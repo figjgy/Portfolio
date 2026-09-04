@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Tools — Listing Scanner & E‑Commerce Suite</title>
+<meta name="description" content="Listing Policy & SEO Scanner, TACOS calculator and Campaign Voucher Simulator — client-side, privacy-first e‑commerce tools.">
+<link rel="icon" type="image/svg+xml" href="../assets/favicon.svg">
+<link rel="stylesheet" href="../assets/style.css">
+</head>
+<body>
+<script>document.documentElement.classList.add('js')</script>
+<nav class="pill" aria-label="Sections"><div class="pill-in"><a href="index.html">Home</a><a href="work/index.html">Work</a><a href="about.html">About</a><a href="card.html">Card</a><a href="tools/index.html" class="on">Tools</a></div></nav>
+<main><div class="wrap">
+  <header style="padding-top:2.5rem;margin-bottom:1.5rem"><h1 class="serif">E‑Commerce Tools</h1><p class="eyebrow muted sub">Listing Scanner · TACOS & Profit · Voucher Simulator</p></header>
+
+  <section>
+    <div style="display:flex;gap:1rem;align-items:center;flex-wrap:wrap;margin-bottom:1rem">
+      <div style="flex:1 1 420px;background:var(--glass);border:1px solid var(--edge);border-radius:var(--rad);padding:1rem">
+        <div style="display:flex;align-items:center;justify-content:space-between;gap:1rem">
+          <div>
+            <strong>Pricing</strong>
+            <div class="meta" style="margin-top:.35rem">Pro Seller: ₱999 / mo · Agency: ₱2,499 / mo</div>
+          </div>
+          <div style="text-align:right">
+            <label class="eyebrow muted">Currency</label>
+            <div style="margin-top:.5rem">
+              <button id="cur-usd" class="tool-btn">USD</button>
+              <button id="cur-php" class="tool-btn">PHP</button>
+            </div>
+            <div id="rate-note" class="meta" style="margin-top:.6rem;font-size:12px;color:var(--dim)"></div>
+          </div>
+        </div>
+        <div style="margin-top:1rem" id="pricing-panel"></div>
+      </div>
+
+      <div style="flex:1 1 320px;background:var(--glass);border:1px solid var(--edge);border-radius:var(--rad);padding:1rem">
+        <strong>VIP Done‑For‑You</strong>
+        <p class="meta" style="margin-top:.5rem;color:var(--dim)">Need a full storefront & listing overhaul? Investment starts at ₱25,000 ($800 USD). Book via WhatsApp.</p>
+        <div style="margin-top:.75rem">
+          <button id="vip-book" class="save" style="min-width:unset">Book via WhatsApp</button>
+        </div>
+      </div>
+    </div>
+
+    <div style="border-radius:var(--rad);overflow:hidden">
+      <div style="display:flex;gap:1px;background:var(--edge);">
+        <button class="tool-btn" data-tab="scanner">🛡️ Listing Policy & SEO Scanner</button>
+        <button class="tool-btn" data-tab="tacos">📊 Ad Efficiency & TACOS</button>
+        <button class="tool-btn" data-tab="voucher">🏷️ Campaign Voucher Simulator</button>
+        <button class="tool-btn" data-tab="bulk">📁 CSV Bulk Scan</button>
+      </div>
+      <div style="background:var(--glass);border:1px solid var(--edge);padding:1.5rem" id="tab-content">
+        <!-- content injected by assets/tools.js -->
+        <p class="muted">Loading tools…</p>
+      </div>
+    </div>
+  </section>
+
+  <p style="margin-top:2rem" class="note">All tools run in your browser. No data is sent to servers unless you explicitly share a file or result.</p>
+
+</div></main>
+<script src="../assets/tools.js"></script>
+</body>
+</html>
