@@ -371,6 +371,47 @@ font-size:14px;line-height:1.5;box-sizing:border-box;transition:border-color .2s
 .count-badge .warn{color:#facc15}
 .count-badge .bad{color:#f87171}
 
+/* ---- assistant chat widget ------------------------------------------- */
+.jl-chat-fab{position:fixed;right:22px;bottom:22px;z-index:300;width:54px;height:54px;border-radius:50%;
+background:var(--acc);border:0;cursor:pointer;display:flex;align-items:center;justify-content:center;
+box-shadow:0 12px 30px rgba(139,13,26,.45),0 0 0 1px rgba(255,255,255,.06);transition:transform .2s}
+.jl-chat-fab:hover{transform:translateY(-2px)}
+.jl-chat-fab svg{width:22px;height:22px;stroke:#F5F2ED;fill:none;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+.jl-chat-fab .dot{position:absolute;top:10px;right:10px;width:9px;height:9px;border-radius:50%;background:#4ade80;border:2px solid var(--acc)}
+.jl-chat{position:fixed;right:22px;bottom:88px;z-index:300;width:min(380px,calc(100vw - 32px));max-height:min(620px,calc(100vh - 120px));
+display:flex;flex-direction:column;background:var(--glass);-webkit-backdrop-filter:blur(24px) saturate(160%);backdrop-filter:blur(24px) saturate(160%);
+border:1px solid var(--edge);border-radius:20px;box-shadow:0 30px 70px rgba(0,0,0,.55),inset 0 1px 0 rgba(255,255,255,.08);
+transform:translateY(12px) scale(.98);opacity:0;pointer-events:none;transition:opacity .22s,transform .22s;overflow:hidden}
+.jl-chat.open{opacity:1;transform:none;pointer-events:auto}
+.jl-chat::before{content:'';position:absolute;inset:0;pointer-events:none;background:radial-gradient(60% 50% at 0% 0%,rgba(139,13,26,.2),transparent 60%)}
+.jl-chat>*{position:relative}
+.jl-chat-head{display:flex;align-items:center;gap:.75rem;padding:.95rem 1.1rem;border-bottom:1px solid var(--edge)}
+.jl-chat-head img{width:36px;height:36px;border-radius:50%;object-fit:cover;border:1px solid var(--edge)}
+.jl-chat-head b{display:block;font-weight:500;font-size:14px;color:var(--ink)}
+.jl-chat-head small{display:block;font-size:11px;color:var(--dim)}
+.jl-chat-x{margin-left:auto;background:transparent;border:0;color:var(--dim);cursor:pointer;width:32px;height:32px;border-radius:8px;display:flex;align-items:center;justify-content:center}
+.jl-chat-x:hover{background:var(--glass-2);color:var(--ink)}
+.jl-chat-x svg{width:16px;height:16px;stroke:currentColor;fill:none;stroke-width:2}
+.jl-chat-log{flex:1;overflow-y:auto;padding:1rem 1.1rem;display:flex;flex-direction:column;gap:.6rem;scrollbar-width:thin;min-height:200px}
+.jl-msg{max-width:86%;padding:.6rem .85rem;border-radius:14px;font-size:13.5px;line-height:1.55;color:var(--ink);white-space:pre-wrap}
+.jl-msg.bot{align-self:flex-start;background:var(--glass-2);border:1px solid var(--edge);border-bottom-left-radius:5px}
+.jl-msg.me{align-self:flex-end;background:var(--acc);color:#F5F2ED;border-bottom-right-radius:5px}
+.jl-msg a{color:inherit;text-decoration:underline;text-underline-offset:3px}
+.jl-chips{display:flex;flex-wrap:wrap;gap:.4rem;padding:0 1.1rem .75rem}
+.jl-chip{background:transparent;border:1px solid var(--edge);color:var(--dim);border-radius:999px;padding:.4rem .8rem;font:inherit;font-size:12px;cursor:pointer;transition:all .15s}
+.jl-chip:hover{border-color:var(--acc);color:var(--ink)}
+.jl-chat-form{display:flex;gap:.5rem;padding:.75rem 1.1rem 1rem;border-top:1px solid var(--edge)}
+.jl-chat-form input{flex:1;background:rgba(18,16,15,.65);border:1px solid var(--edge);color:var(--ink);border-radius:999px;padding:.6rem 1rem;font:inherit;font-size:13.5px}
+[data-theme="light"] .jl-chat-form input{background:rgba(255,255,255,.75)}
+.jl-chat-form input:focus{outline:none;border-color:var(--acc)}
+.jl-chat-form button{width:40px;height:40px;border-radius:50%;border:0;background:var(--acc);cursor:pointer;display:flex;align-items:center;justify-content:center;flex:none}
+.jl-chat-form button svg{width:16px;height:16px;stroke:#F5F2ED;fill:none;stroke-width:1.8}
+.jl-typing{display:inline-flex;gap:4px;align-items:center}
+.jl-typing i{width:6px;height:6px;border-radius:50%;background:var(--dim);animation:jlb 1s infinite}
+.jl-typing i:nth-child(2){animation-delay:.15s}.jl-typing i:nth-child(3){animation-delay:.3s}
+@keyframes jlb{0%,80%,100%{opacity:.3;transform:translateY(0)}40%{opacity:1;transform:translateY(-3px)}}
+@media(max-width:640px){.jl-chat{right:12px;bottom:82px}.jl-chat-fab{right:14px;bottom:14px}}
+
 /* ---- inline flagged-word highlighting ---------------------------------- */
 .hl-wrap{position:relative;background:var(--glass);border-radius:14px;
 -webkit-backdrop-filter:blur(18px) saturate(150%);backdrop-filter:blur(18px) saturate(150%)}
