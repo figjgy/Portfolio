@@ -205,6 +205,18 @@ transition:color .2s,background .2s,border-color .2s}
 .cols p{font-size:.9375rem;color:var(--dim)}
 .tags{display:flex;gap:.5rem;flex-wrap:wrap;margin-top:1rem}
 .gal{display:grid;gap:1rem;margin-top:2.5rem}
+.galwide{grid-column:1/-1}
+.tilegrid{display:grid;gap:.75rem}
+.tilegrid.cols-4{grid-template-columns:repeat(4,1fr)}.tilegrid.cols-5{grid-template-columns:repeat(5,1fr)}.tilegrid.cols-3{grid-template-columns:repeat(3,1fr)}
+.tilegrid .shot{border-radius:12px;border:1px solid var(--edge);transition:transform .2s,border-color .2s}
+.tilegrid .shot:hover{transform:translateY(-2px);border-color:rgba(139,13,26,.55)}
+@media(max-width:640px){.tilegrid.cols-4,.tilegrid.cols-5,.tilegrid.cols-3{grid-template-columns:repeat(2,1fr)}}
+.r45{aspect-ratio:4/5}
+.vidrow{display:grid;grid-template-columns:repeat(3,1fr);gap:1rem}
+@media(max-width:640px){.vidrow{grid-template-columns:1fr 1fr}}
+.vid{position:relative;border-radius:var(--rad);overflow:hidden;background:#000;border:1px solid var(--edge)}
+.vid video{display:block;width:100%;height:100%;object-fit:cover;background:#000}
+.r916{aspect-ratio:9/16}
 .galfig{margin:0}.galfig figcaption{font-size:12.5px;color:var(--dim);line-height:1.5;margin-top:.55rem;padding:0 .15rem}
 .pn{display:flex;justify-content:space-between;gap:1rem;margin-top:3rem}
 .pn a{flex:1;background:var(--glass);border:1px solid var(--edge);border-radius:var(--rad);
