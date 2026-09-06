@@ -885,7 +885,8 @@ try{localStorage.setItem(K,n);}catch(e){}});})();
         findingsList.innerHTML = '<div class="flag-item safe"><div class="flag-head"><span>Clean Listing</span><span class="flag-tag">Safe</span></div><div class="flag-msg">No prohibited medical claims, banned superlatives, or formatting policy flags were detected. Your listing is safe to publish!</div></div>';
       } else {
         var html = '';
-        findings.forEach(function(f){
+        var sevRank = { critical: 0, warning: 1 };
+        findings.slice().sort(function(a, b){ return (sevRank[a.severity] || 2) - (sevRank[b.severity] || 2); }).forEach(function(f){
           html += '<div class="flag-item ' + f.severity + '">';
           html += '<div class="flag-head"><span>Found: \"' + f.word.toUpperCase() + '\"</span><span class="flag-tag">' + f.severity + '</span></div>';
           html += '<div class="flag-msg">' + f.reason + '</div>';
