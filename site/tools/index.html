@@ -534,6 +534,17 @@ and marketplace-ops roles are hired to know.
 <a href="https://www.linkedin.com/in/jamielyn-ludovice-4b0a25380/" rel="noopener"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><use href="#i-in"/></svg><span>linkedin.com/in/jamielyn-ludovice</span></a>
 </nav>
 <div class="socialrow"><a href="https://wa.me/639394886685" rel="noopener" aria-label="WhatsApp" title="WhatsApp"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="#i-wa"/></svg></a><a href="https://instagram.com/jamiii_ludovice" rel="noopener" aria-label="@jamiii_ludovice" title="@jamiii_ludovice"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="#i-ig"/></svg></a><a href="https://tiktok.com/@figjgy" rel="noopener" aria-label="@figjgy" title="@figjgy"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="#i-tt"/></svg></a></div></div>
+<form class="lead-form" id="lead-footer" data-key="6ad39c40-43bd-4760-a45d-c0f0eb5decd1" data-where="footer" novalidate>
+<input type="hidden" name="subject" value="New inquiry from jamielyn-ludovice.vercel.app">
+<input type="hidden" name="from_name" value="Portfolio site">
+<input type="checkbox" name="botcheck" class="lead-hp" tabindex="-1" autocomplete="off" aria-hidden="true">
+<div class="lead-row"><input type="text" name="name" placeholder="Your name" required autocomplete="name">
+<input type="email" name="email" placeholder="Email" required autocomplete="email"></div>
+<input type="text" name="store" placeholder="Store / project link (optional)" autocomplete="url">
+<textarea name="message" rows="3" placeholder="What do you need help with?" required></textarea>
+<div class="lead-foot"><button class="btn" type="submit"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><use href="#i-send"/></svg>Send message</button>
+<span class="lead-msg" aria-live="polite"></span></div>
+</form>
 <div class="footright">
 <button class="btn" type="button" onclick="downloadVCard()" style="min-width:200px">
 <svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><use href="#i-dl"/></svg>SAVE CONTACT</button>
@@ -547,6 +558,17 @@ and marketplace-ops roles are hired to know.
     <button class="jl-chat-x" id="jl-chat-x" type="button" aria-label="Close"><svg viewBox="0 0 24 24"><use href="#i-x"/></svg></button></div>
   <div class="jl-chat-log" id="jl-chat-log" aria-live="polite"></div>
   <div class="jl-chips" id="jl-chips"></div>
+  <div class="jl-lead" id="jl-lead" hidden><form class="lead-form" id="lead-chat" data-key="6ad39c40-43bd-4760-a45d-c0f0eb5decd1" data-where="chat" novalidate>
+<input type="hidden" name="subject" value="New inquiry from jamielyn-ludovice.vercel.app">
+<input type="hidden" name="from_name" value="Portfolio site">
+<input type="checkbox" name="botcheck" class="lead-hp" tabindex="-1" autocomplete="off" aria-hidden="true">
+<div class="lead-row"><input type="text" name="name" placeholder="Your name" required autocomplete="name">
+<input type="email" name="email" placeholder="Email" required autocomplete="email"></div>
+<input type="text" name="store" placeholder="Store / project link (optional)" autocomplete="url">
+<textarea name="message" rows="3" placeholder="What do you need help with?" required></textarea>
+<div class="lead-foot"><button class="btn" type="submit"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><use href="#i-send"/></svg>Send message</button>
+<span class="lead-msg" aria-live="polite"></span></div>
+</form></div>
   <form class="jl-chat-form" id="jl-chat-form" autocomplete="off"><input id="jl-chat-in" type="text" placeholder="Ask about services, tools, or how to start" maxlength="300"><button type="submit" aria-label="Send"><svg viewBox="0 0 24 24"><use href="#i-send"/></svg></button></form>
 </div>
 <script>
@@ -591,17 +613,18 @@ try{localStorage.setItem(K,n);}catch(e){}});})();
     hello:"Hi! I'm Jamie's assistant. Ask about services, the free tools, or how to start a project.",
     fallback:"I can help with services, the free tools, rates, or getting started — or I can hand you straight to Jamie on WhatsApp."
   };
-  var CHIPS=[['What do you do?','services'],['Shopify & marketplaces','shopify'],['Automation & AI agents','automation'],['Free tools','tools'],['Rates & how to start','rates'],['Talk to Jamie','wa']];
-  var RULES=[[/wa|whats|talk|human|jamie|call|contact|number/i,'wa'],[/rate|price|cost|quote|how much|fee|budget|pay/i,'rates'],[/start|hire|begin|work with|proposal|book/i,'start'],
+  var CHIPS=[['What do you do?','services'],['Shopify & marketplaces','shopify'],['Automation & AI agents','automation'],['Free tools','tools'],['Rates & how to start','rates'],['Leave a message','lead'],['Talk to Jamie','wa']];
+  var RULES=[[/email|message|form|leave|write|send you/i,'lead'],[/wa|whats|talk|human|jamie|call|contact|number/i,'wa'],[/rate|price|cost|quote|how much|fee|budget|pay/i,'rates'],[/start|hire|begin|work with|proposal|book/i,'start'],
     [/shopify|shopee|lazada|tiktok|amazon|etsy|ebay|listing|store|product page|a\+|marketplace|photo/i,'shopify'],[/automat|bot|agent|ai|mcp|n8n|telegram|workflow|script|python|hermes|llm/i,'automation'],
     [/tool|scanner|tacos|voucher|audit|report|calculator/i,'tools'],[/service|do you|offer|help with|what can/i,'services'],[/booth|3d|render|blender|sketchup|interior|expo|exhibit/i,'services'],[/hi|hello|hey|kumusta|good/i,'hello']];
   function esc(t){return String(t).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');}
   function linkify(t){return esc(t).replace(/(https?:\/\/[^\s]+|[a-z0-9./-]+\.html|tools\/)/g,function(m){var h=m;if(!/^https?:/.test(m))h=m;return '<a href="'+h+'" target="_blank" rel="noopener">'+m+'</a>';}).replace(/([\w.+-]+@[\w-]+\.[\w.]+)/g,'<a href="mailto:$1">$1</a>');}
   function add(who,text,save){var d=document.createElement('div');d.className='jl-msg '+who;d.innerHTML=who==='bot'?linkify(text):esc(text);log.appendChild(d);log.scrollTop=log.scrollHeight;if(save!==false){hist.push([who,text]);try{localStorage.setItem(KEY,JSON.stringify(hist.slice(-30)));}catch(e){}}}
   function typing(cb){var d=document.createElement('div');d.className='jl-msg bot';d.innerHTML='<span class="jl-typing"><i></i><i></i><i></i></span>';log.appendChild(d);log.scrollTop=log.scrollHeight;setTimeout(function(){d.remove();cb();},520);}
-  function chipsFor(intent){chips.innerHTML='';CHIPS.forEach(function(c){if(c[1]===intent)return;var b=document.createElement('button');b.type='button';b.className='jl-chip';b.textContent=c[0];b.dataset.k=c[1];b.addEventListener('click',function(){ask(c[0],c[1]);});chips.appendChild(b);});}
+  function chipsFor(intent){if(lead&&intent!=='lead')lead.hidden=true;chips.innerHTML='';CHIPS.forEach(function(c){if(c[1]===intent)return;var b=document.createElement('button');b.type='button';b.className='jl-chip';b.textContent=c[0];b.dataset.k=c[1];b.addEventListener('click',function(){ask(c[0],c[1]);});chips.appendChild(b);});}
   function waLink(){var last=hist.filter(function(h){return h[0]==='me';}).slice(-3).map(function(h){return h[1];}).join(' / ');var msg='Hi Jamie! I was on your site'+(last?' and asked about: '+last:'')+'. Can we talk about a project?';return WA+'?text='+encodeURIComponent(msg);}
-  function reply(intent){if(intent==='wa'){add('bot',"Sure — this opens WhatsApp with a short note so Jamie has the context:\n"+waLink());return;}add('bot',A[intent]||A.fallback);}
+  var lead=document.getElementById('jl-lead');
+  function reply(intent){if(intent==='lead'){add('bot','Leave your details and I will reply by email within the day.');if(lead){lead.hidden=false;var n=lead.querySelector('input[name=name]');if(n)n.focus();}return;}if(intent==='wa'){add('bot',"Sure — this opens WhatsApp with a short note so Jamie has the context:\n"+waLink());return;}add('bot',A[intent]||A.fallback);}
   function detect(t){for(var i=0;i<RULES.length;i++){if(RULES[i][0].test(t))return RULES[i][1];}return 'fallback';}
   function ask(text,intent){add('me',text);var k=intent||detect(text);typing(function(){reply(k);chipsFor(k);});}
   function open(){box.classList.add('open');box.setAttribute('aria-hidden','false');fab.setAttribute('aria-expanded','true');if(!log.children.length){add('bot',A.hello,false);chipsFor('hello');}setTimeout(function(){inp.focus();},250);}
@@ -611,6 +634,37 @@ try{localStorage.setItem(K,n);}catch(e){}});})();
   document.addEventListener('keydown',function(e){if(e.key==='Escape')close();});
   form.addEventListener('submit',function(e){e.preventDefault();var t=inp.value.trim();if(!t)return;inp.value='';ask(t);});
   try{var saved=JSON.parse(localStorage.getItem(KEY)||'[]');if(saved.length){saved.forEach(function(h){add(h[0],h[1],false);});hist=saved;chipsFor('');}}catch(e){}
+})();
+
+(function(){
+  var forms=document.querySelectorAll('.lead-form'); if(!forms.length) return;
+  var MAIL='ludovice.jamielyn00@gmail.com';
+  forms.forEach(function(f){
+    var msg=f.querySelector('.lead-msg'), btn=f.querySelector('button[type=submit]');
+    f.addEventListener('submit',function(e){
+      e.preventDefault();
+      var name=f.name.value.trim(), email=f.email.value.trim(), store=(f.store?f.store.value.trim():''), text=f.message.value.trim();
+      if(!name||!email||!text){msg.textContent='Please fill in your name, email and message.';msg.className='lead-msg bad';return;}
+      if(!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)){msg.textContent='That email does not look right.';msg.className='lead-msg bad';return;}
+      var key=f.dataset.key;
+      if(!key){
+        var body='Name: '+name+'\nEmail: '+email+(store?'\nStore: '+store:'')+'\n\n'+text;
+        window.location.href='mailto:'+MAIL+'?subject='+encodeURIComponent('Inquiry from your portfolio')+'&body='+encodeURIComponent(body);
+        msg.textContent='Opening your email app…';msg.className='lead-msg ok';return;
+      }
+      btn.disabled=true; msg.textContent='Sending…'; msg.className='lead-msg';
+      var data=new FormData(f); data.append('access_key',key); data.append('page',location.href);
+      fetch('https://api.web3forms.com/submit',{method:'POST',body:data,headers:{'Accept':'application/json'}})
+        .then(function(r){return r.json();})
+        .then(function(j){
+          if(j&&j.success){f.reset();msg.textContent='Sent. I will reply to '+email+' within the day.';msg.className='lead-msg ok';
+            if(window.showToast)window.showToast('Message sent.');}
+          else{throw new Error((j&&j.message)||'failed');}
+        })
+        .catch(function(){msg.textContent='Could not send. Message me on WhatsApp instead: https://wa.me/639394886685';msg.className='lead-msg bad';})
+        .then(function(){btn.disabled=false;});
+    });
+  });
 })();
 
 (function(){
