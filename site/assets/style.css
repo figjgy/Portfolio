@@ -349,9 +349,10 @@ html{scroll-behavior:auto}.pill-in{scroll-behavior:auto}*{transition:none!import
  .aboutbtns{grid-template-columns:auto auto;justify-content:start}
  .tools{grid-template-columns:repeat(3,1fr)}
  .gal{grid-template-columns:repeat(2,1fr)}
- .footrow{display:flex;justify-content:space-between;gap:3rem;gap:2.5rem;align-items:flex-start;flex-wrap:wrap}
- .footright{display:flex;flex-direction:column;align-items:flex-end;justify-content:space-between}
+ .footrow{display:grid;grid-template-columns:minmax(220px,1fr) minmax(320px,1.35fr) auto;gap:3rem;align-items:start}
+ .footright{display:flex;flex-direction:column;align-items:flex-end;gap:1.5rem;justify-self:end}
  .copy{text-align:right;margin-top:0}
+ .footright .btn{margin-top:0}
 }
 
 /* ---- micro-saas scanner tool ------------------------------------------- */
@@ -383,7 +384,15 @@ border-radius:12px;padding:.7rem .9rem;font:inherit;font-size:13.5px;line-height
 .lead-foot{display:flex;align-items:center;gap:.9rem;flex-wrap:wrap}
 .lead-foot .btn{width:auto;margin:0;padding:.85rem 1.4rem;min-height:44px}
 .lead-msg{font-size:12.5px;color:var(--dim)}.lead-msg.ok{color:#4ade80}.lead-msg.bad{color:#f87171}
-footer .lead-form{margin-top:.25rem}
+footer .lead-col{display:flex;flex-direction:column;gap:.9rem;padding-top:.6rem}
+footer .lead-col h3{font-size:1.05rem;font-weight:400;color:var(--ink);margin:0}
+footer .lead-col p{font-size:13px;color:var(--dim);margin:0 0 .35rem;line-height:1.55}
+footer .lead-form{max-width:none;margin:0}
+footer .lead-form input,footer .lead-form textarea{padding:.85rem 1rem;font-size:14px;border-radius:12px}
+footer .lead-form textarea{min-height:104px}
+footer .lead-foot .btn{min-height:52px;padding:1rem 1.6rem}
+@media(max-width:1000px){.footrow{grid-template-columns:1fr 1fr}.footright{grid-column:1/-1;flex-direction:row;justify-content:space-between;align-items:flex-end;justify-self:stretch}.copy{text-align:left}}
+@media(max-width:700px){.footrow{grid-template-columns:1fr}.footright{flex-direction:column;align-items:flex-start}}
 @media(max-width:640px){.lead-row{grid-template-columns:1fr}}
 .jl-lead{padding:0 1.1rem .9rem}
 .jl-lead .lead-form{max-width:none;gap:.45rem}
