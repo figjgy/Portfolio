@@ -510,92 +510,20 @@ and marketplace-ops roles are hired to know.
   </div>
 </aside>
 
-<!-- ============================================================ PRICING -->
-<section style="margin-top:3rem">
-  <h2 class="eyebrow grouphead"><span>UPGRADE — B2B PLANS</span><span class="rule"></span></h2>
-  <div class="curr-row">
-    <button class="curr-btn on" type="button" data-curr="php">₱ PHP</button>
-    <button class="curr-btn" type="button" data-curr="usd">$ USD</button>
-  </div>
-  <div class="services-grid">
-    <div class="service-card">
-      <span class="pro-badge">PRO SELLER</span>
-      <h3>Single Brand</h3>
-      <p>Unlimited scans across all 5 platforms, plus the 1-click Auto-Sanitize copywriter.</p>
-      <ul>
-        <li>Unlimited listing scans — all 5 platforms</li>
-        <li>Auto-Sanitize copywriter</li>
-        <li>Ad Efficiency &amp; Voucher simulators</li>
-      </ul>
-      <div class="service-price">₱<span data-php="999" data-usd="19">999</span><span> / month</span></div>
-      <button class="btn ghost" type="button" onclick="openProModal('pro')" style="margin-top:1rem">GET STARTED</button>
-    </div>
-    <div class="service-card" style="border-color:var(--acc)">
-      <span class="pro-badge">AGENCY &amp; MULTI-SHOP</span>
-      <h3>Agencies &amp; Multi-Brand Owners</h3>
-      <p>Bulk CSV catalogue upload, team access, and an exportable PDF audit report.</p>
-      <ul>
-        <li>Bulk CSV catalog upload — 500+ SKUs in 1 click</li>
-        <li>Team access (multiple seats)</li>
-        <li>Exportable PDF audit report</li>
-      </ul>
-      <div class="service-price">₱<span data-php="2499" data-usd="49">2499</span><span> / month</span></div>
-      <button class="btn" type="button" onclick="openProModal('agency')" style="margin-top:1rem">GET STARTED</button>
-    </div>
+<!-- ============================================================ WORK WITH ME -->
+<section class="work-card" style="margin-top:3.5rem">
+  <span class="pro-badge">WORK WITH ME</span>
+  <h3 class="serif">Like what the tools show? I do this for stores every week.</h3>
+  <p>Catalogue audits, listing rebuilds, promo planning, monthly reporting — as a one-off project or an ongoing retainer.
+  Send me your store link and what is slowing you down; I reply with what I would do, how long it takes, and a quote. No fixed plans, no subscriptions.</p>
+  <div class="work-btns">
+    <a class="btn" href="https://wa.me/639394886685?text=Hi%20Jamie%21%20I%20tested%20your%20Listing%20Scanner%20and%20I%27d%20like%20to%20book%20a%20Storefront%20%26%20Compliance%20Overhaul%20for%20my%20shop." target="_blank" rel="noopener"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><use href="#i-wa"/></svg>Message on WhatsApp</a>
+    <a class="btn ghost" href="mailto:ludovice.jamielyn00@gmail.com?subject=Project%20inquiry%20from%20your%20tools%20page">Email me</a>
   </div>
 </section>
 
-<!-- ============================================================ DFY BRIDGE -->
-<div class="dfy-card">
-  <div class="dfy-info">
-    <span class="pro-badge">DONE-FOR-YOU SERVICE</span>
-    <h3 class="serif">Managing an entire catalogue and don't have time to audit hundreds of listings yourself?</h3>
-    <p>Hire Jamie for a complete Done-For-You Storefront &amp; A+ Listing Overhaul. I audit your
-    catalogue, design high-converting visual slides, and protect your shop from policy bans.</p>
-  </div>
-  <div class="dfy-btns">
-    <div>
-      <div class="service-price" style="margin-bottom:.75rem">Investment starts at ₱25,000 <span>($800 USD)</span></div>
-      <a class="btn" href="https://wa.me/639394886685?text=Hi%20Jamie%21%20I%20tested%20your%20Listing%20Scanner%20and%20I%27d%20like%20to%20book%20a%20Storefront%20%26%20Compliance%20Overhaul%20for%20my%20shop." target="_blank" rel="noopener" style="display:inline-flex;align-items:center;gap:.5rem">
-        <svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><use href="#i-wa"/></svg>Message on WhatsApp
-      </a>
-    </div>
-  </div>
-</div>
-
 </div></main>
 
-<!-- Pro Subscription Modal -->
-<div id="promodal" class="modal" aria-hidden="true" role="dialog" aria-modal="true" aria-label="SellerGuard plans">
-  <div class="modal-card" style="max-width:24rem;text-align:left">
-    <button class="modal-close" type="button" onclick="closeProModal()" aria-label="Close">&times;</button>
-    <span class="pro-badge">B2B PLAN</span>
-    <h3 class="serif" id="modal-tier-name" style="font-size:1.65rem;margin-top:.35rem">Pro Seller</h3>
-    <p class="muted" style="font-size:13px;margin-top:.4rem">Built for multi-marketplace brand owners, agencies, and e-commerce managers.</p>
-
-    <div style="background:var(--glass-2);padding:1rem;border-radius:14px;border:1px solid var(--edge);margin:1.25rem 0">
-      <div style="display:flex;justify-content:space-between;align-items:baseline">
-        <b id="modal-tier-price" style="font-size:1.15rem">₱999 / mo ($19 USD)</b>
-        <span class="chip" style="font-size:9px">B2B PRICING</span>
-      </div>
-      <p class="muted" style="font-size:12px;margin-top:.35rem">Cancel anytime · Supports GCash, Maya, Debit/Credit Cards &amp; PayPal</p>
-    </div>
-
-    <form onsubmit="submitWaitlist(event)">
-      <div class="field-row">
-        <label class="eyebrow muted" for="pro-email" style="display:block;margin-bottom:.4rem">Your Email Address</label>
-        <input id="pro-email" type="email" required class="tool-select" placeholder="you@brand.com" style="height:44px">
-      </div>
-      <div class="field-row">
-        <label class="eyebrow muted" for="pro-shop" style="display:block;margin-bottom:.4rem">Store / Brand Name (Optional)</label>
-        <input id="pro-shop" type="text" class="tool-select" placeholder="e.g. Margegold Jewelry" style="height:44px">
-      </div>
-      <button class="btn" type="submit" style="min-height:48px;width:100%;margin-top:1rem">
-        REQUEST ACCESS
-      </button>
-    </form>
-  </div>
-</div>
 <div id="toast" class="toast" aria-live="polite"></div>
 <footer id="contact">
 <div class="wrap"><div class="footin footrow">
@@ -1193,63 +1121,6 @@ try{localStorage.setItem(K,n);}catch(e){}});})();
   /* keep the highlight layer aligned while the textarea scrolls */
   if(titleEl && titleHl) titleEl.addEventListener('scroll', function(){ titleHl.scrollTop = titleEl.scrollTop; });
   if(descEl && descHl) descEl.addEventListener('scroll', function(){ descHl.scrollTop = descEl.scrollTop; });
-
-  var PRICING = {
-    pro:    { label: 'Pro Seller',           php: 999,  usd: 19 },
-    agency: { label: 'Agency & Multi-Shop',  php: 2499, usd: 49 }
-  };
-  var selectedTier = 'pro';
-
-  window.openProModal = function(tier){
-    selectedTier = (tier === 'agency') ? 'agency' : 'pro';
-    var m = document.getElementById('promodal');
-    if(!m) return;
-    var t = PRICING[selectedTier];
-    var nameEl = document.getElementById('modal-tier-name');
-    var priceEl = document.getElementById('modal-tier-price');
-    if(nameEl) nameEl.textContent = t.label;
-    if(priceEl) priceEl.textContent = '₱' + t.php + ' / mo ($' + t.usd + ' USD)';
-    m.classList.add('open');
-    m.setAttribute('aria-hidden', 'false');
-    document.body.style.overflow = 'hidden';
-  };
-  window.closeProModal = function(){
-    var m = document.getElementById('promodal');
-    if(!m) return;
-    m.classList.remove('open');
-    m.setAttribute('aria-hidden', 'true');
-    document.body.style.overflow = '';
-  };
-
-  var proModal = document.getElementById('promodal');
-  if(proModal){
-    proModal.addEventListener('click', function(e){
-      if(e.target === this || e.target.closest('.modal-close')) closeProModal();
-    });
-  }
-
-  window.submitWaitlist = function(e){
-    e.preventDefault();
-    var email = document.getElementById('pro-email');
-    if(email && email.value){
-      showToast('You are on the ' + PRICING[selectedTier].label + ' waitlist! We will notify ' + email.value);
-      closeProModal();
-      email.value = '';
-    }
-  };
-
-  /* ---- currency toggle (pricing cards) --------------------------------- */
-  var currBtns = document.querySelectorAll('.curr-btn');
-  currBtns.forEach(function(btn){
-    btn.addEventListener('click', function(){
-      currBtns.forEach(function(b){ b.classList.remove('on'); });
-      btn.classList.add('on');
-      var mode = btn.dataset.curr || 'php';
-      document.querySelectorAll('[data-php][data-usd]').forEach(function(el){
-        el.textContent = mode === 'usd' ? el.dataset.usd : el.dataset.php;
-      });
-    });
-  });
 
   /* ---- suite tab switcher ----------------------------------------------- */
   var suiteTabs = document.querySelectorAll('.suite-tab');
