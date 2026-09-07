@@ -170,7 +170,8 @@ PROJECTS = [
         "link": "https://kpicktradingcorp.com/",
         "link_label": "Visit the live site",
         "tags": ["Front-end design", "Responsive layout", "B2B website"],
-        "cover_note": "Image \u2014 K-Pick Trading Corp. homepage",
+        "cover": "kpick-web-cover.jpg",
+        "cover_note": "kpicktradingcorp.com \u2014 homepage",
         "summary": ("Front-end design for the company website \u2014 a B2B medical distribution "
                     "site read by hospital and clinic procurement teams."),
         "challenge": ("The audience is procurement officers, not shoppers. They arrive looking "
@@ -186,8 +187,24 @@ PROJECTS = [
                      "Built for the phone first, since buyers open it between other things."),
         "result": ("A live site the company points buyers to, with the quote request and the "
                    "compliance documents reachable from anywhere on the page."),
-        "gallery": ["Image \u2014 homepage", "Image \u2014 brand page",
-                    "Image \u2014 mobile layout"],
+        "gallery": [
+            {"title": "Desktop", "sub": "homepage \u00b7 above and below the fold",
+             "ratio": "r169", "alt": "kpicktradingcorp.com desktop layout",
+             "grid": ["kpick-web-desk-1.jpg", "kpick-web-desk-2.jpg"]},
+            {"title": "Phone", "sub": "same page, built for the screen it is actually opened on",
+             "ratio": "r916", "alt": "kpicktradingcorp.com mobile layout",
+             "grid": ["kpick-web-mob-1.jpg", "kpick-web-mob-2.jpg"]},
+        ],
+        "gallery_captions": [
+            "The hero answers the three procurement questions in one screen \u2014 what is "
+            "sold, which certifications it carries, and who it is for \u2014 then splits "
+            "into the two brand lines. Generate Quote sits beside View Certifications "
+            "because those are the only two things a buyer comes to do",
+            "The same page on a phone: the two brand cards collapse to full-width rows, the "
+            "figures stack, and the nav becomes one button \u2014 nothing is dropped, only "
+            "re-ordered, because a procurement officer opening this between meetings still "
+            "needs the certifications and the quote link",
+        ],
     },
     # ------------------------------------------------------------- CREATIVE
     {
