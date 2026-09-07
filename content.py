@@ -198,7 +198,7 @@ PROJECTS = [
         "featured": True,
         "tags": ["Ad creatives", "Paid social", "Art direction", "Copywriting"],
         "cover": "ads-cover.jpg",
-        "cover_note": "Ad creatives \u2014 Upscale Menswear, Big Paw Olive Oil, Luv\u00e9, PLTN",
+        "cover_note": "Ad creatives \u2014 Upscale Menswear, Big Paw Olive Oil, Luv\u00e9, PMT",
         "summary": ("Paid-social creative for four overseas brands \u2014 US menswear, "
                     "a California olive oil producer, a lash brand and an apparel drop \u2014 "
                     "each in its own voice, none of them mine."),
@@ -234,12 +234,12 @@ PROJECTS = [
              "ratio": "r11", "alt": "Luv\u00e9 bottom-of-funnel ad creative",
              "grid": ["ads-luve-bof-1.jpg", "ads-luve-bof-2.jpg", "ads-luve-bof-3.jpg",
                       "ads-luve-bof-4.jpg", "ads-luve-bof-5.jpg"]},
-            {"title": "PLTN \u2014 Palestine special edition",
+            {"title": "PMT \u2014 Palestine special edition",
              "sub": "apparel drop \u00b7 stories 9:16", "ratio": "r916",
-             "alt": "PLTN Palestine special edition story creative",
-             "grid": ["ads-pltn-1.jpg", "ads-pltn-2.jpg", "ads-pltn-3.jpg", "ads-pltn-4.jpg",
-                      "ads-pltn-5.jpg", "ads-pltn-6.jpg", "ads-pltn-7.jpg", "ads-pltn-8.jpg",
-                      "ads-pltn-9.jpg", "ads-pltn-10.jpg"]},
+             "alt": "PMT Palestine special edition story creative",
+             "grid": ["ads-pmt-1.jpg", "ads-pmt-2.jpg", "ads-pmt-3.jpg", "ads-pmt-4.jpg",
+                      "ads-pmt-5.jpg", "ads-pmt-6.jpg", "ads-pmt-7.jpg", "ads-pmt-8.jpg",
+                      "ads-pmt-9.jpg", "ads-pmt-10.jpg"]},
         ],
         "gallery_captions": [
             "Quiet luxury has to be built, not claimed \u2014 thin letter-spaced type, the "
