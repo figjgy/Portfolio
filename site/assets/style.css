@@ -459,7 +459,7 @@ transform:translateY(12px) scale(.98);opacity:0;pointer-events:none;transition:o
 .jl-chat-x svg{width:16px;height:16px;stroke:currentColor;fill:none;stroke-width:2}
 .jl-chat-log{flex:1;overflow-y:auto;padding:1rem 1.1rem;display:flex;flex-direction:column;gap:.6rem;scrollbar-width:thin;min-height:200px}
 .jl-msg{max-width:86%;padding:.6rem .85rem;border-radius:14px;font-size:13.5px;line-height:1.55;color:var(--ink);white-space:pre-wrap}
-.jl-msg.bot{align-self:flex-start;background:var(--glass-2);border:1px solid var(--edge);border-bottom-left-radius:5px}
+.jl-msg.bot{overflow-wrap: anywhere;align-self:flex-start;background:var(--glass-2);border:1px solid var(--edge);border-bottom-left-radius:5px}
 .jl-msg.me{align-self:flex-end;background:var(--acc);color:#F5F2ED;border-bottom-right-radius:5px}
 .jl-msg a{color:inherit;text-decoration:underline;text-underline-offset:3px}
 .jl-chips{display:flex;flex-wrap:wrap;gap:.4rem;padding:0 1.1rem .75rem}
