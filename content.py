@@ -301,7 +301,7 @@ PROJECTS = [
             "the result and the discount and get out of the way",
             "A drop, so the set is built on scarcity and repetition \u2014 one type "
             "treatment, one gold-on-black palette, the shirt shown folded, hung, worn and "
-            "on the street until it is recognisable at thumbnail size",
+            "on the street until it is recognisable at thumbnail size. Scroll sideways to see the whole drop.",
         ],
     },
     # ------------------------------------------------- SOURCING & RESEARCH
