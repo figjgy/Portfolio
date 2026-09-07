@@ -659,7 +659,7 @@ TESTIMONIALS = [
                   "our automation work halfway instead of working around it. Reliable, fast, "
                   "and genuinely good at making the company look like one brand."),
         "name":  "Jhon Wilfred",
-        "role":  "K-PICK Trading Corp.",          # <- add his exact title here
+        "role":  "System Engineer, K-PICK Trading Corp.",
         "photo": "jhon.jpg",
     },
 ]
