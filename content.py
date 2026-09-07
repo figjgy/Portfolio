@@ -268,7 +268,8 @@ PROJECTS = [
         "year": "2026",
         "featured": True,
         "tags": ["Event marketing", "Booth design", "Video production"],
-        "cover_note": "Image — PhilMed booth coverage",
+        "cover": "philmed-cover.jpg",
+        "cover_note": "PhilMed Expo 2026 — booth designed in 3D before fabrication",
         "summary": ("Two booths, three days, solo coverage — from the 3D booth design to the "
                     "follow-up system that held 91 leads."),
         "challenge": ("Two booths, three days, brands nobody in the room had heard of, and a "
@@ -279,8 +280,20 @@ PROJECTS = [
                      "and edited on-site coverage for both booths and ran the follow-up."),
         "result": ("91 leads captured and organised into a tiered follow-up system with owners "
                    "and next actions, not a stack of business cards."),
-        "gallery": ["Image — booth 3D render", "Image — booth as built",
-                    "Image — recap reel still"],
+        "gallery": ["philmed-booth.jpg", "philmed-stand.jpg", "philmed-floor.jpg",
+                    "philmed-brief.jpg", "philmed-demo.jpg"],
+        "gallery_captions": [
+            "The same stand as built — two brands sharing one island, each with its own "
+            "fascia and its own wall, so neither reads as a sub-brand of the other",
+            "The K-PICK wall: product boards, a looping product film and the trocar rack "
+            "at hand height, all laid out in the 3D plan before anything was printed",
+            "Third day, mid-morning. The counter was placed on the aisle side on purpose — "
+            "the display case is what stops people, the conversation happens over it",
+            "Working the floor. Every conversation that got past hello was written down "
+            "the same hour, which is how the 91 leads survived the week",
+            "The demo station doing its job — visitors watching the assist robot run "
+            "instead of being talked at",
+        ],
     },
     {
         "slug": "short-form-scripting",
