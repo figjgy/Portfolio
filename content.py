@@ -402,7 +402,8 @@ PROJECTS = [
         "year": "2026",
         "featured": False,
         "tags": ["TikTok", "Reels", "Scriptwriting"],
-        "cover_note": "Image — script page beside finished video",
+        "cover": "scripting-cover.jpg",
+        "cover_note": "The four-line script sheet",
         "summary": "18 scripts for a single relaunch week, in a format any shooter can execute.",
         "challenge": ("A brand needed a relaunch after going quiet, and it had to work for a "
                       "Filipino audience without sounding like an ad."),
@@ -410,7 +411,15 @@ PROJECTS = [
                      "solution, CTA format with per-scene breakdowns. Taglish hooks, "
                      "trend-aware formats."),
         "result": "A repeatable scripting format now used across all three brands.",
-        "gallery": [],
+        "gallery": ["scripting-scenes.jpg", "scripting-week.jpg"],
+        "gallery_captions": [
+            "The same sheet expanded into scenes. Whoever holds the camera reads one row "
+            "and shoots it \u2014 visual, on-screen text, audio, seconds \u2014 so a script "
+            "handed to a different person still comes back looking like the same brand",
+            "The week is planned as a sequence, not as 18 separate ideas: comeback, problem, "
+            "product, proof, offer, community. That order is why the week builds instead of "
+            "saying the same thing six times",
+        ],
     },
     # ---------------------------------------------------------- GRAPHIC
     {
@@ -641,10 +650,22 @@ TESTIMONIALS = [
         "role":  "Social Media, K-PICK Trading Corp.",
         "photo": "leila.jpg",
     },
+    {
+        "quote": ("Most designers hand you a picture; Jamie hands you a system. When we "
+                  "launched the K-Pick website and synced our catalog to Shopee, Lazada, and "
+                  "TikTok Shop, her photography, renders, and creatives were consistent across "
+                  "every channel, correctly sized, and ready the day we needed them. She is "
+                  "also comfortable in tools like Notion, n8n, and Telegram bots, so she meets "
+                  "our automation work halfway instead of working around it. Reliable, fast, "
+                  "and genuinely good at making the company look like one brand."),
+        "name":  "Jhon Wilfred",
+        "role":  "K-PICK Trading Corp.",          # <- add his exact title here
+        "photo": "jhon.jpg",
+    },
 ]
 
 # How many placeholder cards to show while TESTIMONIALS is still empty.
-TESTIMONIALS_PENDING = 2
+TESTIMONIALS_PENDING = 1
 
 EXPERTISE = [
     {"group": "Marketing & Content", "items": [

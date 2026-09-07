@@ -1,13 +1,9 @@
 ==================================================== 
-  PUSH RUN Mon 09/07/2026 15:57:30.80 
+  PUSH RUN Mon 09/07/2026 16:06:42.95 
 ==================================================== 
 manager
 --- commits to send: 
-9d3543f PMT strip now behaves exactly like the MargeGold ones
-c445348 Fix the mismatched captions, and add a checker so it cannot recur
-20ad3a9 kpicktradingcorp.com: the Generate Quote / PO builder
-14cb26b kpicktradingcorp.com: Learning Centre and credentials
-3437985 kpicktradingcorp.com: real screenshots, desktop and phone
+d40dc8a Every gallery strip now matches MargeGold, including the scrollbar
 --- push output: 
 Everything up-to-date
 --- exit code: 0 
