@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Jamielyn Ludovice — NFC Card Design</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+ --bg:#0B0B0B; --ink:#F5F2ED; --dim:rgba(245,242,237,.62);
+ --acc:#8B0D1A; --acc-lift:#A81324; --page:#efebe4; --line:rgba(18,16,15,.14);
+}
+*{box-sizing:border-box}
+body{margin:0;background:var(--page);color:#12100F;font-family:'Jost',system-ui,sans-serif;
+ padding:3rem 1.5rem 5rem}
+.wrap{max-width:56rem;margin:0 auto}
+h1{font-family:'Cormorant Garamond',Georgia,serif;font-size:2rem;font-weight:500;margin:0}
+.eyebrow{font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:var(--acc);
+ font-weight:600;margin:0 0 .5rem}
+.lede{color:rgba(18,16,15,.65);margin-top:.6rem;max-width:36rem;font-size:.9375rem;line-height:1.6}
+
+.cards{display:flex;flex-wrap:wrap;gap:2.5rem;margin-top:2.5rem;align-items:flex-start}
+.card-block{flex:0 0 auto}
+.card-label{font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:rgba(18,16,15,.5);
+ margin-bottom:.6rem;font-weight:600}
+.cardshell{width:337px;height:212px;border-radius:16px;overflow:hidden;
+ box-shadow:0 18px 40px rgba(18,16,15,.22);}
+.cardshell svg{display:block;width:100%;height:100%}
+
+.spec{margin-top:2.5rem;background:#fff;border:1px solid var(--line);border-radius:14px;
+ padding:1.4rem 1.6rem}
+.spec h3{font-family:'Cormorant Garamond',Georgia,serif;font-weight:500;font-size:1.2rem;margin:0}
+.spec ul{margin:.8rem 0 0;padding-left:1.1rem;font-size:.875rem;line-height:1.75;color:rgba(18,16,15,.75)}
+.spec li b{color:#12100F}
+
+.note{border:2px dashed var(--acc);background:#fff5f6;border-radius:10px;padding:.9rem 1.1rem;
+ margin-top:1.2rem;color:#7a0f24;font-size:.8438rem}
+.note-tag{display:block;font-size:10px;letter-spacing:.1em;text-transform:uppercase;
+ color:var(--acc);font-weight:600;margin-bottom:.3rem}
+
+footer{margin-top:3rem;font-size:11px;letter-spacing:.08em;text-transform:uppercase;
+ color:rgba(18,16,15,.4);text-align:center}
+</style>
+</head>
+<body>
+<div class="wrap">
+ <p class="eyebrow">PERSONAL · NFC CARD</p>
+ <h1>Jamielyn Ludovice — NFC Card Design</h1>
+ <p class="lede">Same theme as the portfolio site: black background, crimson accent, off-white
+  type — now using your real JL logo instead of a placeholder monogram. Standard card size
+  (CR80, 85.6 × 54mm) so it's ready to send straight to a print vendor.</p>
+
+ <div class="cards">
+  <div class="card-block">
+   <div class="card-label">Front</div>
+   <div class="cardshell">
+    <svg viewBox="0 0 856 540" xmlns="http://www.w3.org/2000/svg">
+     <rect width="856" height="540" fill="#0B0B0B"/>
+     <!-- fine corner accents -->
+     <rect x="40" y="40" width="30" height="2" fill="#8B0D1A"/>
+     <rect x="40" y="40" width="2" height="30" fill="#8B0D1A"/>
+     <rect x="786" y="498" width="30" height="2" fill="#8B0D1A"/>
+     <rect x="814" y="470" width="2" height="30" fill="#8B0D1A"/>
+     <!-- real logo (uploaded) -->
+     <image x="322" y="145" width="211" height="130"
+            href="data:image/png;base64,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" />
+     <!-- name -->
+     <text x="428" y="288" font-family="'Cormorant Garamond', Georgia, serif" font-size="42"
+           font-weight="500" fill="#F5F2ED" text-anchor="middle" letter-spacing="1">JAMIELYN LUDOVICE</text>
+     <rect x="358" y="308" width="140" height="1.5" fill="#8B0D1A"/>
+     <!-- title -->
+     <text x="428" y="335" font-family="'Jost',system-ui,sans-serif" font-size="14"
+           font-weight="500" fill="#F5F2ED" text-anchor="middle"
+           letter-spacing="2.5">MULTIDISCIPLINARY CREATIVE SPECIALIST</text>
+     <!-- discipline subtitle -->
+     <text x="428" y="358" font-family="'Jost',system-ui,sans-serif" font-size="10.5"
+           font-weight="400" fill="rgba(245,242,237,.55)" text-anchor="middle"
+           letter-spacing="1.6">MULTIMEDIA · E-COMMERCE · INTERIOR STYLING · CREATIVE SYSTEMS</text>
+     <!-- nfc icon, bottom right -->
+     <g transform="translate(770,470)" stroke="#F5F2ED" stroke-width="2.5" fill="none" opacity=".55">
+      <path d="M -28 -10 A 22 22 0 0 1 -6 12"/>
+      <path d="M -20 -2 A 12 12 0 0 1 -12 6"/>
+      <circle cx="-30" cy="14" r="3" fill="#F5F2ED" stroke="none"/>
+     </g>
+    </svg>
+   </div>
+  </div>
+
+  <div class="card-block">
+   <div class="card-label">Back</div>
+   <div class="cardshell">
+    <svg viewBox="0 0 856 540" xmlns="http://www.w3.org/2000/svg">
+     <rect width="856" height="540" fill="#0B0B0B"/>
+     <!-- small logo, top left -->
+     <image x="52" y="38" width="78" height="48"
+            href="data:image/png;base64,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" />
+
+     <!-- contact block -->
+     <text x="52" y="200" font-family="'Jost',system-ui,sans-serif" font-size="12" fill="#8B0D1A"
+           letter-spacing="2" font-weight="600">PHONE</text>
+     <text x="52" y="224" font-family="'Jost',system-ui,sans-serif" font-size="20" fill="#F5F2ED"
+           letter-spacing=".5">+63 939 488 6685</text>
+
+     <text x="52" y="272" font-family="'Jost',system-ui,sans-serif" font-size="12" fill="#8B0D1A"
+           letter-spacing="2" font-weight="600">EMAIL</text>
+     <text x="52" y="296" font-family="'Jost',system-ui,sans-serif" font-size="20" fill="#F5F2ED"
+           letter-spacing=".5">ludovice.jamielyn00@gmail.com</text>
+
+     <text x="52" y="344" font-family="'Jost',system-ui,sans-serif" font-size="12" fill="#8B0D1A"
+           letter-spacing="2" font-weight="600">PORTFOLIO</text>
+     <text x="52" y="368" font-family="'Jost',system-ui,sans-serif" font-size="20" fill="#F5F2ED"
+           letter-spacing=".5">jamielyn-ludovice.vercel.app</text>
+
+     <!-- tap to connect, bottom right -->
+     <g transform="translate(700,430)">
+      <g stroke="#F5F2ED" stroke-width="3" fill="none">
+       <path d="M -34 -12 A 26 26 0 0 1 -6 16"/>
+       <path d="M -24 -2 A 14 14 0 0 1 -14 8"/>
+       <circle cx="-36" cy="20" r="3.5" fill="#F5F2ED" stroke="none"/>
+      </g>
+      <text x="10" y="14" font-family="'Jost',system-ui,sans-serif" font-size="15" fill="#F5F2ED"
+            letter-spacing="2" font-weight="500">TAP TO CONNECT</text>
+     </g>
+     <rect x="52" y="470" width="752" height="1" fill="rgba(245,242,237,.16)"/>
+     <text x="52" y="500" font-family="'Jost',system-ui,sans-serif" font-size="12"
+           fill="rgba(245,242,237,.45)" letter-spacing="1.5">@JAMIII_LUDOVICE · MANILA, PHILIPPINES</text>
+    </svg>
+   </div>
+  </div>
+ </div>
+
+ <div class="note">
+  <span class="note-tag">⚠ To confirm</span>
+  "PORTFOLIO" line uses a placeholder URL — swap in the real live Vercel domain once the
+  latest site build is confirmed deployed.
+ </div>
+
+ <div class="spec">
+  <h3>Print &amp; NFC notes</h3>
+  <ul>
+   <li><b>Size:</b> CR80 standard, 85.6mm × 54mm (credit-card size) — same size every
+    vendor cuts PVC/NFC cards to, so no custom die-cut needed.</li>
+   <li><b>NFC chip placement:</b> most vendors embed the chip/antenna in the card's centre
+    once you upload this design — send them this file and they will confirm exact chip
+    position and any keep-clear zone, no changes needed on your end unless they ask.</li>
+   <li><b>Bleed:</b> this mockup is flat artwork for approval. Ask the print vendor for
+    their exact bleed/safe-zone template (usually +2mm bleed, 3mm safe margin) before
+    sending a final file — text and the monogram badge already sit well inside a safe
+    margin, so it should transfer cleanly.</li>
+   <li><b>Colors:</b> background <code>#0B0B0B</code>, crimson <code>#8B0D1A</code>,
+    off-white text <code>#F5F2ED</code> — identical to the portfolio site palette.</li>
+  </ul>
+ </div>
+</div>
+<footer>Personal — Jamielyn Ludovice · 4 September 2026</footer>
+</body>
+</html>

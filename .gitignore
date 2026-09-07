@@ -1,0 +1,7 @@
+# build/runtime junk — never commit
+__pycache__/
+*.pyc
+temp_tools.js
+
+# NOTE: site/ MUST stay committed. Vercel does not run build.py,
+# so if site/ is ignored there is literally nothing to serve.
