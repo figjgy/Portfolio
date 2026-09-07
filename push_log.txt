@@ -1,9 +1,8 @@
 ==================================================== 
-  PUSH RUN Mon 09/07/2026 16:06:42.95 
+  PUSH RUN Mon 09/07/2026 16:14:47.16 
 ==================================================== 
 manager
 --- commits to send: 
-d40dc8a Every gallery strip now matches MargeGold, including the scrollbar
 --- push output: 
 Everything up-to-date
 --- exit code: 0 

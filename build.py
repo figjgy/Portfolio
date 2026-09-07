@@ -943,6 +943,96 @@ def chat_widget(up=""):
   <form class="jl-chat-form" id="jl-chat-form" autocomplete="off"><input id="jl-chat-in" type="text" placeholder="Ask about services, tools, or how to start" maxlength="300"><button type="submit" aria-label="Send"><svg viewBox="0 0 24 24"><use href="#i-send"/></svg></button></form>
 </div>'''
 
+
+def chat_kb():
+    """Knowledge base for the on-site assistant, generated from content.py at build
+    time so the answers can never drift from the pages. No API, no key, no cost -
+    retrieval over this list happens in the visitor's own browser."""
+    import json
+    docs = []
+
+    for pr in PROJECTS:
+        parts = [pr.get("summary", ""), pr.get("challenge", ""),
+                 pr.get("approach", ""), pr.get("result", "")]
+        body = " ".join(x for x in parts if x)
+        answer = pr.get("summary", "") or body[:220]
+        extra = pr.get("approach") or pr.get("result") or ""
+        if extra and extra != answer:
+            answer += "\n\n" + extra
+        docs.append({
+            "id": "p:" + pr["slug"],
+            "kind": "project",
+            "title": pr["title"],
+            "terms": " ".join([pr["title"], DISCIPLINES.get(pr["discipline"], ""),
+                               " ".join(pr.get("tags", [])), body, pr.get("year", "")]),
+            "answer": answer,
+            "link": "work/" + pr["slug"] + ".html",
+            "live": pr.get("link", ""),
+        })
+
+    for grp in EXPERTISE:
+        docs.append({
+            "id": "e:" + grp["group"],
+            "kind": "skill",
+            "title": grp["group"],
+            "terms": grp["group"] + " " + " ".join(grp["items"]),
+            "answer": grp["group"] + " covers: " + "; ".join(grp["items"]) + ".",
+            "link": "about.html", "live": "",
+        })
+
+    # BACKGROUND is the education block (a dict); CREDENTIALS is the roles list.
+    docs.append({
+        "id": "b:education",
+        "kind": "background",
+        "title": BACKGROUND.get("degree", "Education"),
+        "terms": ("education degree school studied university course graduate "
+                  + BACKGROUND.get("degree", "") + " " + BACKGROUND.get("school", "")
+                  + " " + " ".join(BACKGROUND.get("points", []))),
+        "answer": (BACKGROUND.get("degree", "") + ", " + BACKGROUND.get("school", "")
+                   + ("\n\n" + " ".join(BACKGROUND.get("points", []))
+                      if BACKGROUND.get("points") else "")),
+        "link": "about.html", "live": "",
+    })
+
+    for job in CREDENTIALS:
+        role, org, per = job.get("role", ""), job.get("org", ""), job.get("period", "")
+        docs.append({
+            "id": "c:" + role + org,
+            "kind": "credential",
+            "title": role + (" - " + org if org else ""),
+            "terms": "experience role position held " + role + " " + org + " " + per,
+            "answer": role + (" at " + org if org else "") + (" (" + per + ")" if per else "") + ".",
+            "link": "about.html", "live": "",
+        })
+
+    for t in TESTIMONIALS:
+        if not (t.get("quote") or "").strip():
+            continue
+        docs.append({
+            "id": "t:" + t["name"],
+            "kind": "quote",
+            "title": "Testimonial from " + t["name"],
+            "terms": t["name"] + " " + t.get("role", "") + " " + t["quote"] + " testimonial reference recommend people say said review feedback opinion praise",
+            "answer": '"' + t["quote"] + '"\n\n- ' + t["name"] + ", " + t.get("role", ""),
+            "link": "about.html", "live": "",
+        })
+
+    docs.append({
+        "id": "x:philosophy", "kind": "about", "title": "How Jamie works",
+        "terms": "philosophy approach principle how do you work process system boring repeat " + PHILOSOPHY,
+        "answer": PHILOSOPHY, "link": "about.html", "live": "",
+    })
+    docs.append({
+        "id": "x:who", "kind": "about", "title": "About Jamie",
+        "terms": "who whos sino ka about jamie jamielyn background yourself introduce location based who are you tell me about yourself "
+                 + PROFILE["name"] + " " + PROFILE["role"] + " " + PROFILE["location"] + " " + PROFILE["intro"],
+        "answer": PROFILE["intro"] + "\n\nBased in " + PROFILE["location"] + ".",
+        "link": "about.html", "live": "",
+    })
+    # The KB is injected inside a <script> tag, so a future project description
+    # containing "</script>" would end the block early and break every page.
+    return json.dumps(docs, ensure_ascii=False).replace("</", "<\\/")
+
 CHAT_JS = r"""
 (function(){
   var fab=document.getElementById('jl-chat-fab'),box=document.getElementById('jl-chat'),log=document.getElementById('jl-chat-log'),
@@ -958,8 +1048,82 @@ CHAT_JS = r"""
     rates:"No fixed plans or subscriptions. Send me your store or project and what's slowing you down — I reply with what I'd do, how long it takes and a quote. Projects are 50%% to start, 50%% on delivery; retainers are monthly.\n\nFastest way: message me on WhatsApp.",
     start:"Message me on WhatsApp with your store link (or the project) and I'll come back with a plan and a quote: "+WA+"\n\nOr email: "+MAIL,
     hello:"Hi! I'm Jamie's assistant. Ask about services, the free tools, or how to start a project.",
-    fallback:"I can help with services, the free tools, rates, or getting started — or I can hand you straight to Jamie on WhatsApp."
+    fallback:"I did not catch that one. I can answer about any of the projects on this site, the services, the free tools, rates or how to start — or hand you straight to Jamie on WhatsApp."
   };
+  // ---- knowledge base, generated from content.py at build time -------------
+  var KB=%(kb)s;
+  var STOP={the:1,a:1,an:1,and:1,or:1,of:1,to:1,in:1,on:1,for:1,with:1,is:1,are:1,was:1,
+    do:1,does:1,did:1,you:1,your:1,yours:1,i:1,me:1,my:1,we:1,it:1,this:1,that:1,can:1,
+    could:1,would:1,how:1,what:1,which:1,who:1,any:1,have:1,has:1,about:1,tell:1,show:1,
+    ba:1,ang:1,ng:1,sa:1,mo:1,ko:1,ako:1,ikaw:1,yung:1,yun:1,ito:1,ay:1,po:1,na:1,pa:1,
+    may:1,mga:1,ninyo:1,niyo:1,kayo:1,pwede:1,puwede:1,kung:1,at:1,si:1,ni:1};
+  // Taglish and shorthand the visitor is likely to type -> words the KB actually uses
+  var SYN={magkano:'rate price',presyo:'rate price',bayad:'rate price',singil:'rate price',
+    gaano:'rate',trabaho:'work project',ginawa:'work project',gawa:'work project',
+    proyekto:'project',larawan:'photo photography',kuha:'photo photography',
+    litrato:'photo photography',video:'video short form reels tiktok',
+    bidyo:'video',disenyo:'design',dinisenyo:'design',website:'web site front-end',
+    sistema:'system automation',bot:'bot telegram automation',
+    tulong:'help service',serbisyo:'service',karanasan:'experience background',
+    saan:'location based',taga:'location based',
+    ecom:'ecommerce marketplace',ecommerce:'ecommerce marketplace shopee lazada tiktok shopify',
+    shopee:'shopee marketplace',lazada:'lazada marketplace',tiktok:'tiktok marketplace video',
+    shopify:'shopify ecommerce store',ai:'ai agent automation',agents:'agent automation',
+    n8n:'automation workflow',notion:'notion system',blender:'render 3d product',
+    sketchup:'3d interior render',expo:'exhibit booth event',booth:'exhibit booth event',
+    tarp:'tarpaulin banner print',pubmat:'social graphics pubmat',
+    resume:'background experience',cv:'background experience',
+    hire:'start hire work with',kausap:'talk contact',makausap:'talk contact',
+    sino:'who jamie about',foreign:'overseas international client',
+    abroad:'overseas international',render:'render 3d blender product',
+    pag_aaral:'education degree school',edukasyon:'education degree school',
+    natapos:'education degree school',eskwela:'education school',
+    kliyente:'client brand',brands:'brand client',
+    say:'say people testimonial',reviews:'testimonial review people say'};
+  function stem(w){ if(w.length>4&&/(ies)$/.test(w)) return w.slice(0,-3)+'y';
+    if(w.length>4&&/(ses|xes|ches|shes)$/.test(w)) return w.slice(0,-2);
+    if(w.length>2&&/s$/.test(w)&&!/(ss|us|is)$/.test(w)) return w.slice(0,-1);
+    if(w.length>5&&/ing$/.test(w)) return w.slice(0,-3);
+    return w; }
+  function norm(t){return String(t).toLowerCase().replace(/[^a-z0-9à-ÿ\s]/g,' ')
+    .split(/\s+/).filter(Boolean).map(stem);}
+  function expand(ws){var o=[],seen={};function push(w){if(w&&!seen[w]){seen[w]=1;o.push(w);}}
+    ws.forEach(function(w){if(STOP[w])return;push(w);
+      if(SYN[w])SYN[w].split(' ').forEach(function(x){push(stem(x));});});return o;}
+  var IDX=KB.map(function(d){var m={};norm(d.terms).forEach(function(w){if(!STOP[w])m[w]=(m[w]||0)+1;});
+    var tm={};norm(d.title).forEach(function(w){if(!STOP[w])tm[w]=1;});return {d:d,m:m,tm:tm};});
+  // A word that appears in only one or two entries identifies that entry far more
+  // strongly than a word every page uses. Weight by how rare it is.
+  var DF={};IDX.forEach(function(e){for(var k in e.m)DF[k]=(DF[k]||0)+1;});
+  var NDOC=IDX.length||1;
+  function idf(w){var d=DF[w]||NDOC;return 1+Math.log(NDOC/d);}
+  function score(q){
+    var ws=expand(norm(q)); if(!ws.length) return null;
+    var best=null,bs=0,second=0;
+    IDX.forEach(function(e){
+      var sc=0;
+      ws.forEach(function(w){
+        var iw=idf(w);
+        if(e.tm[w]) sc+=3*iw;                    // a hit in the title counts most
+        else if(e.m[w]) sc+=(1 + Math.min(e.m[w]-1,2)*0.25)*iw;
+        else if(w.length>4){                     // tolerate typos and part-words
+          for(var k in e.m){ if(k.length>4 && (k.indexOf(w)===0||w.indexOf(k)===0)){sc+=0.6*iw;break;} }
+        }
+      });
+      if(sc>bs){second=bs;bs=sc;best=e.d;} else if(sc>second){second=sc;}
+    });
+    if(bs<3.2) return null;                      // too weak - fall back to intents
+    return {doc:best,score:bs,clear:bs-second};
+  }
+  function kbAnswer(hit){
+    var d=hit.doc,t=d.answer;
+    if(d.kind==='project'){
+      t=d.title+' — '+t;
+      t+='\n\nFull write-up: '+'%(up)s'+d.link;
+      if(d.live) t+='\nLive: '+d.live;
+    }
+    return t;
+  }
   var CHIPS=[['What do you do?','services'],['Shopify & marketplaces','shopify'],['Automation & AI agents','automation'],['Free tools','tools'],['Rates & how to start','rates'],['Leave a message','lead'],['Talk to Jamie','wa']];
   var RULES=[[/email|message|form|leave|write|send you/i,'lead'],[/wa|whats|talk|human|jamie|call|contact|number/i,'wa'],[/rate|price|cost|quote|how much|fee|budget|pay/i,'rates'],[/start|hire|begin|work with|proposal|book/i,'start'],
     [/shopify|shopee|lazada|tiktok|amazon|etsy|ebay|listing|store|product page|a\+|marketplace|photo/i,'shopify'],[/automat|bot|agent|ai|mcp|n8n|telegram|workflow|script|python|hermes|llm/i,'automation'],
@@ -973,7 +1137,17 @@ CHAT_JS = r"""
   var lead=document.getElementById('jl-lead');
   function reply(intent){if(intent==='lead'){add('bot','Leave your details and I will reply by email within the day.');if(lead){lead.hidden=false;var n=lead.querySelector('input[name=name]');if(n)n.focus();}return;}if(intent==='wa'){add('bot',"Sure — this opens WhatsApp with a short note so Jamie has the context:\n"+waLink());return;}add('bot',A[intent]||A.fallback);}
   function detect(t){for(var i=0;i<RULES.length;i++){if(RULES[i][0].test(t))return RULES[i][1];}return 'fallback';}
-  function ask(text,intent){add('me',text);var k=intent||detect(text);typing(function(){reply(k);chipsFor(k);});}
+  // These four are about doing something, not about knowing something, so they
+  // must win over any article the knowledge base might match.
+  var HARD=/rate|price|cost|quote|how much|magkano|presyo|budget|hire|start|begin|book|whats ?app|contact|talk to|email|message you/i;
+  function ask(text,intent){
+    add('me',text);
+    if(intent){ typing(function(){reply(intent);chipsFor(intent);}); return; }
+    if(HARD.test(text)){ var k=detect(text); typing(function(){reply(k);chipsFor(k);}); return; }
+    var hit=score(text);
+    if(hit){ typing(function(){ add('bot',kbAnswer(hit)); chipsFor(''); }); return; }
+    var k2=detect(text); typing(function(){reply(k2);chipsFor(k2);});
+  }
   function open(){box.classList.add('open');box.setAttribute('aria-hidden','false');fab.setAttribute('aria-expanded','true');if(!log.children.length){add('bot',A.hello,false);chipsFor('hello');}setTimeout(function(){inp.focus();},250);}
   function close(){box.classList.remove('open');box.setAttribute('aria-hidden','true');fab.setAttribute('aria-expanded','false');}
   fab.addEventListener('click',function(){box.classList.contains('open')?close():open();});
@@ -1017,7 +1191,7 @@ def shell(title, desc, body, active, up="", extra_js=""):
 {nav(active, up)}
 {body}
 {chat_widget(up)}
-<script>{vj}{REVEAL_JS}{THEME_JS}{CHAT_JS % dict(wa=p['whatsapp'], mail=p['email'], up=up)}{LEAD_JS % dict(wa=p['whatsapp'], mail=p['email'])}{extra_js}</script>
+<script>{vj}{REVEAL_JS}{THEME_JS}{CHAT_JS % dict(wa=p['whatsapp'], mail=p['email'], up=up, kb=chat_kb())}{LEAD_JS % dict(wa=p['whatsapp'], mail=p['email'])}{extra_js}</script>
 </body>
 </html>
 '''
