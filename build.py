@@ -260,6 +260,8 @@ transition:color .2s,background .2s,border-color .2s}
 .strip .shot:hover{transform:translateY(-2px);border-color:rgba(139,13,26,.55)}
 .strip.strip-r45{grid-auto-columns:calc((100% - 4*.75rem)/5)}
 .strip.strip-r916{grid-auto-columns:calc((100% - 4*.75rem)/5)}
+.strip[data-n="1"]{grid-auto-columns:100%}
+.strip[data-n="2"]{grid-auto-columns:calc((100% - .75rem)/2)}
 @media(max-width:820px){.strip{grid-auto-columns:calc((100% - 2*.75rem)/3)}}
 @media(max-width:520px){.strip{grid-auto-columns:calc((100% - .75rem)/2)}}
 .r45{aspect-ratio:4/5}

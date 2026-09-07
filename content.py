@@ -200,6 +200,9 @@ PROJECTS = [
              "sub": "the two pages that decide whether a buyer trusts the company",
              "ratio": "r169", "alt": "kpicktradingcorp.com Learning Centre and credentials",
              "grid": ["kpick-web-learn.jpg", "kpick-web-module.jpg", "kpick-web-creds.jpg"]},
+            {"title": "Generate Quote / PO", "sub": "step 1 of 3 \u00b7 customer, products, review",
+             "ratio": "r169", "alt": "kpicktradingcorp.com quote and purchase order builder",
+             "grid": ["kpick-web-quote.jpg"]},
             {"title": "Phone", "sub": "same page, built for the screen it is actually opened on",
              "ratio": "r916", "alt": "kpicktradingcorp.com mobile layout",
              "grid": ["kpick-web-mob-1.jpg", "kpick-web-mob-2.jpg"]},
@@ -220,6 +223,12 @@ PROJECTS = [
             "the Philippine FDA licence to operate and the exclusive-distributor status, "
             "each with the document behind it and its validity date. Procurement asks for "
             "exactly these four things, so they are one click from anywhere",
+            "The one page that is not a brochure. A buyer builds the request themselves \u2014 "
+            "customer details, then products and quantities from the live catalogue, then a "
+            "review \u2014 and K-Pick receives a summary it can price, instead of an email "
+            "saying \u2018how much for syringes\u2019. Three numbered steps so nobody "
+            "abandons it halfway, a pinned Google Maps delivery address because that is what "
+            "couriers need, and no prices shown anywhere: quotation stays with the team",
             "The same page on a phone: the two brand cards collapse to full-width rows, the "
             "figures stack, and the nav becomes one button \u2014 nothing is dropped, only "
             "re-ordered, because a procurement officer opening this between meetings still "
