@@ -169,7 +169,7 @@ PROJECTS = [
         "featured": True,
         "link": "https://kpicktradingcorp.com/",
         "link_label": "Visit the live site",
-        "tags": ["Front-end design", "Responsive layout", "B2B website"],
+        "tags": ["Front-end design", "Interactive UI", "Responsive layout", "B2B website"],
         "cover": "kpick-web-cover.jpg",
         "cover_note": "kpicktradingcorp.com \u2014 homepage",
         "summary": ("Front-end design for the company website \u2014 a B2B medical distribution "
@@ -180,17 +180,26 @@ PROJECTS = [
                       "is credible enough to buy from at all. A regulated medical distributor "
                       "also carries a great deal of material that has to be reachable without "
                       "burying the pages that actually move an order forward."),
-        "approach": ("Designed the front end across the homepage, the three brand pages and the "
-                     "supporting sections. Set the visual system \u2014 type, colour, spacing, "
-                     "components \u2014 and laid out the page structure so the brand lines, "
-                     "certifications, company history and FAQs each have their own clear place. "
-                     "Built for the phone first, since buyers open it between other things."),
-        "result": ("A live site the company points buyers to, with the quote request and the "
-                   "compliance documents reachable from anywhere on the page."),
+        "approach": ("Designed the front end across the homepage, the two brand pages, the "
+                     "Learning Centre and the supporting sections. Set the visual system \u2014 "
+                     "type, colour, spacing, components \u2014 and laid out the page structure so "
+                     "the brand lines, certifications, company history and FAQs each have their "
+                     "own clear place. The Learning Centre goes further than a specification "
+                     "table: nine devices are explained by letting the reader operate them \u2014 "
+                     "change a gauge and the needle redraws, draw a dose and the barrel fills, "
+                     "with the numbers updating underneath. Built for the phone first, since "
+                     "buyers open it between other things."),
+        "result": ("A live site the company points buyers to \u2014 quote request and compliance "
+                   "documents reachable from anywhere on the page, and a Learning Centre that "
+                   "answers the product questions a sales rep would otherwise answer twice a day."),
         "gallery": [
             {"title": "Desktop", "sub": "homepage \u00b7 above and below the fold",
              "ratio": "r169", "alt": "kpicktradingcorp.com desktop layout",
              "grid": ["kpick-web-desk-1.jpg", "kpick-web-desk-2.jpg"]},
+            {"title": "Learning Centre and credentials",
+             "sub": "the two pages that decide whether a buyer trusts the company",
+             "ratio": "r169", "alt": "kpicktradingcorp.com Learning Centre and credentials",
+             "grid": ["kpick-web-learn.jpg", "kpick-web-module.jpg", "kpick-web-creds.jpg"]},
             {"title": "Phone", "sub": "same page, built for the screen it is actually opened on",
              "ratio": "r916", "alt": "kpicktradingcorp.com mobile layout",
              "grid": ["kpick-web-mob-1.jpg", "kpick-web-mob-2.jpg"]},
@@ -200,6 +209,17 @@ PROJECTS = [
             "sold, which certifications it carries, and who it is for \u2014 then splits "
             "into the two brand lines. Generate Quote sits beside View Certifications "
             "because those are the only two things a buyer comes to do",
+            "The Learning Centre is the part I am proudest of. Nine devices explained by "
+            "letting you operate them \u2014 pick a barrel and a gauge and the syringe "
+            "redraws to scale, drag the dose and the barrel fills while volume, fill "
+            "percentage, needle length and packing update underneath. A specification table "
+            "tells a buyer the numbers; this shows them what the numbers mean. Every claim "
+            "is sourced from manufacturer specifications, dated, and labelled educational "
+            "material rather than clinical advice",
+            "Credentials given their own page instead of a line in the footer: DTI, SEC, "
+            "the Philippine FDA licence to operate and the exclusive-distributor status, "
+            "each with the document behind it and its validity date. Procurement asks for "
+            "exactly these four things, so they are one click from anywhere",
             "The same page on a phone: the two brand cards collapse to full-width rows, the "
             "figures stack, and the nav becomes one button \u2014 nothing is dropped, only "
             "re-ordered, because a procurement officer opening this between meetings still "
