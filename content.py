@@ -280,9 +280,13 @@ PROJECTS = [
                      "and edited on-site coverage for both booths and ran the follow-up."),
         "result": ("91 leads captured and organised into a tiered follow-up system with owners "
                    "and next actions, not a stack of business cards."),
-        "gallery": ["philmed-booth.jpg", "philmed-stand.jpg", "philmed-floor.jpg",
+        "gallery": [{"video": ["philmed-booth-walkthrough.mp4"], "ratio": "r169"},
+                    "philmed-booth.jpg", "philmed-stand.jpg", "philmed-floor.jpg",
                     "philmed-brief.jpg", "philmed-demo.jpg"],
         "gallery_captions": [
+            "The walkthrough rendered from the 3D model before anything was built \u2014 "
+            "used to settle sightlines, where the counter sits and what a visitor reads "
+            "first, while it was still cheap to change",
             "The same stand as built — two brands sharing one island, each with its own "
             "fascia and its own wall, so neither reads as a sub-brand of the other",
             "The K-PICK wall: product boards, a looping product film and the trocar rack "

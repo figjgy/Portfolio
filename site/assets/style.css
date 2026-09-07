@@ -233,6 +233,7 @@ transition:color .2s,background .2s,border-color .2s}
 @media(max-width:520px){.strip{grid-auto-columns:calc((100% - .75rem)/2)}}
 .r45{aspect-ratio:4/5}
 .vidrow{display:grid;grid-template-columns:repeat(3,1fr);gap:1rem}
+.vidrow.one{grid-template-columns:1fr}
 @media(max-width:640px){.vidrow{grid-template-columns:1fr 1fr}}
 .vid{position:relative;border-radius:var(--rad);overflow:hidden;background:#000;border:1px solid var(--edge)}
 .vid video{display:block;width:100%;height:100%;object-fit:cover;background:#000}

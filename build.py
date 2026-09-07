@@ -263,6 +263,7 @@ transition:color .2s,background .2s,border-color .2s}
 @media(max-width:520px){.strip{grid-auto-columns:calc((100% - .75rem)/2)}}
 .r45{aspect-ratio:4/5}
 .vidrow{display:grid;grid-template-columns:repeat(3,1fr);gap:1rem}
+.vidrow.one{grid-template-columns:1fr}
 @media(max-width:640px){.vidrow{grid-template-columns:1fr 1fr}}
 .vid{position:relative;border-radius:var(--rad);overflow:hidden;background:#000;border:1px solid var(--edge)}
 .vid video{display:block;width:100%;height:100%;object-fit:cover;background:#000}
@@ -1191,7 +1192,19 @@ def build_project(i, pr):
     caps = pr.get('gallery_captions') or []
     gal_items = []
     for i, g in enumerate(pr.get('gallery', [])):
-        if isinstance(g, dict):
+        if isinstance(g, dict) and g.get("video"):
+            # Landscape / custom-ratio video block. The bare-list branch below is
+            # the 9:16 phone-video row; this one lets a 16:9 walkthrough run full
+            # width instead of being cropped to a vertical box.
+            vr = g.get("ratio", "r169")
+            vids = "".join(
+                f'<div class="vid {vr}"><video controls muted playsinline preload="metadata" '
+                f'poster="../assets/video/{E(v.rsplit(".",1)[0])}.jpg">'
+                f'<source src="../assets/video/{E(v)}" type="video/mp4"></video></div>'
+                for v in g["video"])
+            n = len(g["video"])
+            media = f'<div class="vidrow{" one" if n == 1 else ""}">{vids}</div>'
+        elif isinstance(g, dict):
             ratio = g.get("ratio", "r11")
             tiles = "".join(render_media(f, ratio, g.get("alt", pr['title']), up="../") for f in g.get("grid", []))
             head = ""
