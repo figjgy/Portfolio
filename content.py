@@ -194,19 +194,67 @@ PROJECTS = [
         "slug": "ads-creatives",
         "title": "Ad creatives for overseas brands",
         "discipline": "marketing",
-        "year": "",          # <- add the years, e.g. "2024–2025"
-        "featured": False,
-        "tags": ["Ad creatives", "Photography", "Short-form video"],
-        "cover_note": "Image — ad creative set",
-        "summary": ("Photo and video ad creatives produced for a handful of "
-                    "foreign product brands."),
-        "challenge": ("Selling a product to an audience you do not share a market with "
-                      "— the creative has to carry the whole message on its own."),
-        "approach": ("Produced both photo and video creatives built for paid placement: "
-                     "hook in the first seconds, the product doing the thing it is bought "
-                     "for, and a clear reason to tap."),
-        "result": ("[ Add what these were used for, or a result you are allowed to share ]"),
-        "gallery": ["Image — photo creative", "Image — video still"],
+        "year": "2025\u20132026",
+        "featured": True,
+        "tags": ["Ad creatives", "Paid social", "Art direction", "Copywriting"],
+        "cover": "ads-cover.jpg",
+        "cover_note": "Ad creatives \u2014 Upscale Menswear, Big Paw Olive Oil, Luv\u00e9, PLTN",
+        "summary": ("Paid-social creative for four overseas brands \u2014 US menswear, "
+                    "a California olive oil producer, a lash brand and an apparel drop \u2014 "
+                    "each in its own voice, none of them mine."),
+        "challenge": ("Selling to a market I do not live in. There is no walking into the "
+                      "store, no reading the room \u2014 the creative has to carry the whole "
+                      "message on its own, in a scroll, to someone who has never heard of "
+                      "the brand. And four brands means four voices: a menswear house that "
+                      "must feel expensive cannot use the same layout as an olive oil "
+                      "producer that must feel warm."),
+        "approach": ("Built each brand its own visual system first \u2014 type, crop, colour, "
+                     "where the logo sits, how the button looks \u2014 then worked inside it "
+                     "so every ad in a set reads as one campaign instead of a pile of "
+                     "one-offs. Funnel position drives the layout: a cold-audience ad leads "
+                     "with the objection in plain words, a warm one leads with the product "
+                     "and the offer. Sized natively per placement \u2014 4:5 and 1:1 for feed, "
+                     "9:16 for stories \u2014 never one export stretched to fit all three."),
+        "result": ("Four brands running on creative that looks like it came from inside "
+                   "each company, produced from Manila."),
+        "gallery": [
+            {"title": "Upscale Menswear", "sub": "US luxury clothier \u00b7 feed 4:5",
+             "ratio": "r45", "alt": "Upscale Menswear ad creative",
+             "grid": ["ads-um-1.jpg", "ads-um-2.jpg", "ads-um-3.jpg",
+                      "ads-um-4.jpg", "ads-um-5.jpg", "ads-um-6.jpg"]},
+            {"title": "Big Paw Olive Oil Co.", "sub": "California olive oil & balsamic \u00b7 feed 1:1",
+             "ratio": "r11", "alt": "Big Paw Olive Oil ad creative",
+             "grid": ["ads-bp-1.jpg", "ads-bp-2.jpg", "ads-bp-3.jpg",
+                      "ads-bp-4.jpg", "ads-bp-5.jpg"]},
+            {"title": "Luv\u00e9 \u2014 cold audience", "sub": "magnetic lashes \u00b7 hook-led, top of funnel",
+             "ratio": "r11", "alt": "Luv\u00e9 top-of-funnel ad creative",
+             "grid": ["ads-luve-tof-1.jpg", "ads-luve-tof-2.jpg", "ads-luve-tof-3.jpg",
+                      "ads-luve-tof-4.jpg", "ads-luve-tof-5.jpg"]},
+            {"title": "Luv\u00e9 \u2014 ready to buy", "sub": "same product \u00b7 offer-led, bottom of funnel",
+             "ratio": "r11", "alt": "Luv\u00e9 bottom-of-funnel ad creative",
+             "grid": ["ads-luve-bof-1.jpg", "ads-luve-bof-2.jpg", "ads-luve-bof-3.jpg",
+                      "ads-luve-bof-4.jpg", "ads-luve-bof-5.jpg"]},
+            {"title": "PLTN \u2014 Palestine special edition",
+             "sub": "apparel drop \u00b7 stories 9:16", "ratio": "r916",
+             "alt": "PLTN Palestine special edition story creative",
+             "grid": ["ads-pltn-1.jpg", "ads-pltn-2.jpg", "ads-pltn-3.jpg", "ads-pltn-4.jpg",
+                      "ads-pltn-5.jpg", "ads-pltn-6.jpg", "ads-pltn-7.jpg", "ads-pltn-8.jpg",
+                      "ads-pltn-9.jpg", "ads-pltn-10.jpg"]},
+        ],
+        "gallery_captions": [
+            "Quiet luxury has to be built, not claimed \u2014 thin letter-spaced type, the "
+            "product shot large, one white button, and nothing else competing for the eye",
+            "Warm and appetite-led instead: the bottles photographed like food, benefits "
+            "stated plainly, one red button repeated in every post so it becomes the brand's",
+            "Cold audience. Each one opens on the objection a first-time buyer actually has "
+            "\u2014 fit on monolid eyes, glue near the eye, the price of extensions \u2014 "
+            "and answers it before mentioning the offer",
+            "Same product, warm audience. The doubt is already handled, so these lead with "
+            "the result and the discount and get out of the way",
+            "A drop, so the set is built on scarcity and repetition \u2014 one type "
+            "treatment, one gold-on-black palette, the shirt shown folded, hung, worn and "
+            "on the street until it is recognisable at thumbnail size",
+        ],
     },
     # ------------------------------------------------- SOURCING & RESEARCH
     {
