@@ -31,13 +31,13 @@
 
 </div></header>
 <main><div class="wrap"><section>
-<div class="ph r32">[ IMAGE — RENDERED PRODUCT ]</div>
+<div class="ph r32"><span class="ph-t">Product rendering</span><span class="ph-n">rendered product</span></div>
 <div class="cols c3">
 <div><span class="eyebrow lab">Challenge</span><p>Syringes and needles are small, transparent and nearly impossible to photograph well — and the suppliers sent nothing usable. Buying studio photography for every variant was not realistic either: one product line runs to a dozen capacities, tip types and needle gauges, and marketing needed all of them.</p></div>
 <div><span class="eyebrow lab">What I did</span><p>Rather than model each product by hand, I wrote a Python build script for Blender that constructs a syringe from its real specification — capacity, tip type, needle gauge and length, barrel colour — so a new variant is a parameter change. On top of it sits an eight-scene, 34-second animated product film with exploded components, callouts and spec overlays, and a turntable mode for stills with transparent backgrounds.</p><p>Two decisions did most of the work. Components animate through an offset layer and a parent empty, so the film never touches the original geometry and can be undone in one call. And the renderer runs a wording check before it starts — it refuses to render any overlay carrying claims the company is not allowed to make, which puts the compliance rule in the tool instead of in someone&#x27;s memory.</p></div>
 <div><span class="eyebrow lab">Result</span><p>Marketing visuals for a catalogue that had no photography at all, and a renderer the team can point at the next product instead of commissioning a shoot. Getting to the first usable frame took six specific fixes — scale-appropriate lighting, near-clip, floor clearance, and how transparent plastic actually has to be rendered — all of them written down so the next person does not rediscover them.</p></div>
 </div>
-<div class="gal"><figure class="galfig"><div class="ph r43">[ IMAGE — TURNTABLE FRAME ]</div><figcaption>One frame off the turntable pass — built from the specification sheet, not a photo</figcaption></figure><figure class="galfig"><div class="ph r43">[ IMAGE — SPEC OVERLAY SCENE ]</div><figcaption>A scene from the 34-second film: components separated, with the spec called out</figcaption></figure></div>
+<div class="gal"><figure class="galfig"><div class="ph r43"><span class="ph-t">Turntable frame</span></div><figcaption>One frame off the turntable pass — built from the specification sheet, not a photo</figcaption></figure><figure class="galfig"><div class="ph r43"><span class="ph-t">Spec overlay scene</span></div><figcaption>A scene from the 34-second film: components separated, with the spec called out</figcaption></figure></div>
 
 <div class="pn"><a href="social-graphics.html"><span>Previous</span>Social media graphics &amp; pubmats</a><a href="interior-decoration.html" style="text-align:right"><span>Next</span>Interior decoration</a></div>
 <p style="margin-top:2.5rem"><a class="more" href="index.html">All projects</a></p>

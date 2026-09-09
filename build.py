@@ -146,10 +146,23 @@ transition:background .25s,transform .12s}
 /* ---- sections ---------------------------------------------------------- */
 section{padding:4rem 0;position:relative;z-index:1}
 .lede{font-size:clamp(1.15rem,4.5vw,1.5rem);line-height:1.55;margin-bottom:2.5rem}
-.ph{width:100%;background:var(--glass);border:1px solid var(--edge);border-radius:var(--rad);
+/* typographic cover panel, used when a project has no photograph yet */
+.ph{position:relative;width:100%;overflow:hidden;border-radius:var(--rad);
+border:1px solid var(--edge);
+background:
+ radial-gradient(120% 90% at 15% 0%,var(--blob1) 0%,transparent 60%),
+ linear-gradient(160deg,var(--glass-2) 0%,var(--glass) 55%,transparent 100%);
 -webkit-backdrop-filter:blur(16px);backdrop-filter:blur(16px);
-display:flex;align-items:center;justify-content:center;text-align:center;padding:1rem;
-color:var(--dim);font-size:10px;text-transform:uppercase;letter-spacing:.22em;font-weight:400}
+display:flex;flex-direction:column;align-items:center;justify-content:center;
+text-align:center;padding:1.4rem;gap:.5rem}
+.ph::before{content:"";position:absolute;top:0;left:0;width:34%;height:2px;background:var(--acc)}
+.ph::after{content:"";position:absolute;inset:0;pointer-events:none;opacity:.5;
+background:repeating-linear-gradient(135deg,transparent 0 9px,var(--glass) 9px 10px)}
+.ph-t{position:relative;z-index:1;font-family:'Cormorant Garamond',Georgia,serif;
+font-size:clamp(1.2rem,3.6vw,1.9rem);line-height:1.15;font-weight:400;color:var(--ink);
+max-width:22ch;text-transform:none;letter-spacing:0}
+.ph-n{position:relative;z-index:1;color:var(--dim);font-size:9.5px;
+text-transform:uppercase;letter-spacing:.22em;font-weight:400}
 .r43{aspect-ratio:4/3}.r34{aspect-ratio:3/4}.r32{aspect-ratio:3/2}
 .r169{aspect-ratio:16/9}.r11{aspect-ratio:1/1}
 .shot{position:relative;width:100%;overflow:hidden;border-radius:var(--rad);
@@ -205,7 +218,9 @@ box-shadow:0 14px 40px var(--shade),inset 0 1px 0 var(--edge-top);overflow:hidde
 transition:border-color .25s,transform .25s,box-shadow .25s}
 .card:hover{border-color:var(--acc);transform:translateY(-4px);
 box-shadow:0 20px 50px var(--shade),inset 0 1px 0 var(--edge-top)}
-.card .ph,.card .shot{border:0;border-radius:0;box-shadow:none;background:var(--glass-2);flex:none}
+/* flush inside a card; .ph keeps its own wash */
+.card .ph,.card .shot{border:0;border-radius:0;box-shadow:none;flex:none}
+.card .shot{background:var(--glass-2)}
 .card:hover .shot img{transform:scale(1.05)}
 .card:hover .shot::after{opacity:1}
 .card .body{padding:1.5rem;display:flex;flex-direction:column;flex:1 1 auto}
@@ -1296,8 +1311,31 @@ def render_media(val, ratio="r43", alt="", up=""):
         return (f'<div class="shot {ratio}">'
                 f'<img src="{E(src)}" alt="{E(alt)}" width="800" height="600" '
                 f'loading="lazy" decoding="async"></div>')
-    note = val if val else "IMAGE"
-    return f'<div class="ph {ratio}">[ {E(note.upper())} ]</div>'
+    # No photograph for this one yet - draw a designed panel, not a broken box.
+    # "Image - rendered product" is scaffolding language, so strip the leading
+    # "Image" and show the subject only; the title carries the panel.
+    note = (val or "").strip()
+    for lead in ("Image — ", "Image - ", "Image: ", "Image"):
+        if note.lower().startswith(lead.lower()):
+            note = note[len(lead):].strip()
+            break
+    # `alt` is the project title on a cover, but the CAPTION on a gallery tile -
+    # and a caption is a whole sentence, which cannot be the panel's headline.
+    # Anything long means we were handed a caption: show the subject instead.
+    title = (alt or "").strip()
+    if len(title) > 46 or title.lower().endswith(" preview"):
+        title = note
+        note = ""
+    if title and title[:1].islower():
+        title = title[0].upper() + title[1:]
+    bits = []
+    if title:
+        bits.append(f'<span class="ph-t">{E(title)}</span>')
+    if note and note.lower() != title.lower():
+        bits.append(f'<span class="ph-n">{E(note)}</span>')
+    if not bits:
+        bits.append('<span class="ph-n">Image to follow</span>')
+    return f'<div class="ph {ratio}">{"".join(bits)}</div>'
 
 
 def card_html(pr, base="work/", up=""):
