@@ -464,17 +464,39 @@ PROJECTS = [
         "discipline": "rendering",
         "year": "2026",
         "featured": True,
-        "tags": ["Blender", "Product visualisation"],
+        "tags": ["Blender", "Product visualisation", "Python", "Parametric modelling",
+                 "Motion graphics"],
         "cover_note": "Image — rendered product",
-        "summary": ("Products built from manufacturer specifications and rendered, because "
-                    "photography was not possible."),
-        "challenge": ("Medical syringes are small, transparent and nearly impossible to "
-                      "photograph well. Suppliers sent nothing usable."),
-        "approach": ("Built the products in Blender from real manufacturer specifications and "
-                     "rendered turntables and transparent stills, plus an eight-scene animated "
-                     "product film with callouts and spec overlays."),
-        "result": "Marketing visuals for products we had no photography for.",
+        "summary": ("Medical products modelled from manufacturer specifications and rendered in "
+                    "Blender — a parametric build script, not a one-off model, so a new size or "
+                    "gauge is a parameter rather than a week of work."),
+        "challenge": ("Syringes and needles are small, transparent and nearly impossible to "
+                      "photograph well — and the suppliers sent nothing usable. Buying studio "
+                      "photography for every variant was not realistic either: one product line "
+                      "runs to a dozen capacities, tip types and needle gauges, and marketing "
+                      "needed all of them."),
+        "approach": ("Rather than model each product by hand, I wrote a Python build script for "
+                     "Blender that constructs a syringe from its real specification — capacity, "
+                     "tip type, needle gauge and length, barrel colour — so a new variant is a "
+                     "parameter change. On top of it sits an eight-scene, 34-second animated "
+                     "product film with exploded components, callouts and spec overlays, and a "
+                     "turntable mode for stills with transparent backgrounds.\n\n"
+                     "Two decisions did most of the work. Components animate through an offset "
+                     "layer and a parent empty, so the film never touches the original geometry "
+                     "and can be undone in one call. And the renderer runs a wording check "
+                     "before it starts — it refuses to render any overlay carrying claims the "
+                     "company is not allowed to make, which puts the compliance rule in the tool "
+                     "instead of in someone's memory."),
+        "result": ("Marketing visuals for a catalogue that had no photography at all, and a "
+                   "renderer the team can point at the next product instead of commissioning a "
+                   "shoot. Getting to the first usable frame took six specific fixes — scale-"
+                   "appropriate lighting, near-clip, floor clearance, and how transparent "
+                   "plastic actually has to be rendered — all of them written down so the next "
+                   "person does not rediscover them."),
         "gallery": ["Image — turntable frame", "Image — spec overlay scene"],
+        "gallery_captions": [
+            "One frame off the turntable pass — built from the specification sheet, not a photo",
+            "A scene from the 34-second film: components separated, with the spec called out"],
     },
     # ---------------------------------------------------------- INTERIOR
     {

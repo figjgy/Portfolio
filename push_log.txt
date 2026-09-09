@@ -1,14 +1,10 @@
 ==================================================== 
-  PUSH RUN Wed 09/09/2026 10:53:02.64 
+  PUSH RUN Wed 09/09/2026 11:00:31.31 
 ==================================================== 
 manager
 --- commits to send: 
+d487289 Merge the GitHub web edit - build.py now carries the same fix on .jl-msg
+26ddff5 Chat bubbles wrap long words on both sides, fixed in build.py so it survives a rebuild
 --- push output: 
-To https://github.com/figjgy/Portfolio.git
- ! [rejected]        main -> main (non-fast-forward)
-error: failed to push some refs to 'https://github.com/figjgy/Portfolio.git'
-hint: Updates were rejected because the tip of your current branch is behind
-hint: its remote counterpart. If you want to integrate the remote changes,
-hint: use 'git pull' before pushing again.
-hint: See the 'Note about fast-forwards' in 'git push --help' for details.
---- exit code: 1 
+Everything up-to-date
+--- exit code: 0 

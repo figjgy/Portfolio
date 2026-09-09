@@ -17,6 +17,16 @@ E = html.escape
 _url_quote = urllib.parse.quote
 
 
+def paras(text):
+    """Escape, and turn a blank line in content.py into a real paragraph break.
+
+    Without this a two-paragraph 'approach' rendered as one unbroken wall of
+    text - the \\n\\n survived into the HTML, where it is just whitespace.
+    """
+    blocks = [b.strip() for b in (text or "").split("\n\n") if b.strip()]
+    return "".join("<p>%s</p>" % E(b) for b in blocks) or "<p></p>"
+
+
 def bio_html(paragraphs):
     """Escape each paragraph, then turn **text** into <strong>text</strong>."""
     out = []
@@ -1491,9 +1501,9 @@ def build_project(i, pr):
 <main><div class="wrap"><section>
 {cover_visual}
 <div class="cols c3">
-<div><span class="eyebrow lab">Challenge</span><p>{E(pr['challenge'])}</p></div>
-<div><span class="eyebrow lab">What I did</span><p>{E(pr['approach'])}</p></div>
-<div><span class="eyebrow lab">Result</span><p>{E(pr['result'])}</p></div>
+<div><span class="eyebrow lab">Challenge</span>{paras(pr['challenge'])}</div>
+<div><span class="eyebrow lab">What I did</span>{paras(pr['approach'])}</div>
+<div><span class="eyebrow lab">Result</span>{paras(pr['result'])}</div>
 </div>
 {galblock}
 {cta}
