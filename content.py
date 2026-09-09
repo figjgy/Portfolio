@@ -244,7 +244,8 @@ PROJECTS = [
         "discipline": "marketing",
         "year": "2025\u20132026",
         "featured": True,
-        "tags": ["Ad creatives", "Paid social", "Art direction", "Copywriting"],
+        "tags": ["Ad creatives", "Paid social", "Art direction", "Copywriting",
+                 "Short-form video"],
         "cover": "ads-cover.jpg",
         "cover_note": "Ad creatives \u2014 Upscale Menswear, Big Paw Olive Oil, Luv\u00e9, PMT",
         "summary": ("Paid-social creative for four overseas brands \u2014 US menswear, "
@@ -288,6 +289,7 @@ PROJECTS = [
              "grid": ["ads-pmt-1.jpg", "ads-pmt-2.jpg", "ads-pmt-3.jpg", "ads-pmt-4.jpg",
                       "ads-pmt-5.jpg", "ads-pmt-6.jpg", "ads-pmt-7.jpg", "ads-pmt-8.jpg",
                       "ads-pmt-9.jpg", "ads-pmt-10.jpg"]},
+            ["luve-video-1.mp4", "luve-video-2.mp4"],
         ],
         "gallery_captions": [
             "Quiet luxury has to be built, not claimed \u2014 thin letter-spaced type, the "
@@ -302,6 +304,10 @@ PROJECTS = [
             "A drop, so the set is built on scarcity and repetition \u2014 one type "
             "treatment, one gold-on-black palette, the shirt shown folded, hung, worn and "
             "on the street until it is recognisable at thumbnail size. Scroll sideways to see the whole drop.",
+            "Luvé in motion. The same two funnel positions as the stills, but paced for "
+            "sound-off vertical video — the first opens on the claim a scroller will "
+            "stop for, the second just shows the lashes going on, because the objection "
+            "these ads answer is “I could never do that myself”",
         ],
     },
     # ------------------------------------------------- SOURCING & RESEARCH
