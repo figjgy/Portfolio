@@ -432,6 +432,10 @@ footer .lead-foot .lead-msg{flex-basis:100%}
 @media(max-width:520px){footer .lead-foot .btn{width:100%}}
 @media(max-width:640px){.lead-row{grid-template-columns:1fr}}
 .jl-lead{padding:0 1.1rem .9rem}
+#jl-lead[hidden]{display:none!important}
+.jl-chat.lead-on .jl-chips,.jl-chat.lead-on .jl-chat-form{display:none}
+.jl-lead-back{display:block;width:100%;margin-bottom:.55rem;background:transparent;border:0;color:var(--dim);font:inherit;font-size:12px;cursor:pointer;text-align:left;padding:0}
+.jl-lead-back:hover{color:var(--ink)}
 .jl-lead .lead-form{max-width:none;gap:.45rem}
 .jl-lead .lead-form input,.jl-lead .lead-form textarea{padding:.55rem .8rem;font-size:13px;border-radius:10px}
 .jl-lead .lead-foot .btn{padding:.6rem 1.1rem;min-height:38px;font-size:11px}
@@ -457,12 +461,20 @@ transform:translateY(12px) scale(.98);opacity:0;pointer-events:none;transition:o
 .jl-chat-x{margin-left:auto;background:transparent;border:0;color:var(--dim);cursor:pointer;width:32px;height:32px;border-radius:8px;display:flex;align-items:center;justify-content:center}
 .jl-chat-x:hover{background:var(--glass-2);color:var(--ink)}
 .jl-chat-x svg{width:16px;height:16px;stroke:currentColor;fill:none;stroke-width:2}
-.jl-chat-log{flex:1;overflow-y:auto;padding:1rem 1.1rem;display:flex;flex-direction:column;gap:.6rem;scrollbar-width:thin;min-height:200px}
-.jl-msg{max-width:86%;padding:.6rem .85rem;border-radius:14px;font-size:13.5px;line-height:1.55;color:var(--ink);white-space:pre-wrap}
+.jl-chat-log{flex:1;overflow-y:auto;padding:1rem 1.1rem;display:flex;flex-direction:column;gap:.6rem;min-height:200px;
+scrollbar-width:thin;scrollbar-color:rgba(245,242,237,.28) transparent}
+.jl-chat-log::-webkit-scrollbar{width:6px}
+.jl-chat-log::-webkit-scrollbar-track{background:transparent}
+.jl-chat-log::-webkit-scrollbar-thumb{background:rgba(245,242,237,.22);border-radius:99px}
+[data-theme="light"] .jl-chat-log{scrollbar-color:rgba(18,16,15,.28) transparent}
+[data-theme="light"] .jl-chat-log::-webkit-scrollbar-thumb{background:rgba(18,16,15,.22)}
+/* chat bubbles wrap long words on BOTH sides, not just the bot's */
+.jl-msg{max-width:86%;padding:.6rem .85rem;border-radius:14px;font-size:13.5px;line-height:1.55;color:var(--ink);white-space:pre-wrap;overflow-wrap:anywhere}
 .jl-msg.bot{align-self:flex-start;background:var(--glass-2);border:1px solid var(--edge);border-bottom-left-radius:5px}
 .jl-msg.me{align-self:flex-end;background:var(--acc);color:#F5F2ED;border-bottom-right-radius:5px}
 .jl-msg a{color:inherit;text-decoration:underline;text-underline-offset:3px}
 .jl-chips{display:flex;flex-wrap:wrap;gap:.4rem;padding:0 1.1rem .75rem}
+.jl-chips[hidden]{display:none!important}
 .jl-chip{background:transparent;border:1px solid var(--edge);color:var(--dim);border-radius:999px;padding:.4rem .8rem;font:inherit;font-size:12px;cursor:pointer;transition:all .15s}
 .jl-chip:hover{border-color:var(--acc);color:var(--ink)}
 .jl-chat-form{display:flex;gap:.5rem;padding:.75rem 1.1rem 1rem;border-top:1px solid var(--edge)}

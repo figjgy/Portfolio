@@ -1,8 +1,14 @@
 ==================================================== 
-  PUSH RUN Mon 09/07/2026 16:14:47.16 
+  PUSH RUN Wed 09/09/2026 10:53:02.64 
 ==================================================== 
 manager
 --- commits to send: 
 --- push output: 
-Everything up-to-date
---- exit code: 0 
+To https://github.com/figjgy/Portfolio.git
+ ! [rejected]        main -> main (non-fast-forward)
+error: failed to push some refs to 'https://github.com/figjgy/Portfolio.git'
+hint: Updates were rejected because the tip of your current branch is behind
+hint: its remote counterpart. If you want to integrate the remote changes,
+hint: use 'git pull' before pushing again.
+hint: See the 'Note about fast-forwards' in 'git push --help' for details.
+--- exit code: 1 

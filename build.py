@@ -462,6 +462,10 @@ footer .lead-foot .lead-msg{flex-basis:100%}
 @media(max-width:520px){footer .lead-foot .btn{width:100%}}
 @media(max-width:640px){.lead-row{grid-template-columns:1fr}}
 .jl-lead{padding:0 1.1rem .9rem}
+#jl-lead[hidden]{display:none!important}
+.jl-chat.lead-on .jl-chips,.jl-chat.lead-on .jl-chat-form{display:none}
+.jl-lead-back{display:block;width:100%;margin-bottom:.55rem;background:transparent;border:0;color:var(--dim);font:inherit;font-size:12px;cursor:pointer;text-align:left;padding:0}
+.jl-lead-back:hover{color:var(--ink)}
 .jl-lead .lead-form{max-width:none;gap:.45rem}
 .jl-lead .lead-form input,.jl-lead .lead-form textarea{padding:.55rem .8rem;font-size:13px;border-radius:10px}
 .jl-lead .lead-foot .btn{padding:.6rem 1.1rem;min-height:38px;font-size:11px}
@@ -487,12 +491,20 @@ transform:translateY(12px) scale(.98);opacity:0;pointer-events:none;transition:o
 .jl-chat-x{margin-left:auto;background:transparent;border:0;color:var(--dim);cursor:pointer;width:32px;height:32px;border-radius:8px;display:flex;align-items:center;justify-content:center}
 .jl-chat-x:hover{background:var(--glass-2);color:var(--ink)}
 .jl-chat-x svg{width:16px;height:16px;stroke:currentColor;fill:none;stroke-width:2}
-.jl-chat-log{flex:1;overflow-y:auto;padding:1rem 1.1rem;display:flex;flex-direction:column;gap:.6rem;scrollbar-width:thin;min-height:200px}
-.jl-msg{max-width:86%;padding:.6rem .85rem;border-radius:14px;font-size:13.5px;line-height:1.55;color:var(--ink);white-space:pre-wrap}
+.jl-chat-log{flex:1;overflow-y:auto;padding:1rem 1.1rem;display:flex;flex-direction:column;gap:.6rem;min-height:200px;
+scrollbar-width:thin;scrollbar-color:rgba(245,242,237,.28) transparent}
+.jl-chat-log::-webkit-scrollbar{width:6px}
+.jl-chat-log::-webkit-scrollbar-track{background:transparent}
+.jl-chat-log::-webkit-scrollbar-thumb{background:rgba(245,242,237,.22);border-radius:99px}
+[data-theme="light"] .jl-chat-log{scrollbar-color:rgba(18,16,15,.28) transparent}
+[data-theme="light"] .jl-chat-log::-webkit-scrollbar-thumb{background:rgba(18,16,15,.22)}
+/* chat bubbles wrap long words on BOTH sides, not just the bot's */
+.jl-msg{max-width:86%;padding:.6rem .85rem;border-radius:14px;font-size:13.5px;line-height:1.55;color:var(--ink);white-space:pre-wrap;overflow-wrap:anywhere}
 .jl-msg.bot{align-self:flex-start;background:var(--glass-2);border:1px solid var(--edge);border-bottom-left-radius:5px}
 .jl-msg.me{align-self:flex-end;background:var(--acc);color:#F5F2ED;border-bottom-right-radius:5px}
 .jl-msg a{color:inherit;text-decoration:underline;text-underline-offset:3px}
 .jl-chips{display:flex;flex-wrap:wrap;gap:.4rem;padding:0 1.1rem .75rem}
+.jl-chips[hidden]{display:none!important}
 .jl-chip{background:transparent;border:1px solid var(--edge);color:var(--dim);border-radius:999px;padding:.4rem .8rem;font:inherit;font-size:12px;cursor:pointer;transition:all .15s}
 .jl-chip:hover{border-color:var(--acc);color:var(--ink)}
 .jl-chat-form{display:flex;gap:.5rem;padding:.75rem 1.1rem 1rem;border-top:1px solid var(--edge)}
@@ -939,7 +951,10 @@ def chat_widget(up=""):
     <button class="jl-chat-x" id="jl-chat-x" type="button" aria-label="Close"><svg viewBox="0 0 24 24"><use href="#i-x"/></svg></button></div>
   <div class="jl-chat-log" id="jl-chat-log" aria-live="polite"></div>
   <div class="jl-chips" id="jl-chips"></div>
-  <div class="jl-lead" id="jl-lead" hidden>{lead_form('chat')}</div>
+  <div class="jl-lead" id="jl-lead" hidden>
+    <button class="jl-lead-back" id="jl-lead-back" type="button">← Back to chat</button>
+    {lead_form('chat')}
+  </div>
   <form class="jl-chat-form" id="jl-chat-form" autocomplete="off"><input id="jl-chat-in" type="text" placeholder="Ask about services, tools, or how to start" maxlength="300"><button type="submit" aria-label="Send"><svg viewBox="0 0 24 24"><use href="#i-send"/></svg></button></form>
 </div>'''
 
@@ -1132,10 +1147,35 @@ CHAT_JS = r"""
   function linkify(t){return esc(t).replace(/(https?:\/\/[^\s]+|[a-z0-9./-]+\.html|tools\/)/g,function(m){var h=m;if(!/^https?:/.test(m))h=m;return '<a href="'+h+'" target="_blank" rel="noopener">'+m+'</a>';}).replace(/([\w.+-]+@[\w-]+\.[\w.]+)/g,'<a href="mailto:$1">$1</a>');}
   function add(who,text,save){var d=document.createElement('div');d.className='jl-msg '+who;d.innerHTML=who==='bot'?linkify(text):esc(text);log.appendChild(d);log.scrollTop=log.scrollHeight;if(save!==false){hist.push([who,text]);try{localStorage.setItem(KEY,JSON.stringify(hist.slice(-30)));}catch(e){}}}
   function typing(cb){var d=document.createElement('div');d.className='jl-msg bot';d.innerHTML='<span class="jl-typing"><i></i><i></i><i></i></span>';log.appendChild(d);log.scrollTop=log.scrollHeight;setTimeout(function(){d.remove();cb();},520);}
-  function chipsFor(intent){if(lead&&intent!=='lead')lead.hidden=true;chips.innerHTML='';CHIPS.forEach(function(c){if(c[1]===intent)return;var b=document.createElement('button');b.type='button';b.className='jl-chip';b.textContent=c[0];b.dataset.k=c[1];b.addEventListener('click',function(){ask(c[0],c[1]);});chips.appendChild(b);});}
-  function waLink(){var last=hist.filter(function(h){return h[0]==='me';}).slice(-3).map(function(h){return h[1];}).join(' / ');var msg='Hi Jamie! I was on your site'+(last?' and asked about: '+last:'')+'. Can we talk about a project?';return WA+'?text='+encodeURIComponent(msg);}
   var lead=document.getElementById('jl-lead');
-  function reply(intent){if(intent==='lead'){add('bot','Leave your details and I will reply by email within the day.');if(lead){lead.hidden=false;var n=lead.querySelector('input[name=name]');if(n)n.focus();}return;}if(intent==='wa'){add('bot',"Sure — this opens WhatsApp with a short note so Jamie has the context:\n"+waLink());return;}add('bot',A[intent]||A.fallback);}
+  function usedTopics(){
+    var labels={}; CHIPS.forEach(function(c){labels[c[0]]=c[1];});
+    var used={};
+    hist.forEach(function(h){ if(h[0]==='me'&&labels[h[1]]) used[labels[h[1]]]=1; });
+    return used;
+  }
+  function setLead(on){
+    if(lead) lead.hidden=!on;
+    box.classList.toggle('lead-on',!!on);
+  }
+  function chipsFor(intent){
+    var used=usedTopics();
+    if(intent) used[intent]=1;
+    var showingLead=intent==='lead';
+    setLead(showingLead);
+    chips.innerHTML='';
+    if(showingLead){ chips.hidden=true; return; }
+    CHIPS.forEach(function(c){
+      if(used[c[1]] && c[1]!=='lead' && c[1]!=='wa') return;
+      var b=document.createElement('button');b.type='button';b.className='jl-chip';
+      b.textContent=c[0];b.dataset.k=c[1];
+      b.addEventListener('click',function(){ask(c[0],c[1]);});
+      chips.appendChild(b);
+    });
+    chips.hidden=!chips.children.length;
+  }
+  function waLink(){var last=hist.filter(function(h){return h[0]==='me';}).slice(-3).map(function(h){return h[1];}).join(' / ');var msg='Hi Jamie! I was on your site'+(last?' and asked about: '+last:'')+'. Can we talk about a project?';return WA+'?text='+encodeURIComponent(msg);}
+  function reply(intent){if(intent==='lead'){add('bot','Leave your details and I will reply by email within the day.');setLead(true);var n=lead&&lead.querySelector('input[name=name]');if(n)n.focus();return;}if(intent==='wa'){add('bot',"Sure — this opens WhatsApp with a short note so Jamie has the context:\n"+waLink());return;}add('bot',A[intent]||A.fallback);}
   function detect(t){for(var i=0;i<RULES.length;i++){if(RULES[i][0].test(t))return RULES[i][1];}return 'fallback';}
   // These four are about doing something, not about knowing something, so they
   // must win over any article the knowledge base might match.
@@ -1148,11 +1188,13 @@ CHAT_JS = r"""
     if(hit){ typing(function(){ add('bot',kbAnswer(hit)); chipsFor(''); }); return; }
     var k2=detect(text); typing(function(){reply(k2);chipsFor(k2);});
   }
-  function open(){box.classList.add('open');box.setAttribute('aria-hidden','false');fab.setAttribute('aria-expanded','true');if(!log.children.length){add('bot',A.hello,false);chipsFor('hello');}setTimeout(function(){inp.focus();},250);}
+  function open(){box.classList.add('open');box.setAttribute('aria-hidden','false');fab.setAttribute('aria-expanded','true');if(!log.children.length){add('bot',A.hello,false);chipsFor('hello');}setTimeout(function(){if(box.classList.contains('lead-on')){var n=lead&&lead.querySelector('input[name=name]');if(n)n.focus();}else inp.focus();},250);}
   function close(){box.classList.remove('open');box.setAttribute('aria-hidden','true');fab.setAttribute('aria-expanded','false');}
   fab.addEventListener('click',function(){box.classList.contains('open')?close():open();});
   x.addEventListener('click',close);
   document.addEventListener('keydown',function(e){if(e.key==='Escape')close();});
+  var leadBack=document.getElementById('jl-lead-back');
+  if(leadBack) leadBack.addEventListener('click',function(){chipsFor('');inp.focus();});
   form.addEventListener('submit',function(e){e.preventDefault();var t=inp.value.trim();if(!t)return;inp.value='';ask(t);});
   try{var saved=JSON.parse(localStorage.getItem(KEY)||'[]');if(saved.length){saved.forEach(function(h){add(h[0],h[1],false);});hist=saved;chipsFor('');}}catch(e){}
 })();
