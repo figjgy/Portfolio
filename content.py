@@ -103,15 +103,36 @@ PROJECTS = [
         "summary": ("Storefront design, listing graphics and optimisation across three "
                     "marketplaces — including clearing the listings that get flagged."),
         "challenge": ("Three marketplaces, each with its own rules, layout system and reasons "
-                      "for taking a product down. A flagged listing earns nothing while it sits."),
+                      "for taking a product down. A flagged listing earns nothing while it sits, "
+                      "and in a regulated category the flag is usually the copy rather than the "
+                      "product — one wrong claim in a title is enough.\n\n"
+                      "The same catalogue also has to look like one brand in three template "
+                      "systems that agree on almost nothing: different banner ratios, different "
+                      "image counts, different rules about what may appear on the first frame."),
         "approach": ("Designed the shop fronts and campaign banners, built the listing graphics "
-                     "and A+ content, and optimised titles, keywords and images for search. "
-                     "Worked through flagged and restricted products — reading each violation, "
-                     "correcting the wording or the artwork, and getting the listing live again."),
-        "result": ("Three storefronts kept consistent, on-brand and selling, with flagged "
-                   "products fixed rather than left down."),
-        "gallery": ["Image — Shopee storefront", "Image — listing graphics set",
+                     "and A+ content, and optimised titles, keywords and images for search.\n\n"
+                     "The part that mattered most was the flagged and restricted products. Each "
+                     "violation gets read properly rather than guessed at, and the fix is "
+                     "usually a rewrite: a regulatory claim the company is not entitled to make "
+                     "yet, a comparison against another brand, an outcome nobody has published "
+                     "data for. I keep the approved phrasing in one place, so the same wording "
+                     "goes out on all three platforms and a corrected listing does not get "
+                     "flagged again a month later for the same sentence.\n\n"
+                     "The pattern turned into a tool. The listing auditor on this site is a "
+                     "generalised version of the checklist I was running by hand."),
+        "result": ("Three storefronts kept consistent and on-brand, and flagged products fixed "
+                   "and relisted rather than quietly left down. The compliance wording now lives "
+                   "in a reference the whole team writes from instead of in one person's memory."),
+        # Keep these subjects SHORT. On a gallery tile the caption below is passed
+        # to render_media() as `alt`, and anything over 46 characters makes the
+        # placeholder fall back to THIS string as the panel headline.
+        "gallery": ["Image — storefront and banner set",
+                    "Image — listing image sequence",
                     "Image — A+ content layout"],
+        "gallery_captions": [
+            "The same brand rebuilt three times — each marketplace imposes its own ratios, image counts and first-frame rules",
+            "A listing sequence in order. The compliance frame is fixed wording, not copy written per product",
+            "A+ content: the page a buyer reads after the photos have already sold them"],
     },
     {
         "slug": "margegold-jewelry",
@@ -439,12 +460,35 @@ PROJECTS = [
         "summary": ("Large-format work laid out for print — sized, bled and readable from "
                     "across a hall."),
         "challenge": ("Print is unforgiving. A tarpaulin that reads well on a laptop can be "
-                      "illegible at three metres, and a file sent without bleed comes back wrong."),
+                      "illegible at three metres, and a file sent without bleed comes back wrong "
+                      "— with no second attempt, because the material is already cut and the "
+                      "event is tomorrow.\n\n"
+                      "Trade-show work makes it harder. A wall panel is read while somebody "
+                      "walks past it, so it competes with every other stand in the hall for "
+                      "about two seconds."),
         "approach": ("Laid out banners, tarpaulins, standees and booth panels at true size with "
-                     "correct bleed and margins, type scaled to viewing distance, and colours "
-                     "checked for print rather than screen."),
-        "result": "Files that print right the first time, on brand across every size.",
-        "gallery": ["Image — tarpaulin layout", "Image — booth panel set"],
+                     "correct bleed and safe margins, type scaled to viewing distance rather "
+                     "than to the page, and colours specified for print rather than screen.\n\n"
+                     "The rule I work to is one message per surface. A panel someone reads at "
+                     "six metres carries a single line and the brand; the detail goes on the "
+                     "material they pick up after they stop walking. Everything is checked at "
+                     "actual size before it is sent — on screen at 100%, and against the "
+                     "supplier's own template, because most reprints come from a spec mismatch "
+                     "and not from the design."),
+        # Keep the words "exhibit / exhibition / booth" SPARSE here. This project
+        # is about print layout; the trade show itself is philmed-expo-2026.
+        # A first draft named the expo and used "booth" five times, and the chat
+        # assistant then sent "exhibit booth" to THIS page instead of the expo
+        # one (tests/test_chat.js catches it). Retrieval is scored on words, so
+        # borrowing another project's vocabulary quietly steals its questions.
+        "result": ("Files that print right the first time, on brand from a pull-up banner to a "
+                   "full stand wall — two stands printed and installed for a three-day medical "
+                   "trade show with no reprints."),
+        "gallery": ["Image — tarpaulin layout at true size",
+                    "Image — booth panel set"],
+        "gallery_captions": [
+            "Laid out at true size. The guides are the deliverable as much as the artwork is",
+            "The stand as one surface — panels designed together so they read as a whole, not as separate posters"],
     },
     {
         "slug": "social-graphics",
@@ -456,12 +500,27 @@ PROJECTS = [
         "cover_note": "Image — pubmat set",
         "summary": ("Daily graphics across three brands, built on templates so the look holds "
                     "when someone else produces them."),
-        "challenge": ("Daily posting across three brands with different palettes, and more than "
-                      "one person producing the artwork."),
-        "approach": ("Built template systems per brand — grids, type scale, colour rules — then "
-                     "produced the pubmats, carousels and campaign sets on top of them."),
-        "result": "A consistent look that survives being handed to someone else.",
-        "gallery": ["Image — pubmat series", "Image — carousel set"],
+        "challenge": ("Around thirty posts a month per brand, three brands with completely "
+                      "different palettes and audiences, and more than one person producing the "
+                      "artwork. At that volume the question is not whether any single graphic is "
+                      "good — it is whether the twentieth one still looks like it came from the "
+                      "same company as the first."),
+        "approach": ("Built a template system per brand before producing anything: grid, type "
+                     "scale, colour rules, and a fixed place for the logo, the price frame and "
+                     "the disclaimer.\n\n"
+                     "The templates are deliberately strict. Someone producing a pubmat chooses "
+                     "the words and the photo, not the type size — which means the work can be "
+                     "handed over without the look drifting, and a day's graphics take minutes "
+                     "instead of an afternoon. The regulated brand carries its approved wording "
+                     "inside the template, so a claim that is not allowed cannot be typed in by "
+                     "accident."),
+        "result": ("A look that survives being handed to someone else. The social media officer "
+                   "now produces the daily sets herself and they still read as one brand."),
+        "gallery": ["Image — pubmat series, three brands",
+                    "Image — carousel set"],
+        "gallery_captions": [
+            "Three brands, one underlying grid. The palette changes; the structure does not",
+            "A carousel built as one argument — each frame earns the swipe to the next"],
     },
     # ---------------------------------------------------------- RENDERING
     {
@@ -499,7 +558,8 @@ PROJECTS = [
                    "appropriate lighting, near-clip, floor clearance, and how transparent "
                    "plastic actually has to be rendered — all of them written down so the next "
                    "person does not rediscover them."),
-        "gallery": ["Image — turntable frame", "Image — spec overlay scene"],
+        "gallery": ["Image — turntable frame, 10 ml Luer lock",
+                    "Image — spec overlay scene"],
         "gallery_captions": [
             "One frame off the turntable pass — built from the specification sheet, not a photo",
             "A scene from the 34-second film: components separated, with the spec called out"],
@@ -516,12 +576,32 @@ PROJECTS = [
         "summary": ("Decoration for condos and homes — modelled to real measurements, with a "
                     "costed materials list behind it."),
         "challenge": ("Clients want to see the room before they commit, and they want to know "
-                      "what it will cost before they say yes."),
-        "approach": ("Measured the space and modelled it to exact dimensions, worked out the "
-                     "finishes, furniture and layout, then produced a materials take-off from "
-                     "the model and turned it into an estimate covering materials and labour."),
-        "result": "A room the client can see, with a number they can decide on.",
-        "gallery": ["Image — living area", "Image — quantity schedule"],
+                      "what it will cost before they say yes. Those two answers usually arrive "
+                      "weeks apart — a mood board first, a number much later — and the gap is "
+                      "where the project stalls.\n\n"
+                      "Decoration has its own constraint that construction does not. Nothing is "
+                      "being built, so almost nothing goes wrong on site; it goes wrong at the "
+                      "supplier, or in the service lift."),
+        "approach": ("Measured the space and modelled it to exact dimensions, then worked out "
+                     "the layout, finishes and furniture against that model rather than against "
+                     "a reference photo.\n\n"
+                     "The estimate comes off the same model — a take-off itemised piece by "
+                     "piece, with the design fee, the furniture at actual cost and the crew's "
+                     "labour kept on separate lines, so the client can see that nobody is paid "
+                     "twice out of one figure. Where a budget is fixed, the list says plainly "
+                     "which pieces come out first and which one should not.\n\n"
+                     "One habit is worth naming: every large piece is checked against the "
+                     "supplier's crate dimensions and the building's lift car, door and corridor "
+                     "turn — not the product dimensions. A sofa that does not fit the lift is a "
+                     "delivery that goes back on the truck."),
+        "result": ("A room the client can see and a number they can decide on, in the same "
+                   "presentation — and a list transparent enough that cutting the budget is a "
+                   "conversation about scope rather than a haggle over the fee."),
+        "gallery": ["Image — living area, modelled to plan",
+                    "Image — itemised cost schedule"],
+        "gallery_captions": [
+            "Modelled to the measured plan, so what the client approves is what fits",
+            "The estimate as a list, not a lump sum — the three costs stay visibly separate"],
     },
     # ---------------------------------------------------------- SYSTEMS
     {

@@ -1,10 +1,54 @@
 ==================================================== 
-  PUSH RUN Wed 09/09/2026 11:00:31.31 
+  PORTFOLIO BUILD, CHECK, COMMIT & PUSH 
+  Fri 09/11/2026 17:50:20.26 
 ==================================================== 
-manager
---- commits to send: 
-d487289 Merge the GitHub web edit - build.py now carries the same fix on .jl-msg
-26ddff5 Chat bubbles wrap long words on both sides, fixed in build.py so it survives a rebuild
---- push output: 
-Everything up-to-date
---- exit code: 0 
+---------- 1. BUILD ---------- 
+Built 152 files into  C:\Users\User\JAMIE CLAUDE\Portfolio\site
+  15 project pages · 8 disciplines
+  card.html is the standalone NFC page
+   exit code 0 
+---------- 2. CHECK ---------- 
+==================================================================
+  PORTFOLIO CHECK
+==================================================================
+
+1. CAPTIONS LINED UP WITH GALLERIES
+   ok - every project with captions has one per gallery item
+
+2. FILES NAMED IN content.py THAT EXIST ON DISK
+   ok - every referenced file is present
+
+3. FILES THE BUILT SITE ASKS FOR
+   ok - every asset the pages request is in site/assets/
+
+4. INTERNAL LINKS
+   ok - no internal link points at a missing file
+
+5. PLACEHOLDERS STILL WAITING FOR REAL WORK
+   marketplace-management     gallery: Image — storefront and banner set
+   marketplace-management     gallery: Image — listing image sequence
+   marketplace-management     gallery: Image — A+ content layout
+   marketplace-management     NO COVER  (Image — shop front & listing graphics)
+   banners-tarpaulins         gallery: Image — tarpaulin layout at true size
+   banners-tarpaulins         gallery: Image — booth panel set
+   banners-tarpaulins         NO COVER  (Image — tarpaulin & banner layouts)
+   social-graphics            gallery: Image — pubmat series, three brands
+   social-graphics            gallery: Image — carousel set
+   social-graphics            NO COVER  (Image — pubmat set)
+   product-rendering          gallery: Image — turntable frame, 10 ml Luer lock
+   product-rendering          gallery: Image — spec overlay scene
+   product-rendering          NO COVER  (Image — rendered product)
+   interior-decoration        gallery: Image — living area, modelled to plan
+   interior-decoration        gallery: Image — itemised cost schedule
+   interior-decoration        NO COVER  (Image — interior visual)
+
+6. YEARS
+   margegold-jewelry          has no year while the rest do
+
+==================================================================
+  NO PROBLEMS. Safe to build and push.
+  note: 16 placeholders still to fill - these are waiting on Jamie's files, not faults
+  note: margegold-jewelry has no year set
+==================================================================
+   exit code 0 
+---------- 3. GIT COMMIT ---------- 

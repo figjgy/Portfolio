@@ -3,5 +3,12 @@ __pycache__/
 *.pyc
 temp_tools.js
 
+# Output of BUILD_AND_CHECK.bat / BUILD_STEP1.bat. Rewritten on every
+# run, so committing it means a diff on every build and nothing gained.
+build_check_log.txt
+build_step1_log.txt
+push_log.txt
+_run_hub_check.bat
+
 # NOTE: site/ MUST stay committed. Vercel does not run build.py,
 # so if site/ is ignored there is literally nothing to serve.
