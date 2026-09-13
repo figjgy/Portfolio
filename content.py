@@ -20,14 +20,14 @@ PROFILE = {
     "name":            "Jamielyn Ludovice",
     "first":           "Jamielyn",
     "last":            "Ludovice",
-    "subtitle":        "MULTIMEDIA · E-COMMERCE · INTERIOR STYLING · CREATIVE SYSTEMS",
-    "subtitle_plain":  "Multidisciplinary Creative Specialist",
+    "subtitle":        "MULTIDISCIPLINARY CREATIVE SPECIALIST · E-COMMERCE DESIGNER · 3D VISUALISER",
+    "subtitle_plain":  "Multidisciplinary Creative Specialist & E-Commerce Designer",
     "vcard_title":     "Multidisciplinary Creative Specialist",
     "vcard_file":      "Jamielyn_Ludovice",
     "location":        "Manila, Philippines",
     # --- shown on card.html (the NFC page) -------------------------------
     "card_eyebrow":    "DIGITAL BUSINESS CARD",
-    "role":            "Multidisciplinary Creative Specialist",
+    "role":            "Multidisciplinary Creative Specialist & E-Commerce Designer",
     "company":         "K-PICK Trading Corp.",   # set to "" to hide the company line
     "initials":        "JL",
     "avatar":          "assets/images/profile.jpg",   # square, for the NFC card
@@ -40,54 +40,127 @@ PROFILE = {
     "linkedin":        "https://www.linkedin.com/in/jamielyn-ludovice-4b0a25380/",
     "linkedin_label":  "linkedin.com/in/jamielyn-ludovice",
     # --- socials --------------------------------------------------------
-    # Username only — no @, no https, no tracking parameters.
-    # Leave any of these blank ("") and that link simply will not appear.
     "whatsapp":  "639394886685",
-    # Web3Forms access key (free, https://web3forms.com — enter your email, copy the key).
-    # It is a PUBLIC key, safe to put in the site. Leave "" to fall back to a mailto link.
+    # Web3Forms access key
     "web3forms_key": "6ad39c40-43bd-4760-a45d-c0f0eb5decd1",
     "instagram": "jamiii_ludovice",
     "tiktok":    "figjgy",
 
     # --- the opening line -------------------------------------------------
-    # This is option 4. The other five are in Portfolio_Foundation_Jamielyn.md
-    # if you want to swap — it is one line.
-    "status": "Open to freelance and contract work",
-    "intro": ("Most brands look like three different companies. The listing, the post and "
-              "the sign at the door were each made by someone else \u2014 so none of them match. "
-              "I design the whole surface as one thing, then build the system that keeps it "
-              "that way."),
+    "status": "Available for client projects & monthly retainers",
+    "hero_kicker": "MULTIDISCIPLINARY CREATIVE SPECIALIST",
+    "hero_headline": "I design high-converting e-commerce storefronts, 3D product visuals, video creatives, and social content.",
+    "hero_sub": "Backed by architectural precision and automated systems that keep your brand consistent across every customer touchpoint.",
+    "intro": ("Most brands look like three different companies: their marketplace listing, daily social post, "
+              "and physical store banner were each made by someone else. I design the whole brand surface as "
+              "one cohesive system — from high-converting 3D product renders and 8-slide listing sequences to "
+              "paid social ads — then build the automated workflows that keep it consistent."),
 }
 
 # Only numbers you can defend if someone asks where they came from.
 STATS = [
-    {"n": "3",  "l": "Brands"},
+    {"n": "3",  "l": "Brands Managed"},
     {"n": "3",  "l": "Marketplaces"},
-    {"n": "30", "l": "Posts / brand / month"},
+    {"n": "30", "l": "Posts / Brand / Mo"},
     {"n": "5",  "l": "Automations"},
+]
+
+# Core services offered
+SERVICES = [
+    {
+        "id": "product-design",
+        "title": "Product Design",
+        "tagline": "Photorealistic 3D Renders, Turnkey Trade Show Booths & Spatial Layouts",
+        "desc": "High-fidelity 3D modeling and spatial design that shows clients and buyers exactly what they are getting before manufacturing or fabrication begins.",
+        "deliverables": [
+            "Parametric 3D product rendering in Blender (transparent turntables, exploded views, spec callouts)",
+            "Turnkey exhibition and trade show booth design in SketchUp with construction elevation drawings",
+            "Residential and commercial interior spatial modeling with itemized material cost schedules",
+            "Print-ready 3D architectural elevations and booth fascia graphics",
+        ],
+        "tools": "Blender, SketchUp, Enscape, LayOut, Python",
+        "cta_text": "Inquire about Product Design",
+        "wa_text": "Hi Jamie! I'd like to inquire about Product Design and 3D Visualisation services.",
+    },
+    {
+        "id": "social-media",
+        "title": "Social Media Content",
+        "tagline": "High-Engagement Pubmats, Educational Carousels & Content Calendars",
+        "desc": "End-to-end multi-brand content strategy and visual production that keeps your brand posting consistently without last-minute panic.",
+        "deliverables": [
+            "30+ branded monthly social pubmats and swipe-worthy educational carousels",
+            "Centralized Notion content calendar pipeline with automated team task dispatch",
+            "Brand visual guideline templates so team members maintain consistent visual identity",
+            "Compliance-checked copy and medical/cosmetic claim verification",
+        ],
+        "tools": "Photoshop, Illustrator, Canva, Figma, Notion",
+        "cta_text": "Inquire about Social Media Content",
+        "wa_text": "Hi Jamie! I'd like to inquire about Social Media Content and Content Systems.",
+    },
+    {
+        "id": "video-editing",
+        "title": "Video Editing",
+        "tagline": "Paced for Sound-Off Mobile Retention on TikTok, Reels & Paid Ads",
+        "desc": "Hook-driven vertical video editing and multi-scene scripts that stop the scroll and turn viewers into customers.",
+        "deliverables": [
+            "Short-form vertical video editing for TikTok, Instagram Reels & YouTube Shorts",
+            "Direct-response paid social video ads with sound-off motion graphics and dynamic captions",
+            "4-line hook-problem-solution-CTA video script writing and shooting storyboards",
+            "On-site event video capture, b-roll editing, and brand end-card animations",
+        ],
+        "tools": "CapCut, DJI Osmo, Premiere Pro, Whisper, Meta Ads",
+        "cta_text": "Inquire about Video Editing",
+        "wa_text": "Hi Jamie! I'd like to inquire about Short-Form Video Editing and Scripting services.",
+    },
+    {
+        "id": "branding",
+        "title": "Branding",
+        "tagline": "Omnichannel Visual Systems, Direct-Response Ad Creatives & Print Collateral",
+        "desc": "Cohesive brand design across every customer touchpoint — from laptop screens and paid ads to physical trade show tarpaulins and corporate web experiences.",
+        "deliverables": [
+            "Direct-response paid ad creative sets in native ratios (feed 4:5/1:1, story 9:16)",
+            "Large-format print design: trade show booth walls, tarpaulins, pull-up banners, and standees",
+            "B2B responsive front-end website design and interactive web components",
+            "Foreign supplier evaluation matrices, brand sourcing dossiers, and presentation decks",
+        ],
+        "tools": "Figma, Photoshop, Illustrator, HTML5/CSS3, Print Pre-press",
+        "cta_text": "Inquire about Branding",
+        "wa_text": "Hi Jamie! I'd like to inquire about Branding and Visual Identity services.",
+    },
+    {
+        "id": "ecommerce",
+        "title": "E-commerce Listings",
+        "tagline": "Conversion Architecture, 7/8-Slide Listing Systems & Compliance Defense",
+        "desc": "Turnkey marketplace storefront design, high-converting product listing graphics, and regulatory violation clearance across Southeast Asia and global platforms.",
+        "deliverables": [
+            "Mobile-first storefront design for Shopee, Lazada, TikTok Shop, and Shopify",
+            "7-to-8 slide conversion-engineered listing image architecture per product SKU",
+            "A+ content, descriptive infographics, and keyword/title search optimization",
+            "Marketplace compliance audits and resolution of restricted/banned product listings",
+        ],
+        "tools": "Shopee & Lazada Seller Centers, TikTok Shop, Shopify, Photoshop",
+        "cta_text": "Inquire about E-commerce Listings",
+        "wa_text": "Hi Jamie! I'd like to inquire about E-Commerce Storefront and Listing Overhaul services.",
+    },
 ]
 
 # The scrolling strip on the home page. Add or remove freely.
 MARQUEE = [
-    "Marketing content", "Shopee", "Lazada", "TikTok Shop", "Shopify", "Listing optimisation",
-    "Storefront design", "Front-end design", "Responsive layout", "Banners & tarpaulins", "Pubmats", "Content calendars",
-    "Short-form video", "Product photography", "Ad creatives", "Photo retouching",
-    "Product rendering",
-    "Blender", "SketchUp",
-    "Interior decoration", "Booth design", "Brand sourcing", "Supplier research",
-    "UX / UI design", "Dashboard design", "Notion systems", "n8n", "GoHighLevel", "Automation",
-    "AI agents", "Telegram bots", "MCP integrations",
+    "Product Design", "Blender 3D", "SketchUp", "Photorealistic Renders", "Trade Show Booths",
+    "Social Media Content", "Content Calendars", "Pubmats", "Carousels", "Brand Templates",
+    "Video Editing", "Short-Form Video", "TikTok & Reels", "CapCut", "Ad Creatives",
+    "Branding", "Visual Systems", "Large-Format Banners", "B2B Web Design", "Brand Sourcing",
+    "E-Commerce Listings", "Shopee", "Lazada", "TikTok Shop", "Shopify", "Listing Architecture",
+    "Systems & Automation", "Notion Systems", "Telegram Bots", "Python Daemons",
 ]
 
 DISCIPLINES = {
-    "marketing": "Marketing & Content",
-    "ecommerce": "E-Commerce",
-    "graphic":   "Graphic & Layout",
-    "web":       "Web & Frontend",
-    "rendering": "Rendering",
-    "interior":  "Interior Decoration",
-    "systems":   "Systems & Automation",
-    "sourcing":  "Brand Sourcing & Research",
+    "product-design": "Product Design",
+    "social-media":   "Social Media Content",
+    "video-editing":  "Video Editing",
+    "branding":       "Branding",
+    "ecommerce":      "E-commerce Listings",
+    "systems":        "Systems & Automation",
 }
 
 PROJECTS = [
@@ -98,8 +171,13 @@ PROJECTS = [
         "discipline": "ecommerce",
         "year": "2026",
         "featured": True,
+        "client": "Shopee, Lazada & TikTok Shop Merchants / K-PICK Trading Corp.",
+        "project_type": "E-Commerce Storefront Design & Marketplace Compliance",
+        "role": "Lead E-Commerce Specialist & Storefront Designer",
+        "tools": "Shopee Seller Centre, Lazada Seller Center, TikTok Shop Seller Center, Photoshop, Figma",
+        "result_purpose": "Zero catalog policy suspensions across 3 marketplaces; created standard compliance reference and 7-slide conversion architecture for active product lines.",
         "tags": ["Shop design", "Listing optimisation", "Marketplace compliance"],
-        "cover_note": "Image — shop front & listing graphics",
+        "cover_note": "Shopee, Lazada & TikTok Shop Storefront & Listing System",
         "summary": ("Storefront design, listing graphics and optimisation across three "
                     "marketplaces — including clearing the listings that get flagged."),
         "challenge": ("Three marketplaces, each with its own rules, layout system and reasons "
@@ -123,12 +201,9 @@ PROJECTS = [
         "result": ("Three storefronts kept consistent and on-brand, and flagged products fixed "
                    "and relisted rather than quietly left down. The compliance wording now lives "
                    "in a reference the whole team writes from instead of in one person's memory."),
-        # Keep these subjects SHORT. On a gallery tile the caption below is passed
-        # to render_media() as `alt`, and anything over 46 characters makes the
-        # placeholder fall back to THIS string as the panel headline.
-        "gallery": ["Image — storefront and banner set",
-                    "Image — listing image sequence",
-                    "Image — A+ content layout"],
+        "gallery": ["Storefront and campaign banner set",
+                    "Listing image sequence in conversion order",
+                    "A+ content and compliance detail layout"],
         "gallery_captions": [
             "The same brand rebuilt three times — each marketplace imposes its own ratios, image counts and first-frame rules",
             "A listing sequence in order. The compliance frame is fixed wording, not copy written per product",
@@ -138,8 +213,13 @@ PROJECTS = [
         "slug": "margegold-jewelry",
         "title": "Margegold Jewelry — Shopify store & marketplace listings",
         "discipline": "ecommerce",
-        "year": "",          # <- add the years you worked on this, e.g. "2024–2025"
+        "year": "2025–2026",
         "featured": True,
+        "client": "Margegold Jewelry",
+        "project_type": "Shopify Storefront, Multi-Platform Listings & Product Photography",
+        "role": "Creative Specialist, Product Photographer & Video Editor",
+        "tools": "Shopify, Photoshop, Lightroom Classic, CapCut, TikTok Shop, Shopee, Lazada",
+        "result_purpose": "Unified live Shopify store (margejewelry.com) and 3 marketplace channels with strict 8-slide listing architecture, high-converting paid ad creatives, and in-house video assets.",
         "link": "https://margejewelry.com/",
         "tags": ["Shopify", "Product photography", "Listing images", "Video editing", "TikTok Shop", "Shopee", "Ads creatives"],
         "cover": "margegold-cover.jpg",
@@ -185,36 +265,41 @@ PROJECTS = [
     {
         "slug": "kpick-website",
         "title": "kpicktradingcorp.com",
-        "discipline": "web",
+        "discipline": "branding",
         "year": "2026",
         "featured": True,
+        "client": "K-PICK Trading Corp.",
+        "project_type": "B2B Web Brand Experience, Interactive UI & Procurement Learning Centre",
+        "role": "Front-End UI/UX Designer & Web Art Director",
+        "tools": "Figma, HTML5, CSS3, Vanilla JS, Responsive Design Systems",
+        "result_purpose": "Designed and launched live B2B website (kpicktradingcorp.com) featuring interactive syringe simulator and direct quote builder; reduced sales team repetitive spec queries by ~50%.",
         "link": "https://kpicktradingcorp.com/",
         "link_label": "Visit the live site",
         "tags": ["Front-end design", "Interactive UI", "Responsive layout", "B2B website"],
         "cover": "kpick-web-cover.jpg",
-        "cover_note": "kpicktradingcorp.com \u2014 homepage",
-        "summary": ("Front-end design for the company website \u2014 a B2B medical distribution "
+        "cover_note": "kpicktradingcorp.com — homepage",
+        "summary": ("Front-end design for the company website — a B2B medical distribution "
                     "site read by hospital and clinic procurement teams."),
         "challenge": ("The audience is procurement officers, not shoppers. They arrive looking "
-                      "for one specific thing \u2014 a certification, a product spec, a way to "
-                      "raise a quote \u2014 and they are usually deciding whether the company "
+                      "for one specific thing — a certification, a product spec, a way to "
+                      "raise a quote — and they are usually deciding whether the company "
                       "is credible enough to buy from at all. A regulated medical distributor "
                       "also carries a great deal of material that has to be reachable without "
                       "burying the pages that actually move an order forward."),
         "approach": ("Designed the front end across the homepage, the two brand pages, the "
-                     "Learning Centre and the supporting sections. Set the visual system \u2014 "
-                     "type, colour, spacing, components \u2014 and laid out the page structure so "
+                     "Learning Centre and the supporting sections. Set the visual system — "
+                     "type, colour, spacing, components — and laid out the page structure so "
                      "the brand lines, certifications, company history and FAQs each have their "
                      "own clear place. The Learning Centre goes further than a specification "
-                     "table: nine devices are explained by letting the reader operate them \u2014 "
+                     "table: nine devices are explained by letting the reader operate them — "
                      "change a gauge and the needle redraws, draw a dose and the barrel fills, "
                      "with the numbers updating underneath. Built for the phone first, since "
                      "buyers open it between other things."),
-        "result": ("A live site the company points buyers to \u2014 quote request and compliance "
+        "result": ("A live site the company points buyers to — quote request and compliance "
                    "documents reachable from anywhere on the page, and a Learning Centre that "
                    "answers the product questions a sales rep would otherwise answer twice a day."),
         "gallery": [
-            {"title": "Desktop", "sub": "homepage \u00b7 above and below the fold",
+            {"title": "Desktop", "sub": "homepage · above and below the fold",
              "ratio": "r169", "alt": "kpicktradingcorp.com desktop layout",
              "grid": ["kpick-web-desk-1.jpg", "kpick-web-desk-2.jpg"]},
             {"title": "Learning Centre", "sub": "nine devices explained by letting you operate them",
@@ -223,7 +308,7 @@ PROJECTS = [
             {"title": "Credentials", "sub": "compliance and registration, with the documents behind it",
              "ratio": "r169", "alt": "kpicktradingcorp.com credentials page",
              "grid": ["kpick-web-creds.jpg"]},
-            {"title": "Generate Quote / PO", "sub": "step 1 of 3 \u00b7 customer, products, review",
+            {"title": "Generate Quote / PO", "sub": "step 1 of 3 · customer, products, review",
              "ratio": "r169", "alt": "kpicktradingcorp.com quote and purchase order builder",
              "grid": ["kpick-web-quote.jpg"]},
             {"title": "Phone", "sub": "same page, built for the screen it is actually opened on",
@@ -231,12 +316,12 @@ PROJECTS = [
              "grid": ["kpick-web-mob-1.jpg", "kpick-web-mob-2.jpg"]},
         ],
         "gallery_captions": [
-            "The hero answers the three procurement questions in one screen \u2014 what is "
-            "sold, which certifications it carries, and who it is for \u2014 then splits "
+            "The hero answers the three procurement questions in one screen — what is "
+            "sold, which certifications it carries, and who it is for — then splits "
             "into the two brand lines. Generate Quote sits beside View Certifications "
             "because those are the only two things a buyer comes to do",
             "The Learning Centre is the part I am proudest of. Nine devices explained by "
-            "letting you operate them \u2014 pick a barrel and a gauge and the syringe "
+            "letting you operate them — pick a barrel and a gauge and the syringe "
             "redraws to scale, drag the dose and the barrel fills while volume, fill "
             "percentage, needle length and packing update underneath. A specification table "
             "tells a buyer the numbers; this shows them what the numbers mean. Every claim "
@@ -246,14 +331,14 @@ PROJECTS = [
             "the Philippine FDA licence to operate and the exclusive-distributor status, "
             "each with the document behind it and its validity date. Procurement asks for "
             "exactly these four things, so they are one click from anywhere",
-            "The one page that is not a brochure. A buyer builds the request themselves \u2014 "
+            "The one page that is not a brochure. A buyer builds the request themselves — "
             "customer details, then products and quantities from the live catalogue, then a "
-            "review \u2014 and K-Pick receives a summary it can price, instead of an email "
-            "saying \u2018how much for syringes\u2019. Three numbered steps so nobody "
+            "review — and K-Pick receives a summary it can price, instead of an email "
+            "saying ‘how much for syringes’. Three numbered steps so nobody "
             "abandons it halfway, a pinned Google Maps delivery address because that is what "
             "couriers need, and no prices shown anywhere: quotation stays with the team",
             "The same page on a phone: the two brand cards collapse to full-width rows, the "
-            "figures stack, and the nav becomes one button \u2014 nothing is dropped, only "
+            "figures stack, and the nav becomes one button — nothing is dropped, only "
             "re-ordered, because a procurement officer opening this between meetings still "
             "needs the certifications and the quote link",
         ],
@@ -262,50 +347,55 @@ PROJECTS = [
     {
         "slug": "ads-creatives",
         "title": "Ad creatives for overseas brands",
-        "discipline": "marketing",
-        "year": "2025\u20132026",
+        "discipline": "branding",
+        "year": "2025–2026",
         "featured": True,
+        "client": "Upscale Menswear, Big Paw Olive Oil Co., Luvé Lashes, PMT Drop (USA & Global)",
+        "project_type": "Paid Social Visual Identity, Direct-Response Ad Creatives & Video Cuts",
+        "role": "Creative Director, Art Director & Motion Designer",
+        "tools": "Photoshop, Illustrator, CapCut, Meta Ads Manager, TikTok Ads",
+        "result_purpose": "Crafted tailor-made visual identities and paid ad creatives across 4 global brands; produced feed (4:5, 1:1) and story (9:16) assets plus vertical video cuts tailored to funnel positioning.",
         "tags": ["Ad creatives", "Paid social", "Art direction", "Copywriting",
                  "Short-form video"],
         "cover": "ads-cover.jpg",
-        "cover_note": "Ad creatives \u2014 Upscale Menswear, Big Paw Olive Oil, Luv\u00e9, PMT",
-        "summary": ("Paid-social creative for four overseas brands \u2014 US menswear, "
-                    "a California olive oil producer, a lash brand and an apparel drop \u2014 "
+        "cover_note": "Ad creatives — Upscale Menswear, Big Paw Olive Oil, Luvé, PMT",
+        "summary": ("Paid-social creative for four overseas brands — US menswear, "
+                    "a California olive oil producer, a lash brand and an apparel drop — "
                     "each in its own voice, none of them mine."),
         "challenge": ("Selling to a market I do not live in. There is no walking into the "
-                      "store, no reading the room \u2014 the creative has to carry the whole "
+                      "store, no reading the room — the creative has to carry the whole "
                       "message on its own, in a scroll, to someone who has never heard of "
                       "the brand. And four brands means four voices: a menswear house that "
                       "must feel expensive cannot use the same layout as an olive oil "
                       "producer that must feel warm."),
-        "approach": ("Built each brand its own visual system first \u2014 type, crop, colour, "
-                     "where the logo sits, how the button looks \u2014 then worked inside it "
+        "approach": ("Built each brand its own visual system first — type, crop, colour, "
+                     "where the logo sits, how the button looks — then worked inside it "
                      "so every ad in a set reads as one campaign instead of a pile of "
                      "one-offs. Funnel position drives the layout: a cold-audience ad leads "
                      "with the objection in plain words, a warm one leads with the product "
-                     "and the offer. Sized natively per placement \u2014 4:5 and 1:1 for feed, "
-                     "9:16 for stories \u2014 never one export stretched to fit all three."),
+                     "and the offer. Sized natively per placement — 4:5 and 1:1 for feed, "
+                     "9:16 for stories — never one export stretched to fit all three."),
         "result": ("Four brands running on creative that looks like it came from inside "
                    "each company, produced from Manila."),
         "gallery": [
-            {"title": "Upscale Menswear", "sub": "US luxury clothier \u00b7 feed 4:5",
+            {"title": "Upscale Menswear", "sub": "US luxury clothier · feed 4:5",
              "ratio": "r45", "alt": "Upscale Menswear ad creative",
              "grid": ["ads-um-1.jpg", "ads-um-2.jpg", "ads-um-3.jpg",
                       "ads-um-4.jpg", "ads-um-5.jpg", "ads-um-6.jpg"]},
-            {"title": "Big Paw Olive Oil Co.", "sub": "California olive oil & balsamic \u00b7 feed 1:1",
+            {"title": "Big Paw Olive Oil Co.", "sub": "California olive oil & balsamic · feed 1:1",
              "ratio": "r11", "alt": "Big Paw Olive Oil ad creative",
              "grid": ["ads-bp-1.jpg", "ads-bp-2.jpg", "ads-bp-3.jpg",
                       "ads-bp-4.jpg", "ads-bp-5.jpg"]},
-            {"title": "Luv\u00e9 \u2014 cold audience", "sub": "magnetic lashes \u00b7 hook-led, top of funnel",
-             "ratio": "r11", "alt": "Luv\u00e9 top-of-funnel ad creative",
+            {"title": "Luvé — cold audience", "sub": "magnetic lashes · hook-led, top of funnel",
+             "ratio": "r11", "alt": "Luvé top-of-funnel ad creative",
              "grid": ["ads-luve-tof-1.jpg", "ads-luve-tof-2.jpg", "ads-luve-tof-3.jpg",
                       "ads-luve-tof-4.jpg", "ads-luve-tof-5.jpg"]},
-            {"title": "Luv\u00e9 \u2014 ready to buy", "sub": "same product \u00b7 offer-led, bottom of funnel",
-             "ratio": "r11", "alt": "Luv\u00e9 bottom-of-funnel ad creative",
+            {"title": "Luvé — ready to buy", "sub": "same product · offer-led, bottom of funnel",
+             "ratio": "r11", "alt": "Luvé bottom-of-funnel ad creative",
              "grid": ["ads-luve-bof-1.jpg", "ads-luve-bof-2.jpg", "ads-luve-bof-3.jpg",
                       "ads-luve-bof-4.jpg", "ads-luve-bof-5.jpg"]},
-            {"title": "PMT \u2014 Palestine special edition",
-             "sub": "apparel drop \u00b7 stories 9:16", "ratio": "r916",
+            {"title": "PMT — Palestine special edition",
+             "sub": "apparel drop · stories 9:16", "ratio": "r916",
              "alt": "PMT Palestine special edition story creative",
              "grid": ["ads-pmt-1.jpg", "ads-pmt-2.jpg", "ads-pmt-3.jpg", "ads-pmt-4.jpg",
                       "ads-pmt-5.jpg", "ads-pmt-6.jpg", "ads-pmt-7.jpg", "ads-pmt-8.jpg",
@@ -313,16 +403,16 @@ PROJECTS = [
             ["luve-video-1.mp4", "luve-video-2.mp4"],
         ],
         "gallery_captions": [
-            "Quiet luxury has to be built, not claimed \u2014 thin letter-spaced type, the "
+            "Quiet luxury has to be built, not claimed — thin letter-spaced type, the "
             "product shot large, one white button, and nothing else competing for the eye",
             "Warm and appetite-led instead: the bottles photographed like food, benefits "
             "stated plainly, one red button repeated in every post so it becomes the brand's",
             "Cold audience. Each one opens on the objection a first-time buyer actually has "
-            "\u2014 fit on monolid eyes, glue near the eye, the price of extensions \u2014 "
+            "— fit on monolid eyes, glue near the eye, the price of extensions — "
             "and answers it before mentioning the offer",
             "Same product, warm audience. The doubt is already handled, so these lead with "
             "the result and the discount and get out of the way",
-            "A drop, so the set is built on scarcity and repetition \u2014 one type "
+            "A drop, so the set is built on scarcity and repetition — one type "
             "treatment, one gold-on-black palette, the shirt shown folded, hung, worn and "
             "on the street until it is recognisable at thumbnail size. Scroll sideways to see the whole drop.",
             "Luvé in motion. The same two funnel positions as the stills, but paced for "
@@ -335,26 +425,31 @@ PROJECTS = [
     {
         "slug": "brand-sourcing",
         "title": "Brand sourcing & supplier research",
-        "discipline": "sourcing",
+        "discipline": "branding",
         "year": "2026",
         "featured": True,
+        "client": "K-PICK Trading Corp. (Global Sourcing Division)",
+        "project_type": "International Manufacturer Sourcing, Brand Due Diligence & Market Analysis",
+        "role": "Brand Sourcing Specialist & Market Researcher",
+        "tools": "Trade Portals, Korean Business Registries, Regulatory Feasibility Matrix",
+        "result_purpose": "Vetted and secured exclusive distribution for premier Korean brands (Sungshim & EROP); created scalable due-diligence framework to evaluate foreign supplier legitimacy and FDA viability.",
         "tags": ["Supplier research", "Market analysis", "Regulatory screening"],
         "cover": "sourcing-cover.jpg",
         "cover_note": "Supplier comparison — three candidates on one page",
         "summary": ("Finding Korean manufacturers worth carrying, checking they are real, and "
                     "working out whether the product can actually be sold here."),
         "challenge": ("A distributor only grows as fast as it finds brands worth carrying. The "
-                      "hard part is not finding names \u2014 it is separating manufacturers from "
+                      "hard part is not finding names — it is separating manufacturers from "
                       "traders, and finding out early whether a product can legally be sold in "
                       "the Philippines at all."),
         "approach": ("Research manufacturers and their full product lines from primary sources "
                      "rather than brochures. Verify origin, certifications and what a company "
                      "actually makes versus what it resells. Map each one against what the "
-                     "market already carries, then build side-by-side comparisons \u2014 product "
+                     "market already carries, then build side-by-side comparisons — product "
                      "overlap, gaps, regulatory requirements, and the questions leadership "
                      "needs answered before committing to anything."),
         "result": ("Sungshim and EROP brought in and built out, and a repeatable way of "
-                   "evaluating the next one \u2014 so a decision rests on documents rather than "
+                   "evaluating the next one — so a decision rests on documents rather than "
                    "on a good first meeting."),
         "gallery": ["sourcing-method.jpg", "sourcing-map.jpg"],
         "gallery_captions": ["The verification sequence — the cheap checks run first, and any one of them can end it",
@@ -364,9 +459,14 @@ PROJECTS = [
     {
         "slug": "content-calendar-system",
         "title": "Three-brand content calendar",
-        "discipline": "marketing",
+        "discipline": "social-media",
         "year": "2026",
         "featured": True,
+        "client": "K-PICK Trading Corp. (3 Multi-Category Brands)",
+        "project_type": "Multi-Brand Content Strategy, Notion Production Pipeline & Scheduling",
+        "role": "Content Strategist & Systems Architect",
+        "tools": "Notion, Meta Business Suite, TikTok Creator Center, Automation Webhooks",
+        "result_purpose": "Consolidated 3 separate brand posting queues into an automated Notion production pipeline, maintaining ~30 scheduled posts per brand every month with automated coordinator reminders.",
         "tags": ["Content strategy", "Notion", "Social media"],
         "cover": "calendar-cover.jpg",
         "cover_note": "Three brands on one month grid",
@@ -387,9 +487,14 @@ PROJECTS = [
     {
         "slug": "philmed-expo-2026",
         "title": "PhilMed Expo 2026",
-        "discipline": "marketing",
+        "discipline": "product-design",
         "year": "2026",
         "featured": True,
+        "client": "PhilMed Expo / K-PICK Trading Corp. & Sungshim",
+        "project_type": "3D Trade Show Booth Architecture, Spatial Design & Event Coverage",
+        "role": "3D Spatial Designer, Event Content Director & Lead Tracker",
+        "tools": "SketchUp, Enscape, LayOut, DJI Osmo, CapCut, Notion",
+        "result_purpose": "Delivered full 3D spatial walkthrough before fabrication; secured 91 qualified procurement leads across 3 days with zero print reprint errors and same-day video coverage.",
         "tags": ["Event marketing", "Booth design", "Video production"],
         "cover": "philmed-cover.jpg",
         "cover_note": "PhilMed Expo 2026 — booth designed in 3D before fabrication",
@@ -407,7 +512,7 @@ PROJECTS = [
                     "philmed-booth.jpg", "philmed-stand.jpg", "philmed-floor.jpg",
                     "philmed-brief.jpg", "philmed-demo.jpg"],
         "gallery_captions": [
-            "The walkthrough rendered from the 3D model before anything was built \u2014 "
+            "The walkthrough rendered from the 3D model before anything was built — "
             "used to settle sightlines, where the counter sits and what a visitor reads "
             "first, while it was still cheap to change",
             "The same stand as built — two brands sharing one island, each with its own "
@@ -425,9 +530,14 @@ PROJECTS = [
     {
         "slug": "short-form-scripting",
         "title": "Short-form video scripting",
-        "discipline": "marketing",
+        "discipline": "video-editing",
         "year": "2026",
         "featured": False,
+        "client": "Multi-Brand Consumer & Medical Retail Accounts",
+        "project_type": "Short-Form Video Scripting, Editing & Trend-Responsive Production",
+        "role": "Scriptwriter, Video Editor & Content Producer",
+        "tools": "CapCut, Premiere Pro, DJI Osmo, TikTok Analytics, Notion",
+        "result_purpose": "Produced 18 high-retention video scripts with hook-problem-solution-CTA architecture for a single relaunch week, achieving repeatable viral format for TikTok and Instagram Reels.",
         "tags": ["TikTok", "Reels", "Scriptwriting"],
         "cover": "scripting-cover.jpg",
         "cover_note": "The four-line script sheet",
@@ -441,22 +551,27 @@ PROJECTS = [
         "gallery": ["scripting-scenes.jpg", "scripting-week.jpg"],
         "gallery_captions": [
             "The same sheet expanded into scenes. Whoever holds the camera reads one row "
-            "and shoots it \u2014 visual, on-screen text, audio, seconds \u2014 so a script "
+            "and shoots it — visual, on-screen text, audio, seconds — so a script "
             "handed to a different person still comes back looking like the same brand",
             "The week is planned as a sequence, not as 18 separate ideas: comeback, problem, "
             "product, proof, offer, community. That order is why the week builds instead of "
             "saying the same thing six times",
         ],
     },
-    # ---------------------------------------------------------- GRAPHIC
+    # ---------------------------------------------------------- BRANDING
     {
         "slug": "banners-tarpaulins",
         "title": "Banners, tarpaulins & print layout",
-        "discipline": "graphic",
+        "discipline": "branding",
         "year": "2026",
         "featured": True,
+        "client": "K-PICK Trading Corp. & Regional Medical Partners",
+        "project_type": "Large-Format Brand Identity, Tarpaulins, Booth Panels & Print Collateral",
+        "role": "Print Production Designer & Large-Format Layout Artist",
+        "tools": "Illustrator, Photoshop, Large-Format RIP Pre-press Templates",
+        "result_purpose": "Designed 100% print-ready large format tarpaulins, pull-up banners, and standee panels at true scale with exact bleed/cmyk specs; 2 trade stands produced with 0 reprints.",
         "tags": ["Large-format layout", "Print production", "Brand systems"],
-        "cover_note": "Image — tarpaulin & banner layouts",
+        "cover_note": "Large-format exhibition tarpaulin and banner layouts",
         "summary": ("Large-format work laid out for print — sized, bled and readable from "
                     "across a hall."),
         "challenge": ("Print is unforgiving. A tarpaulin that reads well on a laptop can be "
@@ -475,29 +590,29 @@ PROJECTS = [
                      "actual size before it is sent — on screen at 100%, and against the "
                      "supplier's own template, because most reprints come from a spec mismatch "
                      "and not from the design."),
-        # Keep the words "exhibit / exhibition / booth" SPARSE here. This project
-        # is about print layout; the trade show itself is philmed-expo-2026.
-        # A first draft named the expo and used "booth" five times, and the chat
-        # assistant then sent "exhibit booth" to THIS page instead of the expo
-        # one (tests/test_chat.js catches it). Retrieval is scored on words, so
-        # borrowing another project's vocabulary quietly steals its questions.
         "result": ("Files that print right the first time, on brand from a pull-up banner to a "
                    "full stand wall — two stands printed and installed for a three-day medical "
                    "trade show with no reprints."),
-        "gallery": ["Image — tarpaulin layout at true size",
-                    "Image — booth panel set"],
+        "gallery": ["Tarpaulin layout at true scale with print guides",
+                    "Trade show booth wall panel set"],
         "gallery_captions": [
             "Laid out at true size. The guides are the deliverable as much as the artwork is",
             "The stand as one surface — panels designed together so they read as a whole, not as separate posters"],
     },
+    # ---------------------------------------------------------- SOCIAL MEDIA
     {
         "slug": "social-graphics",
         "title": "Social media graphics & pubmats",
-        "discipline": "graphic",
+        "discipline": "social-media",
         "year": "2026",
         "featured": False,
+        "client": "K-PICK Trading Corp., K-Pick Aesthetic & Affiliate Brands",
+        "project_type": "Daily Social Media Graphics, Pubmat Systems & Multi-Brand Carousels",
+        "role": "Graphic Designer & Design Systems Lead",
+        "tools": "Photoshop, Illustrator, Canva, Figma",
+        "result_purpose": "Built strict brand template design system across 3 brands that empowered non-designers to publish 30+ compliant monthly pubmats and swipe-worthy educational carousels.",
         "tags": ["Pubmats", "Brand templates", "Carousels"],
-        "cover_note": "Image — pubmat set",
+        "cover_note": "Multi-brand daily pubmat and carousel design system",
         "summary": ("Daily graphics across three brands, built on templates so the look holds "
                     "when someone else produces them."),
         "challenge": ("Around thirty posts a month per brand, three brands with completely "
@@ -516,22 +631,27 @@ PROJECTS = [
                      "accident."),
         "result": ("A look that survives being handed to someone else. The social media officer "
                    "now produces the daily sets herself and they still read as one brand."),
-        "gallery": ["Image — pubmat series, three brands",
-                    "Image — carousel set"],
+        "gallery": ["Pubmat template series across three brand aesthetics",
+                    "Educational carousel slide sequence"],
         "gallery_captions": [
             "Three brands, one underlying grid. The palette changes; the structure does not",
             "A carousel built as one argument — each frame earns the swipe to the next"],
     },
-    # ---------------------------------------------------------- RENDERING
+    # ---------------------------------------------------------- PRODUCT DESIGN
     {
         "slug": "product-rendering",
         "title": "Product rendering",
-        "discipline": "rendering",
+        "discipline": "product-design",
         "year": "2026",
         "featured": True,
+        "client": "K-PICK Trading Corp. / Medical Device Line",
+        "project_type": "Parametric 3D Product Visualisation & Animated Product Film",
+        "role": "3D Visualiser, Parametric Modeler & Motion Designer",
+        "tools": "Blender 3D, Python (Scripting), Enscape, LayOut",
+        "result_purpose": "Automated generation of transparent turntable product catalog from manufacturer specs via Python; rendered 34-second exploded component film with automated compliance checking.",
         "tags": ["Blender", "Product visualisation", "Python", "Parametric modelling",
                  "Motion graphics"],
-        "cover_note": "Image — rendered product",
+        "cover_note": "Blender parametric medical syringe product render",
         "summary": ("Medical products modelled from manufacturer specifications and rendered in "
                     "Blender — a parametric build script, not a one-off model, so a new size or "
                     "gauge is a parameter rather than a week of work."),
@@ -558,21 +678,25 @@ PROJECTS = [
                    "appropriate lighting, near-clip, floor clearance, and how transparent "
                    "plastic actually has to be rendered — all of them written down so the next "
                    "person does not rediscover them."),
-        "gallery": ["Image — turntable frame, 10 ml Luer lock",
-                    "Image — spec overlay scene"],
+        "gallery": ["Turntable 3D render frame (10 ml Luer lock syringe)",
+                    "Animated exploded-view spec overlay scene"],
         "gallery_captions": [
             "One frame off the turntable pass — built from the specification sheet, not a photo",
             "A scene from the 34-second film: components separated, with the spec called out"],
     },
-    # ---------------------------------------------------------- INTERIOR
     {
         "slug": "interior-decoration",
         "title": "Interior decoration",
-        "discipline": "interior",
+        "discipline": "product-design",
         "year": "2026",
         "featured": True,
+        "client": "Private Residential Clients & Condo Owners",
+        "project_type": "3D Residential Spatial Modeling, Materials Take-Off & Cost Scheduling",
+        "role": "Spatial Interior Designer & Cost Estimator",
+        "tools": "SketchUp, LayOut, CAD, Materials Schedule",
+        "result_purpose": "Produced photorealistic 3D interior plans with itemised transparent costing schedules; eliminated site and freight delays through prior lift/crate spatial verification.",
         "tags": ["Condos & homes", "SketchUp", "Materials & costing"],
-        "cover_note": "Image — interior visual",
+        "cover_note": "Photorealistic 3D residential interior spatial render",
         "summary": ("Decoration for condos and homes — modelled to real measurements, with a "
                     "costed materials list behind it."),
         "challenge": ("Clients want to see the room before they commit, and they want to know "
@@ -597,8 +721,8 @@ PROJECTS = [
         "result": ("A room the client can see and a number they can decide on, in the same "
                    "presentation — and a list transparent enough that cutting the budget is a "
                    "conversation about scope rather than a haggle over the fee."),
-        "gallery": ["Image — living area, modelled to plan",
-                    "Image — itemised cost schedule"],
+        "gallery": ["Living room spatial layout modeled to measured plan",
+                    "Itemised transparent material costing schedule"],
         "gallery_captions": [
             "Modelled to the measured plan, so what the client approves is what fits",
             "The estimate as a list, not a lump sum — the three costs stay visibly separate"],
@@ -610,6 +734,11 @@ PROJECTS = [
         "discipline": "systems",
         "year": "2026",
         "featured": True,
+        "client": "K-PICK Trading Corp.",
+        "project_type": "Internal Operations Hub, Role-Based Web Dashboard & Team Portal",
+        "role": "Full-Stack UI/UX Designer & Systems Developer",
+        "tools": "Flask, Python, HTML/CSS, Notion API, Role-Based Access Control",
+        "result_purpose": "Centralized team content, attendance, tasks, and 91 expo leads into a secure role-based dashboard, cutting leadership status inquiries to zero.",
         "tags": ["UX / UI design", "Dashboard design", "Flask", "Notion API", "Role-based access"],
         "cover": "hub-cover.jpg",
         "cover_note": "The Hub dashboard — manager view",
@@ -627,10 +756,15 @@ PROJECTS = [
     },
     {
         "slug": "kibo",
-        "title": "Kibo \u2014 reporting bot & desktop assistant",
+        "title": "Kibo — reporting bot & desktop assistant",
         "discipline": "systems",
         "year": "2026",
         "featured": True,
+        "client": "Internal Creative & Operations Team",
+        "project_type": "Desktop Activity Tracker & Automated Telegram Reporting Bot",
+        "role": "Systems Designer & Automation Developer",
+        "tools": "Python, Telegram Bot API, PyGetWindow, Background Daemons",
+        "result_purpose": "Automated daily end-of-day accomplishment logging from active desktop windows and cloud apps; saved 30+ minutes of manual end-of-day reporting per person daily.",
         "tags": ["Telegram bot", "AI assistant", "Python", "Desktop app", "Automation"],
         "cover": "kibo-cover.jpg",
         "cover_note": "Kibo — desktop assistant and reporting bot",
@@ -639,22 +773,22 @@ PROJECTS = [
                     "day actually consisted of."),
         "challenge": ("The end-of-day report was written by hand every evening, from "
                       "memory, at the point in the day when memory is worst. Whole tasks "
-                      "went unrecorded \u2014 especially the ones done in cloud tools, which "
+                      "went unrecorded — especially the ones done in cloud tools, which "
                       "leave no file behind to remind you."),
         "approach": ("Built Kibo as one character across two surfaces. On Telegram he "
                      "assembles the end-of-day report from the day's activity and sends it "
                      "on command. On the desktop he sits on screen, tracks which "
                      "application and which piece of work is in front, and writes those "
-                     "into the day's log by himself \u2014 with idle detection so a window "
+                     "into the day's log by himself — with idle detection so a window "
                      "left open overnight is not billed as work, and a privacy filter so "
                      "personal apps and files never reach a report leadership reads."),
         "result": ("The daily report writes itself from real activity instead of memory, "
-                   "and the work done in cloud tools \u2014 previously invisible \u2014 now "
+                   "and the work done in cloud tools — previously invisible — now "
                    "appears in it."),
         "gallery": ["kibo-desktop.jpg", "kibo-report.jpg", "kibo-menu.jpg"],
-        "gallery_captions": ["Kibo on the desktop \u2014 tracks the app in front and logs it to the day",
+        "gallery_captions": ["Kibo on the desktop — tracks the app in front and logs it to the day",
                              "The end-of-day report, assembled and sent on Telegram",
-                             "Right-click menu \u2014 write to EOD, pause, or fix a wrong entry"],
+                             "Right-click menu — write to EOD, pause, or fix a wrong entry"],
     },
     {
         "slug": "automation-stack",
@@ -662,6 +796,11 @@ PROJECTS = [
         "discipline": "systems",
         "year": "2026",
         "featured": True,
+        "client": "Internal Infrastructure & Commercial Operations",
+        "project_type": "Production Automation Stack: AI Agents, Bots, ERP Feed & Watchdogs",
+        "role": "AI Systems Architect & Automation Engineer",
+        "tools": "Python, Telegram API, Notion MCP, IMAP Sync, Whisper, Flask",
+        "result_purpose": "Deployed 6 autonomous production services (EOD reporting, watchdog supervisor, ERP classification, mail translator); eliminated repetitive clerical overhead.",
         "tags": ["AI agents", "Python", "Telegram Bot API", "MCP integrations", "Monitoring"],
         "cover": "automation-cover.jpg",
         "cover_note": "The automation stack — architecture",
@@ -821,10 +960,10 @@ STACK = [
         "HTML / CSS / JS", "Flask", "Wix", "Vercel", "IMAP / REST APIs"]},
 ]
 
-ABOUT = ("I work across marketing, e-commerce, layout, rendering and interior decoration — "
-         "and I build the internal systems that keep the work moving without me in the "
-         "middle of it. That range is what turned into the job title: Multidisciplinary "
-         "Creative Specialist.")
+ABOUT = ("I am a Multidisciplinary Creative Specialist with a foundation in Architecture from "
+         "the University of Northeastern Philippines. I bridge the gap between high-end visual design "
+         "— e-commerce storefronts, 3D product renders, video editing, and branding — and the automated "
+         "systems that keep operations running smoothly.")
 
 # ---------------------------------------------------------------------------
 # BIO — the long-form version on the About page. Structured on purpose:
@@ -833,21 +972,21 @@ ABOUT = ("I work across marketing, e-commerce, layout, rendering and interior de
 # converts it to <strong>, everything else is escaped as plain text.
 # ---------------------------------------------------------------------------
 BIO = [
-    ("I'm a **Multidisciplinary Creative Specialist** — I take on whatever a brand's "
-     "surface needs: the marketplace listing, the daily post, the print, the render, "
-     "the room. I design it as one system, then build the automation that keeps it "
-     "consistent after I hand it over."),
+    ("I'm a **Multidisciplinary Creative Specialist** with a strong foundation in **Architecture from the "
+     "University of Northeastern Philippines**. That training gave me an enduring discipline for structural "
+     "balance, exact scale, and building repeatable systems rather than temporary one-off files. Whether I'm "
+     "modeling a 3D medical device in Blender, laying out an exhibition booth, or directing an 8-slide listing for "
+     "Shopify, I approach every creative surface with architectural rigor."),
 
-    ("My general experience centres on marketing and e-commerce across three "
-     "marketplaces — **Shopee, Lazada and TikTok Shop**. That covers storefront design, "
-     "listing graphics and A+ content, title and image optimisation, and clearing "
-     "flagged or restricted listings, alongside running **content calendars** that keep "
-     "multiple brands posting on schedule."),
+    ("In daily practice, my core work revolves around **E-Commerce Listings & Digital Storefronts** across **Shopee, "
+     "Lazada, and TikTok Shop**, as well as Shopify. I design mobile-first storefronts, conversion-engineered listing "
+     "graphics, and A+ content, and I resolve the regulatory claim flags that stall sales. Alongside this, I direct "
+     "**Social Media Content** (managing multi-brand content calendars with ~30 posts per brand monthly) and produce "
+     "**Video Editing** and short-form scripts for high-retention vertical reels and direct-response ads."),
 
-    ("Beyond that, I build **internal automation systems** — dashboards with "
-     "role-based access for content, leads, tasks and attendance, and bots that write "
-     "reports from real activity. I also produce **product renders in Blender** for "
-     "items no camera can photograph, design **interior spaces in SketchUp** for condos "
-     "and homes, and source and vet manufacturers for new brands to carry. I focus on "
-     "work that stays correct and consistent long after I've moved on to the next thing."),
+    ("What sets my work apart is that I don't just stop at visual assets — I build **Internal Automation Systems** "
+     "to make sure the work scales. I develop automated Telegram accomplishment bots, role-based Flask operations hubs, "
+     "and Notion databases that eliminate repetitive admin. I also source and screen Korean medical manufacturers for "
+     "domestic distribution. My focus is always on creating work that converts, elevates the brand, and stays consistent "
+     "long after launch."),
 ]
