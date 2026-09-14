@@ -22,9 +22,24 @@ Write-Output ""
 
 if (-not (Test-Path $imgs)) { New-Item -ItemType Directory -Path $imgs | Out-Null }
 
+# 🔴 NAME THE ZIP, never "take the newest".
+# The uploads folder holds ten zips, six of them MARGEGOLD jewellery sets. A
+# newest-file rule would happily unpack earrings and file them as
+# kpick-medical-01.jpg — wrong pictures under the right name is far worse than
+# an error, because nothing downstream would flag it. Match on the name instead
+# and refuse if it is not there.
 $zip = Get-ChildItem -Path $uploads -Filter '*.zip' -ErrorAction SilentlyContinue |
+       Where-Object { $_.Name -like '*MEDICAL*' } |
        Sort-Object LastWriteTime -Descending | Select-Object -First 1
-if (-not $zip) { Write-Output 'NO ZIP FOUND in uploads.'; exit 1 }
+if (-not $zip) {
+  Write-Output 'NO ZIP MATCHING "*MEDICAL*" FOUND in uploads. Zips present:'
+  Get-ChildItem -Path $uploads -Filter '*.zip' -ErrorAction SilentlyContinue |
+    ForEach-Object { Write-Output ("  " + $_.Name) }
+  Write-Output ''
+  Write-Output 'Nothing was copied. Re-upload the pubmat zip, or tell Claude'
+  Write-Output 'which of the above is the right one.'
+  exit 1
+}
 Write-Output ("zip         : " + $zip.Name)
 Write-Output ("zip size    : " + [math]::Round($zip.Length/1MB,2) + " MB")
 Write-Output ""

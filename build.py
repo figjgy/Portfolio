@@ -92,6 +92,18 @@ box-shadow:0 14px 40px var(--shade),inset 0 1px 0 var(--edge-top)}
 }
 
 /* ---- nav --------------------------------------------------------------- */
+/* Pubmat feed grid (2026-09-14). Three across, square, tight gutters — the way
+   a run of posts is actually seen. Stays 3 across on a phone ON PURPOSE: the
+   claim is that the set reads as one brand, and one-per-row shows a sequence of
+   single posts instead of a body of work. 2px gutter so the tiles read as a
+   block, not as separate cards. */
+.iggrid{display:grid;grid-template-columns:repeat(3,1fr);gap:3px;margin-top:.75rem}
+.iggrid .shot{border-radius:0;margin:0}
+.iggrid .shot img{width:100%;height:100%;object-fit:cover;display:block}
+.iggrid>*:first-child{border-top-left-radius:10px}
+.iggrid>*:nth-child(3){border-top-right-radius:10px}
+@media(max-width:640px){.iggrid{gap:2px}}
+
 /* Hero explanation line + the two homepage CTAs (2026-09-14).
    .hero-cta stacks on narrow screens so the two buttons never squeeze each
    other; the primary keeps the solid fill and Contact Me is the ghost. */
@@ -1594,6 +1606,46 @@ def is_image(val):
     return any(clean.endswith(ext) for ext in IMAGE_EXTS)
 
 
+def images_with_prefix(prefix):
+    """Every file in Portfolio/images/ whose name starts with prefix, sorted.
+
+    Added 2026-09-14 for the pubmat feed. The alternative was listing thirty
+    filenames by hand in content.py, which has two problems: the list goes stale
+    the moment a post is added, and check_portfolio.py then reports a missing
+    file for a typo nobody can see. Reading the folder means adding next month's
+    pubmats is dropping files in — no code edit, no caption count to keep in
+    step. Sorted by name, which is why the importer numbers them 01, 02, 03.
+    """
+    src = os.path.join(os.path.dirname(os.path.abspath(__file__)), "images")
+    if not os.path.isdir(src):
+        return []
+    return sorted(f for f in os.listdir(src)
+                  if f.startswith(prefix) and not f.startswith(".") and is_image(f))
+
+
+def project_cover(pr):
+    """The cover image for a project, resolved in order of certainty.
+
+    "cover"        — an exact filename, wins if given.
+    "cover_prefix" — the FIRST file in images/ starting with that prefix. Added
+                     2026-09-14 after a real failure: the cover was hard-coded as
+                     kpick-medical-01.jpg while the importer names the file after
+                     whatever extension the source had. If the zip held PNGs the
+                     reference pointed at a file that would never exist, and
+                     check_portfolio.py blocked the push for a one-character
+                     mismatch nobody could see. Matching the prefix removes the
+                     guess entirely.
+    "cover_note"   — the designed text placeholder, when there is no image yet.
+    """
+    if pr.get("cover"):
+        return pr["cover"]
+    if pr.get("cover_prefix"):
+        found = images_with_prefix(pr["cover_prefix"])
+        if found:
+            return found[0]
+    return pr.get("cover_note")
+
+
 def render_media(val, ratio="r43", alt="", up=""):
     """Render a responsive .shot container if val is an image file, or .ph placeholder if text."""
     if is_image(val):
@@ -1633,7 +1685,7 @@ def card_html(pr, base="work/", up=""):
     """base is the path prefix to the work/ folder from the page being built;
     up is the path prefix to the assets/ folder."""
     d = DISCIPLINES[pr['discipline']]
-    cover = pr.get("cover") or pr.get("cover_note")
+    cover = project_cover(pr)
     visual = render_media(cover, "r43", pr['title'], up=up)
     live_chip = ('<span class="chip live"><span class="live-dot" aria-hidden="true"></span>Live</span>'
                  if pr.get("link") else "")
@@ -1773,7 +1825,7 @@ def build_project(i, pr):
     prev_p = PROJECTS[i - 1] if i > 0 else None
     next_p = PROJECTS[i + 1] if i < len(PROJECTS) - 1 else None
     tags = "".join(f'<span class="chip">{E(t)}</span>' for t in pr['tags'])
-    cover = pr.get("cover") or pr.get("cover_note")
+    cover = project_cover(pr)
     cover_visual = render_media(cover, "r32", pr['title'], up="../")
     caps = pr.get('gallery_captions') or []
     gal_items = []
@@ -1792,13 +1844,25 @@ def build_project(i, pr):
             media = f'<div class="vidrow{" one" if n == 1 else ""}">{vids}</div>'
         elif isinstance(g, dict):
             ratio = g.get("ratio", "r11")
-            tiles = "".join(render_media(f, ratio, g.get("alt", pr['title']), up="../") for f in g.get("grid", []))
+            # grid_prefix reads the folder instead of naming every file — see
+            # images_with_prefix(). An explicit "grid" list still works and wins.
+            files = g.get("grid") or images_with_prefix(g.get("grid_prefix", "\0"))
+            tiles = "".join(render_media(f, ratio, g.get("alt", pr['title']), up="../") for f in files)
             head = ""
             if g.get("title"):
                 head = (f'<div class="galset-head"><h4>{E(g["title"])}</h4>'
                         + (f'<span class="muted">{E(g["sub"])}</span>' if g.get("sub") else "") + '</div>')
-            n = len(g.get("grid", []))
-            media = f'<div class="galset">{head}<div class="strip strip-{ratio}" data-n="{n}">{tiles}</div></div>'
+            n = len(files)
+            # layout "feed" = a square 3-up grid that wraps, the way a set of posts
+            # is actually seen on the account. The default .strip scrolls sideways,
+            # which is right for 2-4 mockups and wrong for thirty posts: a strip
+            # hides most of them behind a drag nobody performs, and the whole point
+            # of this project is that the look HOLDS across a lot of them. You only
+            # see that if you can see them at once.
+            if g.get("layout") == "feed":
+                media = f'<div class="galset">{head}<div class="iggrid" data-n="{n}">{tiles}</div></div>'
+            else:
+                media = f'<div class="galset">{head}<div class="strip strip-{ratio}" data-n="{n}">{tiles}</div></div>'
         elif isinstance(g, (list, tuple)):
             vids = "".join(
                 f'<div class="vid r916"><video controls muted playsinline preload="metadata" '
@@ -4583,12 +4647,25 @@ def build_card():
  --glass:rgba(255,255,255,.42);--edge:rgba(18,16,15,.10);--edge-top:rgba(255,255,255,.85);
  --shade:rgba(90,70,70,.16);--blob1:rgba(139,13,26,.11);--blob2:rgba(139,13,26,.06);
 }}
+/* 2026-09-14 — FIT THE PHONE, one screen, no scroll.
+   Two separate faults were making this card overflow:
+   1. height:100% / 100vh on a phone does NOT mean the visible area. Mobile
+      browsers size 100vh to the viewport with the URL bar HIDDEN, so the card
+      was always taller than the screen by roughly the height of that bar —
+      exactly the overflow in her screenshot. 100dvh is the dynamic height and
+      tracks the chrome; 100vh stays first as the fallback for older browsers.
+   2. Everything inside was fixed px/rem, so a short phone had no way to give.
+      Every large vertical measurement below is now clamp(min, vh, max): full
+      size on a desktop or a tall phone, compressing on a small one, never
+      below the min that keeps a tap target legal. */
 html,body{{height:100%}}
 body{{
  margin:0;background:var(--bg);color:var(--ink);
  font-family:system-ui,-apple-system,'Segoe UI',Roboto,sans-serif;line-height:1.55;
  display:flex;align-items:center;justify-content:center;
- padding:max(1.25rem,env(safe-area-inset-top)) 1.25rem max(1.25rem,env(safe-area-inset-bottom));
+ min-height:100vh;min-height:100dvh;
+ padding:max(clamp(.5rem,1.6vh,1.25rem),env(safe-area-inset-top)) 1.25rem
+         max(clamp(.5rem,1.6vh,1.25rem),env(safe-area-inset-bottom));
  overflow-x:hidden;transition:background .35s,color .35s;
 }}
 .blobs{{position:fixed;inset:0;z-index:0;overflow:hidden;pointer-events:none}}
@@ -4602,7 +4679,8 @@ body{{
  background:var(--glass);border:1px solid var(--edge);border-radius:26px;
  -webkit-backdrop-filter:blur(22px) saturate(150%);backdrop-filter:blur(22px) saturate(150%);
  box-shadow:0 18px 50px var(--shade),inset 0 1px 0 var(--edge-top);
- padding:2rem 1.5rem 1.75rem;text-align:center;transition:background .35s,border-color .35s;
+ padding:clamp(1.1rem,3.4vh,2rem) 1.5rem clamp(1rem,3vh,1.75rem);
+ text-align:center;transition:background .35s,border-color .35s;
 }}
 .toggle{{
  position:absolute;top:1rem;right:1rem;width:52px;height:30px;border-radius:999px;cursor:pointer;
@@ -4614,7 +4692,8 @@ body{{
 [data-theme="light"] .toggle::after{{transform:translateX(22px)}}
 .toggle:focus-visible{{outline:2px solid var(--acc);outline-offset:2px}}
 .av{{
- position:relative;width:104px;height:104px;margin:.25rem auto 1.25rem;border-radius:50%;
+ position:relative;width:clamp(68px,12.5vh,104px);height:clamp(68px,12.5vh,104px);
+ margin:.25rem auto clamp(.6rem,2.2vh,1.25rem);border-radius:50%;
  overflow:hidden;background:var(--glass);border:1px solid var(--edge);
  box-shadow:0 8px 24px var(--shade),inset 0 1px 0 var(--edge-top);
  display:flex;align-items:center;justify-content:center;
@@ -4623,28 +4702,34 @@ body{{
 .av img{{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block}}
 .av span{{font-size:2rem;font-weight:600;letter-spacing:.04em;color:var(--dim)}}
 .eyebrow{{margin:0;font-size:10px;font-weight:400;letter-spacing:.26em;color:var(--dim)}}
-h1{{margin:.6rem 0 0;font-family:Georgia,'Times New Roman',serif;font-size:2.1rem;
+h1{{margin:clamp(.35rem,1.2vh,.6rem) 0 0;font-family:Georgia,'Times New Roman',serif;
+font-size:clamp(1.6rem,5vh,2.1rem);
 font-weight:400;line-height:1.15;letter-spacing:.005em}}
-.role{{margin:.7rem 0 0;font-size:.9375rem;font-weight:400;letter-spacing:.02em;color:var(--ink)}}
-.org{{margin:.4rem 0 0;font-size:.875rem;color:var(--dim)}}
-hr{{border:0;height:1px;background:var(--edge);margin:1.5rem 0}}
+.role{{margin:clamp(.4rem,1.4vh,.7rem) 0 0;font-size:clamp(.875rem,1.9vh,.9375rem);
+font-weight:400;letter-spacing:.02em;color:var(--ink)}}
+.org{{margin:clamp(.25rem,.9vh,.4rem) 0 0;font-size:clamp(.8125rem,1.7vh,.875rem);color:var(--dim)}}
+hr{{border:0;height:1px;background:var(--edge);margin:clamp(.75rem,2.6vh,1.5rem) 0}}
 .save{{
- display:flex;align-items:center;justify-content:center;width:100%;min-height:54px;
+ display:flex;align-items:center;justify-content:center;width:100%;
+ min-height:clamp(46px,6.6vh,54px);
  border:0;border-radius:999px;cursor:pointer;background:var(--acc);color:#F5F2ED;
  font:400 13px/1 system-ui,sans-serif;letter-spacing:.16em;text-transform:uppercase;
  box-shadow:0 8px 22px var(--shade);transition:background .25s,transform .12s;
 }}
 .save:active{{transform:scale(.98)}}
 .save:hover{{background:var(--acc-lift)}}
-.row{{display:grid;grid-template-columns:1fr 1fr;gap:.75rem;margin-top:.75rem}}
+.row{{display:grid;grid-template-columns:1fr 1fr;gap:clamp(.5rem,1.6vh,.75rem);
+ margin-top:clamp(.5rem,1.6vh,.75rem)}}
 .row a{{
- display:flex;align-items:center;justify-content:center;min-height:52px;border-radius:16px;
+ display:flex;align-items:center;justify-content:center;
+ min-height:clamp(44px,6.2vh,52px);border-radius:16px;
  background:var(--glass);border:1px solid var(--edge);color:var(--ink);text-decoration:none;
  font:400 15px/1 system-ui,sans-serif;
  -webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px);transition:border-color .2s}}
 .row a:active{{border-color:var(--acc)}}
 .tool-btn{{
- display:flex;align-items:center;justify-content:center;gap:.5rem;min-height:52px;border-radius:16px;
+ display:flex;align-items:center;justify-content:center;gap:.5rem;
+ min-height:clamp(44px,6.2vh,52px);border-radius:16px;
  background:var(--glass);border:1px solid var(--edge);color:var(--ink);
  font:400 14px/1 system-ui,sans-serif;cursor:pointer;
  -webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px);transition:border-color .2s,background .2s;
@@ -4653,17 +4738,26 @@ hr{{border:0;height:1px;background:var(--edge);margin:1.5rem 0}}
 .tool-btn:active{{transform:scale(.98)}}
 .tool-btn svg{{width:18px;height:18px;stroke:currentColor;fill:none;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}}
 .full{{
- display:inline-flex;align-items:center;justify-content:center;min-height:44px;margin-top:1.5rem;
+ display:inline-flex;align-items:center;justify-content:center;min-height:40px;
+ margin-top:clamp(.7rem,2.4vh,1.5rem);
  color:var(--ink);text-decoration:underline;text-underline-offset:5px;
  font:400 14px/1 system-ui,sans-serif;letter-spacing:.04em}}
-.socials{{display:flex;justify-content:center;gap:.75rem;margin-top:1.25rem}}
-.socials a{{width:52px;height:52px;border-radius:50%;display:flex;align-items:center;
+.socials{{display:flex;justify-content:center;gap:.75rem;margin-top:clamp(.7rem,2.2vh,1.25rem)}}
+.socials a{{width:clamp(44px,6.2vh,52px);height:clamp(44px,6.2vh,52px);
+border-radius:50%;display:flex;align-items:center;
 justify-content:center;background:var(--glass);border:1px solid var(--edge);
 -webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px);transition:border-color .2s}}
 .socials a:active{{border-color:var(--acc)}}
 .socials svg{{width:21px;height:21px;stroke:var(--ink);fill:none;stroke-width:1.7;
 stroke-linecap:round;stroke-linejoin:round}}
-.note{{margin:1.25rem 0 0;font-size:12px;color:var(--dim);line-height:1.5}}
+.note{{margin:clamp(.7rem,2.2vh,1.25rem) 0 0;font-size:12px;color:var(--dim);line-height:1.45}}
+/* Very short screens (a small phone in landscape, or an older 4.7") — the
+   clamps alone are not enough there, so the two lines that are nice-to-have
+   rather than load-bearing step out of the way. The card must still fit. */
+@media(max-height:620px){{
+  .note{{display:none}}
+  .org{{display:none}}
+}}
 button:focus-visible,a:focus-visible{{outline:2px solid var(--acc);outline-offset:3px}}
 
 .modal{{position:fixed;inset:0;z-index:200;display:flex;align-items:center;justify-content:center;

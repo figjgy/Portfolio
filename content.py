@@ -51,10 +51,15 @@ PROFILE = {
     "hero_kicker": "MULTIDISCIPLINARY CREATIVE SPECIALIST",
     "hero_headline": "I create product content, e-commerce storefronts, campaign visuals and practical systems that help brands stay consistent across channels.",
     "hero_sub": "Backed by architectural precision and automated systems that keep your brand consistent across every customer touchpoint.",
-    "intro": ("Most brands look like three different companies: their marketplace listing, daily social post, "
-              "and physical store banner were each made by someone else. I design the whole brand surface as "
-              "one cohesive system — from high-converting 3D product renders and 8-slide listing sequences to "
-              "paid social ads — then build the automated workflows that keep it consistent."),
+    # 2026-09-14 shortened. hero_headline now sits directly above this and already
+    # states WHAT the work is, so the old version said "one cohesive system …
+    # consistent" twice in two consecutive paragraphs. This keeps only the part the
+    # hero cannot carry — the observation that makes the problem worth solving —
+    # and drops the deliverable list, which the six project cards show anyway.
+    # 65 words -> 38.
+    "intro": ("Most brands look like three different companies: the marketplace listing, the daily "
+              "post and the store banner were each made by someone else. I design the whole surface "
+              "as one system, then automate what keeps it that way."),
 }
 
 # Only numbers you can defend if someone asks where they came from.
@@ -187,6 +192,11 @@ PROJECTS = [
         "tools": "Shopee Seller Centre, Lazada Seller Center, TikTok Shop Seller Center, Photoshop, Figma",
         "result_purpose": "Zero catalog policy suspensions across 3 marketplaces; created standard compliance reference and 7-slide conversion architecture for active product lines.",
         "tags": ["Shop design", "Listing optimisation", "Marketplace compliance"],
+        # cover_prefix, not a filename: build.py takes the first file in images/
+        # starting with this, whatever its extension. Run IMPORT_SHOPFRONT.bat and
+        # it resolves; until then the designed cover_note placeholder shows and the
+        # push is NOT blocked.
+        "cover_prefix": "marketplace-",
         "cover_note": "Shopee, Lazada & TikTok Shop Storefront & Listing System",
         "summary": ("Storefront design, listing graphics and optimisation across three "
                     "marketplaces — including clearing the listings that get flagged."),
@@ -211,11 +221,23 @@ PROJECTS = [
         "result": ("Three storefronts kept consistent and on-brand, and flagged products fixed "
                    "and relisted rather than quietly left down. The compliance wording now lives "
                    "in a reference the whole team writes from instead of in one person's memory."),
-        "gallery": ["Storefront and campaign banner set",
+        # The shop front is a SCROLLING STRIP at phone ratio, not the square feed
+        # grid the pubmats use. These are 9:16 phone captures of a storefront a
+        # buyer scrolls top to bottom — cropping them square would cut the banner
+        # off the top of every one, and the banners are the work being shown.
+        # grid_prefix reads the folder, so adding a sixth capture is a file drop.
+        "gallery": [{"ratio": "r916",
+                     "grid_prefix": "marketplace-",
+                     "alt": "K-PICK Shopee storefront",
+                     "title": "The storefront as a buyer scrolls it",
+                     "sub": "Shop header, featured best-sellers, and a banner per category"},
                     "Listing image sequence in conversion order",
                     "A+ content and compliance detail layout"],
         "gallery_captions": [
-            "The same brand rebuilt three times — each marketplace imposes its own ratios, image counts and first-frame rules",
+            "One storefront, top to bottom: the shop header, the Featured Best Sellers rail, then "
+            "a designed banner for every category — Medical Supplies, Coffee, Personal Care. Each "
+            "marketplace imposes its own ratios and first-frame rules, so the same brand is rebuilt "
+            "three times to arrive at the same look",
             "A listing sequence in order. The compliance frame is fixed wording, not copy written per product",
             "A+ content: the page a buyer reads after the photos have already sold them"],
     },
@@ -631,6 +653,10 @@ PROJECTS = [
         "tools": "Photoshop, Illustrator, Canva, Figma",
         "result_purpose": "Built strict brand template design system across 3 brands that empowered non-designers to publish 30+ compliant monthly pubmats and swipe-worthy educational carousels.",
         "tags": ["Pubmats", "Brand templates", "Carousels"],
+        # Same prefix rule as marketplace-management — the pubmat zip may hold PNGs
+        # or JPGs and this must not care which. Resolves the moment
+        # IMPORT_PUBMATS.bat has run; shows the placeholder until then.
+        "cover_prefix": "kpick-medical-",
         "cover_note": "Multi-brand daily pubmat and carousel design system",
         "summary": ("Daily graphics across three brands, built on templates so the look holds "
                     "when someone else produces them."),
@@ -650,11 +676,21 @@ PROJECTS = [
                      "accident."),
         "result": ("A look that survives being handed to someone else. The social media officer "
                    "now produces the daily sets herself and they still read as one brand."),
-        "gallery": ["Pubmat template series across three brand aesthetics",
-                    "Educational carousel slide sequence"],
+        # The pubmats render as a square 3-up feed, not the usual scrolling strip.
+        # grid_prefix reads Portfolio/images/ at build time, so next month's posts
+        # are a drag-and-drop — no filename list here to go stale, and no caption
+        # count to keep in step with it (check_portfolio.py enforces that pairing,
+        # and a 30-item list is exactly where it would break).
+        "gallery": [{"layout": "feed",
+                     "ratio": "r11",
+                     "grid_prefix": "kpick-medical-",
+                     "alt": "K-PICK Medical pubmat",
+                     "title": "The account itself",
+                     "sub": "Posts as they sit on the grid — @kpickmedical"}],
         "gallery_captions": [
-            "Three brands, one underlying grid. The palette changes; the structure does not",
-            "A carousel built as one argument — each frame earns the swipe to the next"],
+            "One template system, a month of posts. The palette and the claim change "
+            "per product; the grid, the type scale and the position of the logo do not — "
+            "which is what makes thirty separate posts read as one account"],
     },
     # ---------------------------------------------------------- PRODUCT DESIGN
     {

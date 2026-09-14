@@ -1,8 +1,13 @@
  M .gitignore
+ M PUSH_PORTFOLIO.bat
  M _gitstat.tmp
+ M _import_pubmats.ps1
+ M build.py
  M content.py
  M site/404.html
  M site/about.html
+ M site/assets/style.css
+ M site/card.html
  M site/index.html
  M site/tools/index.html
  M site/work/ads-creatives.html
@@ -21,5 +26,5 @@
  M site/work/product-rendering.html
  M site/work/short-form-scripting.html
  M site/work/social-graphics.html
-?? IMPORT_PUBMATS.bat
-?? _import_pubmats.ps1
+?? IMPORT_SHOPFRONT.bat
+?? _import_shopfront.ps1

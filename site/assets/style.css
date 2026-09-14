@@ -52,6 +52,18 @@ box-shadow:0 14px 40px var(--shade),inset 0 1px 0 var(--edge-top)}
 }
 
 /* ---- nav --------------------------------------------------------------- */
+/* Pubmat feed grid (2026-09-14). Three across, square, tight gutters — the way
+   a run of posts is actually seen. Stays 3 across on a phone ON PURPOSE: the
+   claim is that the set reads as one brand, and one-per-row shows a sequence of
+   single posts instead of a body of work. 2px gutter so the tiles read as a
+   block, not as separate cards. */
+.iggrid{display:grid;grid-template-columns:repeat(3,1fr);gap:3px;margin-top:.75rem}
+.iggrid .shot{border-radius:0;margin:0}
+.iggrid .shot img{width:100%;height:100%;object-fit:cover;display:block}
+.iggrid>*:first-child{border-top-left-radius:10px}
+.iggrid>*:nth-child(3){border-top-right-radius:10px}
+@media(max-width:640px){.iggrid{gap:2px}}
+
 /* Hero explanation line + the two homepage CTAs (2026-09-14).
    .hero-cta stacks on narrow screens so the two buttons never squeeze each
    other; the primary keeps the solid fill and Contact Me is the ghost. */

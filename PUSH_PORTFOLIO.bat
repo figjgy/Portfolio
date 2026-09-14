@@ -36,7 +36,17 @@ where python >> %LOG% 2>&1
 git remote -v >> %LOG% 2>&1
 git branch --show-current >> %LOG% 2>&1
 
-echo [1/5] Rebuilding site from content.py ...
+REM ---------- 0b. PULL IN ANY NEW ARTWORK, AUTOMATICALLY ----------
+REM  Added 2026-09-14 because the import had become a SECOND double-click and
+REM  that was a step Jamie never used to need. It runs itself now, and it is
+REM  safe to leave in: the importer matches the zip BY NAME, and the guard
+REM  below means it does nothing at all once the images are already in.
+REM  Silent when there is nothing to do - no output, no questions, no failure.
+if not exist "images\kpick-medical-01.*" (
+  powershell -NoProfile -ExecutionPolicy Bypass -File "%~dp0_import_pubmats.ps1" < NUL >> %LOG% 2>&1
+)
+
+echo [1/6] Rebuilding site from content.py ...
 echo ---------- 1. BUILD ---------- >> %LOG%
 python -u build.py < NUL >> %LOG% 2>&1
 set BUILDRC=%ERRORLEVEL%
@@ -48,7 +58,7 @@ if not "%BUILDRC%"=="0" (
 echo    Build successful.
 
 echo.
-echo [2/5] Verifying consistency ...
+echo [2/6] Verifying consistency ...
 echo ---------- 2. CHECK ---------- >> %LOG%
 python -u check_portfolio.py < NUL >> %LOG% 2>&1
 set CHECKRC=%ERRORLEVEL%
