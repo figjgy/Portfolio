@@ -4,18 +4,24 @@ REM ============================================================
 REM  PUSH THE PORTFOLIO TO GITHUB  ->  Vercel redeploys by itself
 REM ============================================================
 REM  Double-click this file.
-REM  It will:
-REM    1. Rebuild site\ from content.py (build.py)
-REM    2. Verify captions, links & images (check_portfolio.py)
-REM    3. Stage and commit all new/modified files
-REM    4. Push to GitHub (origin main) -> triggers Vercel deploy
+REM
+REM  2026-09-14 REWRITE. The old version reported SUCCESS while
+REM  pushing nothing, because of two faults that hid each other:
+REM    * git push output was NOT redirected to the log, so the one
+REM      line that matters ("Everything up-to-date" / "rejected")
+REM      was only ever on screen and never readable afterwards.
+REM    * "nothing to commit" and "commit failed" both produced an
+REM      EMPTY section 3, so they could not be told apart.
+REM  An empty push is exit code 0. Exit 0 is NOT proof of a deploy.
+REM  Everything below is logged, including the ahead/behind counts.
 REM ============================================================
 cd /d "%~dp0"
+set LOG=push_log.txt
 
-echo ==================================================== > push_log.txt
-echo   PORTFOLIO BUILD, CHECK, COMMIT ^& PUSH >> push_log.txt
-echo   %DATE% %TIME% >> push_log.txt
-echo ==================================================== >> push_log.txt
+echo ==================================================== > %LOG%
+echo   PORTFOLIO BUILD, CHECK, COMMIT ^& PUSH >> %LOG%
+echo   %DATE% %TIME% >> %LOG%
+echo ==================================================== >> %LOG%
 
 echo.
 echo ====================================================
@@ -23,74 +29,95 @@ echo   PORTFOLIO DEPLOYMENT TO GITHUB ^& VERCEL
 echo ====================================================
 echo.
 
-echo [1/4] Rebuilding site from content.py ...
-echo ---------- 1. BUILD ---------- >> push_log.txt
-python -u build.py < NUL >> push_log.txt 2>&1
+REM ---------- 0. environment, so a failure can be blamed correctly ----------
+echo ---------- 0. ENVIRONMENT ---------- >> %LOG%
+where git >> %LOG% 2>&1
+where python >> %LOG% 2>&1
+git remote -v >> %LOG% 2>&1
+git branch --show-current >> %LOG% 2>&1
+
+echo [1/5] Rebuilding site from content.py ...
+echo ---------- 1. BUILD ---------- >> %LOG%
+python -u build.py < NUL >> %LOG% 2>&1
 set BUILDRC=%ERRORLEVEL%
-echo    exit code %BUILDRC% >> push_log.txt
+echo    exit code %BUILDRC% >> %LOG%
 if not "%BUILDRC%"=="0" (
-  echo.
-  echo  [ERROR] Build failed! Check push_log.txt for details.
-  echo  Nothing was pushed.
-  echo.
-  pause
-  exit /b 1
+  echo. & echo  [ERROR] Build failed. See push_log.txt. Nothing was pushed. & echo.
+  pause & exit /b 1
 )
 echo    Build successful.
 
 echo.
-echo [2/4] Verifying consistency ...
-echo ---------- 2. CHECK ---------- >> push_log.txt
-python -u check_portfolio.py < NUL >> push_log.txt 2>&1
+echo [2/5] Verifying consistency ...
+echo ---------- 2. CHECK ---------- >> %LOG%
+python -u check_portfolio.py < NUL >> %LOG% 2>&1
 set CHECKRC=%ERRORLEVEL%
-echo    exit code %CHECKRC% >> push_log.txt
+echo    exit code %CHECKRC% >> %LOG%
 if not "%CHECKRC%"=="0" (
-  echo.
-  echo  [ERROR] Consistency check failed! Check push_log.txt for details.
-  echo  Nothing was pushed.
-  echo.
-  pause
-  exit /b 1
+  echo. & echo  [ERROR] Consistency check failed. See push_log.txt. Nothing was pushed. & echo.
+  pause & exit /b 1
 )
 echo    Consistency check passed.
 
+REM ---------- 3. what git ACTUALLY sees. Logged either way. ----------
 echo.
-echo [3/4] Staging and committing changes ...
-echo ---------- 3. GIT COMMIT ---------- >> push_log.txt
-set HAS_CHANGES=0
-for /f "tokens=*" %%i in ('git status --porcelain') do (
-  set HAS_CHANGES=1
-)
-
-if "%HAS_CHANGES%"=="1" (
-  echo    Changes detected. Staging and committing...
-  git add -A >> push_log.txt 2>&1
-  git commit -m "Update portfolio: %DATE% %TIME%" >> push_log.txt 2>&1
-  echo    Committed latest updates.
+echo [3/5] Reading git status ...
+echo ---------- 3. GIT STATUS (before commit) ---------- >> %LOG%
+git status --porcelain >> %LOG% 2>&1
+git status --porcelain > _gitstat.tmp 2>&1
+for %%A in (_gitstat.tmp) do set STATSIZE=%%~zA
+if "!STATSIZE!"=="0" (
+  echo    Working tree clean - nothing new to commit.
+  echo [none - working tree clean] >> %LOG%
+  set DIDCOMMIT=0
 ) else (
-  echo    No new uncommitted changes.
+  echo    Changes found. Staging and committing...
+  echo ---------- 3b. GIT ADD + COMMIT ---------- >> %LOG%
+  git add -A >> %LOG% 2>&1
+  git commit -m "Update portfolio: %DATE% %TIME%" >> %LOG% 2>&1
+  echo    commit exit code: !ERRORLEVEL! >> %LOG%
+  set DIDCOMMIT=1
 )
+del _gitstat.tmp >NUL 2>&1
 
+REM ---------- 4. behind/ahead BEFORE pushing - gotcha 57's first command ----------
 echo.
-echo [4/4] Pushing to GitHub (origin main) ...
-echo ---------- 4. GIT PUSH ---------- >> push_log.txt
+echo [4/5] Comparing with GitHub ...
+echo ---------- 4. AHEAD / BEHIND (left=origin only, right=local only) ---------- >> %LOG%
+git fetch -c credential.helper= origin >> %LOG% 2>&1
+git rev-list --left-right --count origin/main...HEAD >> %LOG% 2>&1
+
+REM ---------- 5. THE PUSH. Output goes to the log AND the screen. ----------
 echo.
-git push origin main
+echo [5/5] Pushing to GitHub (origin main) ...
+echo ---------- 5. GIT PUSH ---------- >> %LOG%
+git push origin main > _push.tmp 2>&1
 set PUSHCODE=%ERRORLEVEL%
-echo git push exit code: %PUSHCODE% >> push_log.txt
+type _push.tmp
+type _push.tmp >> %LOG%
+del _push.tmp >NUL 2>&1
+echo git push exit code: %PUSHCODE% >> %LOG%
+
+echo ---------- 6. AFTER THE PUSH ---------- >> %LOG%
+git rev-list --left-right --count origin/main...HEAD >> %LOG% 2>&1
+git log -1 --oneline >> %LOG% 2>&1
 
 echo.
 echo ====================================================
-if "%PUSHCODE%"=="0" (
-  echo   SUCCESS! Everything pushed to GitHub.
-  echo   Vercel is now automatically rebuilding and deploying!
-  echo.
-  echo   Check your live website in ~1-2 minutes:
-  echo   https://jamielyn-ludovice.vercel.app
+if not "%PUSHCODE%"=="0" (
+  echo   PUSH FAILED  ^(exit %PUSHCODE%^)
+  echo   Read push_log.txt - section 5 now has the real reason.
 ) else (
-  echo   PUSH FAILED (Exit Code: %PUSHCODE%)
-  echo   Details saved in push_log.txt.
-  echo   If prompted to sign in to GitHub, please authorize in your browser.
+  if "!DIDCOMMIT!"=="0" (
+    echo   PUSH OK - but there was NOTHING NEW TO SEND.
+    echo   The live site has NOT changed. That is not a failure,
+    echo   it means the build produced no new files. If you expected
+    echo   a change, your edit did not reach content.py or images\.
+  ) else (
+    echo   SUCCESS - a new commit was pushed.
+    echo   Vercel redeploys by itself. Check in ~1-2 minutes:
+    echo   https://jamielyn-ludovice.vercel.app
+  )
 )
 echo ====================================================
 echo.
