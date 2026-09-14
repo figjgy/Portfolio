@@ -620,6 +620,12 @@ PROJECTS = [
         "year": "2026",
         "featured": False,
         "client": "K-PICK Trading Corp., K-Pick Aesthetic & Affiliate Brands",
+        # A "link" is what makes build.py render the green LIVE chip on the card.
+        # This one matters more than usual: the whole claim of this project is that
+        # the template system holds up at volume, and the account is the evidence —
+        # a visitor can go and see thirty of them in a row.
+        "link": "https://www.instagram.com/kpickmedical/",
+        "link_label": "See the live account — instagram.com/kpickmedical",
         "project_type": "Daily Social Media Graphics, Pubmat Systems & Multi-Brand Carousels",
         "role": "Graphic Designer & Design Systems Lead",
         "tools": "Photoshop, Illustrator, Canva, Figma",

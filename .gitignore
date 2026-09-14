@@ -8,6 +8,7 @@ temp_tools.js
 build_check_log.txt
 build_step1_log.txt
 push_log.txt
+import_pubmats_log.txt
 _run_hub_check.bat
 
 # NOTE: site/ MUST stay committed. Vercel does not run build.py,

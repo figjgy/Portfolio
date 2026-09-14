@@ -1,7 +1,25 @@
- M PUSH_PORTFOLIO.bat
+ M .gitignore
  M _gitstat.tmp
- M build.py
  M content.py
+ M site/404.html
  M site/about.html
- M site/assets/style.css
  M site/index.html
+ M site/tools/index.html
+ M site/work/ads-creatives.html
+ M site/work/automation-stack.html
+ M site/work/banners-tarpaulins.html
+ M site/work/brand-sourcing.html
+ M site/work/content-calendar-system.html
+ M site/work/index.html
+ M site/work/interior-decoration.html
+ M site/work/kibo.html
+ M site/work/kpick-website.html
+ M site/work/margegold-jewelry.html
+ M site/work/marketplace-management.html
+ M site/work/multimedia-hub.html
+ M site/work/philmed-expo-2026.html
+ M site/work/product-rendering.html
+ M site/work/short-form-scripting.html
+ M site/work/social-graphics.html
+?? IMPORT_PUBMATS.bat
+?? _import_pubmats.ps1
