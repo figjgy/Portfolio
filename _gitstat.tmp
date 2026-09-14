@@ -1,2 +1,7 @@
  M PUSH_PORTFOLIO.bat
-?? _gitstat.tmp
+ M _gitstat.tmp
+ M build.py
+ M content.py
+ M site/about.html
+ M site/assets/style.css
+ M site/index.html

@@ -52,6 +52,14 @@ box-shadow:0 14px 40px var(--shade),inset 0 1px 0 var(--edge-top)}
 }
 
 /* ---- nav --------------------------------------------------------------- */
+/* Hero explanation line + the two homepage CTAs (2026-09-14).
+   .hero-cta stacks on narrow screens so the two buttons never squeeze each
+   other; the primary keeps the solid fill and Contact Me is the ghost. */
+.hero-line{max-width:34rem;margin:.85rem 0 0;font-size:1.02rem;line-height:1.6;color:var(--ink)}
+.hero-cta{display:flex;flex-wrap:wrap;gap:.6rem;align-items:flex-start}
+.hero-cta .btn{margin-top:0}
+@media(max-width:640px){.hero-cta{width:100%}.hero-cta .btn{flex:1 1 100%;justify-content:center}}
+
 /* Ambient Mouse Cursor Halo */
 .cursor-glow{position:fixed;top:0;left:0;width:550px;height:550px;border-radius:50%;
 pointer-events:none;z-index:0;transform:translate3d(-50%,-50%,0);

@@ -92,6 +92,14 @@ box-shadow:0 14px 40px var(--shade),inset 0 1px 0 var(--edge-top)}
 }
 
 /* ---- nav --------------------------------------------------------------- */
+/* Hero explanation line + the two homepage CTAs (2026-09-14).
+   .hero-cta stacks on narrow screens so the two buttons never squeeze each
+   other; the primary keeps the solid fill and Contact Me is the ghost. */
+.hero-line{max-width:34rem;margin:.85rem 0 0;font-size:1.02rem;line-height:1.6;color:var(--ink)}
+.hero-cta{display:flex;flex-wrap:wrap;gap:.6rem;align-items:flex-start}
+.hero-cta .btn{margin-top:0}
+@media(max-width:640px){.hero-cta{width:100%}.hero-cta .btn{flex:1 1 100%;justify-content:center}}
+
 /* Ambient Mouse Cursor Halo */
 .cursor-glow{position:fixed;top:0;left:0;width:550px;height:550px;border-radius:50%;
 pointer-events:none;z-index:0;transform:translate3d(-50%,-50%,0);
@@ -1654,20 +1662,32 @@ def build_home():
     marquee = (f'<div class="marquee" aria-label="What I do">'
                f'<div class="mtrack"><div class="mset">{strip}</div>'
                f'<div class="mset" aria-hidden="true">{strip}</div></div></div>')
+    # 2026-09-14 hero rebuild.
+    #   * The kicker alone ("MULTIDISCIPLINARY CREATIVE SPECIALIST") is a label,
+    #     not an explanation — hero_headline now states the actual work in one
+    #     sentence, immediately under it.
+    #   * SAVE TO CONTACTS was the single prominent button. That is the right
+    #     first action on the NFC card page (card.html still has it) and the
+    #     wrong one for a portfolio visitor, whose first action is to look at
+    #     the work. Replaced by two real CTAs; "Save contact" still exists in
+    #     the footer, which is where a secondary action belongs.
     body = f'''<header id="top"><div class="wrap"><div class="headrow"><div>
 <h1 class="hin">{E(p['name'])}</h1>
 <p class="eyebrow muted sub hin" style="--d:160ms">{E(p['subtitle'])}</p>
-<div class="hin" style="--d:320ms">{contact_nav()}</div></div>
-<button class="btn hin" style="--d:480ms" type="button" onclick="downloadVCard()">
-<svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><use href="#i-dl"/></svg>SAVE TO CONTACTS</button>
+<p class="hero-line hin" style="--d:260ms">{E(p['hero_headline'])}</p>
+<div class="hin" style="--d:380ms">{contact_nav()}</div></div>
+<div class="hero-cta hin" style="--d:500ms">
+<a class="btn" href="#work"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><use href="#i-star"/></svg>VIEW SELECTED WORK</a>
+<a class="btn ghost" href="#contact">CONTACT ME</a>
+</div>
 </div></div></header>
 <main><div class="wrap">
 <section class="rv"><p class="lede">{E(p['intro'])}</p></section>
 <section class="stats" style="padding-top:0">{stats}</section>
 </div>{marquee}<div class="wrap">
-<section><h2 class="eyebrow grouphead"><span>SELECTED WORK</span><span class="rule"></span></h2>
+<section id="work"><h2 class="eyebrow grouphead"><span>SELECTED WORK</span><span class="rule"></span></h2>
 <div class="cards">{cards}</div>
-<p style="margin-top:3rem"><a class="more" href="work/index.html">See all {len(PROJECTS)} projects</a></p>
+<p style="margin-top:3rem"><a class="more" href="work/index.html">View all {len(PROJECTS)} projects</a></p>
 </section>
 </div></main>{footer()}'''
     write("index.html", shell(f"{p['name']} — {p['subtitle_plain']}", p['intro'], body, "home"))

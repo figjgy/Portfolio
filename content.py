@@ -49,7 +49,7 @@ PROFILE = {
     # --- the opening line -------------------------------------------------
     "status": "Available for client projects & monthly retainers",
     "hero_kicker": "MULTIDISCIPLINARY CREATIVE SPECIALIST",
-    "hero_headline": "I design high-converting e-commerce storefronts, 3D product visuals, video creatives, and social content.",
+    "hero_headline": "I create product content, e-commerce storefronts, campaign visuals and practical systems that help brands stay consistent across channels.",
     "hero_sub": "Backed by architectural precision and automated systems that keep your brand consistent across every customer touchpoint.",
     "intro": ("Most brands look like three different companies: their marketplace listing, daily social post, "
               "and physical store banner were each made by someone else. I design the whole brand surface as "
@@ -58,11 +58,21 @@ PROFILE = {
 }
 
 # Only numbers you can defend if someone asks where they came from.
+#
+# 2026-09-14: "5 Automations" contradicted the automation-stack project, which
+# says "Six services in production". Six is the defensible one and they are
+# nameable: Hub · Kibo (Telegram) · MEDIC · mail watcher · Kibo Desktop ·
+# Leila's desktop assistant. Corrected to 6.
+#
+# ⚠️ "90+ posts monthly" was proposed and is NOT used, on purpose. It assumes
+# 30 x 3 brands, but the real calendar runs roughly 24 E-Com to 9 Kokolock —
+# so 90 is arithmetic, not a count anyone could show. The per-brand rate is
+# what the content calendar actually evidences, so that is what is claimed.
 STATS = [
-    {"n": "3",  "l": "Brands Managed"},
-    {"n": "3",  "l": "Marketplaces"},
-    {"n": "30", "l": "Posts / Brand / Mo"},
-    {"n": "5",  "l": "Automations"},
+    {"n": "3",   "l": "Brands Managed"},
+    {"n": "3",   "l": "Marketplaces Supported"},
+    {"n": "30+", "l": "Posts / Brand / Month"},
+    {"n": "6",   "l": "Automation Systems Deployed"},
 ]
 
 # Core services offered
@@ -424,10 +434,13 @@ PROJECTS = [
     # ------------------------------------------------- SOURCING & RESEARCH
     {
         "slug": "brand-sourcing",
+        # featured=False since 2026-09-14: the homepage showed 13 of 15 projects,
+        # which is not a selection. Six strongest stay; everything else lives on
+        # /work, which already carries all 15 behind discipline filters.
         "title": "Brand sourcing & supplier research",
         "discipline": "branding",
         "year": "2026",
-        "featured": True,
+        "featured": False,
         "client": "K-PICK Trading Corp. (Global Sourcing Division)",
         "project_type": "International Manufacturer Sourcing, Brand Due Diligence & Market Analysis",
         "role": "Brand Sourcing Specialist & Market Researcher",
@@ -461,7 +474,7 @@ PROJECTS = [
         "title": "Three-brand content calendar",
         "discipline": "social-media",
         "year": "2026",
-        "featured": True,
+        "featured": False,
         "client": "K-PICK Trading Corp. (3 Multi-Category Brands)",
         "project_type": "Multi-Brand Content Strategy, Notion Production Pipeline & Scheduling",
         "role": "Content Strategist & Systems Architect",
@@ -564,7 +577,7 @@ PROJECTS = [
         "title": "Banners, tarpaulins & print layout",
         "discipline": "branding",
         "year": "2026",
-        "featured": True,
+        "featured": False,
         "client": "K-PICK Trading Corp. & Regional Medical Partners",
         "project_type": "Large-Format Brand Identity, Tarpaulins, Booth Panels & Print Collateral",
         "role": "Print Production Designer & Large-Format Layout Artist",
@@ -643,7 +656,7 @@ PROJECTS = [
         "title": "Product rendering",
         "discipline": "product-design",
         "year": "2026",
-        "featured": True,
+        "featured": False,
         "client": "K-PICK Trading Corp. / Medical Device Line",
         "project_type": "Parametric 3D Product Visualisation & Animated Product Film",
         "role": "3D Visualiser, Parametric Modeler & Motion Designer",
@@ -689,7 +702,7 @@ PROJECTS = [
         "title": "Interior decoration",
         "discipline": "product-design",
         "year": "2026",
-        "featured": True,
+        "featured": False,
         "client": "Private Residential Clients & Condo Owners",
         "project_type": "3D Residential Spatial Modeling, Materials Take-Off & Cost Scheduling",
         "role": "Spatial Interior Designer & Cost Estimator",
@@ -733,7 +746,7 @@ PROJECTS = [
         "title": "K-PICK Multimedia Hub",
         "discipline": "systems",
         "year": "2026",
-        "featured": True,
+        "featured": False,
         "client": "K-PICK Trading Corp.",
         "project_type": "Internal Operations Hub, Role-Based Web Dashboard & Team Portal",
         "role": "Full-Stack UI/UX Designer & Systems Developer",
@@ -759,7 +772,7 @@ PROJECTS = [
         "title": "Kibo — reporting bot & desktop assistant",
         "discipline": "systems",
         "year": "2026",
-        "featured": True,
+        "featured": False,
         "client": "Internal Creative & Operations Team",
         "project_type": "Desktop Activity Tracker & Automated Telegram Reporting Bot",
         "role": "Systems Designer & Automation Developer",
@@ -912,7 +925,14 @@ TESTIMONIALS = [
 ]
 
 # How many placeholder cards to show while TESTIMONIALS is still empty.
-TESTIMONIALS_PENDING = 1
+# 0 since 2026-09-14. An empty "Testimonial pending / Awaiting their words" card
+# advertises that the portfolio is unfinished — two real quotes read stronger than
+# three cards where one is a placeholder. Setting this to 0 also removes the
+# "More requests are out. Real quotes only — nothing here is written by me." note,
+# because build.py only prints that line while something is pending. That note was
+# defending the testimonials against a doubt no visitor had raised.
+# Put it back to 1 only if a quote has actually been promised and is coming.
+TESTIMONIALS_PENDING = 0
 
 EXPERTISE = [
     {"group": "Marketing & Content", "items": [

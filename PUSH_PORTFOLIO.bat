@@ -59,9 +59,40 @@ if not "%CHECKRC%"=="0" (
 )
 echo    Consistency check passed.
 
+REM ---------- 2b. THE JS TESTS. This gate did not exist before 2026-09-14,
+REM  and its absence is exactly how commit 318cc79 (cursor halo, 3D card
+REM  tilt, nav dropdown removed) reached the live site unverified.
+REM  check_portfolio.py inspects captions, files and links - it has never
+REM  executed a single line of JavaScript. BUILD_AND_CHECK.bat ran these
+REM  tests; the PUSH path did not, so the one route that actually deploys
+REM  was the one route with no JS check on it.
+REM  Non-blocking on purpose: a failing test must not strand her with no
+REM  way to publish, but it is now IMPOSSIBLE to push without being told.
+echo.
+echo [3/6] Running the site JS tests ...
+echo ---------- 2b. JS TESTS (tests/test_chat.js) ---------- >> %LOG%
+where node >NUL 2>&1
+if errorlevel 1 (
+  echo    node not found - JS tests SKIPPED.
+  echo [SKIPPED - node is not on PATH] >> %LOG%
+) else (
+  node tests/test_chat.js < NUL >> %LOG% 2>&1
+  set JSRC=!ERRORLEVEL!
+  echo    exit code !JSRC! >> %LOG%
+  if not "!JSRC!"=="0" (
+    echo.
+    echo    [WARNING] The site JS tests FAILED ^(exit !JSRC!^).
+    echo    The push will continue, but something on the live site is broken.
+    echo    Read section 2b of push_log.txt.
+    echo.
+  ) else (
+    echo    JS tests passed.
+  )
+)
+
 REM ---------- 3. what git ACTUALLY sees. Logged either way. ----------
 echo.
-echo [3/5] Reading git status ...
+echo [4/6] Reading git status ...
 echo ---------- 3. GIT STATUS (before commit) ---------- >> %LOG%
 git status --porcelain >> %LOG% 2>&1
 git status --porcelain > _gitstat.tmp 2>&1
@@ -82,14 +113,14 @@ del _gitstat.tmp >NUL 2>&1
 
 REM ---------- 4. behind/ahead BEFORE pushing - gotcha 57's first command ----------
 echo.
-echo [4/5] Comparing with GitHub ...
+echo [5/6] Comparing with GitHub ...
 echo ---------- 4. AHEAD / BEHIND (left=origin only, right=local only) ---------- >> %LOG%
 git fetch -c credential.helper= origin >> %LOG% 2>&1
 git rev-list --left-right --count origin/main...HEAD >> %LOG% 2>&1
 
 REM ---------- 5. THE PUSH. Output goes to the log AND the screen. ----------
 echo.
-echo [5/5] Pushing to GitHub (origin main) ...
+echo [6/6] Pushing to GitHub (origin main) ...
 echo ---------- 5. GIT PUSH ---------- >> %LOG%
 git push origin main > _push.tmp 2>&1
 set PUSHCODE=%ERRORLEVEL%
