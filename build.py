@@ -199,6 +199,66 @@ transform:translateX(-100%);transition:transform .75s var(--ease-editorial);poin
 .service-card .btn,.dfy-btns .btn,.work-btns .btn{width:100%;padding:1rem 1.25rem}
 @media(min-width:840px){.dfy-btns .btn,.work-btns .btn{width:auto;min-width:240px}}
 
+/* ---- Editorial Hero (Reference-inspired composition) --------------------- */
+.hero-editorial{padding:3.5rem 0 2rem;position:relative;z-index:1}
+.hero-editorial-top{max-width:46rem;margin:0 auto;text-align:center}
+.hero-editorial .hero-kicker{display:inline-flex;align-items:center;color:var(--acc-text);font-size:11px;text-transform:uppercase;letter-spacing:.22em;font-weight:500;margin-bottom:.85rem}
+.hero-editorial .hero-kicker::before{content:'';display:inline-block;width:5px;height:5px;border-radius:50%;background:var(--acc);margin-right:.5rem}
+.hero-editorial h1{font-size:clamp(3rem,8.5vw,4.75rem);font-weight:300;letter-spacing:-.015em;line-height:1.05;margin:0 0 1rem;color:var(--ink)}
+.hero-editorial .hero-lead{font-size:clamp(1.05rem,2.5vw,1.25rem);color:var(--dim);line-height:1.6;margin:0 auto 2rem;max-width:38rem}
+.hero-actions{display:flex;align-items:center;justify-content:center;gap:.85rem;flex-wrap:wrap;margin-bottom:3.5rem}
+.hero-actions .btn{width:auto;margin:0;min-height:50px;padding:1rem 1.85rem}
+
+/* Editorial Hero Visual Mosaic (Triptych of real project work) */
+.hero-mosaic{display:grid;grid-template-columns:1fr 1.25fr 1fr;gap:1.25rem;align-items:center;margin-top:1.5rem}
+.hero-mosaic-tile{position:relative;border-radius:var(--rad);overflow:hidden;border:1px solid var(--edge);background:var(--glass-2);transition:border-color .45s var(--ease-editorial),transform .45s var(--ease-editorial),box-shadow .45s;display:block}
+.hero-mosaic-tile:hover{border-color:rgba(139,13,26,.55);transform:translateY(-3px);box-shadow:0 20px 45px -10px var(--shade)}
+.hero-mosaic-tile img{width:100%;height:100%;object-fit:cover;display:block;transition:transform 1.1s var(--ease-editorial)}
+.hero-mosaic-tile:hover img{transform:scale(1.04)}
+.hero-mosaic-tile.t-tall{aspect-ratio:3/4}
+.hero-mosaic-tile.t-center{aspect-ratio:4/5;box-shadow:0 16px 40px var(--shade)}
+.hero-mosaic-tag{position:absolute;bottom:0;left:0;right:0;padding:1.25rem 1rem .85rem;background:linear-gradient(0deg,rgba(11,11,11,.9) 0%,rgba(11,11,11,.4) 60%,transparent 100%);color:var(--ink);font-size:10.5px;text-transform:uppercase;letter-spacing:.2em;font-family:'Jost',system-ui,sans-serif;font-weight:400;display:flex;align-items:center;gap:.45rem}
+.hero-mosaic-tag::before{content:'';width:5px;height:5px;border-radius:50%;background:var(--acc)}
+
+@media(max-width:860px){
+  .hero-mosaic{grid-template-columns:1fr 1fr;gap:1rem}
+  .hero-mosaic-tile.t-center{grid-column:1/-1;order:-1;aspect-ratio:16/9}
+}
+@media(max-width:540px){
+  .hero-mosaic{grid-template-columns:1fr}
+  .hero-actions{flex-direction:column;width:100%}
+  .hero-actions .btn{width:100%}
+}
+
+/* ---- Featured Case Study (Asymmetric Rectangular Editorial Layout) ------- */
+.feat-showcase{margin:3.5rem 0;padding:3rem 0;border-top:1px solid var(--edge);border-bottom:1px solid var(--edge)}
+.feat-head{display:flex;align-items:baseline;justify-content:space-between;gap:1.5rem;margin-bottom:2.5rem}
+.feat-head h2{font-size:11px;text-transform:uppercase;letter-spacing:.24em;color:var(--dim);margin:0;font-family:'Jost',system-ui,sans-serif;font-weight:400;display:flex;align-items:center;gap:.6rem}
+.feat-head h2::before{content:'';width:6px;height:6px;border-radius:2px;background:var(--acc)}
+.feat-head .feat-all-link{font-size:11px;text-transform:uppercase;letter-spacing:.16em;color:var(--acc-text);display:inline-flex;align-items:center;gap:.35rem;transition:transform .25s var(--ease-editorial)}
+.feat-head .feat-all-link:hover{transform:translateX(4px)}
+
+.feat-case-grid{display:grid;grid-template-columns:1fr 1.25fr;gap:3rem;align-items:center}
+.feat-case-info{display:flex;flex-direction:column;gap:1.25rem}
+.feat-case-meta{display:flex;align-items:center;flex-wrap:wrap;gap:.85rem}
+.feat-case-info h3{font-size:clamp(2.2rem,5vw,3.2rem);font-weight:300;line-height:1.1;letter-spacing:-.01em;color:var(--ink);margin:0}
+.feat-case-info .feat-lead{font-size:1.05rem;line-height:1.65;color:var(--dim)}
+.feat-highlights{list-style:none;padding:0;margin:0;display:grid;gap:.65rem;border-top:1px solid var(--edge);padding-top:1.25rem}
+.feat-highlights li{font-size:13.5px;color:var(--ink);display:flex;align-items:center;gap:.6rem;letter-spacing:.02em}
+.feat-highlights li::before{content:'✓';color:var(--acc-text);font-size:12px;font-weight:600}
+.feat-case-actions{display:flex;align-items:center;gap:1rem;flex-wrap:wrap;margin-top:.75rem}
+.feat-case-actions .btn{width:auto;margin:0;min-height:48px;padding:.9rem 1.6rem}
+
+.feat-case-media{display:grid;grid-template-columns:1fr 1fr;gap:1rem}
+.feat-media-hero{grid-column:1/-1;border-radius:var(--rad);overflow:hidden;border:1px solid var(--edge);background:var(--glass-2);aspect-ratio:16/10;position:relative}
+.feat-media-hero img,.feat-media-sub img{width:100%;height:100%;object-fit:cover;display:block;transition:transform 1.1s var(--ease-editorial)}
+.feat-media-hero:hover img,.feat-media-sub:hover img{transform:scale(1.035)}
+.feat-media-sub{border-radius:var(--rad);overflow:hidden;border:1px solid var(--edge);background:var(--glass-2);aspect-ratio:1/1;position:relative}
+
+@media(max-width:860px){
+  .feat-case-grid{grid-template-columns:1fr;gap:2rem}
+}
+
 /* ---- sections ---------------------------------------------------------- */
 section{padding:4rem 0;position:relative;z-index:1}
 .lede{font-size:clamp(1.15rem,4.5vw,1.5rem);line-height:1.55;margin-bottom:2.5rem}
@@ -1607,31 +1667,87 @@ def card_html(pr, base="work/", up=""):
 def build_home():
     p = PROFILE
     feat = [x for x in PROJECTS if x.get('featured')]
+    # Highlight Margegold Jewelry in the primary showcase, and list remaining featured work below
+    secondary_feat = [x for x in feat if x.get('slug') != 'margegold-jewelry']
     stats = "".join(
         f'<div class="stats-item rv"><span class="n" data-count>{E(s["n"])}</span>'
         f'<span class="l">{E(s["l"])}</span></div>' for s in STATS)
-    cards = "".join(card_html(x, base="work/", up="") for x in feat)
+    cards = "".join(card_html(x, base="work/", up="") for x in secondary_feat)
     strip = "".join(f'<span>{E(x)}</span>' for x in MARQUEE)
     marquee = (f'<div class="marquee" aria-label="What I do">'
                f'<div class="mtrack"><div class="mset">{strip}</div>'
                f'<div class="mset" aria-hidden="true">{strip}</div></div></div>')
-    body = f'''<header id="top"><div class="wrap"><div class="headrow"><div>
-<h1 class="hin">{E(p['name'])}</h1>
-<p class="eyebrow muted sub hin" style="--d:160ms">{E(p['subtitle'])}</p>
-<p class="hero-line hin" style="--d:260ms">{E(p['hero_headline'])}</p>
-<div class="hin" style="--d:380ms">{contact_nav()}</div></div>
-<div class="hero-cta hin" style="--d:500ms">
-<a class="btn" href="#work"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><use href="#i-star"/></svg>VIEW SELECTED WORK</a>
-<a class="btn ghost" href="#contact">CONTACT ME</a>
+    body = f'''<header id="top" class="hero-editorial"><div class="wrap">
+<div class="hero-editorial-top">
+<span class="hero-kicker hin">{E(p.get('hero_kicker', 'MULTIDISCIPLINARY CREATIVE SPECIALIST'))}</span>
+<h1 class="hin" style="--d:120ms">{E(p['name'])}</h1>
+<p class="hero-lead hin" style="--d:220ms">{E(p['hero_headline'])}</p>
+<div class="hero-actions hin" style="--d:320ms">
+<a class="btn" href="#work"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><use href="#i-star"/></svg>EXPLORE SELECTED WORK</a>
+<a class="btn ghost" href="#contact">START A PROJECT</a>
 </div>
-</div></div></header>
+</div>
+<div class="hero-mosaic hin" style="--d:440ms">
+<a class="hero-mosaic-tile t-tall" href="work/philmed-expo-2026.html" title="PhilMed Expo 2026 — 3D Exhibition Design">
+<img src="assets/images/philmed-booth.jpg" alt="PhilMed Expo 2026 trade show booth 3D design" width="600" height="800" loading="eager" decoding="async">
+<span class="hero-mosaic-tag">3D Spatial &amp; Exhibition</span>
+</a>
+<div class="hero-mosaic-tile t-center">
+<img src="assets/images/portrait.jpg" alt="{E(p['name'])}" width="700" height="875" loading="eager" decoding="async">
+<span class="hero-mosaic-tag">Multidisciplinary Creative</span>
+</div>
+<a class="hero-mosaic-tile t-tall" href="work/margegold-jewelry.html" title="Margegold Jewelry — E-Commerce &amp; Product Photography">
+<img src="assets/images/margegold-cover.jpg" alt="Margegold Jewelry e-commerce macro product photography" width="600" height="800" loading="eager" decoding="async">
+<span class="hero-mosaic-tag">E-Commerce &amp; Visual Systems</span>
+</a>
+</div>
+</div></header>
 <main><div class="wrap">
-<section class="rv" style="padding-bottom:0"><p class="lede">{E(p['intro'])}</p></section>
+<section class="rv" style="padding:2.5rem 0 0"><p class="lede">{E(p['intro'])}</p></section>
 <section class="stats">{stats}</section>
 </div>{marquee}<div class="wrap">
-<section id="work"><h2 class="eyebrow grouphead"><span>SELECTED WORK</span><span class="rule"></span></h2>
+<section id="work">
+<div class="feat-head rv">
+<h2><span>SELECTED WORK</span></h2>
+<a class="feat-all-link" href="work/index.html">View all {len(PROJECTS)} projects &rarr;</a>
+</div>
+
+<div class="feat-showcase rv">
+<div class="feat-case-grid">
+<div class="feat-case-info">
+<div class="feat-case-meta">
+<span class="chip">E-Commerce Listings &amp; Storefront</span>
+<span class="live-status"><span class="live-dot" aria-hidden="true"></span><a href="https://margejewelry.com/" target="_blank" rel="noopener" style="color:inherit">margejewelry.com &nearr;</a></span>
+</div>
+<h3 class="serif">Margegold Jewelry</h3>
+<p class="feat-lead">Product photography, conversion listing architecture, and short-form video assets across a live Shopify store and 3 marketplace channels.</p>
+<ul class="feat-highlights">
+<li>8-slide conversion architecture standardized across all catalogue SKUs</li>
+<li>Cross-platform deployment for Shopify, TikTok Shop, Shopee &amp; Lazada</li>
+<li>Custom 4:5 lifestyle paid ad sets and sound-off short-form video creatives</li>
+</ul>
+<div class="feat-case-actions">
+<a class="btn" href="work/margegold-jewelry.html">VIEW CASE STUDY</a>
+<a class="btn ghost" href="https://margejewelry.com/" target="_blank" rel="noopener">VISIT LIVE STORE &nearr;</a>
+</div>
+</div>
+<div class="feat-case-media">
+<a class="feat-media-hero" href="work/margegold-jewelry.html">
+<img src="assets/images/margegold-cover.jpg" alt="Margegold hero listing slide" width="800" height="500" loading="lazy" decoding="async">
+</a>
+<a class="feat-media-sub" href="work/margegold-jewelry.html">
+<img src="assets/images/mg-necklace-1.jpg" alt="Margegold macro silk product detail" width="400" height="400" loading="lazy" decoding="async">
+</a>
+<a class="feat-media-sub" href="work/margegold-jewelry.html">
+<img src="assets/images/mg-ad-a-1.jpg" alt="Margegold dusty-rose lifestyle ad creative" width="400" height="400" loading="lazy" decoding="async">
+</a>
+</div>
+</div>
+</div>
+
+<h3 class="eyebrow muted" style="margin:2.5rem 0 1.5rem">MORE FEATURED WORK</h3>
 <div class="cards">{cards}</div>
-<p style="margin-top:3rem"><a class="more" href="work/index.html">View all {len(PROJECTS)} projects</a></p>
+<p style="margin-top:3rem;text-align:center"><a class="btn ghost" href="work/index.html" style="display:inline-flex;width:auto;margin:0 auto">VIEW ALL {len(PROJECTS)} PROJECTS &rarr;</a></p>
 </section>
 </div></main>{footer()}'''
     write("index.html", shell(f"{p['name']} — {p['subtitle_plain']}", p['intro'], body, "home"))
