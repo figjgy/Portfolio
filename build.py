@@ -116,8 +116,9 @@ box-shadow:0 14px 40px var(--shade),inset 0 1px 0 var(--edge-top)}
 .site-header{position:sticky;top:0;left:0;right:0;z-index:200;background:rgba(11,11,11,.92);-webkit-backdrop-filter:blur(20px);backdrop-filter:blur(20px);border-bottom:1px solid var(--edge);height:72px;display:flex;align-items:center;transition:background .35s var(--ease-editorial),border-color .35s}
 [data-theme="light"] .site-header{background:rgba(239,235,228,.92)}
 .nav-wrap{max-width:var(--max);margin:0 auto;padding:0 var(--pad);display:flex;align-items:center;justify-content:space-between;width:100%;height:100%}
-.brand-link{font-family:'Cormorant Garamond',Georgia,serif;font-size:22px;font-weight:400;letter-spacing:.02em;color:var(--ink);text-decoration:none;transition:color .25s;line-height:1}
-.brand-link:hover{color:var(--acc-text)}
+.brand-link{display:inline-flex;align-items:center;text-decoration:none;transition:transform .25s var(--ease-editorial)}
+.brand-link:hover{transform:scale(1.06)}
+.brand-logo{width:36px;height:36px;border-radius:10px;display:block;box-shadow:0 2px 8px var(--shade)}
 .nav-links{display:flex;align-items:center;gap:.35rem}
 .nav-links a{padding:.45rem .85rem;border-radius:8px;font:400 15px/1 'Jost',system-ui,sans-serif;letter-spacing:.03em;color:var(--dim);text-decoration:none;transition:color .25s,background .25s}
 .nav-links a:hover{color:var(--ink);background:rgba(245,242,237,.06)}
@@ -126,7 +127,7 @@ box-shadow:0 14px 40px var(--shade),inset 0 1px 0 var(--edge-top)}
 @media(max-width:640px){
   .site-header{height:64px}
   .nav-wrap{padding:0 1rem}
-  .brand-link{font-size:20px}
+  .brand-logo{width:32px;height:32px;border-radius:8px}
   .nav-links{gap:.15rem;overflow-x:auto;scrollbar-width:none}
   .nav-links a{padding:.35rem .5rem;font-size:13.5px}
 }
@@ -1124,7 +1125,9 @@ def nav(active, up=""):
            '<svg class="tgl-moon" viewBox="0 0 24 24" aria-hidden="true"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>'
            '</button>')
     return (f'<header class="site-header"><div class="nav-wrap">'
-            f'<a class="brand-link" href="{up}index.html">{E(PROFILE["name"])}</a>'
+            f'<a class="brand-link" href="{up}index.html" aria-label="{E(PROFILE["name"])} - Home">'
+            f'<img class="brand-logo" src="{up}assets/images/favicon.png" alt="JL Logo" width="36" height="36">'
+            f'</a>'
             f'<nav class="nav-links" aria-label="Main Navigation">{"".join(out)}{tgl}</nav>'
             f'</div></header>')
 
