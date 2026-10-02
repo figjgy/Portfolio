@@ -482,10 +482,10 @@ footer h2{font-size:clamp(2.25rem,8vw,3rem);font-weight:300;margin-bottom:1.5rem
 footer .contact a:hover{color:var(--acc-text)}
 .copy{margin-top:2.5rem}.copy span{display:block;margin-bottom:.35rem}
 
-.js .rv{opacity:0;transform:translateY(32px);filter:blur(5px);
-transition:opacity .95s var(--ease-editorial),transform .95s var(--ease-editorial),filter .95s var(--ease-editorial);
-will-change:opacity,transform,filter}
-.js .rv.on{opacity:1;transform:none;filter:none}
+.js .rv{opacity:0;transform:translateY(18px);
+transition:opacity .65s var(--ease-editorial),transform .65s var(--ease-editorial);
+will-change:opacity,transform}
+.js .rv.on{opacity:1;transform:none}
 
 /* Scroll progress. Crimson on black, 2px, fixed to the very top. */
 .prog{position:fixed;top:0;left:0;height:2px;width:100%;transform:scaleX(0);
@@ -962,22 +962,19 @@ function downloadVCard(){
 """
 
 REVEAL_JS = """
-(function(){var e=[].slice.call(document.querySelectorAll('.rv'));
-if(!('IntersectionObserver' in window)){e.forEach(function(x){x.classList.add('on')});return}
-/* Stagger: an element's delay is its position among its .rv SIBLINGS, so a row
-   of cards cascades while a lone section still arrives immediately. Capped at
-   660ms with intentional 110ms spacing. */
-e.forEach(function(x){
-  var c=x.parentNode.children,n=0;
-  for(var k=0;k<c.length;k++){
-    if(c[k]===x)break;
-    if(c[k].classList&&c[k].classList.contains('rv'))n++;
-  }
-  if(n>0)x.style.transitionDelay=Math.min(n*110,660)+'ms';
-});
-var o=new IntersectionObserver(function(en){en.forEach(function(x){
-if(x.isIntersecting){x.target.classList.add('on');o.unobserve(x.target)}})},
-{rootMargin:'0px 0px -80px 0px'});e.forEach(function(x){o.observe(x)})})();
+(function(){
+  var e=[].slice.call(document.querySelectorAll('.rv'));
+  if(!e.length)return;
+  function revealAll(){e.forEach(function(x){x.classList.add('on');});}
+  if(!('IntersectionObserver' in window)){revealAll();return;}
+  var o=new IntersectionObserver(function(en){
+    en.forEach(function(x){
+      if(x.isIntersecting){x.target.classList.add('on');o.unobserve(x.target);}
+    });
+  },{rootMargin:'120px 0px 0px 0px',threshold:0.02});
+  e.forEach(function(x){o.observe(x);});
+  setTimeout(revealAll,400);
+})();
 
 (function(){
   if(window.matchMedia&&window.matchMedia('(prefers-reduced-motion:reduce)').matches)return;
