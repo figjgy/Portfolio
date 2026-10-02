@@ -1051,12 +1051,6 @@ if(x.isIntersecting){x.target.classList.add('on');o.unobserve(x.target)}})},
     }
   },{passive:true});
 })();
-
-/* ==========================================================
-   MOUSE HOVER & EVENT ANIMATION SYSTEM
-   - Global ambient cursor halo (smooth lerp tracking)
-   - 3D perspective card tilt with dynamic mouse spotlight
-   - Magnetic micro-pull on buttons, theme switch, & nav pills
 """
 
 
