@@ -189,9 +189,11 @@ transform:translateX(-100%);transition:transform .75s var(--ease-editorial);poin
 
 /* ---- Decorative Artwork Hero --------------------------------------------- */
 .hero-art{position:relative;min-height:480px;max-height:560px;height:clamp(480px,55vh,560px);display:flex;align-items:center;overflow:hidden;border-bottom:1px solid var(--edge);background:#0B0B0B}
-.hero-art-bg{position:absolute;inset:0;background:linear-gradient(90deg, #0B0B0B 0%, rgba(11,11,11,.92) 38%, rgba(11,11,11,.55) 58%, rgba(11,11,11,0) 80%), url('assets/images/hero-artwork.png') right center / cover no-repeat;z-index:0}
 [data-theme="light"] .hero-art{background:#EFEBE4}
-[data-theme="light"] .hero-art-bg{background:linear-gradient(90deg, #EFEBE4 0%, rgba(239,235,228,.95) 42%, rgba(239,235,228,.7) 62%, rgba(239,235,228,0.2) 85%), url('assets/images/hero-artwork.png') right center / cover no-repeat}
+.hero-art-media{position:absolute;inset:0;z-index:0;overflow:hidden;pointer-events:none}
+.hero-art-media img{position:absolute;top:0;right:0;width:100%;height:100%;object-fit:cover;object-position:right center;display:block}
+.hero-art-grad{position:absolute;inset:0;background:linear-gradient(90deg, #0B0B0B 0%, rgba(11,11,11,.94) 38%, rgba(11,11,11,.55) 58%, rgba(11,11,11,0) 82%);pointer-events:none}
+[data-theme="light"] .hero-art-grad{background:linear-gradient(90deg, #EFEBE4 0%, rgba(239,235,228,.95) 40%, rgba(239,235,228,.65) 60%, rgba(239,235,228,0.15) 85%)}
 .hero-art-wrap{position:relative;z-index:1;display:flex;align-items:center;width:100%}
 .hero-art-content{max-width:36rem;display:flex;flex-direction:column;align-items:flex-start;text-align:left}
 .hero-art-content .hero-kicker{display:inline-flex;align-items:center;color:var(--acc-text);font-size:11px;text-transform:uppercase;letter-spacing:.22em;font-weight:500;margin-bottom:.85rem}
@@ -205,8 +207,9 @@ transform:translateX(-100%);transition:transform .75s var(--ease-editorial);poin
 
 @media(max-width:768px){
   .hero-art{min-height:auto;max-height:none;height:auto;padding:3.25rem 0 2.75rem}
-  .hero-art-bg{background:linear-gradient(180deg, rgba(11,11,11,.96) 0%, rgba(11,11,11,.88) 60%, rgba(11,11,11,.65) 100%), url('assets/images/hero-artwork.png') center right / cover no-repeat}
-  [data-theme="light"] .hero-art-bg{background:linear-gradient(180deg, rgba(239,235,228,.96) 0%, rgba(239,235,228,.88) 60%, rgba(239,235,228,.65) 100%), url('assets/images/hero-artwork.png') center right / cover no-repeat}
+  .hero-art-media img{object-position:center right;opacity:.4}
+  .hero-art-grad{background:linear-gradient(180deg, rgba(11,11,11,.96) 0%, rgba(11,11,11,.88) 60%, rgba(11,11,11,.65) 100%)}
+  [data-theme="light"] .hero-art-grad{background:linear-gradient(180deg, rgba(239,235,228,.96) 0%, rgba(239,235,228,.88) 60%, rgba(239,235,228,.65) 100%)}
   .hero-art-content{max-width:100%}
 }
 
@@ -1675,7 +1678,10 @@ def feat_card_html(pr, base="work/", up=""):
 def build_home():
     p = PROFILE
     body = f'''<header id="top" class="hero-art">
-<div class="hero-art-bg" aria-hidden="true"></div>
+<div class="hero-art-media" aria-hidden="true">
+<img src="assets/images/hero-artwork.png" alt="" width="1920" height="1080" loading="eager" decoding="async">
+<div class="hero-art-grad"></div>
+</div>
 <div class="wrap hero-art-wrap">
 <div class="hero-art-content">
 <span class="hero-kicker hin">{E(p.get('hero_kicker', 'MULTIDISCIPLINARY CREATIVE SPECIALIST'))}</span>
