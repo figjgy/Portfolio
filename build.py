@@ -124,15 +124,58 @@ box-shadow:0 14px 40px var(--shade),inset 0 1px 0 var(--edge-top)}
 .nav-links a:hover{color:var(--ink);background:rgba(245,242,237,.06)}
 .nav-links a.on{color:#F5F2ED;background:var(--acc);font-weight:500}
 [data-theme="light"] .nav-links a:hover{background:rgba(18,16,15,.06)}
-@media(max-width:640px){
+.nav-actions-mob{display:none}
+.burger-btn{width:38px;height:38px;border-radius:10px;background:var(--glass);border:1px solid var(--edge);cursor:pointer;padding:0;position:relative;display:flex;align-items:center;justify-content:center;color:var(--ink);transition:border-color .25s,background .25s}
+.burger-btn:hover{border-color:var(--acc);background:var(--glass-2)}
+.burger-btn span{position:absolute;width:18px;height:1.8px;background:currentColor;border-radius:2px;transition:transform .3s var(--ease-editorial),opacity .2s}
+.burger-btn span:nth-child(1){transform:translateY(-4px)}
+.burger-btn span:nth-child(2){transform:translateY(4px)}
+.burger-btn.open span:nth-child(1){transform:translateY(0) rotate(45deg)}
+.burger-btn.open span:nth-child(2){transform:translateY(0) rotate(-45deg)}
+
+/* ---- Mobile Nav Drawer --------------------------------------------------- */
+.mobile-nav-drawer{display:none}
+@media(max-width:768px){
   :root{--pad:1.15rem}
-  .site-header{height:60px}
+  .site-header{height:62px}
   .nav-wrap{padding:0 1.15rem}
-  .brand-logo{width:30px;height:30px;border-radius:8px}
-  .nav-links{gap:.15rem;overflow-x:auto;scrollbar-width:none;-webkit-overflow-scrolling:touch}
-  .nav-links::-webkit-scrollbar{display:none}
-  .nav-links a{padding:.35rem .45rem;font-size:12.5px;white-space:nowrap;flex-shrink:0}
-  .tgl{width:32px;height:32px;margin-left:.15rem;flex-shrink:0}
+  .brand-logo{width:32px;height:32px;border-radius:8px}
+  .nav-links{display:none}
+  .nav-actions-mob{display:flex;align-items:center;gap:.45rem}
+  
+  .mobile-nav-drawer{
+    display:flex;flex-direction:column;justify-content:space-between;
+    position:fixed;top:62px;left:0;right:0;bottom:0;z-index:190;
+    background:rgba(11,11,11,.98);
+    -webkit-backdrop-filter:blur(24px);backdrop-filter:blur(24px);
+    padding:1.75rem 1.5rem 2.25rem;
+    opacity:0;pointer-events:none;transform:translateY(-12px);
+    transition:opacity .3s var(--ease-editorial),transform .3s var(--ease-editorial);
+    overflow-y:auto;
+  }
+  [data-theme="light"] .mobile-nav-drawer{background:rgba(239,235,228,.98)}
+  .mobile-nav-drawer.open{opacity:1;pointer-events:auto;transform:translateY(0)}
+  
+  .mobile-nav-links{display:flex;flex-direction:column;gap:.25rem}
+  .mobile-nav-links a{
+    font-family:'Cormorant Garamond',Georgia,serif;
+    font-size:1.85rem;font-weight:400;color:var(--ink);
+    padding:.75rem 0;border-bottom:1px solid var(--edge);
+    text-decoration:none;display:flex;align-items:center;justify-content:space-between;
+    transition:color .2s,padding-left .2s;
+  }
+  .mobile-nav-links a::after{content:'→';font-family:'Jost',sans-serif;font-size:1.1rem;color:var(--dim);transition:transform .2s,color .2s}
+  .mobile-nav-links a:hover,.mobile-nav-links a.on{color:var(--acc-text);padding-left:.35rem}
+  .mobile-nav-links a.on::after{color:var(--acc-text);transform:translateX(4px)}
+  
+  .mobile-nav-foot{margin-top:2rem;display:flex;flex-direction:column;gap:1.25rem}
+  .mobile-nav-foot .btn{width:100%;justify-content:center;min-height:48px}
+  .mobile-nav-socials{display:flex;gap:.75rem;justify-content:center}
+  .mobile-nav-socials a{
+    width:44px;height:44px;border-radius:50%;display:flex;align-items:center;justify-content:center;
+    background:var(--glass);border:1px solid var(--edge);color:var(--ink);
+  }
+  .mobile-nav-socials svg{width:18px;height:18px;stroke:currentColor;fill:none;stroke-width:1.8}
 }
 
 .tgl{flex:0 0 auto;width:36px;height:36px;margin-left:.35rem;border-radius:50%;cursor:pointer;
@@ -1130,33 +1173,79 @@ def nav(active, up=""):
              ("Card", f"{up}card.html", "card"),
              ("Contact", f"{up}index.html#contact", "contact")]
     out = []
+    mob_out = []
     for label, href, key in items:
         cls = ' class="on"' if key == active else ""
         out.append(f'<a href="{href}"{cls}>{label}</a>')
-    tgl = ('<button class="tgl" type="button" id="t" aria-label="Switch between dark and light">'
+        mob_out.append(f'<a href="{href}"{cls}><span>{label}</span></a>')
+    tgl = ('<button class="tgl" type="button" aria-label="Switch between dark and light">'
            '<svg class="tgl-sun" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="4"/>'
            '<path d="M12 2v2m0 16v2M4.93 4.93l1.41 1.41m11.32 11.32l1.41 1.41M2 12h2m16 0h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"/></svg>'
            '<svg class="tgl-moon" viewBox="0 0 24 24" aria-hidden="true"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>'
            '</button>')
+    burger = ('<button class="burger-btn" type="button" id="burger" aria-label="Toggle navigation menu" aria-expanded="false" aria-controls="mobile-nav">'
+              '<span></span><span></span>'
+              '</button>')
+    soc_html = "".join(f'<a href="{E(u)}" target="_blank" rel="noopener" aria-label="{E(l)}"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="#{i}"/></svg></a>' for i, l, u in socials())
+    mob_drawer = (f'<div class="mobile-nav-drawer" id="mobile-nav" aria-hidden="true">'
+                  f'<nav class="mobile-nav-links" aria-label="Mobile Navigation">{"".join(mob_out)}</nav>'
+                  f'<div class="mobile-nav-foot">'
+                  f'<a href="{up}card.html" class="btn ghost mobile-nav-card-btn">Digital Business Card &rarr;</a>'
+                  f'<div class="mobile-nav-socials">{soc_html}</div>'
+                  f'</div>'
+                  f'</div>')
     return (f'<header class="site-header"><div class="nav-wrap">'
             f'<a class="brand-link" href="{up}index.html" aria-label="{E(PROFILE["name"])} - Home">'
             f'<img class="brand-logo" src="{up}assets/images/favicon.png" alt="JL Logo" width="36" height="36">'
             f'</a>'
             f'<nav class="nav-links" aria-label="Main Navigation">{"".join(out)}{tgl}</nav>'
-            f'</div></header>')
+            f'<div class="nav-actions-mob">{tgl}{burger}</div>'
+            f'</div>'
+            f'{mob_drawer}'
+            f'</header>')
 
 
 THEME_JS = """
-(function(){var r=document.documentElement,t=document.getElementById('t'),K='jl-theme';
+(function(){
+var r=document.documentElement,K='jl-theme';
 try{var v=localStorage.getItem(K);if(v)r.setAttribute('data-theme',v);}catch(e){}
-function syncLabel(){if(t){var isLight=r.getAttribute('data-theme')==='light';t.setAttribute('aria-label',isLight?'Switch to dark theme':'Switch to light theme')}}
+function syncLabel(){
+document.querySelectorAll('.tgl').forEach(function(btn){
+var isLight=r.getAttribute('data-theme')==='light';
+btn.setAttribute('aria-label',isLight?'Switch to dark theme':'Switch to light theme');
+});
+}
 syncLabel();
-if(t)t.addEventListener('click',function(){
+document.querySelectorAll('.tgl').forEach(function(btn){
+btn.addEventListener('click',function(){
 var n=r.getAttribute('data-theme')==='light'?'dark':'light';
 r.setAttribute('data-theme',n);
 var m=document.querySelector('meta[name="theme-color"]');if(m)m.setAttribute('content',n==='light'?'#EFEBE4':'#0B0B0B');
 syncLabel();
-try{localStorage.setItem(K,n);}catch(e){}});})();
+try{localStorage.setItem(K,n);}catch(e){}
+});
+});
+
+var b=document.getElementById('burger'), m=document.getElementById('mobile-nav');
+if(b && m){
+function toggleNav(){
+var isOpen=b.classList.toggle('open');
+m.classList.toggle('open',isOpen);
+b.setAttribute('aria-expanded',isOpen?'true':'false');
+m.setAttribute('aria-hidden',isOpen?'false':'true');
+document.body.style.overflow=isOpen?'hidden':'';
+}
+b.addEventListener('click',toggleNav);
+m.querySelectorAll('a').forEach(function(a){
+a.addEventListener('click',function(){
+if(m.classList.contains('open'))toggleNav();
+});
+});
+document.addEventListener('keydown',function(e){
+if(e.key==='Escape'&&m.classList.contains('open'))toggleNav();
+});
+}
+})();
 """
 
 
