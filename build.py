@@ -198,70 +198,70 @@ transform:translateX(-100%);transition:transform .75s var(--ease-editorial);poin
 .hero-link-sec{font:400 13px/1 'Jost',system-ui,sans-serif;letter-spacing:.12em;text-transform:uppercase;color:var(--dim);display:inline-flex;align-items:center;gap:.4rem;text-decoration:none;transition:color .25s var(--ease-editorial),transform .25s}
 .hero-link-sec:hover{color:var(--ink);transform:translateX(3px)}
 
-/* Work-Led Dual Feature Banner */
-.hero-work-duo{display:grid;grid-template-columns:1fr 1fr;gap:1.5rem;margin-top:2rem}
-.hero-duo-tile{position:relative;border-radius:14px;overflow:hidden;border:1px solid var(--edge);background:var(--glass-2);aspect-ratio:16/10;display:block;text-decoration:none;transition:border-color .45s var(--ease-editorial),transform .45s var(--ease-editorial),box-shadow .45s}
-.hero-duo-tile:hover{border-color:rgba(139,13,26,.55);transform:translateY(-3px);box-shadow:0 20px 45px -10px var(--shade)}
-.hero-duo-tile img{width:100%;height:100%;object-fit:cover;display:block;transition:transform 1.1s var(--ease-editorial)}
-.hero-duo-tile:hover img{transform:scale(1.035)}
-.hero-duo-overlay{position:absolute;bottom:0;left:0;right:0;padding:2rem 1.25rem 1rem;background:linear-gradient(0deg,rgba(11,11,11,.92) 0%,rgba(11,11,11,.5) 60%,transparent 100%);display:flex;flex-direction:column;gap:.25rem}
-.hero-duo-tag{color:var(--acc-text);font-size:10.5px;text-transform:uppercase;letter-spacing:.2em;font-family:'Jost',system-ui,sans-serif;font-weight:500;display:flex;align-items:center;gap:.4rem}
-.hero-duo-tag::before{content:'';width:4px;height:4px;border-radius:50%;background:var(--acc)}
-.hero-duo-title{color:var(--ink);font-family:'Cormorant Garamond',Georgia,serif;font-size:1.25rem;font-weight:400;line-height:1.2}
-
-@media(max-width:768px){
-  .hero-work-duo{grid-template-columns:1fr;gap:1.25rem}
-  .hero-actions-compact{gap:1rem}
-}
-
-/* ---- Featured Case Study (Asymmetric Rectangular Editorial Layout) ------- */
-.feat-showcase{margin:3.5rem 0 4rem;padding:3rem 0;border-top:1px solid var(--edge);border-bottom:1px solid var(--edge)}
-.feat-head{display:flex;align-items:baseline;justify-content:space-between;gap:1.5rem;margin-bottom:2.5rem}
-.feat-head h2{font-size:11px;text-transform:uppercase;letter-spacing:.24em;color:var(--dim);margin:0;font-family:'Jost',system-ui,sans-serif;font-weight:400;display:flex;align-items:center;gap:.6rem}
-.feat-head h2::before{content:'';width:6px;height:6px;border-radius:2px;background:var(--acc)}
-.feat-head .feat-all-link{font-size:11px;text-transform:uppercase;letter-spacing:.16em;color:var(--acc-text);display:inline-flex;align-items:center;gap:.35rem;transition:transform .25s var(--ease-editorial)}
-.feat-head .feat-all-link:hover{transform:translateX(4px)}
-
-.feat-case-grid{display:grid;grid-template-columns:1fr 1.25fr;gap:3rem;align-items:center}
-.feat-case-info{display:flex;flex-direction:column;gap:1.25rem}
-.feat-case-meta{display:flex;align-items:center;flex-wrap:wrap;gap:.85rem}
-.feat-case-info h3{font-size:clamp(2.2rem,5vw,3.2rem);font-weight:300;line-height:1.1;letter-spacing:-.01em;color:var(--ink);margin:0}
-.feat-case-info .feat-lead{font-size:1.05rem;line-height:1.65;color:var(--dim)}
-.feat-highlights{list-style:none;padding:0;margin:0;display:grid;gap:.65rem;border-top:1px solid var(--edge);padding-top:1.25rem}
-.feat-highlights li{font-size:13.5px;color:var(--ink);display:flex;align-items:center;gap:.6rem;letter-spacing:.02em}
-.feat-highlights li::before{content:'✓';color:var(--acc-text);font-size:12px;font-weight:600}
-.feat-case-actions{display:flex;align-items:center;gap:1rem;flex-wrap:wrap;margin-top:.75rem}
-.feat-case-actions .btn{width:auto;margin:0;min-height:48px;padding:.9rem 1.6rem}
-
-.feat-case-media{display:grid;grid-template-columns:1fr 1fr;gap:1rem}
-.feat-media-hero{grid-column:1/-1;border-radius:14px;overflow:hidden;border:1px solid var(--edge);background:var(--glass-2);aspect-ratio:16/10;position:relative}
-.feat-media-hero img,.feat-media-sub img{width:100%;height:100%;object-fit:cover;display:block;transition:transform 1.1s var(--ease-editorial)}
-.feat-media-hero:hover img,.feat-media-sub:hover img{transform:scale(1.035)}
-.feat-media-sub{border-radius:14px;overflow:hidden;border:1px solid var(--edge);background:var(--glass-2);aspect-ratio:1/1;position:relative}
-
+/* ---- Hero Single Lead Project ------------------------------------------- */
+.hero-lead-work{margin-top:2.5rem;position:relative;border-radius:16px;overflow:hidden;border:1px solid var(--edge);background:var(--glass-2);transition:border-color .45s var(--ease-editorial),transform .45s var(--ease-editorial),box-shadow .45s}
+.hero-lead-work:hover{border-color:rgba(139,13,26,.55);transform:translateY(-3px);box-shadow:0 24px 60px -10px var(--shade)}
+.hero-lead-media{aspect-ratio:16/9;position:relative;overflow:hidden;background:#000}
+.hero-lead-media img{width:100%;height:100%;object-fit:cover;display:block;transition:transform 1.15s var(--ease-editorial)}
+.hero-lead-work:hover .hero-lead-media img{transform:scale(1.03)}
+.hero-lead-body{padding:1.75rem 2rem;display:flex;align-items:center;justify-content:space-between;gap:2rem;background:var(--glass);border-top:1px solid var(--edge)}
+.hero-lead-info{display:flex;flex-direction:column;gap:.35rem;max-width:44rem}
+.hero-lead-meta{display:flex;align-items:center;gap:.75rem;font-size:11px;text-transform:uppercase;letter-spacing:.18em;color:var(--acc-text);font-family:'Jost',system-ui,sans-serif;font-weight:500}
+.hero-lead-meta::before{content:'';width:4px;height:4px;border-radius:50%;background:var(--acc)}
+.hero-lead-title{font-family:'Cormorant Garamond',Georgia,serif;font-size:clamp(1.5rem,3.5vw,2rem);font-weight:400;color:var(--ink);margin:0;line-height:1.2}
+.hero-lead-desc{font-size:.9375rem;color:var(--dim);line-height:1.6;margin:0}
+.hero-lead-cta{flex:none}
 @media(max-width:860px){
-  .feat-case-grid{grid-template-columns:1fr;gap:2rem}
+  .hero-lead-body{flex-direction:column;align-items:flex-start;padding:1.5rem;gap:1.25rem}
+  .hero-lead-cta .btn{width:100%}
 }
 
-/* ---- More Featured Work Grid (Connected Editorial Styling) --------------- */
-.feat-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:2.5rem 2rem;margin-top:2rem}
-.feat-grid-item{display:flex;flex-direction:column;gap:1rem;text-decoration:none;color:inherit;position:relative}
-.feat-grid-visual{border-radius:14px;overflow:hidden;border:1px solid var(--edge);background:var(--glass-2);aspect-ratio:16/10;position:relative;transition:border-color .45s var(--ease-editorial),transform .45s var(--ease-editorial),box-shadow .45s}
-.feat-grid-item:hover .feat-grid-visual{border-color:rgba(139,13,26,.55);transform:translateY(-3px);box-shadow:0 16px 40px -10px var(--shade)}
-.feat-grid-visual img{width:100%;height:100%;object-fit:cover;display:block;transition:transform 1.1s var(--ease-editorial)}
-.feat-grid-item:hover .feat-grid-visual img{transform:scale(1.035)}
-.feat-grid-body{display:flex;flex-direction:column;gap:.4rem}
-.feat-grid-meta{display:flex;align-items:center;gap:.6rem;font-size:11px;text-transform:uppercase;letter-spacing:.18em;color:var(--acc-text);font-family:'Jost',system-ui,sans-serif;font-weight:500}
-.feat-grid-meta::before{content:'';width:4px;height:4px;border-radius:50%;background:var(--acc)}
-.feat-grid-title{font-family:'Cormorant Garamond',Georgia,serif;font-size:1.6rem;font-weight:400;line-height:1.2;color:var(--ink);margin:0;transition:color .25s}
-.feat-grid-item:hover .feat-grid-title{color:var(--acc-text)}
-.feat-grid-sum{font-size:.9375rem;color:var(--dim);line-height:1.6;margin:0}
-.feat-grid-tags{font-size:11.5px;color:var(--dim);letter-spacing:.03em;margin-top:.35rem}
-.feat-grid-link{display:inline-flex;align-items:center;gap:.4rem;font:400 11.5px/1 'Jost',system-ui,sans-serif;letter-spacing:.16em;text-transform:uppercase;color:var(--dim);margin-top:.6rem;transition:color .25s,transform .25s}
-.feat-grid-item:hover .feat-grid-link{color:var(--ink);transform:translateX(3px)}
-
+/* ---- Selected Work: 2 Supporting Projects -------------------------------- */
+.work-duo-grid{display:grid;grid-template-columns:1fr 1fr;gap:2.5rem 2rem;margin-top:2rem}
+.work-duo-item{display:flex;flex-direction:column;gap:1.1rem;text-decoration:none;color:inherit;position:relative}
+.work-duo-visual{border-radius:14px;overflow:hidden;border:1px solid var(--edge);background:var(--glass-2);aspect-ratio:16/10;position:relative;transition:border-color .45s var(--ease-editorial),transform .45s var(--ease-editorial),box-shadow .45s}
+.work-duo-item:hover .work-duo-visual{border-color:rgba(139,13,26,.55);transform:translateY(-3px);box-shadow:0 18px 45px -10px var(--shade)}
+.work-duo-visual img{width:100%;height:100%;object-fit:cover;display:block;transition:transform 1.1s var(--ease-editorial)}
+.work-duo-item:hover .work-duo-visual img{transform:scale(1.035)}
+.work-duo-body{display:flex;flex-direction:column;gap:.4rem}
+.work-duo-meta{display:flex;align-items:center;gap:.6rem;font-size:11px;text-transform:uppercase;letter-spacing:.18em;color:var(--acc-text);font-family:'Jost',system-ui,sans-serif;font-weight:500}
+.work-duo-meta::before{content:'';width:4px;height:4px;border-radius:50%;background:var(--acc)}
+.work-duo-title{font-family:'Cormorant Garamond',Georgia,serif;font-size:1.65rem;font-weight:400;line-height:1.2;color:var(--ink);margin:0;transition:color .25s}
+.work-duo-item:hover .work-duo-title{color:var(--acc-text)}
+.work-duo-sum{font-size:.9375rem;color:var(--dim);line-height:1.6;margin:0}
+.work-duo-tags{font-size:11.5px;color:var(--dim);letter-spacing:.03em;margin-top:.35rem}
+.work-duo-link{display:inline-flex;align-items:center;gap:.4rem;font:400 11.5px/1 'Jost',system-ui,sans-serif;letter-spacing:.16em;text-transform:uppercase;color:var(--dim);margin-top:.6rem;transition:color .25s,transform .25s}
+.work-duo-item:hover .work-duo-link{color:var(--ink);transform:translateX(3px)}
 @media(max-width:768px){
-  .feat-grid{grid-template-columns:1fr;gap:2rem}
+  .work-duo-grid{grid-template-columns:1fr;gap:2rem}
+}
+
+/* ---- Capabilities: What I can help with (Clean Text Rows) ---------------- */
+.cap-section{padding:4.5rem 0 3.5rem;border-top:1px solid var(--edge);position:relative;z-index:1}
+.cap-list{display:flex;flex-direction:column;margin-top:2.5rem}
+.cap-row{display:grid;grid-template-columns:minmax(220px,1.2fr) 2fr;gap:2.5rem;padding:2.25rem 0;border-top:1px solid var(--edge);align-items:start}
+.cap-row:last-child{border-bottom:1px solid var(--edge)}
+.cap-header h3{font-size:1.65rem;font-weight:400;color:var(--ink);margin:0 0 .4rem;line-height:1.2}
+.cap-tools{font-size:11.5px;color:var(--dim);letter-spacing:.04em;font-family:'Jost',system-ui,sans-serif}
+.cap-content{display:flex;flex-direction:column;gap:.85rem}
+.cap-content p{font-size:.95rem;color:var(--dim);line-height:1.7;margin:0}
+.cap-bullets{list-style:none;padding:0;margin:0;display:grid;gap:.45rem}
+.cap-bullets li{font-size:13px;color:var(--ink);display:flex;align-items:baseline;gap:.6rem}
+.cap-bullets li::before{content:'—';color:var(--acc-text);font-weight:400}
+@media(max-width:768px){
+  .cap-row{grid-template-columns:1fr;gap:1rem;padding:1.75rem 0}
+}
+
+/* ---- How I Work: Process & Philosophy (Clean Text Layout) ---------------- */
+.process-section{padding:3.5rem 0 4.5rem;position:relative;z-index:1}
+.process-philo{font-size:clamp(1.15rem,3vw,1.45rem);font-family:'Cormorant Garamond',Georgia,serif;line-height:1.5;color:var(--ink);max-width:44rem;margin:1.5rem 0 3rem;font-style:italic}
+.process-steps{display:grid;grid-template-columns:repeat(3,1fr);gap:2rem;border-top:1px solid var(--edge);padding-top:2.5rem}
+.process-step{display:flex;flex-direction:column;gap:.6rem}
+.process-step-num{font-size:11px;font-family:'Jost',system-ui,sans-serif;text-transform:uppercase;letter-spacing:.2em;color:var(--acc-text);font-weight:500}
+.process-step h4{font-size:1.35rem;font-weight:400;color:var(--ink);margin:0;line-height:1.2}
+.process-step p{font-size:.9rem;color:var(--dim);line-height:1.65;margin:0}
+@media(max-width:768px){
+  .process-steps{grid-template-columns:1fr;gap:2rem}
 }
 
 /* ---- sections ---------------------------------------------------------- */
@@ -1663,17 +1663,6 @@ def feat_card_html(pr, base="work/", up=""):
 # ------------------------------------------------------------------- builders
 def build_home():
     p = PROFILE
-    feat = [x for x in PROJECTS if x.get('featured')]
-    # Highlight Margegold Jewelry in the primary showcase, and list remaining featured work below
-    secondary_feat = [x for x in feat if x.get('slug') != 'margegold-jewelry']
-    stats = "".join(
-        f'<div class="stats-item rv"><span class="n" data-count>{E(s["n"])}</span>'
-        f'<span class="l">{E(s["l"])}</span></div>' for s in STATS)
-    cards = "".join(feat_card_html(x, base="work/", up="") for x in secondary_feat)
-    strip = "".join(f'<span>{E(x)}</span>' for x in MARQUEE)
-    marquee = (f'<div class="marquee" aria-label="What I do">'
-               f'<div class="mtrack"><div class="mset">{strip}</div>'
-               f'<div class="mset" aria-hidden="true">{strip}</div></div></div>')
     body = f'''<header id="top" class="hero-compact"><div class="wrap">
 <div class="hero-compact-top">
 <span class="hero-kicker hin">{E(p.get('hero_kicker', 'MULTIDISCIPLINARY CREATIVE SPECIALIST'))}</span>
@@ -1684,71 +1673,151 @@ def build_home():
 <a class="hero-link-sec" href="#contact">Get in touch &rarr;</a>
 </div>
 </div>
-<div class="hero-work-duo hin" style="--d:360ms">
-<a class="hero-duo-tile" href="work/philmed-expo-2026.html" title="PhilMed Expo 2026 — 3D Spatial &amp; Exhibition Design">
-<img src="assets/images/philmed-booth.jpg" alt="PhilMed Expo 2026 3D trade show booth architecture" width="800" height="500" loading="eager" decoding="async">
-<div class="hero-duo-overlay">
-<span class="hero-duo-tag">3D Spatial &amp; Exhibition Design</span>
-<span class="hero-duo-title">PhilMed Expo 2026 — Walkthrough &amp; Fabrication Layout</span>
-</div>
+
+<div class="hero-lead-work hin" style="--d:380ms">
+<a href="work/margegold-jewelry.html" class="hero-lead-media" title="Margegold Jewelry — Shopify Store &amp; Marketplace Listings">
+<img src="assets/images/margegold-cover.jpg" alt="Margegold Jewelry hero listing and macro product photography" width="1200" height="675" loading="eager" decoding="async">
 </a>
-<a class="hero-duo-tile" href="work/kpick-website.html" title="kpicktradingcorp.com — B2B Digital Commerce &amp; Interactive UI">
-<img src="assets/images/kpick-web-desk-1.jpg" alt="kpicktradingcorp.com B2B medical procurement UI" width="800" height="500" loading="eager" decoding="async">
-<div class="hero-duo-overlay">
-<span class="hero-duo-tag">Digital Commerce &amp; Interactive UI</span>
-<span class="hero-duo-title">kpicktradingcorp.com — Interactive Procurement Experience</span>
+<div class="hero-lead-body">
+<div class="hero-lead-info">
+<div class="hero-lead-meta">Featured Project &middot; E-Commerce &amp; Visual Systems &middot; 2025–2026</div>
+<h2 class="hero-lead-title"><a href="work/margegold-jewelry.html" style="color:inherit">Margegold Jewelry — Live Storefront &amp; 8-Slide Conversion System</a></h2>
+<p class="hero-lead-desc">Standardized 8-slide listing architecture, macro jewelry photography, and short-form video creatives deployed across a live Shopify store (margejewelry.com), TikTok Shop, Shopee, and Lazada.</p>
 </div>
-</a>
+<div class="hero-lead-cta">
+<a class="btn" href="work/margegold-jewelry.html">VIEW CASE STUDY</a>
+</div>
+</div>
 </div>
 </div></header>
-<main><div class="wrap">
-<section class="rv" style="padding:2.5rem 0 0"><p class="lede">{E(p['intro'])}</p></section>
-<section class="stats">{stats}</section>
-</div>{marquee}<div class="wrap">
-<section id="work">
+
+<main>
+<div class="wrap">
+<section id="work" style="padding:4rem 0 3rem">
 <div class="feat-head rv">
 <h2><span>SELECTED WORK</span></h2>
 <a class="feat-all-link" href="work/index.html">View all {len(PROJECTS)} projects &rarr;</a>
 </div>
 
-<div class="feat-showcase rv">
-<div class="feat-case-grid">
-<div class="feat-case-info">
-<div class="feat-case-meta">
-<span class="chip">E-Commerce Listings &amp; Storefront</span>
-<span class="live-status"><span class="live-dot" aria-hidden="true"></span><a href="https://margejewelry.com/" target="_blank" rel="noopener" style="color:inherit">margejewelry.com &nearr;</a></span>
+<div class="work-duo-grid">
+<a class="work-duo-item rv" href="work/philmed-expo-2026.html">
+<div class="work-duo-visual">
+<img src="assets/images/philmed-booth.jpg" alt="PhilMed Expo 2026 3D trade show booth architecture" width="800" height="500" loading="lazy" decoding="async">
 </div>
-<h3 class="serif">Margegold Jewelry</h3>
-<p class="feat-lead">Product photography, conversion listing architecture, and short-form video assets across a live Shopify store and 3 marketplace channels.</p>
-<ul class="feat-highlights">
-<li>8-slide conversion architecture standardized across all catalogue SKUs</li>
-<li>Cross-platform deployment for Shopify, TikTok Shop, Shopee &amp; Lazada</li>
-<li>Custom 4:5 lifestyle paid ad sets and sound-off short-form video creatives</li>
+<div class="work-duo-body">
+<div class="work-duo-meta">Product Design &middot; 2026</div>
+<h3 class="work-duo-title">PhilMed Expo 2026</h3>
+<p class="work-duo-sum">Turnkey 3D trade show booth architecture, construction elevation drawings, print-ready fascia graphics, and an on-site lead tracking system that captured 91 qualified procurement contacts.</p>
+<div class="work-duo-tags">3D Spatial Modeling &middot; LayOut Elevations &middot; On-Site Lead System</div>
+<span class="work-duo-link">View project &rarr;</span>
+</div>
+</a>
+
+<a class="work-duo-item rv" href="work/kpick-website.html">
+<div class="work-duo-visual">
+<img src="assets/images/kpick-web-desk-1.jpg" alt="kpicktradingcorp.com B2B medical procurement UI" width="800" height="500" loading="lazy" decoding="async">
+</div>
+<div class="work-duo-body">
+<div class="work-duo-meta">Branding &amp; Web UI &middot; 2026</div>
+<h3 class="work-duo-title">kpicktradingcorp.com</h3>
+<p class="work-duo-sum">Front-end UI/UX for a regulated medical distribution website, featuring an interactive syringe simulator and direct quote/PO request builder for hospital procurement teams.</p>
+<div class="work-duo-tags">Front-End Design &middot; Interactive Learning Centre &middot; Responsive UI</div>
+<span class="work-duo-link">View project &rarr;</span>
+</div>
+</a>
+</div>
+
+<div style="margin-top:3.5rem;text-align:center">
+<a class="btn ghost" href="work/index.html" style="display:inline-flex;width:auto;margin:0 auto">VIEW ALL {len(PROJECTS)} PROJECTS &rarr;</a>
+</div>
+</section>
+</div>
+
+<section class="cap-section" id="capabilities">
+<div class="wrap">
+<h2 class="eyebrow grouphead"><span>WHAT I CAN HELP WITH</span><span class="rule"></span></h2>
+<div class="cap-list">
+
+<div class="cap-row rv">
+<div class="cap-header">
+<h3>Content &amp; campaigns</h3>
+<span class="cap-tools">Photoshop &middot; Illustrator &middot; CapCut &middot; Premiere Pro &middot; Notion</span>
+</div>
+<div class="cap-content">
+<p>End-to-end multi-brand content strategy and visual production that keeps brands posting consistently with unified visual standards.</p>
+<ul class="cap-bullets">
+<li>~30 branded monthly social pubmats, educational carousels, and promotional banners per brand</li>
+<li>Short-form video scripting and vertical edits paced for sound-off mobile retention on TikTok &amp; Reels</li>
+<li>Tailor-made direct-response ad creative sets (4:5, 1:1, 9:16) aligned to cold and warm audiences</li>
 </ul>
-<div class="feat-case-actions">
-<a class="btn" href="work/margegold-jewelry.html">VIEW CASE STUDY</a>
-<a class="btn ghost" href="https://margejewelry.com/" target="_blank" rel="noopener">VISIT LIVE STORE &nearr;</a>
-</div>
-</div>
-<div class="feat-case-media">
-<a class="feat-media-hero" href="work/margegold-jewelry.html">
-<img src="assets/images/margegold-cover.jpg" alt="Margegold hero listing slide" width="800" height="500" loading="lazy" decoding="async">
-</a>
-<a class="feat-media-sub" href="work/margegold-jewelry.html">
-<img src="assets/images/mg-necklace-1.jpg" alt="Margegold macro silk product detail" width="400" height="400" loading="lazy" decoding="async">
-</a>
-<a class="feat-media-sub" href="work/margegold-jewelry.html">
-<img src="assets/images/mg-ad-a-1.jpg" alt="Margegold dusty-rose lifestyle ad creative" width="400" height="400" loading="lazy" decoding="async">
-</a>
-</div>
 </div>
 </div>
 
-<h3 class="eyebrow muted" style="margin:2.5rem 0 1.5rem">MORE FEATURED WORK</h3>
-<div class="feat-grid">{cards}</div>
-<p style="margin-top:3.5rem;text-align:center"><a class="btn ghost" href="work/index.html" style="display:inline-flex;width:auto;margin:0 auto">VIEW ALL {len(PROJECTS)} PROJECTS &rarr;</a></p>
+<div class="cap-row rv">
+<div class="cap-header">
+<h3>E-commerce &amp; web</h3>
+<span class="cap-tools">Shopify &middot; Shopee &middot; Lazada &middot; TikTok Shop &middot; Figma &middot; HTML/CSS</span>
+</div>
+<div class="cap-content">
+<p>Storefront and listing optimization that turns casual scrollers into buyers while protecting catalogs from regulatory suspension.</p>
+<ul class="cap-bullets">
+<li>Conversion-engineered 8-slide listing image architecture standardized across product catalogues</li>
+<li>Mobile-first storefront design, custom campaign banners, and structured A+ content layouts</li>
+<li>Marketplace compliance audits, banned claim scrub, and resolution of flagged restricted listings</li>
+<li>Clean, responsive B2B web experiences and interactive product simulators</li>
+</ul>
+</div>
+</div>
+
+<div class="cap-row rv">
+<div class="cap-header">
+<h3>Systems &amp; automation</h3>
+<span class="cap-tools">Python &middot; Telegram Bot API &middot; Notion API &middot; n8n &middot; Flask</span>
+</div>
+<div class="cap-content">
+<p>Practical automations that eliminate repetitive admin and keep multi-brand operations running smoothly without manual babysitting.</p>
+<ul class="cap-bullets">
+<li>Centralized Notion content calendars with automated task dispatch to social media coordinators</li>
+<li>Automated Telegram team accomplishment bots and end-of-day summary collectors</li>
+<li>ERP-to-dashboard sales action feeds, inventory velocity alerts, and scheduled sync daemons</li>
+<li>Foreign manufacturer sourcing, due-diligence screening, and regulatory feasibility matrices</li>
+</ul>
+</div>
+</div>
+
+</div>
+</div>
 </section>
-</div></main>{footer()}'''
+
+<section class="process-section" id="process">
+<div class="wrap">
+<h2 class="eyebrow grouphead"><span>HOW I WORK</span><span class="rule"></span></h2>
+<p class="process-philo">&ldquo;I would rather build the boring system than do the same task ninety times.&rdquo;</p>
+<div class="process-steps">
+
+<div class="process-step rv">
+<span class="process-step-num">01 / ARCHITECTURE</span>
+<h4>Define the System</h4>
+<p>Every project starts with structural discipline. Before opening production software, I set exact scales, component grids, and brand guidelines so all outputs read as one company.</p>
+</div>
+
+<div class="process-step rv">
+<span class="process-step-num">02 / PRODUCTION</span>
+<h4>Execute with Rigor</h4>
+<p>Whether rendering 3D spatial models, editing sound-off vertical video, or building e-commerce listings, assets are produced with strict regulatory compliance and conversion intent.</p>
+</div>
+
+<div class="process-step rv">
+<span class="process-step-num">03 / AUTOMATION</span>
+<h4>Automate the Handoff</h4>
+<p>I build the templates, Notion databases, and automated bots that keep the surface consistent after delivery, so teams can maintain the standard without starting from scratch.</p>
+</div>
+
+</div>
+</div>
+</section>
+
+</main>{footer()}'''
     write("index.html", shell(f"{p['name']} — {p['subtitle_plain']}", p['intro'], body, "home"))
 
 
