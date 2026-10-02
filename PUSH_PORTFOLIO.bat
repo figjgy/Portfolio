@@ -126,11 +126,11 @@ echo ---------- 4. AHEAD / BEHIND (left=origin only, right=local only) ---------
 git fetch -c credential.helper= origin >> %LOG% 2>&1
 git rev-list --left-right --count origin/main...HEAD >> %LOG% 2>&1
 
-REM ---------- 5. THE PUSH. Output goes to the log AND the screen. ----------
-echo.
-echo [6/6] Pushing to GitHub (origin main) ...
+for /f "tokens=*" %%i in ('git branch --show-current') do set CUR_BRANCH=%%i
+if "!CUR_BRANCH!"=="" set CUR_BRANCH=main
+echo [6/6] Pushing to GitHub (origin !CUR_BRANCH!) ...
 echo ---------- 5. GIT PUSH ---------- >> %LOG%
-git push origin main > _push.tmp 2>&1
+git push -u origin !CUR_BRANCH! > _push.tmp 2>&1
 set PUSHCODE=%ERRORLEVEL%
 type _push.tmp
 type _push.tmp >> %LOG%
