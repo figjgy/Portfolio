@@ -28,7 +28,7 @@ PROFILE = {
     # --- shown on card.html (the NFC page) -------------------------------
     "card_eyebrow":    "DIGITAL BUSINESS CARD",
     "role":            "Multidisciplinary Creative Specialist & E-Commerce Designer",
-    "company":         "K-PICK Trading Corp.",   # set to "" to hide the company line
+    "company":         "",   # removed current employer; card displays location only
     "initials":        "JL",
     "avatar":          "assets/images/profile.jpg",   # square, for the NFC card
     # The tall portrait on the home and About pages. A file in Portfolio/images/.

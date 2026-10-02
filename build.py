@@ -112,44 +112,31 @@ box-shadow:0 14px 40px var(--shade),inset 0 1px 0 var(--edge-top)}
 .hero-cta .btn{margin-top:0}
 @media(max-width:640px){.hero-cta{width:100%}.hero-cta .btn{flex:1 1 100%;justify-content:center}}
 
-/* ---- nav --------------------------------------------------------------- */
-.pill{position:fixed;left:0;right:0;top:max(.85rem,env(safe-area-inset-top));z-index:100;
-display:flex;justify-content:center;padding:0 1rem;pointer-events:none;
-transition:transform .75s var(--ease-editorial),opacity .75s var(--ease-editorial);
-will-change:transform,opacity}
-.pill.nav-hidden{transform:translateY(-130%);opacity:0}
-.pill-in{pointer-events:auto;display:flex;gap:.25rem;align-items:center;max-width:100%;
-background:var(--glass-2);-webkit-backdrop-filter:blur(24px) saturate(160%);
-backdrop-filter:blur(24px) saturate(160%);border:1px solid var(--edge);border-radius:999px;
-padding:.35rem .45rem;box-shadow:0 16px 42px var(--shade),inset 0 1px 0 var(--edge-top);
-overflow-x:auto;scrollbar-width:none;scroll-behavior:smooth;
-transition:box-shadow .55s var(--ease-editorial),border-color .55s var(--ease-editorial)}
-.pill-in a{flex:0 0 auto;display:flex;align-items:center;padding:.65rem 1.15rem;border-radius:999px;
-white-space:nowrap;font:400 13px/1 'Jost',system-ui,sans-serif;letter-spacing:.04em;color:var(--dim);min-height:38px;
-transition:color .3s var(--ease-editorial),background .3s var(--ease-editorial),transform .25s var(--ease-editorial),box-shadow .3s;
-will-change:transform}
-.pill-in a:hover{color:var(--ink);background:rgba(245,242,237,.09);transform:translateY(-1px)}
-.pill-in a.on{background:var(--acc);color:#F5F2ED;box-shadow:0 4px 18px rgba(139,13,26,.55)}
-.pill-in a.on:hover{background:var(--acc-lift);box-shadow:0 6px 22px rgba(139,13,26,.7);transform:translateY(-1px)}
-@media(max-width:540px){
-  .pill{padding:0 .5rem}
-  .pill-in{gap:.15rem;padding:.25rem .35rem}
-  .pill-in a{padding:.5rem .75rem;font-size:12px;min-height:34px}
-  .tgl{width:34px;height:34px;margin-left:.15rem}
-}
-@media(max-width:380px){
-  .pill-in a{padding:.45rem .6rem;font-size:11px}
+/* ---- Simple Sticky Site Header ------------------------------------------ */
+.site-header{position:sticky;top:0;left:0;right:0;z-index:200;background:rgba(11,11,11,.92);-webkit-backdrop-filter:blur(20px);backdrop-filter:blur(20px);border-bottom:1px solid var(--edge);transition:background .35s var(--ease-editorial),border-color .35s}
+[data-theme="light"] .site-header{background:rgba(239,235,228,.92)}
+.nav-wrap{max-width:var(--max);margin:0 auto;padding:0 var(--pad);display:flex;align-items:center;justify-content:space-between;height:62px}
+.brand-link{font-family:'Cormorant Garamond',Georgia,serif;font-size:1.35rem;font-weight:400;letter-spacing:.02em;color:var(--ink);text-decoration:none;transition:color .25s}
+.brand-link:hover{color:var(--acc-text)}
+.nav-links{display:flex;align-items:center;gap:.35rem}
+.nav-links a{padding:.5rem .85rem;border-radius:8px;font:400 13px/1 'Jost',system-ui,sans-serif;letter-spacing:.04em;color:var(--dim);text-decoration:none;transition:color .25s,background .25s}
+.nav-links a:hover{color:var(--ink);background:rgba(245,242,237,.06)}
+.nav-links a.on{color:#F5F2ED;background:var(--acc);font-weight:500}
+[data-theme="light"] .nav-links a:hover{background:rgba(18,16,15,.06)}
+@media(max-width:640px){
+  .nav-wrap{height:54px;padding:0 1rem}
+  .brand-link{font-size:1.15rem}
+  .nav-links{gap:.15rem;overflow-x:auto;scrollbar-width:none}
+  .nav-links a{padding:.4rem .55rem;font-size:12px}
 }
 
-.tgl{flex:0 0 auto;width:38px;height:38px;margin-left:.25rem;border-radius:999px;cursor:pointer;
+.tgl{flex:0 0 auto;width:36px;height:36px;margin-left:.35rem;border-radius:50%;cursor:pointer;
 background:transparent;border:1px solid var(--edge);color:var(--ink);font-size:15px;line-height:1;
 display:flex;align-items:center;justify-content:center;
-transition:border-color .35s var(--ease-editorial),background .35s var(--ease-editorial),transform .35s var(--ease-editorial),box-shadow .35s;
-will-change:transform}
-.tgl:hover{border-color:var(--acc);transform:scale(1.08);background:rgba(245,242,237,.06);box-shadow:0 0 16px rgba(139,13,26,.3)}
-.tgl svg{width:17px;height:17px;stroke:currentColor;fill:none;stroke-width:1.8;
-stroke-linecap:round;stroke-linejoin:round;transition:transform .6s var(--ease-editorial),opacity .45s var(--ease-editorial)}
-.tgl:hover svg{transform:scale(1.15) rotate(45deg)}
+transition:border-color .35s var(--ease-editorial),background .35s,transform .25s}
+.tgl:hover{border-color:var(--acc);transform:scale(1.06);background:rgba(245,242,237,.06)}
+.tgl svg{width:16px;height:16px;stroke:currentColor;fill:none;stroke-width:1.8;
+stroke-linecap:round;stroke-linejoin:round;transition:transform .4s var(--ease-editorial)}
 [data-theme="dark"] .tgl-moon{display:none}
 [data-theme="dark"] .tgl-sun{display:block}
 [data-theme="light"] .tgl-sun{display:none}
@@ -158,7 +145,7 @@ a:focus-visible,button:focus-visible{outline:2px solid var(--acc);outline-offset
 
 /* ---- header ------------------------------------------------------------ */
 header{padding:2.5rem 0 3rem;position:relative;z-index:1}
-[id]{scroll-margin-top:6rem}
+[id]{scroll-margin-top:5.5rem}
 h1{font-size:clamp(2.75rem,10vw,4.25rem);font-weight:300;letter-spacing:-.005em}
 .sub{margin-top:.75rem}
 .contact{display:flex;flex-direction:column;gap:.25rem;margin-top:2rem}
@@ -199,39 +186,36 @@ transform:translateX(-100%);transition:transform .75s var(--ease-editorial);poin
 .service-card .btn,.dfy-btns .btn,.work-btns .btn{width:100%;padding:1rem 1.25rem}
 @media(min-width:840px){.dfy-btns .btn,.work-btns .btn{width:auto;min-width:240px}}
 
-/* ---- Editorial Hero (Reference-inspired composition) --------------------- */
-.hero-editorial{padding:3.5rem 0 2rem;position:relative;z-index:1}
-.hero-editorial-top{max-width:46rem;margin:0 auto;text-align:center}
-.hero-editorial .hero-kicker{display:inline-flex;align-items:center;color:var(--acc-text);font-size:11px;text-transform:uppercase;letter-spacing:.22em;font-weight:500;margin-bottom:.85rem}
-.hero-editorial .hero-kicker::before{content:'';display:inline-block;width:5px;height:5px;border-radius:50%;background:var(--acc);margin-right:.5rem}
-.hero-editorial h1{font-size:clamp(3rem,8.5vw,4.75rem);font-weight:300;letter-spacing:-.015em;line-height:1.05;margin:0 0 1rem;color:var(--ink)}
-.hero-editorial .hero-lead{font-size:clamp(1.05rem,2.5vw,1.25rem);color:var(--dim);line-height:1.6;margin:0 auto 2rem;max-width:38rem}
-.hero-actions{display:flex;align-items:center;justify-content:center;gap:.85rem;flex-wrap:wrap;margin-bottom:3.5rem}
-.hero-actions .btn{width:auto;margin:0;min-height:50px;padding:1rem 1.85rem}
+/* ---- Compact Work-Led Hero ----------------------------------------------- */
+.hero-compact{padding:3.5rem 0 2rem;position:relative;z-index:1}
+.hero-compact-top{max-width:48rem;margin:0 auto 2.5rem;text-align:center}
+.hero-compact .hero-kicker{display:inline-flex;align-items:center;color:var(--acc-text);font-size:11px;text-transform:uppercase;letter-spacing:.22em;font-weight:500;margin-bottom:.85rem}
+.hero-compact .hero-kicker::before{content:'';display:inline-block;width:5px;height:5px;border-radius:50%;background:var(--acc);margin-right:.5rem}
+.hero-compact h1{font-size:clamp(2.75rem,7.5vw,4.5rem);font-weight:300;letter-spacing:-.015em;line-height:1.05;margin:0 0 1rem;color:var(--ink)}
+.hero-compact .hero-lead{font-size:clamp(1.05rem,2.2vw,1.2rem);color:var(--dim);line-height:1.6;margin:0 auto 1.75rem;max-width:40rem}
+.hero-actions-compact{display:flex;align-items:center;justify-content:center;gap:1.5rem;flex-wrap:wrap}
+.hero-actions-compact .btn{width:auto;margin:0;min-height:48px;padding:.9rem 1.85rem}
+.hero-link-sec{font:400 13px/1 'Jost',system-ui,sans-serif;letter-spacing:.12em;text-transform:uppercase;color:var(--dim);display:inline-flex;align-items:center;gap:.4rem;text-decoration:none;transition:color .25s var(--ease-editorial),transform .25s}
+.hero-link-sec:hover{color:var(--ink);transform:translateX(3px)}
 
-/* Editorial Hero Visual Mosaic (Triptych of real project work) */
-.hero-mosaic{display:grid;grid-template-columns:1fr 1.25fr 1fr;gap:1.25rem;align-items:center;margin-top:1.5rem}
-.hero-mosaic-tile{position:relative;border-radius:var(--rad);overflow:hidden;border:1px solid var(--edge);background:var(--glass-2);transition:border-color .45s var(--ease-editorial),transform .45s var(--ease-editorial),box-shadow .45s;display:block}
-.hero-mosaic-tile:hover{border-color:rgba(139,13,26,.55);transform:translateY(-3px);box-shadow:0 20px 45px -10px var(--shade)}
-.hero-mosaic-tile img{width:100%;height:100%;object-fit:cover;display:block;transition:transform 1.1s var(--ease-editorial)}
-.hero-mosaic-tile:hover img{transform:scale(1.04)}
-.hero-mosaic-tile.t-tall{aspect-ratio:3/4}
-.hero-mosaic-tile.t-center{aspect-ratio:4/5;box-shadow:0 16px 40px var(--shade)}
-.hero-mosaic-tag{position:absolute;bottom:0;left:0;right:0;padding:1.25rem 1rem .85rem;background:linear-gradient(0deg,rgba(11,11,11,.9) 0%,rgba(11,11,11,.4) 60%,transparent 100%);color:var(--ink);font-size:10.5px;text-transform:uppercase;letter-spacing:.2em;font-family:'Jost',system-ui,sans-serif;font-weight:400;display:flex;align-items:center;gap:.45rem}
-.hero-mosaic-tag::before{content:'';width:5px;height:5px;border-radius:50%;background:var(--acc)}
+/* Work-Led Dual Feature Banner */
+.hero-work-duo{display:grid;grid-template-columns:1fr 1fr;gap:1.5rem;margin-top:2rem}
+.hero-duo-tile{position:relative;border-radius:14px;overflow:hidden;border:1px solid var(--edge);background:var(--glass-2);aspect-ratio:16/10;display:block;text-decoration:none;transition:border-color .45s var(--ease-editorial),transform .45s var(--ease-editorial),box-shadow .45s}
+.hero-duo-tile:hover{border-color:rgba(139,13,26,.55);transform:translateY(-3px);box-shadow:0 20px 45px -10px var(--shade)}
+.hero-duo-tile img{width:100%;height:100%;object-fit:cover;display:block;transition:transform 1.1s var(--ease-editorial)}
+.hero-duo-tile:hover img{transform:scale(1.035)}
+.hero-duo-overlay{position:absolute;bottom:0;left:0;right:0;padding:2rem 1.25rem 1rem;background:linear-gradient(0deg,rgba(11,11,11,.92) 0%,rgba(11,11,11,.5) 60%,transparent 100%);display:flex;flex-direction:column;gap:.25rem}
+.hero-duo-tag{color:var(--acc-text);font-size:10.5px;text-transform:uppercase;letter-spacing:.2em;font-family:'Jost',system-ui,sans-serif;font-weight:500;display:flex;align-items:center;gap:.4rem}
+.hero-duo-tag::before{content:'';width:4px;height:4px;border-radius:50%;background:var(--acc)}
+.hero-duo-title{color:var(--ink);font-family:'Cormorant Garamond',Georgia,serif;font-size:1.25rem;font-weight:400;line-height:1.2}
 
-@media(max-width:860px){
-  .hero-mosaic{grid-template-columns:1fr 1fr;gap:1rem}
-  .hero-mosaic-tile.t-center{grid-column:1/-1;order:-1;aspect-ratio:16/9}
-}
-@media(max-width:540px){
-  .hero-mosaic{grid-template-columns:1fr}
-  .hero-actions{flex-direction:column;width:100%}
-  .hero-actions .btn{width:100%}
+@media(max-width:768px){
+  .hero-work-duo{grid-template-columns:1fr;gap:1.25rem}
+  .hero-actions-compact{gap:1rem}
 }
 
 /* ---- Featured Case Study (Asymmetric Rectangular Editorial Layout) ------- */
-.feat-showcase{margin:3.5rem 0;padding:3rem 0;border-top:1px solid var(--edge);border-bottom:1px solid var(--edge)}
+.feat-showcase{margin:3.5rem 0 4rem;padding:3rem 0;border-top:1px solid var(--edge);border-bottom:1px solid var(--edge)}
 .feat-head{display:flex;align-items:baseline;justify-content:space-between;gap:1.5rem;margin-bottom:2.5rem}
 .feat-head h2{font-size:11px;text-transform:uppercase;letter-spacing:.24em;color:var(--dim);margin:0;font-family:'Jost',system-ui,sans-serif;font-weight:400;display:flex;align-items:center;gap:.6rem}
 .feat-head h2::before{content:'';width:6px;height:6px;border-radius:2px;background:var(--acc)}
@@ -250,13 +234,34 @@ transform:translateX(-100%);transition:transform .75s var(--ease-editorial);poin
 .feat-case-actions .btn{width:auto;margin:0;min-height:48px;padding:.9rem 1.6rem}
 
 .feat-case-media{display:grid;grid-template-columns:1fr 1fr;gap:1rem}
-.feat-media-hero{grid-column:1/-1;border-radius:var(--rad);overflow:hidden;border:1px solid var(--edge);background:var(--glass-2);aspect-ratio:16/10;position:relative}
+.feat-media-hero{grid-column:1/-1;border-radius:14px;overflow:hidden;border:1px solid var(--edge);background:var(--glass-2);aspect-ratio:16/10;position:relative}
 .feat-media-hero img,.feat-media-sub img{width:100%;height:100%;object-fit:cover;display:block;transition:transform 1.1s var(--ease-editorial)}
 .feat-media-hero:hover img,.feat-media-sub:hover img{transform:scale(1.035)}
-.feat-media-sub{border-radius:var(--rad);overflow:hidden;border:1px solid var(--edge);background:var(--glass-2);aspect-ratio:1/1;position:relative}
+.feat-media-sub{border-radius:14px;overflow:hidden;border:1px solid var(--edge);background:var(--glass-2);aspect-ratio:1/1;position:relative}
 
 @media(max-width:860px){
   .feat-case-grid{grid-template-columns:1fr;gap:2rem}
+}
+
+/* ---- More Featured Work Grid (Connected Editorial Styling) --------------- */
+.feat-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:2.5rem 2rem;margin-top:2rem}
+.feat-grid-item{display:flex;flex-direction:column;gap:1rem;text-decoration:none;color:inherit;position:relative}
+.feat-grid-visual{border-radius:14px;overflow:hidden;border:1px solid var(--edge);background:var(--glass-2);aspect-ratio:16/10;position:relative;transition:border-color .45s var(--ease-editorial),transform .45s var(--ease-editorial),box-shadow .45s}
+.feat-grid-item:hover .feat-grid-visual{border-color:rgba(139,13,26,.55);transform:translateY(-3px);box-shadow:0 16px 40px -10px var(--shade)}
+.feat-grid-visual img{width:100%;height:100%;object-fit:cover;display:block;transition:transform 1.1s var(--ease-editorial)}
+.feat-grid-item:hover .feat-grid-visual img{transform:scale(1.035)}
+.feat-grid-body{display:flex;flex-direction:column;gap:.4rem}
+.feat-grid-meta{display:flex;align-items:center;gap:.6rem;font-size:11px;text-transform:uppercase;letter-spacing:.18em;color:var(--acc-text);font-family:'Jost',system-ui,sans-serif;font-weight:500}
+.feat-grid-meta::before{content:'';width:4px;height:4px;border-radius:50%;background:var(--acc)}
+.feat-grid-title{font-family:'Cormorant Garamond',Georgia,serif;font-size:1.6rem;font-weight:400;line-height:1.2;color:var(--ink);margin:0;transition:color .25s}
+.feat-grid-item:hover .feat-grid-title{color:var(--acc-text)}
+.feat-grid-sum{font-size:.9375rem;color:var(--dim);line-height:1.6;margin:0}
+.feat-grid-tags{font-size:11.5px;color:var(--dim);letter-spacing:.03em;margin-top:.35rem}
+.feat-grid-link{display:inline-flex;align-items:center;gap:.4rem;font:400 11.5px/1 'Jost',system-ui,sans-serif;letter-spacing:.16em;text-transform:uppercase;color:var(--dim);margin-top:.6rem;transition:color .25s,transform .25s}
+.feat-grid-item:hover .feat-grid-link{color:var(--ink);transform:translateX(3px)}
+
+@media(max-width:768px){
+  .feat-grid{grid-template-columns:1fr;gap:2rem}
 }
 
 /* ---- sections ---------------------------------------------------------- */
@@ -1082,37 +1087,6 @@ REVEAL_JS = """
     if(x.isIntersecting){run(x.target);o.unobserve(x.target)}})},{threshold:.6});
   el.forEach(function(x){o.observe(x)});
 })();
-
-/* Smart Floating Navigation Auto-Hide on Scroll & Proximity Reveal */
-(function(){
-  var pill=document.querySelector('.pill');
-  if(!pill)return;
-  var lastY=window.pageYOffset||0;
-  var ticking=false;
-  var threshold=120;
-  function updateNav(){
-    var currentY=window.pageYOffset||0;
-    var diff=currentY-lastY;
-    if(currentY>threshold&&diff>12){
-      pill.classList.add('nav-hidden');
-    } else if(diff<-8||currentY<=threshold){
-      pill.classList.remove('nav-hidden');
-    }
-    lastY=currentY;
-    ticking=false;
-  }
-  window.addEventListener('scroll',function(){
-    if(!ticking){
-      window.requestAnimationFrame(updateNav);
-      ticking=true;
-    }
-  },{passive:true});
-  document.addEventListener('mousemove',function(e){
-    if(e.clientY<65&&pill.classList.contains('nav-hidden')){
-      pill.classList.remove('nav-hidden');
-    }
-  },{passive:true});
-})();
 """
 
 
@@ -1155,7 +1129,10 @@ def nav(active, up=""):
            '<path d="M12 2v2m0 16v2M4.93 4.93l1.41 1.41m11.32 11.32l1.41 1.41M2 12h2m16 0h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"/></svg>'
            '<svg class="tgl-moon" viewBox="0 0 24 24" aria-hidden="true"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>'
            '</button>')
-    return f'<nav class="pill" aria-label="Sections"><div class="pill-in">{"".join(out)}{tgl}</div></nav>'
+    return (f'<header class="site-header"><div class="nav-wrap">'
+            f'<a class="brand-link" href="{up}index.html">{E(PROFILE["name"])}</a>'
+            f'<nav class="nav-links" aria-label="Main Navigation">{"".join(out)}{tgl}</nav>'
+            f'</div></header>')
 
 
 THEME_JS = """
@@ -1663,6 +1640,26 @@ def card_html(pr, base="work/", up=""):
 <span class="more">View project</span></div></a>'''
 
 
+def feat_card_html(pr, base="work/", up=""):
+    d = DISCIPLINES[pr['discipline']]
+    cover = project_cover(pr)
+    visual = render_media(cover, "r169", pr['title'], up=up)
+    tags_html = ""
+    if pr.get("tags"):
+        tags_html = f'<div class="feat-grid-tags">{" · ".join(E(t) for t in pr["tags"][:3])}</div>'
+    yr = f" · {E(pr['year'])}" if pr.get("year") else ""
+    return f'''<a class="feat-grid-item rv" href="{base}{pr['slug']}.html">
+<div class="feat-grid-visual">{visual}</div>
+<div class="feat-grid-body">
+<div class="feat-grid-meta">{E(d)}{yr}</div>
+<h4 class="feat-grid-title">{E(pr['title'])}</h4>
+<p class="feat-grid-sum">{E(pr['summary'])}</p>
+{tags_html}
+<span class="feat-grid-link">View project &rarr;</span>
+</div>
+</a>'''
+
+
 # ------------------------------------------------------------------- builders
 def build_home():
     p = PROFILE
@@ -1672,33 +1669,35 @@ def build_home():
     stats = "".join(
         f'<div class="stats-item rv"><span class="n" data-count>{E(s["n"])}</span>'
         f'<span class="l">{E(s["l"])}</span></div>' for s in STATS)
-    cards = "".join(card_html(x, base="work/", up="") for x in secondary_feat)
+    cards = "".join(feat_card_html(x, base="work/", up="") for x in secondary_feat)
     strip = "".join(f'<span>{E(x)}</span>' for x in MARQUEE)
     marquee = (f'<div class="marquee" aria-label="What I do">'
                f'<div class="mtrack"><div class="mset">{strip}</div>'
                f'<div class="mset" aria-hidden="true">{strip}</div></div></div>')
-    body = f'''<header id="top" class="hero-editorial"><div class="wrap">
-<div class="hero-editorial-top">
+    body = f'''<header id="top" class="hero-compact"><div class="wrap">
+<div class="hero-compact-top">
 <span class="hero-kicker hin">{E(p.get('hero_kicker', 'MULTIDISCIPLINARY CREATIVE SPECIALIST'))}</span>
-<h1 class="hin" style="--d:120ms">{E(p['name'])}</h1>
-<p class="hero-lead hin" style="--d:220ms">{E(p['hero_headline'])}</p>
-<div class="hero-actions hin" style="--d:320ms">
+<h1 class="hin" style="--d:100ms">{E(p['name'])}</h1>
+<p class="hero-lead hin" style="--d:180ms">{E(p['hero_headline'])}</p>
+<div class="hero-actions-compact hin" style="--d:260ms">
 <a class="btn" href="#work"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><use href="#i-star"/></svg>EXPLORE SELECTED WORK</a>
-<a class="btn ghost" href="#contact">START A PROJECT</a>
+<a class="hero-link-sec" href="#contact">Get in touch &rarr;</a>
 </div>
 </div>
-<div class="hero-mosaic hin" style="--d:440ms">
-<a class="hero-mosaic-tile t-tall" href="work/philmed-expo-2026.html" title="PhilMed Expo 2026 — 3D Exhibition Design">
-<img src="assets/images/philmed-booth.jpg" alt="PhilMed Expo 2026 trade show booth 3D design" width="600" height="800" loading="eager" decoding="async">
-<span class="hero-mosaic-tag">3D Spatial &amp; Exhibition</span>
+<div class="hero-work-duo hin" style="--d:360ms">
+<a class="hero-duo-tile" href="work/philmed-expo-2026.html" title="PhilMed Expo 2026 — 3D Spatial &amp; Exhibition Design">
+<img src="assets/images/philmed-booth.jpg" alt="PhilMed Expo 2026 3D trade show booth architecture" width="800" height="500" loading="eager" decoding="async">
+<div class="hero-duo-overlay">
+<span class="hero-duo-tag">3D Spatial &amp; Exhibition Design</span>
+<span class="hero-duo-title">PhilMed Expo 2026 — Walkthrough &amp; Fabrication Layout</span>
+</div>
 </a>
-<div class="hero-mosaic-tile t-center">
-<img src="assets/images/portrait.jpg" alt="{E(p['name'])}" width="700" height="875" loading="eager" decoding="async">
-<span class="hero-mosaic-tag">Multidisciplinary Creative</span>
+<a class="hero-duo-tile" href="work/kpick-website.html" title="kpicktradingcorp.com — B2B Digital Commerce &amp; Interactive UI">
+<img src="assets/images/kpick-web-desk-1.jpg" alt="kpicktradingcorp.com B2B medical procurement UI" width="800" height="500" loading="eager" decoding="async">
+<div class="hero-duo-overlay">
+<span class="hero-duo-tag">Digital Commerce &amp; Interactive UI</span>
+<span class="hero-duo-title">kpicktradingcorp.com — Interactive Procurement Experience</span>
 </div>
-<a class="hero-mosaic-tile t-tall" href="work/margegold-jewelry.html" title="Margegold Jewelry — E-Commerce &amp; Product Photography">
-<img src="assets/images/margegold-cover.jpg" alt="Margegold Jewelry e-commerce macro product photography" width="600" height="800" loading="eager" decoding="async">
-<span class="hero-mosaic-tag">E-Commerce &amp; Visual Systems</span>
 </a>
 </div>
 </div></header>
@@ -1746,8 +1745,8 @@ def build_home():
 </div>
 
 <h3 class="eyebrow muted" style="margin:2.5rem 0 1.5rem">MORE FEATURED WORK</h3>
-<div class="cards">{cards}</div>
-<p style="margin-top:3rem;text-align:center"><a class="btn ghost" href="work/index.html" style="display:inline-flex;width:auto;margin:0 auto">VIEW ALL {len(PROJECTS)} PROJECTS &rarr;</a></p>
+<div class="feat-grid">{cards}</div>
+<p style="margin-top:3.5rem;text-align:center"><a class="btn ghost" href="work/index.html" style="display:inline-flex;width:auto;margin:0 auto">VIEW ALL {len(PROJECTS)} PROJECTS &rarr;</a></p>
 </section>
 </div></main>{footer()}'''
     write("index.html", shell(f"{p['name']} — {p['subtitle_plain']}", p['intro'], body, "home"))
