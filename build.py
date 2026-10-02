@@ -113,21 +113,22 @@ box-shadow:0 14px 40px var(--shade),inset 0 1px 0 var(--edge-top)}
 @media(max-width:640px){.hero-cta{width:100%}.hero-cta .btn{flex:1 1 100%;justify-content:center}}
 
 /* ---- Simple Sticky Site Header ------------------------------------------ */
-.site-header{position:sticky;top:0;left:0;right:0;z-index:200;background:rgba(11,11,11,.92);-webkit-backdrop-filter:blur(20px);backdrop-filter:blur(20px);border-bottom:1px solid var(--edge);transition:background .35s var(--ease-editorial),border-color .35s}
+.site-header{position:sticky;top:0;left:0;right:0;z-index:200;background:rgba(11,11,11,.92);-webkit-backdrop-filter:blur(20px);backdrop-filter:blur(20px);border-bottom:1px solid var(--edge);height:72px;display:flex;align-items:center;transition:background .35s var(--ease-editorial),border-color .35s}
 [data-theme="light"] .site-header{background:rgba(239,235,228,.92)}
-.nav-wrap{max-width:var(--max);margin:0 auto;padding:0 var(--pad);display:flex;align-items:center;justify-content:space-between;height:62px}
-.brand-link{font-family:'Cormorant Garamond',Georgia,serif;font-size:1.35rem;font-weight:400;letter-spacing:.02em;color:var(--ink);text-decoration:none;transition:color .25s}
+.nav-wrap{max-width:var(--max);margin:0 auto;padding:0 var(--pad);display:flex;align-items:center;justify-content:space-between;width:100%;height:100%}
+.brand-link{font-family:'Cormorant Garamond',Georgia,serif;font-size:22px;font-weight:400;letter-spacing:.02em;color:var(--ink);text-decoration:none;transition:color .25s;line-height:1}
 .brand-link:hover{color:var(--acc-text)}
 .nav-links{display:flex;align-items:center;gap:.35rem}
-.nav-links a{padding:.5rem .85rem;border-radius:8px;font:400 13px/1 'Jost',system-ui,sans-serif;letter-spacing:.04em;color:var(--dim);text-decoration:none;transition:color .25s,background .25s}
+.nav-links a{padding:.45rem .85rem;border-radius:8px;font:400 15px/1 'Jost',system-ui,sans-serif;letter-spacing:.03em;color:var(--dim);text-decoration:none;transition:color .25s,background .25s}
 .nav-links a:hover{color:var(--ink);background:rgba(245,242,237,.06)}
 .nav-links a.on{color:#F5F2ED;background:var(--acc);font-weight:500}
 [data-theme="light"] .nav-links a:hover{background:rgba(18,16,15,.06)}
 @media(max-width:640px){
-  .nav-wrap{height:54px;padding:0 1rem}
-  .brand-link{font-size:1.15rem}
+  .site-header{height:64px}
+  .nav-wrap{padding:0 1rem}
+  .brand-link{font-size:20px}
   .nav-links{gap:.15rem;overflow-x:auto;scrollbar-width:none}
-  .nav-links a{padding:.4rem .55rem;font-size:12px}
+  .nav-links a{padding:.35rem .5rem;font-size:13.5px}
 }
 
 .tgl{flex:0 0 auto;width:36px;height:36px;margin-left:.35rem;border-radius:50%;cursor:pointer;
@@ -145,7 +146,7 @@ a:focus-visible,button:focus-visible{outline:2px solid var(--acc);outline-offset
 
 /* ---- header ------------------------------------------------------------ */
 header{padding:2rem 0 2rem;position:relative;z-index:1}
-[id]{scroll-margin-top:4.5rem}
+[id]{scroll-margin-top:84px}
 h1{font-size:clamp(2.75rem,10vw,4.25rem);font-weight:300;letter-spacing:-.005em}
 .sub{margin-top:.75rem}
 .contact{display:flex;flex-direction:column;gap:.25rem;margin-top:2rem}
@@ -186,34 +187,45 @@ transform:translateX(-100%);transition:transform .75s var(--ease-editorial);poin
 .service-card .btn,.dfy-btns .btn,.work-btns .btn{width:100%;padding:1rem 1.25rem}
 @media(min-width:840px){.dfy-btns .btn,.work-btns .btn{width:auto;min-width:240px}}
 
-/* ---- Compact Work-Led Hero ----------------------------------------------- */
-.hero-compact{padding:2rem 0 1.5rem;position:relative;z-index:1}
-.hero-compact-top{max-width:44rem;margin:0 auto 1.5rem;text-align:center}
-.hero-compact .hero-kicker{display:inline-flex;align-items:center;color:var(--acc-text);font-size:11px;text-transform:uppercase;letter-spacing:.22em;font-weight:500;margin-bottom:.65rem}
-.hero-compact .hero-kicker::before{content:'';display:inline-block;width:5px;height:5px;border-radius:50%;background:var(--acc);margin-right:.5rem}
-.hero-compact h1{font-size:clamp(2.35rem,5.5vw,3.65rem);font-weight:300;letter-spacing:-.015em;line-height:1.1;margin:0 0 .75rem;color:var(--ink)}
-.hero-compact .hero-lead{font-size:clamp(1rem,1.8vw,1.15rem);color:var(--dim);line-height:1.55;margin:0 auto 1.25rem;max-width:36rem}
-.hero-actions-compact{display:flex;align-items:center;justify-content:center;gap:1.25rem;flex-wrap:wrap}
-.hero-actions-compact .btn{width:auto;margin:0;min-height:46px;padding:.85rem 1.75rem}
+/* ---- Decorative Artwork Hero --------------------------------------------- */
+.hero-art{position:relative;min-height:480px;max-height:560px;height:clamp(480px,55vh,560px);display:flex;align-items:center;overflow:hidden;border-bottom:1px solid var(--edge);background:#0B0B0B}
+.hero-art-bg{position:absolute;inset:0;background:linear-gradient(90deg, #0B0B0B 0%, rgba(11,11,11,.92) 38%, rgba(11,11,11,.55) 58%, rgba(11,11,11,0) 80%), url('assets/images/hero-artwork.png') right center / cover no-repeat;z-index:0}
+[data-theme="light"] .hero-art{background:#EFEBE4}
+[data-theme="light"] .hero-art-bg{background:linear-gradient(90deg, #EFEBE4 0%, rgba(239,235,228,.95) 42%, rgba(239,235,228,.7) 62%, rgba(239,235,228,0.2) 85%), url('assets/images/hero-artwork.png') right center / cover no-repeat}
+.hero-art-wrap{position:relative;z-index:1;display:flex;align-items:center;width:100%}
+.hero-art-content{max-width:36rem;display:flex;flex-direction:column;align-items:flex-start;text-align:left}
+.hero-art-content .hero-kicker{display:inline-flex;align-items:center;color:var(--acc-text);font-size:11px;text-transform:uppercase;letter-spacing:.22em;font-weight:500;margin-bottom:.85rem}
+.hero-art-content .hero-kicker::before{content:'';display:inline-block;width:5px;height:5px;border-radius:50%;background:var(--acc);margin-right:.5rem}
+.hero-art-content h1{font-size:clamp(2.5rem,5.5vw,4.1rem);font-weight:300;letter-spacing:-.015em;line-height:1.06;margin:0 0 .9rem;color:var(--ink)}
+.hero-art-content .hero-lead{font-size:clamp(1.05rem,1.8vw,1.2rem);color:var(--dim);line-height:1.6;margin:0 0 1.75rem;max-width:32rem}
+.hero-actions-compact{display:flex;align-items:center;justify-content:flex-start;gap:1.25rem;flex-wrap:wrap}
+.hero-actions-compact .btn{width:auto;margin:0;min-height:48px;padding:.9rem 1.85rem}
 .hero-link-sec{font:400 13px/1 'Jost',system-ui,sans-serif;letter-spacing:.12em;text-transform:uppercase;color:var(--dim);display:inline-flex;align-items:center;gap:.4rem;text-decoration:none;transition:color .25s var(--ease-editorial),transform .25s}
 .hero-link-sec:hover{color:var(--ink);transform:translateX(3px)}
 
-/* ---- Hero Single Lead Project ------------------------------------------- */
-.hero-lead-work{margin-top:1.5rem;position:relative;border-radius:16px;overflow:hidden;border:1px solid var(--edge);background:var(--glass-2);transition:border-color .45s var(--ease-editorial),transform .45s var(--ease-editorial),box-shadow .45s}
-.hero-lead-work:hover{border-color:rgba(139,13,26,.55);transform:translateY(-3px);box-shadow:0 24px 60px -10px var(--shade)}
-.hero-lead-media{aspect-ratio:16/9;position:relative;overflow:hidden;background:#000}
-.hero-lead-media img{width:100%;height:100%;object-fit:cover;display:block;transition:transform 1.15s var(--ease-editorial)}
-.hero-lead-work:hover .hero-lead-media img{transform:scale(1.03)}
-.hero-lead-body{padding:1.75rem 2rem;display:flex;align-items:center;justify-content:space-between;gap:2rem;background:var(--glass);border-top:1px solid var(--edge)}
-.hero-lead-info{display:flex;flex-direction:column;gap:.35rem;max-width:44rem}
-.hero-lead-meta{display:flex;align-items:center;gap:.75rem;font-size:11px;text-transform:uppercase;letter-spacing:.18em;color:var(--acc-text);font-family:'Jost',system-ui,sans-serif;font-weight:500}
-.hero-lead-meta::before{content:'';width:4px;height:4px;border-radius:50%;background:var(--acc)}
-.hero-lead-title{font-family:'Cormorant Garamond',Georgia,serif;font-size:clamp(1.5rem,3.5vw,2rem);font-weight:400;color:var(--ink);margin:0;line-height:1.2}
-.hero-lead-desc{font-size:.9375rem;color:var(--dim);line-height:1.6;margin:0}
-.hero-lead-cta{flex:none}
+@media(max-width:768px){
+  .hero-art{min-height:auto;max-height:none;height:auto;padding:3.25rem 0 2.75rem}
+  .hero-art-bg{background:linear-gradient(180deg, rgba(11,11,11,.96) 0%, rgba(11,11,11,.88) 60%, rgba(11,11,11,.65) 100%), url('assets/images/hero-artwork.png') center right / cover no-repeat}
+  [data-theme="light"] .hero-art-bg{background:linear-gradient(180deg, rgba(239,235,228,.96) 0%, rgba(239,235,228,.88) 60%, rgba(239,235,228,.65) 100%), url('assets/images/hero-artwork.png') center right / cover no-repeat}
+  .hero-art-content{max-width:100%}
+}
+
+/* ---- Selected Work: Primary Lead Project ---------------------------------- */
+.work-lead-card{margin-top:2rem;position:relative;border-radius:16px;overflow:hidden;border:1px solid var(--edge);background:var(--glass-2);transition:border-color .45s var(--ease-editorial),transform .45s var(--ease-editorial),box-shadow .45s}
+.work-lead-card:hover{border-color:rgba(139,13,26,.55);transform:translateY(-3px);box-shadow:0 24px 60px -10px var(--shade)}
+.work-lead-media{aspect-ratio:16/9;position:relative;overflow:hidden;background:#000;display:block}
+.work-lead-media img{width:100%;height:100%;object-fit:cover;display:block;transition:transform 1.15s var(--ease-editorial)}
+.work-lead-card:hover .work-lead-media img{transform:scale(1.03)}
+.work-lead-body{padding:1.75rem 2rem;display:flex;align-items:center;justify-content:space-between;gap:2rem;background:var(--glass);border-top:1px solid var(--edge)}
+.work-lead-info{display:flex;flex-direction:column;gap:.35rem;max-width:44rem}
+.work-lead-meta{display:flex;align-items:center;gap:.75rem;font-size:11px;text-transform:uppercase;letter-spacing:.18em;color:var(--acc-text);font-family:'Jost',system-ui,sans-serif;font-weight:500}
+.work-lead-meta::before{content:'';width:4px;height:4px;border-radius:50%;background:var(--acc)}
+.work-lead-title{font-family:'Cormorant Garamond',Georgia,serif;font-size:clamp(1.5rem,3.5vw,2rem);font-weight:400;color:var(--ink);margin:0;line-height:1.2}
+.work-lead-desc{font-size:.9375rem;color:var(--dim);line-height:1.6;margin:0}
+.work-lead-cta{flex:none}
 @media(max-width:860px){
-  .hero-lead-body{flex-direction:column;align-items:flex-start;padding:1.5rem;gap:1.25rem}
-  .hero-lead-cta .btn{width:100%}
+  .work-lead-body{flex-direction:column;align-items:flex-start;padding:1.5rem;gap:1.25rem}
+  .work-lead-cta .btn{width:100%}
 }
 
 /* ---- Selected Work: 2 Supporting Projects -------------------------------- */
@@ -1662,30 +1674,16 @@ def feat_card_html(pr, base="work/", up=""):
 # ------------------------------------------------------------------- builders
 def build_home():
     p = PROFILE
-    body = f'''<header id="top" class="hero-compact"><div class="wrap">
-<div class="hero-compact-top">
+    body = f'''<header id="top" class="hero-art">
+<div class="hero-art-bg" aria-hidden="true"></div>
+<div class="wrap hero-art-wrap">
+<div class="hero-art-content">
 <span class="hero-kicker hin">{E(p.get('hero_kicker', 'MULTIDISCIPLINARY CREATIVE SPECIALIST'))}</span>
 <h1 class="hin" style="--d:100ms">{E(p['name'])}</h1>
 <p class="hero-lead hin" style="--d:180ms">{E(p['hero_headline'])}</p>
 <div class="hero-actions-compact hin" style="--d:260ms">
 <a class="btn" href="#work"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><use href="#i-star"/></svg>EXPLORE SELECTED WORK</a>
 <a class="hero-link-sec" href="#contact">Get in touch &rarr;</a>
-</div>
-</div>
-
-<div class="hero-lead-work hin" style="--d:380ms">
-<a href="work/margegold-jewelry.html" class="hero-lead-media" title="Margegold Jewelry — Shopify Store &amp; Marketplace Listings">
-<img src="assets/images/margegold-cover.jpg" alt="Margegold Jewelry hero listing and macro product photography" width="1200" height="675" loading="eager" decoding="async">
-</a>
-<div class="hero-lead-body">
-<div class="hero-lead-info">
-<div class="hero-lead-meta">Featured Project &middot; E-Commerce &amp; Visual Systems &middot; 2025–2026</div>
-<h2 class="hero-lead-title"><a href="work/margegold-jewelry.html" style="color:inherit">Margegold Jewelry — Live Storefront &amp; 8-Slide Conversion System</a></h2>
-<p class="hero-lead-desc">Standardized 8-slide listing architecture, macro jewelry photography, and short-form video creatives deployed across a live Shopify store (margejewelry.com), TikTok Shop, Shopee, and Lazada.</p>
-</div>
-<div class="hero-lead-cta">
-<a class="btn" href="work/margegold-jewelry.html">VIEW CASE STUDY</a>
-</div>
 </div>
 </div>
 </div></header>
@@ -1696,6 +1694,22 @@ def build_home():
 <div class="feat-head rv">
 <h2><span>SELECTED WORK</span></h2>
 <a class="feat-all-link" href="work/index.html">View all {len(PROJECTS)} projects &rarr;</a>
+</div>
+
+<div class="work-lead-card rv">
+<a href="work/margegold-jewelry.html" class="work-lead-media" title="Margegold Jewelry — Shopify Store &amp; Marketplace Listings">
+<img src="assets/images/margegold-cover.jpg" alt="Margegold Jewelry hero listing and macro product photography" width="1200" height="675" loading="lazy" decoding="async">
+</a>
+<div class="work-lead-body">
+<div class="work-lead-info">
+<div class="work-lead-meta">Featured Project &middot; E-Commerce &amp; Visual Systems &middot; 2025–2026</div>
+<h3 class="work-lead-title"><a href="work/margegold-jewelry.html" style="color:inherit">Margegold Jewelry — Live Storefront &amp; 8-Slide Conversion System</a></h3>
+<p class="work-lead-desc">Standardized 8-slide listing architecture, macro jewelry photography, and short-form video creatives deployed across a live Shopify store (margejewelry.com), TikTok Shop, Shopee, and Lazada.</p>
+</div>
+<div class="work-lead-cta">
+<a class="btn" href="work/margegold-jewelry.html">VIEW CASE STUDY</a>
+</div>
+</div>
 </div>
 
 <div class="work-duo-grid">
