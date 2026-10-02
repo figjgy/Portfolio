@@ -141,6 +141,15 @@ will-change:transform}
 .pill-in a:hover{color:var(--ink);background:rgba(245,242,237,.09);transform:translateY(-1px)}
 .pill-in a.on{background:var(--acc);color:#F5F2ED;box-shadow:0 4px 18px rgba(139,13,26,.55)}
 .pill-in a.on:hover{background:var(--acc-lift);box-shadow:0 6px 22px rgba(139,13,26,.7);transform:translateY(-1px)}
+@media(max-width:540px){
+  .pill{padding:0 .5rem}
+  .pill-in{gap:.15rem;padding:.25rem .35rem}
+  .pill-in a{padding:.5rem .75rem;font-size:12px;min-height:34px}
+  .tgl{width:34px;height:34px;margin-left:.15rem}
+}
+@media(max-width:380px){
+  .pill-in a{padding:.45rem .6rem;font-size:11px}
+}
 
 .tgl{flex:0 0 auto;width:38px;height:38px;margin-left:.25rem;border-radius:999px;cursor:pointer;
 background:transparent;border:1px solid var(--edge);color:var(--ink);font-size:15px;line-height:1;
@@ -325,7 +334,7 @@ letter-spacing:.14em;text-transform:uppercase;transition:border-color .45s var(-
 .live-link:hover{border-color:#22c55e;background:rgba(34,197,94,.12);transform:translateY(-2px)}
 
 .shot img{cursor:zoom-in}
-.lb{position:fixed;inset:0;z-index:200;display:flex;align-items:center;justify-content:center;
+.lb{position:fixed;inset:0;z-index:600;display:flex;align-items:center;justify-content:center;
 background:rgba(11,11,11,.88);-webkit-backdrop-filter:blur(24px);backdrop-filter:blur(24px);
 opacity:0;pointer-events:none;transition:opacity .25s ease;padding:1.5rem}
 .lb.open{opacity:1;pointer-events:auto}
@@ -1182,9 +1191,9 @@ def contact_nav(prefix=""):
     return f'''<nav class="contact" aria-label="Contact">
 <a href="tel:{E(p['tel'])}"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><use href="#i-phone"/></svg><span>{E(p['phone'])}</span></a>
 <a href="mailto:{E(p['email'])}"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><use href="#i-mail"/></svg><span>{E(p['email'])}</span></a>
-<a href="{E(p['linkedin'])}" rel="noopener"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><use href="#i-in"/></svg><span>{E(p['linkedin_label'])}</span></a>
+<a href="{E(p['linkedin'])}" target="_blank" rel="noopener"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><use href="#i-in"/></svg><span>{E(p['linkedin_label'])}</span></a>
 </nav>
-<div class="socialrow">{"".join(f'<a href="{E(u)}" rel="noopener" aria-label="{E(l)}" title="{E(l)}"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="#{i}"/></svg></a>' for i, l, u in socials())}</div>'''
+<div class="socialrow">{"".join(f'<a href="{E(u)}" target="_blank" rel="noopener" aria-label="{E(l)}" title="{E(l)}"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="#{i}"/></svg></a>' for i, l, u in socials())}</div>'''
 
 
 def nav(active, up=""):
@@ -1545,10 +1554,18 @@ def shell(title, desc, body, active, up="", extra_js=""):
 <link rel="icon" type="image/png" href="{up}assets/images/favicon.png">
 <link rel="apple-touch-icon" href="{up}assets/images/apple-touch-icon.png">
 <script>(function(){{try{{var v=localStorage.getItem('jl-theme');if(v){{document.documentElement.setAttribute('data-theme',v);var m=document.querySelector('meta[name="theme-color"]');if(m)m.setAttribute('content',v==='light'?'#EFEBE4':'#0B0B0B');}}}}catch(e){{}}}})();</script>
+<meta property="og:site_name" content="{E(p['name'])}">
 <meta property="og:type" content="website">
 <meta property="og:title" content="{E(title)}">
 <meta property="og:description" content="{E(desc)}">
+<meta property="og:image" content="https://jamielyn-ludovice.vercel.app/assets/images/og-image.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="{E(p['name'])} — {E(p['subtitle_plain'])}">
 <meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="{E(title)}">
+<meta name="twitter:description" content="{E(desc)}">
+<meta name="twitter:image" content="https://jamielyn-ludovice.vercel.app/assets/images/og-image.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
@@ -4833,7 +4850,7 @@ transition:opacity .25s,transform .25s;z-index:300;box-shadow:0 12px 32px var(--
   </button>
  </div>
 
- <div class="socials">{"".join(f'<a href="{E(u)}" rel="noopener" aria-label="{E(l)}"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="#{i}"/></svg></a>' for i, l, u in socials())}</div>
+ <div class="socials">{"".join(f'<a href="{E(u)}" target="_blank" rel="noopener" aria-label="{E(l)}"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="#{i}"/></svg></a>' for i, l, u in socials())}</div>
 
  <a class="full" href="index.html">View Full Portfolio</a>
  <p class="note">The contact file contains only the public details shown on this page.</p>
@@ -4958,6 +4975,19 @@ def main():
                 "rebuilds the whole site/ folder every run, so anything left there\n"
                 "is lost. This folder is copied in fresh on every build.\n")
     write("vercel.json", '{\n  "cleanUrls": true,\n  "trailingSlash": false\n}\n')
+    write("robots.txt", "User-agent: *\nAllow: /\nSitemap: https://jamielyn-ludovice.vercel.app/sitemap.xml\n")
+    sitemap_pages = [
+        ("https://jamielyn-ludovice.vercel.app/", "1.0", "monthly"),
+        ("https://jamielyn-ludovice.vercel.app/work/", "0.9", "monthly"),
+        ("https://jamielyn-ludovice.vercel.app/about", "0.8", "monthly"),
+        ("https://jamielyn-ludovice.vercel.app/tools/", "0.8", "monthly"),
+        ("https://jamielyn-ludovice.vercel.app/card", "0.6", "monthly"),
+    ] + [(f"https://jamielyn-ludovice.vercel.app/work/{pr['slug']}", "0.8", "monthly") for pr in PROJECTS]
+    sitemap_lines = ['<?xml version="1.0" encoding="UTF-8"?>', '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">']
+    for loc, prio, freq in sitemap_pages:
+        sitemap_lines.append(f'  <url>\n    <loc>{loc}</loc>\n    <changefreq>{freq}</changefreq>\n    <priority>{prio}</priority>\n  </url>')
+    sitemap_lines.append('</urlset>\n')
+    write("sitemap.xml", "\n".join(sitemap_lines))
     build_home(); build_work_index(); build_tools(); build_about(); build_card(); build_404()
     for i, pr in enumerate(PROJECTS):
         build_project(i, pr)
