@@ -251,13 +251,16 @@ transform:translateX(-100%);transition:transform .75s var(--ease-editorial);poin
 .hero-link-sec:hover{color:var(--ink);transform:translateX(3px)}
 
 @media(max-width:768px){
-  .hero-art{min-height:auto;max-height:none;height:auto;padding:3rem 0 2.5rem}
-  .hero-art-media img{object-position:center right;opacity:.3}
-  .hero-art-grad{background:linear-gradient(180deg, rgba(11,11,11,.97) 0%, rgba(11,11,11,.9) 65%, rgba(11,11,11,.75) 100%)}
-  [data-theme="light"] .hero-art-grad{background:linear-gradient(180deg, rgba(239,235,228,.97) 0%, rgba(239,235,228,.9) 65%, rgba(239,235,228,.75) 100%)}
-  .hero-art-content{max-width:100%}
-  .hero-art-content h1{font-size:clamp(2.1rem,7.5vw,2.75rem);line-height:1.15;margin-bottom:.85rem}
-  .hero-art-content .hero-lead{font-size:1.025rem;line-height:1.6;margin-bottom:1.5rem}
+  .hero-art{min-height:auto;max-height:none;height:auto;padding:3.5rem 0 3rem;position:relative}
+  .hero-art-media img{object-position:80% center;opacity:.88;filter:brightness(.95);transform:scale(1.05)}
+  .hero-art-grad{background:linear-gradient(180deg, rgba(11,11,11,.75) 0%, rgba(11,11,11,.45) 45%, rgba(11,11,11,.88) 100%),linear-gradient(90deg, rgba(11,11,11,.82) 0%, rgba(11,11,11,.2) 100%)}
+  [data-theme="light"] .hero-art-media img{opacity:.75;filter:brightness(1.02)}
+  [data-theme="light"] .hero-art-grad{background:linear-gradient(180deg, rgba(239,235,228,.78) 0%, rgba(239,235,228,.45) 45%, rgba(239,235,228,.88) 100%),linear-gradient(90deg, rgba(239,235,228,.82) 0%, rgba(239,235,228,.2) 100%)}
+  .hero-art-content{max-width:100%;position:relative;z-index:2}
+  .hero-art-content h1{font-size:clamp(2.15rem,7.8vw,2.85rem);line-height:1.15;margin-bottom:.85rem;text-shadow:0 2px 14px rgba(0,0,0,.75)}
+  .hero-art-content .hero-lead{font-size:1.025rem;line-height:1.6;margin-bottom:1.5rem;text-shadow:0 1px 8px rgba(0,0,0,.65);color:#E5E2DC}
+  [data-theme="light"] .hero-art-content h1{text-shadow:none}
+  [data-theme="light"] .hero-art-content .hero-lead{color:var(--dim);text-shadow:none}
 }
 @media(max-width:640px){
   .hero-actions-compact{flex-direction:column;align-items:stretch;width:100%;gap:.65rem}
