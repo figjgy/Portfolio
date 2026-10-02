@@ -195,60 +195,40 @@ transform:translateX(-100%);transition:transform .75s var(--ease-editorial);poin
 .hero-art-grad{position:absolute;inset:0;background:linear-gradient(90deg, #0B0B0B 0%, rgba(11,11,11,.94) 38%, rgba(11,11,11,.55) 58%, rgba(11,11,11,0) 82%);pointer-events:none}
 [data-theme="light"] .hero-art-grad{background:linear-gradient(90deg, #EFEBE4 0%, rgba(239,235,228,.95) 40%, rgba(239,235,228,.65) 60%, rgba(239,235,228,0.15) 85%)}
 .hero-art-wrap{position:relative;z-index:1;display:flex;align-items:center;width:100%}
-.hero-art-content{max-width:36rem;display:flex;flex-direction:column;align-items:flex-start;text-align:left}
-.hero-art-content .hero-kicker{display:inline-flex;align-items:center;color:var(--acc-text);font-size:11px;text-transform:uppercase;letter-spacing:.22em;font-weight:500;margin-bottom:.85rem}
-.hero-art-content .hero-kicker::before{content:'';display:inline-block;width:5px;height:5px;border-radius:50%;background:var(--acc);margin-right:.5rem}
-.hero-art-content h1{font-size:clamp(2.5rem,5.5vw,4.1rem);font-weight:300;letter-spacing:-.015em;line-height:1.06;margin:0 0 .9rem;color:var(--ink)}
-.hero-art-content .hero-lead{font-size:clamp(1.05rem,1.8vw,1.2rem);color:var(--dim);line-height:1.6;margin:0 0 1.75rem;max-width:32rem}
+.hero-art-content{max-width:38rem;display:flex;flex-direction:column;align-items:flex-start;text-align:left}
+.hero-art-content h1{font-family:'Cormorant Garamond',Georgia,serif;font-size:clamp(2.5rem,5.2vw,3.85rem);font-weight:300;letter-spacing:-.015em;line-height:1.12;margin:0 0 1.15rem;color:var(--ink)}
+.hero-art-content .hero-lead{font-size:clamp(1.05rem,1.8vw,1.175rem);color:var(--dim);line-height:1.65;margin:0 0 1.75rem;max-width:34rem}
 .hero-actions-compact{display:flex;align-items:center;justify-content:flex-start;gap:1.25rem;flex-wrap:wrap}
 .hero-actions-compact .btn{width:auto;margin:0;min-height:48px;padding:.9rem 1.85rem}
 .hero-link-sec{font:400 13px/1 'Jost',system-ui,sans-serif;letter-spacing:.12em;text-transform:uppercase;color:var(--dim);display:inline-flex;align-items:center;gap:.4rem;text-decoration:none;transition:color .25s var(--ease-editorial),transform .25s}
 .hero-link-sec:hover{color:var(--ink);transform:translateX(3px)}
 
 @media(max-width:768px){
-  .hero-art{min-height:auto;max-height:none;height:auto;padding:3.25rem 0 2.75rem}
-  .hero-art-media img{object-position:center right;opacity:.4}
+  .hero-art{min-height:auto;max-height:none;height:auto;padding:3.5rem 0 3rem}
+  .hero-art-media img{object-position:center right;opacity:.35}
   .hero-art-grad{background:linear-gradient(180deg, rgba(11,11,11,.96) 0%, rgba(11,11,11,.88) 60%, rgba(11,11,11,.65) 100%)}
   [data-theme="light"] .hero-art-grad{background:linear-gradient(180deg, rgba(239,235,228,.96) 0%, rgba(239,235,228,.88) 60%, rgba(239,235,228,.65) 100%)}
   .hero-art-content{max-width:100%}
 }
 
-/* ---- Selected Work: Primary Lead Project ---------------------------------- */
-.work-lead-card{margin-top:2rem;position:relative;border-radius:16px;overflow:hidden;border:1px solid var(--edge);background:var(--glass-2);transition:border-color .45s var(--ease-editorial),transform .45s var(--ease-editorial),box-shadow .45s}
-.work-lead-card:hover{border-color:rgba(139,13,26,.55);transform:translateY(-3px);box-shadow:0 24px 60px -10px var(--shade)}
-.work-lead-media{aspect-ratio:16/9;position:relative;overflow:hidden;background:#000;display:block}
-.work-lead-media img{width:100%;height:100%;object-fit:cover;display:block;transition:transform 1.15s var(--ease-editorial)}
-.work-lead-card:hover .work-lead-media img{transform:scale(1.03)}
-.work-lead-body{padding:1.75rem 2rem;display:flex;align-items:center;justify-content:space-between;gap:2rem;background:var(--glass);border-top:1px solid var(--edge)}
-.work-lead-info{display:flex;flex-direction:column;gap:.35rem;max-width:44rem}
-.work-lead-meta{display:flex;align-items:center;gap:.75rem;font-size:11px;text-transform:uppercase;letter-spacing:.18em;color:var(--acc-text);font-family:'Jost',system-ui,sans-serif;font-weight:500}
-.work-lead-meta::before{content:'';width:4px;height:4px;border-radius:50%;background:var(--acc)}
-.work-lead-title{font-family:'Cormorant Garamond',Georgia,serif;font-size:clamp(1.5rem,3.5vw,2rem);font-weight:400;color:var(--ink);margin:0;line-height:1.2}
-.work-lead-desc{font-size:.9375rem;color:var(--dim);line-height:1.6;margin:0}
-.work-lead-cta{flex:none}
-@media(max-width:860px){
-  .work-lead-body{flex-direction:column;align-items:flex-start;padding:1.5rem;gap:1.25rem}
-  .work-lead-cta .btn{width:100%}
+/* ---- Selected Work: 3 Equal Projects in One Desktop Row -------------------- */
+.work-trio-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:2rem;margin-top:2rem}
+.work-trio-item{display:flex;flex-direction:column;text-decoration:none;color:inherit;position:relative}
+.work-trio-visual{border-radius:12px;overflow:hidden;border:1px solid var(--edge);background:var(--glass-2);aspect-ratio:4/3;position:relative;transition:border-color .4s var(--ease-editorial),transform .4s var(--ease-editorial),box-shadow .4s}
+.work-trio-item:hover .work-trio-visual{border-color:rgba(139,13,26,.55);transform:translateY(-3px);box-shadow:0 16px 40px -10px var(--shade)}
+.work-trio-visual img{width:100%;height:100%;object-fit:cover;display:block;transition:transform 1.1s var(--ease-editorial)}
+.work-trio-item:hover .work-trio-visual img{transform:scale(1.04)}
+.work-trio-body{display:flex;flex-direction:column;margin-top:1rem}
+.work-trio-title{font-family:'Cormorant Garamond',Georgia,serif;font-size:1.45rem;font-weight:400;line-height:1.2;color:var(--ink);margin:0 0 .45rem;transition:color .25s}
+.work-trio-item:hover .work-trio-title{color:var(--acc-text)}
+.work-trio-contrib{font-size:.9375rem;color:var(--dim);line-height:1.55;margin:0 0 .75rem}
+.work-trio-link{display:inline-flex;align-items:center;gap:.35rem;font:400 11.5px/1 'Jost',system-ui,sans-serif;letter-spacing:.14em;text-transform:uppercase;color:var(--dim);transition:color .25s,transform .25s}
+.work-trio-item:hover .work-trio-link{color:var(--ink);transform:translateX(3px)}
+@media(max-width:900px){
+  .work-trio-grid{grid-template-columns:repeat(2,1fr);gap:1.75rem}
 }
-
-/* ---- Selected Work: 2 Supporting Projects -------------------------------- */
-.work-duo-grid{display:grid;grid-template-columns:1fr 1fr;gap:2.5rem 2rem;margin-top:2rem}
-.work-duo-item{display:flex;flex-direction:column;gap:1.1rem;text-decoration:none;color:inherit;position:relative}
-.work-duo-visual{border-radius:14px;overflow:hidden;border:1px solid var(--edge);background:var(--glass-2);aspect-ratio:16/10;position:relative;transition:border-color .45s var(--ease-editorial),transform .45s var(--ease-editorial),box-shadow .45s}
-.work-duo-item:hover .work-duo-visual{border-color:rgba(139,13,26,.55);transform:translateY(-3px);box-shadow:0 18px 45px -10px var(--shade)}
-.work-duo-visual img{width:100%;height:100%;object-fit:cover;display:block;transition:transform 1.1s var(--ease-editorial)}
-.work-duo-item:hover .work-duo-visual img{transform:scale(1.035)}
-.work-duo-body{display:flex;flex-direction:column;gap:.4rem}
-.work-duo-meta{display:flex;align-items:center;gap:.6rem;font-size:11px;text-transform:uppercase;letter-spacing:.18em;color:var(--acc-text);font-family:'Jost',system-ui,sans-serif;font-weight:500}
-.work-duo-meta::before{content:'';width:4px;height:4px;border-radius:50%;background:var(--acc)}
-.work-duo-title{font-family:'Cormorant Garamond',Georgia,serif;font-size:1.65rem;font-weight:400;line-height:1.2;color:var(--ink);margin:0;transition:color .25s}
-.work-duo-item:hover .work-duo-title{color:var(--acc-text)}
-.work-duo-sum{font-size:.9375rem;color:var(--dim);line-height:1.6;margin:0}
-.work-duo-tags{font-size:11.5px;color:var(--dim);letter-spacing:.03em;margin-top:.35rem}
-.work-duo-link{display:inline-flex;align-items:center;gap:.4rem;font:400 11.5px/1 'Jost',system-ui,sans-serif;letter-spacing:.16em;text-transform:uppercase;color:var(--dim);margin-top:.6rem;transition:color .25s,transform .25s}
-.work-duo-item:hover .work-duo-link{color:var(--ink);transform:translateX(3px)}
-@media(max-width:768px){
-  .work-duo-grid{grid-template-columns:1fr;gap:2rem}
+@media(max-width:600px){
+  .work-trio-grid{grid-template-columns:1fr;gap:2rem}
 }
 
 /* ---- Capabilities: What I can help with (Clean Text Rows) ---------------- */
@@ -1684,11 +1664,10 @@ def build_home():
 </div>
 <div class="wrap hero-art-wrap">
 <div class="hero-art-content">
-<span class="hero-kicker hin">{E(p.get('hero_kicker', 'MULTIDISCIPLINARY CREATIVE SPECIALIST'))}</span>
-<h1 class="hin" style="--d:100ms">{E(p['name'])}</h1>
-<p class="hero-lead hin" style="--d:180ms">{E(p['hero_headline'])}</p>
+<h1 class="hin" style="--d:100ms">Thoughtful visuals.<br>Connected experiences.</h1>
+<p class="hero-lead hin" style="--d:180ms">I design brand content, online stores, and practical systems that help businesses stay consistent.</p>
 <div class="hero-actions-compact hin" style="--d:260ms">
-<a class="btn" href="#work"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><use href="#i-star"/></svg>EXPLORE SELECTED WORK</a>
+<a class="btn" href="#work"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><use href="#i-star"/></svg>EXPLORE MY WORK</a>
 <a class="hero-link-sec" href="#contact">Get in touch &rarr;</a>
 </div>
 </div>
@@ -1699,49 +1678,39 @@ def build_home():
 <section id="work" style="padding:4rem 0 3rem">
 <div class="feat-head rv">
 <h2><span>SELECTED WORK</span></h2>
-<a class="feat-all-link" href="work/index.html">View all {len(PROJECTS)} projects &rarr;</a>
 </div>
 
-<div class="work-lead-card rv">
-<a href="work/margegold-jewelry.html" class="work-lead-media" title="Margegold Jewelry — Shopify Store &amp; Marketplace Listings">
-<img src="assets/images/margegold-cover.jpg" alt="Margegold Jewelry hero listing and macro product photography" width="1200" height="675" loading="lazy" decoding="async">
-</a>
-<div class="work-lead-body">
-<div class="work-lead-info">
-<div class="work-lead-meta">Featured Project &middot; E-Commerce &amp; Visual Systems &middot; 2025–2026</div>
-<h3 class="work-lead-title"><a href="work/margegold-jewelry.html" style="color:inherit">Margegold Jewelry — Live Storefront &amp; 8-Slide Conversion System</a></h3>
-<p class="work-lead-desc">Standardized 8-slide listing architecture, macro jewelry photography, and short-form video creatives deployed across a live Shopify store (margejewelry.com), TikTok Shop, Shopee, and Lazada.</p>
+<div class="work-trio-grid">
+<a class="work-trio-item rv" href="work/margegold-jewelry.html">
+<div class="work-trio-visual">
+<img src="assets/images/margegold-cover.jpg" alt="Margegold Jewelry Shopify storefront and marketplace listings" width="800" height="600" loading="lazy" decoding="async">
 </div>
-<div class="work-lead-cta">
-<a class="btn" href="work/margegold-jewelry.html">VIEW CASE STUDY</a>
-</div>
-</div>
-</div>
-
-<div class="work-duo-grid">
-<a class="work-duo-item rv" href="work/philmed-expo-2026.html">
-<div class="work-duo-visual">
-<img src="assets/images/philmed-booth.jpg" alt="PhilMed Expo 2026 3D trade show booth architecture" width="800" height="500" loading="lazy" decoding="async">
-</div>
-<div class="work-duo-body">
-<div class="work-duo-meta">Product Design &middot; 2026</div>
-<h3 class="work-duo-title">PhilMed Expo 2026</h3>
-<p class="work-duo-sum">Turnkey 3D trade show booth architecture, construction elevation drawings, print-ready fascia graphics, and an on-site lead tracking system that captured 91 qualified procurement contacts.</p>
-<div class="work-duo-tags">3D Spatial Modeling &middot; LayOut Elevations &middot; On-Site Lead System</div>
-<span class="work-duo-link">View project &rarr;</span>
+<div class="work-trio-body">
+<h3 class="work-trio-title">Margegold Jewelry</h3>
+<p class="work-trio-contrib">Shopify storefront design and standardized 8-slide listing architecture across multi-channel marketplaces.</p>
+<span class="work-trio-link">View project &rarr;</span>
 </div>
 </a>
 
-<a class="work-duo-item rv" href="work/kpick-website.html">
-<div class="work-duo-visual">
-<img src="assets/images/kpick-web-desk-1.jpg" alt="kpicktradingcorp.com B2B medical procurement UI" width="800" height="500" loading="lazy" decoding="async">
+<a class="work-trio-item rv" href="work/philmed-expo-2026.html">
+<div class="work-trio-visual">
+<img src="assets/images/philmed-booth.jpg" alt="PhilMed Expo 2026 3D trade show booth architecture" width="800" height="600" loading="lazy" decoding="async">
 </div>
-<div class="work-duo-body">
-<div class="work-duo-meta">Branding &amp; Web UI &middot; 2026</div>
-<h3 class="work-duo-title">kpicktradingcorp.com</h3>
-<p class="work-duo-sum">Front-end UI/UX for a regulated medical distribution website, featuring an interactive syringe simulator and direct quote/PO request builder for hospital procurement teams.</p>
-<div class="work-duo-tags">Front-End Design &middot; Interactive Learning Centre &middot; Responsive UI</div>
-<span class="work-duo-link">View project &rarr;</span>
+<div class="work-trio-body">
+<h3 class="work-trio-title">PhilMed Expo 2026</h3>
+<p class="work-trio-contrib">Turnkey 3D booth architecture, construction elevation drawings, and on-site procurement lead system.</p>
+<span class="work-trio-link">View project &rarr;</span>
+</div>
+</a>
+
+<a class="work-trio-item rv" href="work/kpick-website.html">
+<div class="work-trio-visual">
+<img src="assets/images/kpick-web-desk-1.jpg" alt="kpicktradingcorp.com B2B medical procurement UI" width="800" height="600" loading="lazy" decoding="async">
+</div>
+<div class="work-trio-body">
+<h3 class="work-trio-title">kpicktradingcorp.com</h3>
+<p class="work-trio-contrib">Front-end B2B catalog UI featuring an interactive product simulator and procurement quote builder.</p>
+<span class="work-trio-link">View project &rarr;</span>
 </div>
 </a>
 </div>
