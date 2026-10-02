@@ -85,11 +85,11 @@ box-shadow:0 14px 40px var(--shade),inset 0 1px 0 var(--edge-top)}
 .nav-links a.on{color:#F5F2ED;background:var(--acc);font-weight:500}
 [data-theme="light"] .nav-links a:hover{background:rgba(18,16,15,.06)}
 .nav-actions-mob{display:none}
-.burger-btn{width:38px;height:38px;border-radius:10px;background:var(--glass);border:1px solid var(--edge);cursor:pointer;padding:0;position:relative;display:flex;align-items:center;justify-content:center;color:var(--ink);transition:border-color .25s,background .25s}
+.burger-btn{width:40px;height:40px;border-radius:10px;background:var(--glass);border:1px solid var(--edge);cursor:pointer;padding:0;position:relative;display:flex;align-items:center;justify-content:center;color:var(--ink);transition:border-color .25s,background .25s;touch-action:manipulation;-webkit-tap-highlight-color:transparent}
 .burger-btn:hover{border-color:var(--acc);background:var(--glass-2)}
-.burger-btn span{position:absolute;width:18px;height:1.8px;background:currentColor;border-radius:2px;transition:transform .3s var(--ease-editorial),opacity .2s}
-.burger-btn span:nth-child(1){transform:translateY(-4px)}
-.burger-btn span:nth-child(2){transform:translateY(4px)}
+.burger-btn span{position:absolute;width:20px;height:2px;background:currentColor;border-radius:2px;transition:transform .3s var(--ease-editorial),opacity .2s;pointer-events:none}
+.burger-btn span:nth-child(1){transform:translateY(-4.5px)}
+.burger-btn span:nth-child(2){transform:translateY(4.5px)}
 .burger-btn.open span:nth-child(1){transform:translateY(0) rotate(45deg)}
 .burger-btn.open span:nth-child(2){transform:translateY(0) rotate(-45deg)}
 
@@ -101,26 +101,31 @@ box-shadow:0 14px 40px var(--shade),inset 0 1px 0 var(--edge-top)}
   .nav-wrap{padding:0 1.15rem}
   .brand-logo{width:32px;height:32px;border-radius:8px}
   .nav-links{display:none}
-  .nav-actions-mob{display:flex;align-items:center;gap:.45rem}
+  .nav-actions-mob{display:flex;align-items:center;gap:.5rem}
   
   .mobile-nav-drawer{
     display:flex;flex-direction:column;justify-content:space-between;
-    position:fixed;top:62px;left:0;right:0;bottom:0;z-index:190;
+    position:fixed;top:62px;left:0;right:0;bottom:0;width:100%;
+    height:calc(100vh - 62px);height:calc(100dvh - 62px);
+    z-index:999;
+    background:#0B0B0B;
     background:rgba(11,11,11,.98);
     -webkit-backdrop-filter:blur(24px);backdrop-filter:blur(24px);
-    padding:1.75rem 1.5rem 2.25rem;
-    opacity:0;pointer-events:none;transform:translateY(-12px);
-    transition:opacity .3s var(--ease-editorial),transform .3s var(--ease-editorial);
+    padding:1.5rem 1.25rem 2rem;
+    opacity:0;visibility:hidden;pointer-events:none;
+    transform:translateY(-8px);
+    transition:opacity .25s ease,transform .25s ease,visibility .25s;
     overflow-y:auto;
+    -webkit-overflow-scrolling:touch;
   }
-  [data-theme="light"] .mobile-nav-drawer{background:rgba(239,235,228,.98)}
-  .mobile-nav-drawer.open{opacity:1;pointer-events:auto;transform:translateY(0)}
+  [data-theme="light"] .mobile-nav-drawer{background:#EFEBE4;background:rgba(239,235,228,.98)}
+  .mobile-nav-drawer.open{opacity:1;visibility:visible;pointer-events:auto;transform:translateY(0)}
   
   .mobile-nav-links{display:flex;flex-direction:column;gap:.25rem}
   .mobile-nav-links a{
     font-family:'Cormorant Garamond',Georgia,serif;
     font-size:1.85rem;font-weight:400;color:var(--ink);
-    padding:.75rem 0;border-bottom:1px solid var(--edge);
+    padding:.75rem .25rem;border-bottom:1px solid var(--edge);
     text-decoration:none;display:flex;align-items:center;justify-content:space-between;
     transition:color .2s,padding-left .2s;
   }
@@ -128,9 +133,9 @@ box-shadow:0 14px 40px var(--shade),inset 0 1px 0 var(--edge-top)}
   .mobile-nav-links a:hover,.mobile-nav-links a.on{color:var(--acc-text);padding-left:.35rem}
   .mobile-nav-links a.on::after{color:var(--acc-text);transform:translateX(4px)}
   
-  .mobile-nav-foot{margin-top:2rem;display:flex;flex-direction:column;gap:1.25rem}
+  .mobile-nav-foot{margin-top:auto;padding-top:1.75rem;display:flex;flex-direction:column;gap:1.25rem}
   .mobile-nav-foot .btn{width:100%;justify-content:center;min-height:48px}
-  .mobile-nav-socials{display:flex;gap:.75rem;justify-content:center}
+  .mobile-nav-socials{display:flex;gap:.85rem;justify-content:center}
   .mobile-nav-socials a{
     width:44px;height:44px;border-radius:50%;display:flex;align-items:center;justify-content:center;
     background:var(--glass);border:1px solid var(--edge);color:var(--ink);
