@@ -112,16 +112,6 @@ box-shadow:0 14px 40px var(--shade),inset 0 1px 0 var(--edge-top)}
 .hero-cta .btn{margin-top:0}
 @media(max-width:640px){.hero-cta{width:100%}.hero-cta .btn{flex:1 1 100%;justify-content:center}}
 
-/* Ambient Mouse Cursor Halo */
-.cursor-glow{position:fixed;top:0;left:0;width:550px;height:550px;border-radius:50%;
-pointer-events:none;z-index:0;transform:translate3d(-50%,-50%,0);
-background:radial-gradient(circle,rgba(139,13,26,.12) 0%,rgba(139,13,26,.04) 38%,transparent 70%);
-opacity:0;transition:opacity .65s var(--ease-editorial);will-change:transform,opacity}
-[data-theme="light"] .cursor-glow{background:radial-gradient(circle,rgba(139,13,26,.06) 0%,rgba(139,13,26,.02) 40%,transparent 70%)}
-body:hover .cursor-glow{opacity:1}
-@media(pointer:coarse){.cursor-glow{display:none}}
-@media(prefers-reduced-motion:reduce){.cursor-glow{display:none}}
-
 /* ---- nav --------------------------------------------------------------- */
 .pill{position:fixed;left:0;right:0;top:max(.85rem,env(safe-area-inset-top));z-index:100;
 display:flex;justify-content:center;padding:0 1rem;pointer-events:none;
@@ -246,23 +236,13 @@ transition:opacity .85s var(--ease-editorial)}
 .gal .shot:hover,.galfig:hover .shot{border-color:rgba(139,13,26,.65);
 box-shadow:0 24px 60px -10px var(--shade),0 0 28px rgba(139,13,26,.25);transform:translateY(-3px)}
 
-.stats{display:grid;grid-template-columns:repeat(2,1fr);gap:1rem}
-.stats>div{position:relative;background:var(--glass);border:1px solid var(--edge);border-radius:var(--rad);
--webkit-backdrop-filter:blur(20px) saturate(150%);backdrop-filter:blur(20px) saturate(150%);
-box-shadow:0 14px 40px var(--shade),inset 0 1px 0 var(--edge-top);padding:1.75rem 1.25rem;overflow:hidden;
-transform-style:preserve-3d;
-transition:border-color .45s var(--ease-editorial),transform .28s cubic-bezier(0.16,1,0.3,1),box-shadow .45s var(--ease-editorial);
-will-change:transform}
-.stats>div::before{content:'';position:absolute;inset:0;border-radius:inherit;pointer-events:none;
-background:radial-gradient(280px circle at var(--mouse-x,50%) var(--mouse-y,50%),rgba(180,20,40,.2),transparent 70%);
-opacity:0;transition:opacity .45s var(--ease-editorial);z-index:1}
-.stats>div:hover::before{opacity:1}
-.stats>div:hover{border-color:rgba(139,13,26,.6);transform:translateY(-4px);box-shadow:0 22px 55px -10px var(--shade),0 0 28px rgba(139,13,26,.25)}
-.stats .n{display:block;font-family:'Cormorant Garamond',Georgia,serif;font-size:3rem;
-font-weight:300;line-height:1;transition:color .35s var(--ease-editorial)}
-.stats>div:hover .n{color:var(--acc-text)}
-.stats .n::after{content:'';display:block;width:26px;height:2px;background:var(--acc);margin-top:.75rem}
-.stats .l{display:block;margin-top:.6rem}
+/* ---- stats metrics strip (editorial open layout) ------------------------- */
+.stats{display:grid;grid-template-columns:repeat(2,1fr);gap:2.25rem 1.5rem;padding:2.5rem 0 3rem;border-top:1px solid var(--edge);border-bottom:1px solid var(--edge);margin-top:1.5rem}
+@media(min-width:768px){.stats{grid-template-columns:repeat(4,1fr);gap:2.5rem}}
+.stats-item{display:flex;flex-direction:column;position:relative}
+.stats-item .n{display:block;font-family:'Cormorant Garamond',Georgia,serif;font-size:clamp(2.75rem,5.5vw,3.75rem);font-weight:300;line-height:1;color:var(--ink);letter-spacing:-.02em;transition:color .3s var(--ease-editorial)}
+.stats-item:hover .n{color:var(--acc-text)}
+.stats-item .l{display:block;margin-top:.75rem;font-size:11px;text-transform:uppercase;letter-spacing:.2em;color:var(--dim);font-family:'Jost',system-ui,sans-serif;font-weight:400;line-height:1.4}
 
 .marquee{position:relative;z-index:1;overflow:hidden;margin:3.5rem 0;padding:1.1rem 0;
 border-top:1px solid var(--edge);border-bottom:1px solid var(--edge);
@@ -285,41 +265,33 @@ background:var(--acc);margin-left:3rem;opacity:.7}
 .grouphead::before{content:'';flex:0 0 8px;width:8px;height:8px;background:var(--acc);border-radius:2px}
 .grouphead .rule{flex:1;height:1px;background:var(--edge)}
 
-.cards{display:grid;gap:1.5rem;align-items:stretch}
+.cards{display:grid;gap:1.75rem;align-items:stretch}
 .card{display:flex;flex-direction:column;height:100%;position:relative;
 background:var(--glass);border:1px solid var(--edge);border-radius:var(--rad);
 -webkit-backdrop-filter:blur(20px) saturate(150%);backdrop-filter:blur(20px) saturate(150%);
-box-shadow:0 14px 40px var(--shade),inset 0 1px 0 var(--edge-top);overflow:hidden;
-transform-style:preserve-3d;
-transition:border-color .45s var(--ease-editorial),transform .28s cubic-bezier(0.16,1,0.3,1),box-shadow .45s var(--ease-editorial);
-will-change:transform}
-/* Card interactive mouse spotlight reflection */
-.card::before{content:'';position:absolute;inset:0;border-radius:inherit;pointer-events:none;
-background:radial-gradient(360px circle at var(--mouse-x,50%) var(--mouse-y,50%),rgba(180,20,40,.24),transparent 72%);
-opacity:0;transition:opacity .45s var(--ease-editorial);z-index:2}
-[data-theme="light"] .card::before{background:radial-gradient(360px circle at var(--mouse-x,50%) var(--mouse-y,50%),rgba(139,13,26,.12),transparent 72%)}
-.card:hover::before{opacity:1}
-.card:hover{border-color:rgba(139,13,26,.65);
-box-shadow:0 30px 75px -12px var(--shade),0 0 38px rgba(139,13,26,.28),inset 0 1px 0 var(--edge-top)}
-/* flush inside a card; .ph keeps its own wash */
+box-shadow:0 12px 36px var(--shade),inset 0 1px 0 var(--edge-top);overflow:hidden;
+transition:border-color .35s var(--ease-editorial),transform .35s var(--ease-editorial),box-shadow .35s var(--ease-editorial)}
+.card:hover{border-color:rgba(139,13,26,.55);transform:translateY(-4px);
+box-shadow:0 24px 55px -10px var(--shade),0 0 30px rgba(139,13,26,.22),inset 0 1px 0 var(--edge-top)}
 .card .ph,.card .shot{border:0;border-radius:0;box-shadow:none;flex:none}
 .card .shot{background:var(--glass-2)}
-.card:hover .shot img{transform:scale(1.042)}
+.card:hover .shot img{transform:scale(1.028)}
 .card:hover .shot::after{opacity:1}
-.card .body{padding:1.5rem;display:flex;flex-direction:column;flex:1 1 auto}
-.card h3{font-size:1.5rem;font-weight:400;margin-bottom:.6rem;transition:color .45s var(--ease-editorial)}
+.card .body{padding:1.6rem 1.6rem 1.75rem;display:flex;flex-direction:column;flex:1 1 auto}
+.card-meta{display:flex;align-items:center;flex-wrap:wrap;gap:.45rem;margin-bottom:.85rem}
+.card h3{font-size:1.55rem;font-weight:400;line-height:1.2;margin:0 0 .65rem;transition:color .35s var(--ease-editorial)}
 .card:hover h3{color:var(--ink)}
-.card .sum{font-size:.9375rem;color:var(--dim);margin-top:.85rem;line-height:1.6;transition:color .55s var(--ease-editorial)}
+.card .sum{font-size:.9375rem;color:var(--dim);margin:0;line-height:1.65;transition:color .35s var(--ease-editorial)}
 .card:hover .sum{color:var(--ink)}
-.card .more{margin-top:auto;padding-top:1.25rem;align-self:flex-start;
-transition:color .45s var(--ease-editorial),transform .45s var(--ease-editorial)}
-.card .more::after{display:inline-block;transition:transform .45s var(--ease-editorial)}
-.card:hover .more::after{transform:translateX(6px)}
-.card-tags-reveal{display:flex;gap:.35rem;flex-wrap:wrap;margin-top:.85rem;opacity:0;transform:translateY(6px);
-transition:opacity .65s var(--ease-editorial),transform .65s var(--ease-editorial)}
-.card:hover .card-tags-reveal{opacity:1;transform:translateY(0)}
-.card-tag{font-size:9.5px;text-transform:uppercase;letter-spacing:.12em;padding:3px 8px;border-radius:999px;
-background:rgba(245,242,237,.06);border:1px solid var(--edge);color:var(--dim)}
+.card-tags{display:flex;gap:.35rem;flex-wrap:wrap;margin-top:1rem}
+.card-tag{font-size:10px;text-transform:uppercase;letter-spacing:.1em;padding:3px 9px;border-radius:999px;
+background:var(--glass-2);border:1px solid var(--edge);color:var(--dim)}
+.card .more{margin-top:auto;padding-top:1.35rem;align-self:flex-start;
+font:500 11.5px/1 'Jost',system-ui,sans-serif;letter-spacing:.16em;text-transform:uppercase;color:var(--dim);
+display:inline-flex;align-items:center;gap:.45rem;transition:color .3s var(--ease-editorial)}
+.card .more::after{content:'→';display:inline-block;transition:transform .3s var(--ease-editorial)}
+.card:hover .more{color:var(--acc-text)}
+.card:hover .more::after{transform:translateX(5px)}
 
 .chip{display:inline-block;background:var(--glass-2);border:1px solid var(--edge);
 color:var(--ink);padding:5px 11px;border-radius:999px;font-size:10px;text-transform:uppercase;
@@ -1085,91 +1057,6 @@ if(x.isIntersecting){x.target.classList.add('on');o.unobserve(x.target)}})},
    - Global ambient cursor halo (smooth lerp tracking)
    - 3D perspective card tilt with dynamic mouse spotlight
    - Magnetic micro-pull on buttons, theme switch, & nav pills
-   ========================================================== */
-(function(){
-  if(window.matchMedia&&window.matchMedia('(pointer:coarse)').matches)return;
-  if(window.matchMedia&&window.matchMedia('(prefers-reduced-motion:reduce)').matches)return;
-
-  // 1. Ambient cursor halo
-  var glow=document.createElement('div');
-  glow.className='cursor-glow';
-  glow.setAttribute('aria-hidden','true');
-  document.body.appendChild(glow);
-
-  var mouseX=-600,mouseY=-600,curX=-600,curY=-600,glowTicking=false;
-  window.addEventListener('mousemove',function(e){
-    mouseX=e.clientX;
-    mouseY=e.clientY;
-    if(!glowTicking){
-      glowTicking=true;
-      requestAnimationFrame(renderGlow);
-    }
-  },{passive:true});
-
-  function renderGlow(){
-    curX+=(mouseX-curX)*0.14;
-    curY+=(mouseY-curY)*0.14;
-    glow.style.transform='translate3d('+(curX-275)+'px,'+(curY-275)+'px,0)';
-    if(Math.abs(mouseX-curX)>0.2||Math.abs(mouseY-curY)>0.2){
-      requestAnimationFrame(renderGlow);
-    }else{
-      glowTicking=false;
-    }
-  }
-
-  // 2. 3D Tilt & Cursor Spotlight on Cards & Blocks
-  function initTilt(selector, maxTilt){
-    var items=document.querySelectorAll(selector);
-    items.forEach(function(el){
-      var frame=null;
-      el.addEventListener('mousemove',function(e){
-        var rect=el.getBoundingClientRect();
-        var x=e.clientX-rect.left;
-        var y=e.clientY-rect.top;
-        el.style.setProperty('--mouse-x',x+'px');
-        el.style.setProperty('--mouse-y',y+'px');
-        if(frame)cancelAnimationFrame(frame);
-        frame=requestAnimationFrame(function(){
-          var normX=(x/rect.width-0.5)*2;
-          var normY=(y/rect.height-0.5)*2;
-          var rx=(-normY*maxTilt).toFixed(2);
-          var ry=(normX*maxTilt).toFixed(2);
-          el.style.transform='perspective(900px) rotateX('+rx+'deg) rotateY('+ry+'deg) translateY(-6px)';
-        });
-      },{passive:true});
-
-      el.addEventListener('mouseleave',function(){
-        if(frame)cancelAnimationFrame(frame);
-        el.style.transform='';
-      });
-    });
-  }
-
-  initTilt('.card', 4.5);
-  initTilt('.service-card, .tool-box, .pro-card', 3.5);
-  initTilt('.stats>div', 3.0);
-
-  // 3. Magnetic pull on buttons and nav pills
-  function initMagnetic(selector, strength){
-    var targets=document.querySelectorAll(selector);
-    targets.forEach(function(el){
-      el.addEventListener('mousemove',function(e){
-        var rect=el.getBoundingClientRect();
-        var dx=(e.clientX-(rect.left+rect.width/2))*strength;
-        var dy=(e.clientY-(rect.top+rect.height/2))*strength;
-        el.style.transform='translate3d('+dx.toFixed(1)+'px,'+dy.toFixed(1)+'px,0)';
-      },{passive:true});
-      el.addEventListener('mouseleave',function(){
-        el.style.transform='';
-      });
-    });
-  }
-
-  initMagnetic('.btn:not(.foot-vcard)', 0.16);
-  initMagnetic('.tgl', 0.22);
-  initMagnetic('.socialrow a', 0.22);
-  initMagnetic('.pill-in a', 0.12);
-})();
 """
 
 
@@ -1709,11 +1596,12 @@ def card_html(pr, base="work/", up=""):
     tags_html = ""
     if pr.get("tags"):
         tags_chips = "".join(f'<span class="card-tag">{E(t)}</span>' for t in pr['tags'][:3])
-        tags_html = f'<div class="card-tags-reveal">{tags_chips}</div>'
+        tags_html = f'<div class="card-tags">{tags_chips}</div>'
     return f'''<a class="card rv" href="{base}{pr['slug']}.html">
 {visual}
-<div class="body"><div style="display:flex;align-items:center;flex-wrap:wrap;gap:.4rem"><span class="chip">{E(d)}</span>{live_chip}</div>
-<h3 style="margin-top:.85rem">{E(pr['title'])}</h3>
+<div class="body">
+<div class="card-meta"><span class="chip">{E(d)}</span>{live_chip}</div>
+<h3>{E(pr['title'])}</h3>
 <p class="sum">{E(pr['summary'])}</p>
 {tags_html}
 <span class="more">View project</span></div></a>'''
@@ -1724,22 +1612,13 @@ def build_home():
     p = PROFILE
     feat = [x for x in PROJECTS if x.get('featured')]
     stats = "".join(
-        f'<div class="rv"><span class="n" data-count>{E(s["n"])}</span>'
-        f'<span class="eyebrow muted l">{E(s["l"])}</span></div>' for s in STATS)
+        f'<div class="stats-item rv"><span class="n" data-count>{E(s["n"])}</span>'
+        f'<span class="l">{E(s["l"])}</span></div>' for s in STATS)
     cards = "".join(card_html(x, base="work/", up="") for x in feat)
     strip = "".join(f'<span>{E(x)}</span>' for x in MARQUEE)
     marquee = (f'<div class="marquee" aria-label="What I do">'
                f'<div class="mtrack"><div class="mset">{strip}</div>'
                f'<div class="mset" aria-hidden="true">{strip}</div></div></div>')
-    # 2026-09-14 hero rebuild.
-    #   * The kicker alone ("MULTIDISCIPLINARY CREATIVE SPECIALIST") is a label,
-    #     not an explanation — hero_headline now states the actual work in one
-    #     sentence, immediately under it.
-    #   * SAVE TO CONTACTS was the single prominent button. That is the right
-    #     first action on the NFC card page (card.html still has it) and the
-    #     wrong one for a portfolio visitor, whose first action is to look at
-    #     the work. Replaced by two real CTAs; "Save contact" still exists in
-    #     the footer, which is where a secondary action belongs.
     body = f'''<header id="top"><div class="wrap"><div class="headrow"><div>
 <h1 class="hin">{E(p['name'])}</h1>
 <p class="eyebrow muted sub hin" style="--d:160ms">{E(p['subtitle'])}</p>
@@ -1751,8 +1630,8 @@ def build_home():
 </div>
 </div></div></header>
 <main><div class="wrap">
-<section class="rv"><p class="lede">{E(p['intro'])}</p></section>
-<section class="stats" style="padding-top:0">{stats}</section>
+<section class="rv" style="padding-bottom:0"><p class="lede">{E(p['intro'])}</p></section>
+<section class="stats">{stats}</section>
 </div>{marquee}<div class="wrap">
 <section id="work"><h2 class="eyebrow grouphead"><span>SELECTED WORK</span><span class="rule"></span></h2>
 <div class="cards">{cards}</div>
