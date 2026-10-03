@@ -45,7 +45,7 @@ CSS = """
  --glass:rgba(245,242,237,.025);--glass-2:rgba(245,242,237,.05);
  --edge:rgba(245,242,237,.08);--edge-top:rgba(245,242,237,.16);
  --shade:rgba(0,0,0,.5);--blob1:rgba(139,13,26,.10);--blob2:rgba(139,13,26,.04);
- --max:82rem;--pad:1.75rem;--rad:6px;
+ --max:82rem;--pad:2rem;--rad:6px;
  /* Intentional Editorial Motion Tokens */
  --ease-editorial:cubic-bezier(0.16,1,0.3,1);
  --ease-soft:cubic-bezier(0.25,1,0.5,1);
@@ -56,10 +56,10 @@ CSS = """
  --dur-slow:1.2s;
 }
 @media(min-width:1200px){
- :root{--max:94rem;--pad:3rem}
+ :root{--max:86rem;--pad:3rem}
 }
-@media(min-width:1600px){
- :root{--max:104rem;--pad:4rem}
+@media(min-width:1440px){
+ :root{--max:90rem;--pad:3.5rem}
 }
 [data-theme="light"]{
  --bg:#EFEBE4;--ink:#12100F;--dim:rgba(18,16,15,.65);
@@ -101,9 +101,10 @@ font-family:'Jost',system-ui,sans-serif}
 .site-header{position:sticky;top:0;left:0;right:0;z-index:200;background:rgba(11,11,11,.92);-webkit-backdrop-filter:blur(20px);backdrop-filter:blur(20px);border-bottom:1px solid var(--edge);height:72px;display:flex;align-items:center;transition:background .35s var(--ease-editorial),border-color .35s}
 [data-theme="light"] .site-header{background:rgba(239,235,228,.92)}
 .nav-wrap{max-width:var(--max);margin:0 auto;padding:0 var(--pad);display:flex;align-items:center;justify-content:space-between;width:100%;height:100%}
-.brand-link{display:inline-flex;align-items:center;text-decoration:none;transition:transform .25s var(--ease-editorial)}
-.brand-link:hover{transform:scale(1.05)}
-.brand-logo{width:34px;height:34px;border-radius:6px;display:block}
+.brand-link{display:inline-flex;align-items:center;gap:.65rem;text-decoration:none;transition:opacity .25s var(--ease-editorial)}
+.brand-link:hover{opacity:.85}
+.brand-logo{width:30px;height:30px;border-radius:4px;display:block;flex:none}
+.brand-name{font:400 15px/1 'Jost',system-ui,sans-serif;letter-spacing:.02em;color:var(--ink);white-space:nowrap}
 .nav-links{display:flex;align-items:center;gap:.35rem}
 .nav-links a{padding:.45rem .85rem;border-radius:6px;font:400 14px/1 'Jost',system-ui,sans-serif;letter-spacing:.04em;color:var(--dim);text-decoration:none;transition:color .25s,background .25s}
 .nav-links a:hover{color:var(--ink);background:rgba(245,242,237,.06)}
@@ -226,6 +227,7 @@ transition:background .25s var(--ease-editorial),transform .2s var(--ease-editor
 [data-theme="light"] .hero-art-grad{background:linear-gradient(90deg, #EFEBE4 0%, rgba(239,235,228,.95) 40%, rgba(239,235,228,.65) 62%, rgba(239,235,228,0.15) 85%)}
 .hero-art-wrap{position:relative;z-index:1;display:flex;align-items:center;width:100%}
 .hero-art-content{max-width:46rem;display:flex;flex-direction:column;align-items:flex-start;text-align:left}
+.hero-art-content .hero-identity{font:400 12.5px/1.4 'Jost',system-ui,sans-serif;letter-spacing:.2em;text-transform:uppercase;color:var(--dim);margin:0 0 1.15rem;display:inline-block}
 .hero-art-content h1{font-family:'Cormorant Garamond',Georgia,serif;font-size:clamp(2.85rem,5.8vw,4.5rem);font-weight:300;letter-spacing:-.015em;line-height:1.08;margin:0 0 1.25rem;color:var(--ink)}
 .hero-art-content .hero-lead{font-size:clamp(1.1rem,1.7vw,1.25rem);color:var(--dim);line-height:1.65;margin:0 0 2rem;max-width:38rem}
 .hero-actions-compact{display:flex;align-items:center;justify-content:flex-start;gap:1.75rem;flex-wrap:wrap}
@@ -240,6 +242,7 @@ transition:background .25s var(--ease-editorial),transform .2s var(--ease-editor
   [data-theme="light"] .hero-art-media img{opacity:.75;filter:brightness(1.02)}
   [data-theme="light"] .hero-art-grad{background:linear-gradient(180deg, rgba(239,235,228,.78) 0%, rgba(239,235,228,.45) 45%, rgba(239,235,228,.88) 100%),linear-gradient(90deg, rgba(239,235,228,.82) 0%, rgba(239,235,228,.2) 100%)}
   .hero-art-content{max-width:100%;position:relative;z-index:2}
+  .hero-art-content .hero-identity{font-size:11.5px;letter-spacing:.16em;margin-bottom:.75rem}
   .hero-art-content h1{font-size:clamp(1.85rem,6.4vw,2.35rem);line-height:1.15;margin-bottom:.75rem}
   .hero-art-content .hero-lead{font-size:.95rem;line-height:1.55;margin-bottom:1.35rem;color:#E5E2DC}
   [data-theme="light"] .hero-art-content .hero-lead{color:var(--dim)}
@@ -271,34 +274,25 @@ transition:background .25s var(--ease-editorial),transform .2s var(--ease-editor
   .work-trio-title{font-size:1.45rem}
 }
 
-/* ---- Capabilities: What I can help with (Asymmetric Open Rows) ----------- */
+/* ---- Capabilities: What I do (Asymmetric Open Rows) ----------------- */
 .cap-section{padding:5.5rem 0 4.5rem;border-top:1px solid var(--edge);position:relative;z-index:1}
-.cap-list{display:flex;flex-direction:column;margin-top:3rem}
-.cap-row{display:grid;grid-template-columns:320px 1fr;gap:4.5rem;padding:2.75rem 0;border-top:1px solid var(--edge);align-items:start}
+.cap-list{display:flex;flex-direction:column;margin-top:2.5rem}
+.cap-row{display:grid;grid-template-columns:320px 1fr;gap:4.5rem;padding:2.25rem 0;border-top:1px solid var(--edge);align-items:center}
 @media(min-width:1400px){.cap-row{grid-template-columns:380px 1fr;gap:6rem}}
 .cap-row:last-child{border-bottom:1px solid var(--edge)}
-.cap-header h3{font-size:1.85rem;font-weight:400;color:var(--ink);margin:0 0 .4rem;line-height:1.2}
-.cap-tools{font-size:11.5px;color:var(--dim);letter-spacing:.04em;font-family:'Jost',system-ui,sans-serif;line-height:1.5;display:block}
-.cap-content{display:flex;flex-direction:column;gap:1.15rem}
-.cap-content p{font-size:1.025rem;color:var(--ink);line-height:1.75;margin:0;max-width:65ch}
-.cap-bullets{list-style:none;padding:0;margin:0;display:grid;gap:.65rem}
-.cap-bullets li{font-size:14px;color:var(--dim);display:flex;align-items:baseline;gap:.75rem;line-height:1.6}
-.cap-bullets li::before{content:'—';color:var(--acc-text);font-weight:400;flex:none}
+.cap-header h3{font-size:1.85rem;font-weight:400;color:var(--ink);margin:0;line-height:1.2}
+.cap-content{display:flex;flex-direction:column}
+.cap-content p{font-size:1.05rem;color:var(--dim);line-height:1.7;margin:0;max-width:65ch}
 @media(max-width:850px){
-  .cap-row{grid-template-columns:1fr;gap:1.25rem;padding:2rem 0}
+  .cap-row{grid-template-columns:1fr;gap:.6rem;padding:1.65rem 0}
 }
 
-/* ---- How I Work: Process & Philosophy (Open Grid) ------------------------ */
-.process-section{padding:4.5rem 0 5.5rem;position:relative;z-index:1}
-.process-philo{font-size:clamp(1.25rem,2.8vw,1.65rem);font-family:'Cormorant Garamond',Georgia,serif;line-height:1.45;color:var(--ink);max-width:52rem;margin:1.5rem 0 3.5rem;font-style:italic}
-.process-steps{display:grid;grid-template-columns:repeat(3,1fr);gap:3.5rem;border-top:1px solid var(--edge);padding-top:3rem}
-.process-step{display:flex;flex-direction:column;gap:.75rem}
-.process-step-num{font-size:11px;font-family:'Jost',system-ui,sans-serif;text-transform:uppercase;letter-spacing:.2em;color:var(--acc-text);font-weight:500}
-.process-step h4{font-size:1.45rem;font-weight:400;color:var(--ink);margin:0;line-height:1.2}
-.process-step p{font-size:.95rem;color:var(--dim);line-height:1.7;margin:0;max-width:44ch}
-@media(max-width:850px){
-  .process-steps{grid-template-columns:1fr;gap:2.25rem}
-}
+/* ---- Personal Intro Section --------------------------------------------- */
+.intro-section{padding:5rem 0;border-top:1px solid var(--edge);position:relative;z-index:1}
+.intro-content{margin-top:2.25rem;max-width:58rem}
+.intro-text{font-size:clamp(1.15rem,2.2vw,1.4rem);line-height:1.65;color:var(--ink);font-weight:300;margin:0 0 1.5rem}
+.intro-link{font:400 12.5px/1 'Jost',system-ui,sans-serif;letter-spacing:.14em;text-transform:uppercase;color:var(--dim);display:inline-flex;align-items:center;gap:.4rem;text-decoration:none;transition:color .25s,transform .25s}
+.intro-link:hover{color:var(--acc-text);transform:translateX(3px)}
 
 /* ---- sections ---------------------------------------------------------- */
 section{padding:4.5rem 0;position:relative;z-index:1}
@@ -1122,7 +1116,8 @@ def nav(active, up=""):
                   f'</div>')
     return (f'<header class="site-header"><div class="nav-wrap">'
             f'<a class="brand-link" href="{up}index.html" aria-label="{E(PROFILE["name"])} - Home">'
-            f'<img class="brand-logo" src="{up}assets/images/favicon.png" alt="JL Logo" width="36" height="36">'
+            f'<img class="brand-logo" src="{up}assets/images/favicon.png" alt="JL Logo" width="30" height="30">'
+            f'<span class="brand-name">{E(PROFILE["name"])}</span>'
             f'</a>'
             f'<nav class="nav-links" aria-label="Main Navigation">{"".join(out)}{tgl}</nav>'
             f'<div class="nav-actions-mob">{tgl}{burger}</div>'
@@ -1545,21 +1540,17 @@ def footer():
     p = PROFILE
     return f'''<footer id="contact">
 <div class="wrap footrow">
-<div class="foot-left"><h2 class="serif">Let's talk.</h2>{contact_nav()}
+<div class="foot-left"><h2 class="serif">Let's talk.</h2>
+<p style="margin-top:.75rem;color:var(--dim);font-size:1.05rem;max-width:34ch">Have a project, opportunity, or question? Feel free to reach out directly or send a message.</p>
+{contact_nav()}
 <div class="copy"><span class="eyebrow muted">© 2026 {E((p['name']).upper())}</span>
 <span class="eyebrow muted">{E((p['location']).upper())}</span></div></div>
-<div class="lead-col"><h3 class="serif">Or leave a message</h3><p>Tell me about the store or project. I reply by email within the day.</p>{lead_form('footer', extra='<button class="btn ghost foot-vcard" type="button" onclick="downloadVCard()"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><use href="#i-dl"/></svg>Save contact</button>')}</div>
+<div class="lead-col"><h3 class="serif">Send a message</h3><p>Tell me about your project or inquiry. I reply by email within the day.</p>{lead_form('footer', extra='<button class="btn ghost foot-vcard" type="button" onclick="downloadVCard()"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><use href="#i-dl"/></svg>Save contact</button>')}</div>
 </div></footer>'''
 
 
 def portrait_html(ratio="r34", note="IMAGE \u2014 PORTRAIT", style=""):
-    """The photo on the home and About pages, or a placeholder if none is set.
-
-    The ratio is locked on the WRAPPER and the image is absolutely positioned
-    inside it. Putting aspect-ratio on the <img> itself fights the file's own
-    intrinsic ratio and the width/height attributes, which is how it ended up
-    taller than the box it was supposed to sit in.
-    """
+    """The photo on the home and About pages, or a placeholder if none is set."""
     st = ' style="%s"' % style if style else ""
     f = PROFILE.get("portrait")
     if not f:
@@ -1581,15 +1572,6 @@ def is_image(val):
 
 
 def images_with_prefix(prefix):
-    """Every file in Portfolio/images/ whose name starts with prefix, sorted.
-
-    Added 2026-09-14 for the pubmat feed. The alternative was listing thirty
-    filenames by hand in content.py, which has two problems: the list goes stale
-    the moment a post is added, and check_portfolio.py then reports a missing
-    file for a typo nobody can see. Reading the folder means adding next month's
-    pubmats is dropping files in — no code edit, no caption count to keep in
-    step. Sorted by name, which is why the importer numbers them 01, 02, 03.
-    """
     src = os.path.join(os.path.dirname(os.path.abspath(__file__)), "images")
     if not os.path.isdir(src):
         return []
@@ -1598,19 +1580,6 @@ def images_with_prefix(prefix):
 
 
 def project_cover(pr):
-    """The cover image for a project, resolved in order of certainty.
-
-    "cover"        — an exact filename, wins if given.
-    "cover_prefix" — the FIRST file in images/ starting with that prefix. Added
-                     2026-09-14 after a real failure: the cover was hard-coded as
-                     kpick-medical-01.jpg while the importer names the file after
-                     whatever extension the source had. If the zip held PNGs the
-                     reference pointed at a file that would never exist, and
-                     check_portfolio.py blocked the push for a one-character
-                     mismatch nobody could see. Matching the prefix removes the
-                     guess entirely.
-    "cover_note"   — the designed text placeholder, when there is no image yet.
-    """
     if pr.get("cover"):
         return pr["cover"]
     if pr.get("cover_prefix"):
@@ -1621,24 +1590,17 @@ def project_cover(pr):
 
 
 def render_media(val, ratio="r43", alt="", up=""):
-    """Render a responsive .shot container if val is an image file, or .ph placeholder if text."""
     if is_image(val):
         val = val.strip()
         src = val if val.startswith(("http://", "https://", "/")) else f"{up}assets/images/{val}"
         return (f'<div class="shot {ratio}">'
                 f'<img src="{E(src)}" alt="{E(alt)}" width="800" height="600" '
                 f'loading="lazy" decoding="async"></div>')
-    # No photograph for this one yet - draw a designed panel, not a broken box.
-    # "Image - rendered product" is scaffolding language, so strip the leading
-    # "Image" and show the subject only; the title carries the panel.
     note = (val or "").strip()
     for lead in ("Image — ", "Image - ", "Image: ", "Image"):
         if note.lower().startswith(lead.lower()):
             note = note[len(lead):].strip()
             break
-    # `alt` is the project title on a cover, but the CAPTION on a gallery tile -
-    # and a caption is a whole sentence, which cannot be the panel's headline.
-    # Anything long means we were handed a caption: show the subject instead.
     title = (alt or "").strip()
     if len(title) > 46 or title.lower().endswith(" preview"):
         title = note
@@ -1656,8 +1618,6 @@ def render_media(val, ratio="r43", alt="", up=""):
 
 
 def card_html(pr, base="work/", up=""):
-    """base is the path prefix to the work/ folder from the page being built;
-    up is the path prefix to the assets/ folder."""
     d = DISCIPLINES[pr['discipline']]
     cover = project_cover(pr)
     visual = render_media(cover, "r43", pr['title'], up=up)
@@ -1707,18 +1667,19 @@ def build_home():
 </div>
 <div class="wrap hero-art-wrap">
 <div class="hero-art-content">
-<h1 class="hin" style="--d:100ms">Thoughtful visuals.<br>Connected experiences.</h1>
-<p class="hero-lead hin" style="--d:180ms">I design brand content, online stores, and practical systems that help businesses stay consistent.</p>
+<p class="hero-identity hin" style="--d:50ms">PERSONAL PORTFOLIO</p>
+<h1 class="hin" style="--d:120ms">Hi, I’m Jamielyn.<br>I design visuals, websites, and systems.</h1>
+<p class="hero-lead hin" style="--d:190ms">Explore my work across brand content, e-commerce, and practical automation—from the finished designs to the thinking behind them.</p>
 <div class="hero-actions-compact hin" style="--d:260ms">
-<a class="btn" href="#work"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><use href="#i-star"/></svg>EXPLORE MY WORK</a>
-<a class="hero-link-sec" href="#contact">Get in touch &rarr;</a>
+<a class="btn" href="#work">View my work</a>
+<a class="hero-link-sec" href="about.html">About me &rarr;</a>
 </div>
 </div>
 </div></header>
 
 <main>
 <div class="wrap">
-<section id="work" style="padding:4rem 0 3rem">
+<section id="work" style="padding:4.5rem 0 3.5rem">
 <div class="feat-head rv">
 <h2><span>SELECTED WORK</span></h2>
 </div>
@@ -1726,93 +1687,73 @@ def build_home():
 <div class="work-trio-grid">
 <a class="work-trio-item rv" href="work/margegold-jewelry.html">
 <div class="work-trio-visual">
-<img src="assets/images/margegold-cover.jpg" alt="Margegold Jewelry Shopify storefront and marketplace listings" width="800" height="600" loading="lazy" decoding="async">
+<img src="assets/images/margegold-cover.jpg" alt="Margegold Jewelry Shopify storefront and listing design" width="800" height="600" loading="lazy" decoding="async">
 </div>
 <div class="work-trio-body">
 <h3 class="work-trio-title">Margegold Jewelry</h3>
-<p class="work-trio-contrib">Shopify storefront design and standardized 8-slide listing architecture across multi-channel marketplaces.</p>
+<p class="work-trio-contrib"><strong style="color:var(--ink);font-weight:400">My role:</strong> Shopify storefront design, 8-slide listing image architecture, and paid ad creative sets.</p>
 <span class="work-trio-link">View project &rarr;</span>
 </div>
 </a>
 
 <a class="work-trio-item rv" href="work/philmed-expo-2026.html">
 <div class="work-trio-visual">
-<img src="assets/images/philmed-booth.jpg" alt="PhilMed Expo 2026 3D trade show booth architecture" width="800" height="600" loading="lazy" decoding="async">
+<img src="assets/images/philmed-cover.jpg" alt="PhilMed Expo 2026 3D trade show booth render in SketchUp" width="800" height="600" loading="lazy" decoding="async">
 </div>
 <div class="work-trio-body">
 <h3 class="work-trio-title">PhilMed Expo 2026</h3>
-<p class="work-trio-contrib">Turnkey 3D booth architecture, construction elevation drawings, and on-site procurement lead system.</p>
+<p class="work-trio-contrib"><strong style="color:var(--ink);font-weight:400">My role:</strong> Turnkey 3D booth spatial design in SketchUp, elevation drawings, and on-site lead tracking.</p>
 <span class="work-trio-link">View project &rarr;</span>
 </div>
 </a>
 
 <a class="work-trio-item rv" href="work/kpick-website.html">
 <div class="work-trio-visual">
-<img src="assets/images/kpick-web-desk-1.jpg" alt="kpicktradingcorp.com B2B medical procurement UI" width="800" height="600" loading="lazy" decoding="async">
+<img src="assets/images/kpick-web-desk-1.jpg" alt="kpicktradingcorp.com B2B website UI screenshot" width="800" height="600" loading="lazy" decoding="async">
 </div>
 <div class="work-trio-body">
 <h3 class="work-trio-title">kpicktradingcorp.com</h3>
-<p class="work-trio-contrib">Front-end B2B catalog UI featuring an interactive product simulator and procurement quote builder.</p>
+<p class="work-trio-contrib"><strong style="color:var(--ink);font-weight:400">My role:</strong> Front-end B2B website design with interactive medical device simulator and quote builder.</p>
 <span class="work-trio-link">View project &rarr;</span>
 </div>
 </a>
 </div>
 
 <div style="margin-top:3.5rem;text-align:center">
-<a class="btn ghost" href="work/index.html" style="display:inline-flex;width:auto;margin:0 auto">VIEW ALL {len(PROJECTS)} PROJECTS &rarr;</a>
+<a class="btn ghost" href="work/index.html" style="display:inline-flex;width:auto;margin:0 auto">View all projects &rarr;</a>
 </div>
 </section>
 </div>
 
-<section class="cap-section" id="capabilities">
+<section class="cap-section" id="what-i-do">
 <div class="wrap">
-<h2 class="eyebrow grouphead"><span>WHAT I CAN HELP WITH</span><span class="rule"></span></h2>
+<h2 class="eyebrow grouphead"><span>WHAT I DO</span><span class="rule"></span></h2>
 <div class="cap-list">
 
 <div class="cap-row rv">
 <div class="cap-header">
-<h3>Content &amp; campaigns</h3>
-<span class="cap-tools">Photoshop &middot; Illustrator &middot; CapCut &middot; Premiere Pro &middot; Notion</span>
+<h3>Brand &amp; content design</h3>
 </div>
 <div class="cap-content">
-<p>End-to-end multi-brand content strategy and visual production that keeps brands posting consistently with unified visual standards.</p>
-<ul class="cap-bullets">
-<li>~30 branded monthly social pubmats, educational carousels, and promotional banners per brand</li>
-<li>Short-form video scripting and vertical edits paced for sound-off mobile retention on TikTok &amp; Reels</li>
-<li>Tailor-made direct-response ad creative sets (4:5, 1:1, 9:16) aligned to cold and warm audiences</li>
-</ul>
+<p>Social media pubmats, educational carousels, and short-form video scripts built for consistent multi-brand publishing.</p>
 </div>
 </div>
 
 <div class="cap-row rv">
 <div class="cap-header">
 <h3>E-commerce &amp; web</h3>
-<span class="cap-tools">Shopify &middot; Shopee &middot; Lazada &middot; TikTok Shop &middot; Figma &middot; HTML/CSS</span>
 </div>
 <div class="cap-content">
-<p>Storefront and listing optimization that turns casual scrollers into buyers while protecting catalogs from regulatory suspension.</p>
-<ul class="cap-bullets">
-<li>Conversion-engineered 8-slide listing image architecture standardized across product catalogues</li>
-<li>Mobile-first storefront design, custom campaign banners, and structured A+ content layouts</li>
-<li>Marketplace compliance audits, banned claim scrub, and resolution of flagged restricted listings</li>
-<li>Clean, responsive B2B web experiences and interactive product simulators</li>
-</ul>
+<p>Marketplace storefront design, standardized 8-slide listing image architectures, and clean responsive website front-ends.</p>
 </div>
 </div>
 
 <div class="cap-row rv">
 <div class="cap-header">
-<h3>Systems &amp; automation</h3>
-<span class="cap-tools">Python &middot; Telegram Bot API &middot; Notion API &middot; n8n &middot; Flask</span>
+<h3>3D visual &amp; automation</h3>
 </div>
 <div class="cap-content">
-<p>Practical automations that eliminate repetitive admin and keep multi-brand operations running smoothly without manual babysitting.</p>
-<ul class="cap-bullets">
-<li>Centralized Notion content calendars with automated task dispatch to social media coordinators</li>
-<li>Automated Telegram team accomplishment bots and end-of-day summary collectors</li>
-<li>ERP-to-dashboard sales action feeds, inventory velocity alerts, and scheduled sync daemons</li>
-<li>Foreign manufacturer sourcing, due-diligence screening, and regulatory feasibility matrices</li>
-</ul>
+<p>3D trade show booth modeling in SketchUp, parametric product renders, and automated workflow bots that reduce repetitive manual tasks.</p>
 </div>
 </div>
 
@@ -1820,30 +1761,12 @@ def build_home():
 </div>
 </section>
 
-<section class="process-section" id="process">
+<section class="intro-section" id="about-intro">
 <div class="wrap">
-<h2 class="eyebrow grouphead"><span>HOW I WORK</span><span class="rule"></span></h2>
-<p class="process-philo">&ldquo;I would rather build the boring system than do the same task ninety times.&rdquo;</p>
-<div class="process-steps">
-
-<div class="process-step rv">
-<span class="process-step-num">01 / ARCHITECTURE</span>
-<h4>Define the System</h4>
-<p>Every project starts with structural discipline. Before opening production software, I set exact scales, component grids, and brand guidelines so all outputs read as one company.</p>
-</div>
-
-<div class="process-step rv">
-<span class="process-step-num">02 / PRODUCTION</span>
-<h4>Execute with Rigor</h4>
-<p>Whether rendering 3D spatial models, editing sound-off vertical video, or building e-commerce listings, assets are produced with strict regulatory compliance and conversion intent.</p>
-</div>
-
-<div class="process-step rv">
-<span class="process-step-num">03 / AUTOMATION</span>
-<h4>Automate the Handoff</h4>
-<p>I build the templates, Notion databases, and automated bots that keep the surface consistent after delivery, so teams can maintain the standard without starting from scratch.</p>
-</div>
-
+<h2 class="eyebrow grouphead"><span>ABOUT ME</span><span class="rule"></span></h2>
+<div class="intro-content rv">
+<p class="intro-text">I’m a designer with an architectural background from the University of Northeastern Philippines, based in Manila. I work across digital storefronts, marketing content, and 3D spatial design—paired with practical automations that keep brand touchpoints consistent and easy to maintain.</p>
+<a class="intro-link" href="about.html">Read more about my background &rarr;</a>
 </div>
 </div>
 </section>
