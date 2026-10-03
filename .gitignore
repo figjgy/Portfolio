@@ -14,3 +14,13 @@ _run_hub_check.bat
 
 # NOTE: site/ MUST stay committed. Vercel does not run build.py,
 # so if site/ is ignored there is literally nothing to serve.
+
+# Temporary proof and scratch images
+proof_*.png
+diff_*.png
+mid_*.png
+scratch_*.png
+stage_*.png
+isolated_*.png
+full_page_*.png
+test_*.png

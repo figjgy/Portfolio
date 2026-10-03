@@ -71,9 +71,14 @@ body{
  overflow:hidden;background:var(--glass);border:1px solid var(--edge);
  display:flex;align-items:center;justify-content:center;
 }
-/* absolute, so it COVERS the initials instead of sharing the flex row */
-.av img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block}
-.av span{font-size:2rem;font-weight:600;letter-spacing:.04em;color:var(--dim)}
+.pose-avatar{position:relative;width:100%;height:100%;overflow:hidden;background:#580512;user-select:none;-webkit-user-select:none;z-index:2}
+.pose-avatar .pose-img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:none;pointer-events:none}
+.pose-avatar .pose-img.active{display:block}
+@media(prefers-reduced-motion:reduce){
+  .pose-avatar .pose-img{display:none!important}
+  .pose-avatar .pose-img[data-pose="center"]{display:block!important}
+}
+.av span{display:none}
 .eyebrow{margin:0;font-size:10px;font-weight:400;letter-spacing:.26em;color:var(--dim)}
 h1{margin:clamp(.35rem,1.2vh,.6rem) 0 0;font-family:Georgia,'Times New Roman',serif;
 font-size:clamp(1.6rem,5vh,2.1rem);
@@ -176,9 +181,19 @@ transition:opacity .25s,transform .25s;z-index:300;box-shadow:0 12px 32px var(--
  <button class="toggle" type="button" id="t" aria-label="Switch between dark and light"></button>
 
  <div class="av">
-  <img src="assets/images/profile.jpg" alt="Jamielyn Ludovice"
-       onerror="this.remove()">
-  <span aria-hidden="true">JL</span>
+  <div class="pose-avatar" data-avatar="pose-switcher" style="border-radius:50%">
+   <img class="pose-img active" data-pose="center" src="assets/images/avatar_poses/pose-center.png" alt="Jamielyn Ludovice" width="512" height="512">
+   <img class="pose-img" data-pose="trans-left" src="assets/images/avatar_poses/pose-trans-left.png" alt="" width="512" height="512" aria-hidden="true">
+   <img class="pose-img" data-pose="look-left" src="assets/images/avatar_poses/pose-look-left.png" alt="" width="512" height="512" aria-hidden="true">
+   <img class="pose-img" data-pose="trans-right" src="assets/images/avatar_poses/pose-trans-right.png" alt="" width="512" height="512" aria-hidden="true">
+   <img class="pose-img" data-pose="look-right" src="assets/images/avatar_poses/pose-look-right.png" alt="" width="512" height="512" aria-hidden="true">
+   <img class="pose-img" data-pose="trans-up" src="assets/images/avatar_poses/pose-trans-up.png" alt="" width="512" height="512" aria-hidden="true">
+   <img class="pose-img" data-pose="look-up" src="assets/images/avatar_poses/pose-look-up.png" alt="" width="512" height="512" aria-hidden="true">
+   <img class="pose-img" data-pose="trans-down" src="assets/images/avatar_poses/pose-trans-down.png" alt="" width="512" height="512" aria-hidden="true">
+   <img class="pose-img" data-pose="look-down" src="assets/images/avatar_poses/pose-look-down.png" alt="" width="512" height="512" aria-hidden="true">
+   <img class="pose-img" data-pose="blink" src="assets/images/avatar_poses/pose-blink.png" alt="" width="512" height="512" aria-hidden="true">
+  </div>
+  <span aria-hidden="true" style="position:absolute;z-index:0">JL</span>
  </div>
 
  <p class="eyebrow">DIGITAL BUSINESS CARD</p>
@@ -279,5 +294,286 @@ function shareCard(){
   showToast(window.location.href);
  }
 }
+
+(function(){
+  var switchers = document.querySelectorAll('[data-avatar="pose-switcher"]');
+  if(!switchers.length) return;
+
+  var mediaMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
+  var isReduced = mediaMotion.matches;
+  if(mediaMotion.addEventListener){
+    mediaMotion.addEventListener('change', function(e){
+      isReduced = e.matches;
+      if(isReduced){ setAllTarget('center'); }
+    });
+  }
+
+  // Preload all 10 images (endpoints + intermediate frames) to guarantee zero flashing
+  var poseNames = [
+    'center',
+    'trans-left', 'look-left',
+    'trans-right', 'look-right',
+    'trans-up', 'look-up',
+    'trans-down', 'look-down',
+    'blink'
+  ];
+  var preloads = {};
+  poseNames.forEach(function(p){
+    var img = new Image();
+    img.src = 'assets/images/avatar_poses/pose-' + p + '.png';
+    preloads[p] = img;
+  });
+
+  // State management per avatar instance
+  var instances = [];
+  switchers.forEach(function(sw){
+    var imgs = {};
+    sw.querySelectorAll('.pose-img').forEach(function(im){
+      imgs[im.getAttribute('data-pose')] = im;
+    });
+    instances.push({
+      el: sw,
+      imgs: imgs,
+      currentPose: 'center',
+      targetPose: 'center',
+      isTransitioning: false,
+      stepMs: 90,
+      timer: null
+    });
+  });
+
+  function applyPose(inst, poseName){
+    if(inst.currentPose === poseName) return;
+    if(inst.imgs[inst.currentPose]){
+      inst.imgs[inst.currentPose].classList.remove('active');
+    }
+    if(inst.imgs[poseName]){
+      inst.imgs[poseName].classList.add('active');
+    }
+    inst.currentPose = poseName;
+    if(inst.onPoseChange) inst.onPoseChange(poseName);
+  }
+
+  // Directed graph routing for coherent head/eye transitions
+  function getNextStep(current, target){
+    if(current === target) return null;
+    
+    // CENTER transitions outwards
+    if(current === 'center'){
+      if(target === 'look-left' || target === 'trans-left') return 'trans-left';
+      if(target === 'look-right' || target === 'trans-right') return 'trans-right';
+      if(target === 'look-up' || target === 'trans-up') return 'trans-up';
+      if(target === 'look-down' || target === 'trans-down') return 'trans-down';
+      return null;
+    }
+    
+    // LEFT branch
+    if(current === 'trans-left'){
+      if(target === 'look-left') return 'look-left';
+      return 'center';
+    }
+    if(current === 'look-left'){
+      return 'trans-left';
+    }
+
+    // RIGHT branch
+    if(current === 'trans-right'){
+      if(target === 'look-right') return 'look-right';
+      return 'center';
+    }
+    if(current === 'look-right'){
+      return 'trans-right';
+    }
+
+    // UP branch
+    if(current === 'trans-up'){
+      if(target === 'look-up') return 'look-up';
+      return 'center';
+    }
+    if(current === 'look-up'){
+      return 'trans-up';
+    }
+
+    // DOWN branch
+    if(current === 'trans-down'){
+      if(target === 'look-down') return 'look-down';
+      return 'center';
+    }
+    if(current === 'look-down'){
+      return 'trans-down';
+    }
+
+    return 'center';
+  }
+
+  function advanceInstance(inst){
+    if(isReduced){
+      applyPose(inst, 'center');
+      inst.isTransitioning = false;
+      return;
+    }
+    var next = getNextStep(inst.currentPose, inst.targetPose);
+    if(!next){
+      inst.isTransitioning = false;
+      return;
+    }
+    applyPose(inst, next);
+    inst.isTransitioning = true;
+    clearTimeout(inst.timer);
+    inst.timer = setTimeout(function(){
+      advanceInstance(inst);
+    }, inst.stepMs || 90);
+  }
+
+  function setTarget(inst, target){
+    if(inst.targetPose === target && inst.currentPose === target) return;
+    inst.targetPose = target;
+    if(!inst.isTransitioning){
+      advanceInstance(inst);
+    }
+  }
+
+  function setAllTarget(target){
+    instances.forEach(function(inst){
+      setTarget(inst, target);
+    });
+  }
+
+  // Cursor Tracking with Deadzone & Hysteresis
+  var mouseActive = false;
+  var lastX = 0, lastY = 0;
+  var currentAxis = 'horizontal'; // 'horizontal' | 'vertical'
+
+  function updateDirection(clientX, clientY){
+    if(isReduced) return;
+    instances.forEach(function(inst){
+      if(inst.el.getAttribute('data-manual') === 'true') return;
+      var rect = inst.el.getBoundingClientRect();
+      var cx = rect.left + rect.width / 2;
+      var cy = rect.top + rect.height / 2;
+
+      var dx = clientX - cx;
+      var dy = clientY - cy;
+      var dist = Math.sqrt(dx * dx + dy * dy);
+
+      // Deadzone around avatar center: within 70px stay centered
+      if(dist < 70){
+        setTarget(inst, 'center');
+        return;
+      }
+
+      var absX = Math.abs(dx);
+      var absY = Math.abs(dy);
+
+      // Axis hysteresis to prevent flickering on 45-degree diagonals
+      if(currentAxis === 'horizontal'){
+        if(absY > absX * 1.35){
+          currentAxis = 'vertical';
+        }
+      } else {
+        if(absX > absY * 1.35){
+          currentAxis = 'horizontal';
+        }
+      }
+
+      var targetPose = 'center';
+      if(currentAxis === 'horizontal'){
+        targetPose = (dx < 0) ? 'look-left' : 'look-right';
+      } else {
+        targetPose = (dy < 0) ? 'look-up' : 'look-down';
+      }
+
+      setTarget(inst, targetPose);
+    });
+  }
+
+  window.addEventListener('mousemove', function(e){
+    mouseActive = true;
+    lastX = e.clientX;
+    lastY = e.clientY;
+    updateDirection(e.clientX, e.clientY);
+  }, { passive: true });
+
+  window.addEventListener('scroll', function(){
+    if(mouseActive){
+      updateDirection(lastX, lastY);
+    }
+  }, { passive: true });
+
+  document.addEventListener('mouseleave', function(){
+    mouseActive = false;
+    setAllTarget('center');
+  }, { passive: true });
+
+  window.addEventListener('blur', function(){
+    mouseActive = false;
+    setAllTarget('center');
+  });
+
+  // Mobile Device Orientation / Phone Tilt
+  var tiltActive = false;
+  var baseBeta = null, baseGamma = null;
+
+  function onOrientation(e){
+    if(!tiltActive || isReduced || e.beta === null || e.gamma === null) return;
+    if(baseBeta === null){
+      baseBeta = e.beta;
+      baseGamma = e.gamma;
+    }
+    var dg = e.gamma - baseGamma;
+    var db = e.beta - baseBeta;
+
+    instances.forEach(function(inst){
+      if(inst.el.getAttribute('data-manual') === 'true') return;
+      if(Math.abs(dg) < 6 && Math.abs(db) < 6){
+        setTarget(inst, 'center');
+        return;
+      }
+      if(Math.abs(dg) >= Math.abs(db)){
+        setTarget(inst, (dg < 0) ? 'look-left' : 'look-right');
+      } else {
+        setTarget(inst, (db < 0) ? 'look-up' : 'look-down');
+      }
+    });
+  }
+
+  window.toggleAvatarTilt = function(btn){
+    if(tiltActive){
+      tiltActive = false;
+      baseBeta = null; baseGamma = null;
+      window.removeEventListener('deviceorientation', onOrientation);
+      setAllTarget('center');
+      if(btn){ btn.classList.remove('active'); btn.textContent = 'Enable tilt'; }
+      return;
+    }
+
+    function activate(){
+      tiltActive = true;
+      baseBeta = null; baseGamma = null;
+      window.addEventListener('deviceorientation', onOrientation, { passive: true });
+      if(btn){ btn.classList.add('active'); btn.textContent = 'Disable tilt'; }
+    }
+
+    if(typeof DeviceOrientationEvent !== 'undefined' && typeof DeviceOrientationEvent.requestPermission === 'function'){
+      DeviceOrientationEvent.requestPermission().then(function(s){
+        if(s === 'granted'){ activate(); }
+      }).catch(function(){});
+    } else if(window.DeviceOrientationEvent){
+      activate();
+    }
+  };
+
+  // Expose global controller for preview / telemetry test suite
+  window.__avatarController = {
+    instances: instances,
+    setTarget: setTarget,
+    setAllTarget: setAllTarget,
+    applyPose: applyPose,
+    setStepMs: function(ms){
+      instances.forEach(function(i){ i.stepMs = ms; });
+    }
+  };
+})();
+
 </script>
 </body></html>

@@ -218,60 +218,172 @@ transition:background .25s var(--ease-editorial),transform .2s var(--ease-editor
 .btn.ghost svg{stroke:currentColor}
 .service-card .btn,.dfy-btns .btn,.work-btns .btn{width:auto;padding:.85rem 1.5rem}
 
-/* ---- Decorative Artwork Hero --------------------------------------------- */
-.hero-art{position:relative;min-height:500px;max-height:600px;height:clamp(500px,55vh,600px);display:flex;align-items:center;overflow:hidden;border-bottom:1px solid var(--edge);background:#0B0B0B}
-[data-theme="light"] .hero-art{background:#EFEBE4}
-.hero-art-media{position:absolute;inset:0;z-index:0;overflow:hidden;pointer-events:none}
-.hero-art-media img{position:absolute;top:0;right:0;width:100%;height:100%;object-fit:cover;object-position:right center;display:block}
-.hero-art-grad{position:absolute;inset:0;background:linear-gradient(90deg, #0B0B0B 0%, rgba(11,11,11,.94) 40%, rgba(11,11,11,.55) 62%, rgba(11,11,11,0) 85%);pointer-events:none}
-[data-theme="light"] .hero-art-grad{background:linear-gradient(90deg, #EFEBE4 0%, rgba(239,235,228,.95) 40%, rgba(239,235,228,.65) 62%, rgba(239,235,228,0.15) 85%)}
-.hero-art-wrap{position:relative;z-index:1;display:flex;align-items:center;width:100%}
-.hero-art-content{max-width:46rem;display:flex;flex-direction:column;align-items:flex-start;text-align:left}
-.hero-art-content .hero-identity{font:400 12.5px/1.4 'Jost',system-ui,sans-serif;letter-spacing:.2em;text-transform:uppercase;color:var(--dim);margin:0 0 1.15rem;display:inline-block}
-.hero-art-content h1{font-family:'Cormorant Garamond',Georgia,serif;font-size:clamp(2.85rem,5.8vw,4.5rem);font-weight:300;letter-spacing:-.015em;line-height:1.08;margin:0 0 1.25rem;color:var(--ink)}
-.hero-art-content .hero-lead{font-size:clamp(1.1rem,1.7vw,1.25rem);color:var(--dim);line-height:1.65;margin:0 0 2rem;max-width:38rem}
+/* ---- Bold Editorial Hero with Cutout Portrait ----------------------------- */
+.hero-editorial{
+  position:relative;min-height:580px;overflow:hidden;background:var(--bg);
+  border-bottom:1px solid var(--edge);padding:3rem 0 0;display:flex;flex-direction:column;justify-content:flex-end;
+}
+.hero-bg-title-wrap{
+  position:absolute;top:0.75rem;left:0;right:0;width:100%;display:flex;justify-content:center;
+  pointer-events:none;z-index:0;overflow:hidden;
+}
+.hero-bg-title{
+  font-family:'Cormorant Garamond',Georgia,serif;font-size:clamp(5rem,15vw,13.5rem);font-weight:300;
+  letter-spacing:.08em;line-height:.8;text-transform:uppercase;color:var(--ink);opacity:.038;
+  white-space:nowrap;user-select:none;
+}
+[data-theme="light"] .hero-bg-title{opacity:.045}
+
+.hero-editorial-wrap{
+  position:relative;z-index:1;display:grid;grid-template-columns:1.15fr 0.85fr;gap:3rem;
+  align-items:flex-end;width:100%;
+}
+.hero-editorial-left{
+  padding-bottom:4.5rem;display:flex;flex-direction:column;align-items:flex-start;text-align:left;z-index:2;
+}
+.hero-editorial-left h1{
+  font-family:'Cormorant Garamond',Georgia,serif;font-size:clamp(2.75rem,5.2vw,4.25rem);
+  font-weight:300;letter-spacing:-.015em;line-height:1.1;margin:0 0 1.35rem;color:var(--ink);
+}
+.hero-editorial-left .hero-lead{
+  font-size:clamp(1.05rem,1.6vw,1.2rem);color:var(--dim);line-height:1.7;margin:0 0 1.75rem;max-width:36rem;
+}
+.hero-editorial-meta{
+  display:flex;align-items:center;gap:.65rem;font-size:12px;letter-spacing:.1em;text-transform:uppercase;
+  color:var(--dim);margin-bottom:2.25rem;
+}
+.hero-editorial-meta .meta-dot{
+  display:inline-block;width:6px;height:6px;border-radius:50%;background:#22c55e;margin-right:.25rem;
+}
+.hero-editorial-meta .meta-sep{opacity:.4}
+
 .hero-actions-compact{display:flex;align-items:center;justify-content:flex-start;gap:1.75rem;flex-wrap:wrap}
 .hero-actions-compact .btn{width:auto;margin:0;min-height:48px;padding:.9rem 1.85rem}
 .hero-link-sec{font:400 12.5px/1 'Jost',system-ui,sans-serif;letter-spacing:.12em;text-transform:uppercase;color:var(--dim);display:inline-flex;align-items:center;gap:.4rem;text-decoration:none;transition:color .25s,transform .25s}
 .hero-link-sec:hover{color:var(--ink);transform:translateX(3px)}
 
-@media(max-width:768px){
-  .hero-art{min-height:auto;max-height:none;height:auto;padding:3rem 0 2.5rem;position:relative}
-  .hero-art-media img{object-position:80% center;opacity:.88;filter:brightness(.95);transform:scale(1.05)}
-  .hero-art-grad{background:linear-gradient(180deg, rgba(11,11,11,.75) 0%, rgba(11,11,11,.45) 45%, rgba(11,11,11,.88) 100%),linear-gradient(90deg, rgba(11,11,11,.82) 0%, rgba(11,11,11,.2) 100%)}
-  [data-theme="light"] .hero-art-media img{opacity:.75;filter:brightness(1.02)}
-  [data-theme="light"] .hero-art-grad{background:linear-gradient(180deg, rgba(239,235,228,.78) 0%, rgba(239,235,228,.45) 45%, rgba(239,235,228,.88) 100%),linear-gradient(90deg, rgba(239,235,228,.82) 0%, rgba(239,235,228,.2) 100%)}
-  .hero-art-content{max-width:100%;position:relative;z-index:2}
-  .hero-art-content .hero-identity{font-size:11.5px;letter-spacing:.16em;margin-bottom:.75rem}
-  .hero-art-content h1{font-size:clamp(1.85rem,6.4vw,2.35rem);line-height:1.15;margin-bottom:.75rem}
-  .hero-art-content .hero-lead{font-size:.95rem;line-height:1.55;margin-bottom:1.35rem;color:#E5E2DC}
-  [data-theme="light"] .hero-art-content .hero-lead{color:var(--dim)}
+.hero-editorial-right{
+  position:relative;display:flex;justify-content:center;align-items:flex-end;width:100%;z-index:1;
+}
+.hero-portrait-stage{
+  position:relative;width:100%;max-width:440px;display:flex;justify-content:center;align-items:flex-end;margin:0 auto;
+}
+.hero-backdrop-panel{
+  position:absolute;bottom:0;right:4%;width:84%;height:84%;background:var(--acc);
+  opacity:.92;border-radius:4px 4px 0 0;z-index:0;pointer-events:none;
+  box-shadow:0 20px 50px rgba(139,13,26,.25);
+}
+[data-theme="light"] .hero-backdrop-panel{background:#700A15;opacity:.88}
+.hero-cutout-img{
+  position:relative;z-index:1;width:100%;max-width:420px;height:auto;display:block;
+  object-fit:contain;object-position:bottom center;
+  filter:drop-shadow(0 16px 36px rgba(0,0,0,0.55));
+}
+
+@media(max-width:960px){
+  .hero-editorial-wrap{grid-template-columns:1fr;gap:2rem}
+  .hero-editorial-left{padding-bottom:1rem}
+  .hero-editorial-right{max-width:380px;margin:0 auto}
+  .hero-backdrop-panel{width:88%;height:82%}
 }
 @media(max-width:640px){
+  .hero-editorial{padding:2.5rem 0 0}
+  .hero-editorial-left h1{font-size:clamp(2rem,7vw,2.5rem)}
+  .hero-editorial-left .hero-lead{font-size:1rem;line-height:1.6}
+  .hero-editorial-meta{font-size:11px;flex-wrap:wrap;gap:.4rem;margin-bottom:1.75rem}
   .hero-actions-compact{flex-direction:column;align-items:stretch;width:100%;gap:.65rem}
   .hero-actions-compact .btn{width:100%;justify-content:center;min-height:44px}
   .hero-link-sec{justify-content:center;padding:.4rem 0;font-size:12px}
+  .hero-portrait-stage{max-width:320px}
+}
+
+/* ---- Selected Work Strip: Color-Blocked Section ---------------------------- */
+.work-strip-section{
+  padding:5rem 0 4.5rem;position:relative;z-index:1;
+  background:#130305;border-top:1px solid rgba(139,13,26,.3);border-bottom:1px solid rgba(139,13,26,.3);
+}
+[data-theme="light"] .work-strip-section{
+  background:#E6DFD4;border-top:1px solid rgba(18,16,15,.1);border-bottom:1px solid rgba(18,16,15,.1);
 }
 
 /* ---- Selected Work: 3 Equal Projects in One Desktop Row -------------------- */
 .work-trio-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:3rem;margin-top:2.75rem}
 .work-trio-item{display:flex;flex-direction:column;text-decoration:none;color:inherit;position:relative}
 .work-trio-visual{border-radius:6px;overflow:hidden;border:1px solid var(--edge);background:var(--glass-2);aspect-ratio:4/3;position:relative;transition:border-color .35s var(--ease-editorial),transform .35s var(--ease-editorial)}
-.work-trio-item:hover .work-trio-visual{border-color:rgba(139,13,26,.55);transform:translateY(-3px)}
-.work-trio-visual img{width:100%;height:100%;object-fit:cover;display:block;transition:transform 1s var(--ease-editorial)}
-.work-trio-item:hover .work-trio-visual img{transform:scale(1.03)}
-.work-trio-body{display:flex;flex-direction:column;margin-top:1.15rem}
-.work-trio-title{font-family:'Cormorant Garamond',Georgia,serif;font-size:1.6rem;font-weight:400;line-height:1.2;color:var(--ink);margin:0 0 .4rem;transition:color .25s}
-.work-trio-item:hover .work-trio-title{color:var(--acc-text)}
-.work-trio-contrib{font-size:.925rem;color:var(--dim);line-height:1.6;margin:0 0 .85rem;max-width:44ch}
+.work-trio-item:hover .work-trio-visual,.work-trio-item:focus-visible .work-trio-visual{border-color:rgba(139,13,26,.55);transform:translateY(-3px)}
+.work-trio-visual img{width:100%;height:100%;object-fit:cover;object-position:center;display:block;transition:transform .75s var(--ease-editorial)}
+.work-trio-visual.web-preview img{object-position:top center}
+.work-trio-item:hover .work-trio-visual img,.work-trio-item:focus-visible .work-trio-visual img{transform:scale(1.03)}
+
+.work-trio-body{display:flex;flex-direction:column;margin-top:1.25rem}
+.work-trio-title{font-family:'Cormorant Garamond',Georgia,serif;font-size:1.65rem;font-weight:400;line-height:1.2;color:var(--ink);margin:0 0 .5rem;transition:color .25s}
+.work-trio-item:hover .work-trio-title,.work-trio-item:focus-visible .work-trio-title{color:var(--acc-text)}
+.work-trio-role{font-size:.92rem;color:var(--dim);line-height:1.6;margin:0 0 .45rem}
+.work-trio-role strong{color:var(--ink);font-weight:400}
+.work-trio-insight{font-size:.88rem;color:var(--dim);line-height:1.6;margin:0 0 1rem;font-style:italic;border-left:2px solid rgba(139,13,26,.5);padding-left:.65rem}
 .work-trio-link{display:inline-flex;align-items:center;gap:.35rem;font:400 11.5px/1 'Jost',system-ui,sans-serif;letter-spacing:.14em;text-transform:uppercase;color:var(--dim);transition:color .25s,transform .25s}
-.work-trio-item:hover .work-trio-link{color:var(--ink);transform:translateX(3px)}
+.work-trio-item:hover .work-trio-link,.work-trio-item:focus-visible .work-trio-link{color:var(--ink);transform:translateX(4px)}
 @media(max-width:960px){
   .work-trio-grid{grid-template-columns:repeat(2,1fr);gap:2.25rem}
 }
 @media(max-width:640px){
   .work-trio-grid{grid-template-columns:1fr;gap:2.5rem}
   .work-trio-title{font-size:1.45rem}
+}
+
+/* ---- Personal Intro Section with Interactive Anime Avatar ----------------- */
+.intro-section{padding:5rem 0 4.5rem;border-top:1px solid var(--edge);position:relative;z-index:1}
+.intro-grid{display:grid;grid-template-columns:220px 1fr;gap:3.5rem;align-items:center;margin-top:2.25rem}
+@media(min-width:1200px){.intro-grid{grid-template-columns:240px 1fr;gap:4.5rem}}
+
+.intro-photo-wrap{
+  position:relative;width:100%;max-width:240px;display:flex;flex-direction:column;align-items:center;
+}
+.intro-photo-card{
+  width:100%;aspect-ratio:1/1;position:relative;overflow:hidden;border-radius:0;border:1px solid var(--edge);
+  background:#5C0612;
+}
+
+/* Whole-Portrait Pose Switching (Scoped to [data-avatar="pose-switcher"]) */
+.pose-avatar{
+  position:relative;width:100%;height:100%;overflow:hidden;background:#580512;
+  user-select:none;-webkit-user-select:none;
+}
+.pose-avatar .pose-img{
+  position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:none;pointer-events:none;
+}
+.pose-avatar .pose-img.active{
+  display:block;
+}
+
+.avatar-tilt-btn{
+  display:none;margin-top:.65rem;padding:.35rem .75rem;border-radius:4px;
+  background:var(--glass);border:1px solid var(--edge);color:var(--dim);
+  font:400 11px/1 'Jost',system-ui,sans-serif;letter-spacing:.08em;text-transform:uppercase;
+  cursor:pointer;transition:all .2s;
+}
+.avatar-tilt-btn:hover{color:var(--ink);border-color:var(--acc)}
+.avatar-tilt-btn.active{background:var(--acc);color:#F5F2ED;border-color:var(--acc)}
+@media(hover:none) and (pointer:coarse){
+  .avatar-tilt-btn{display:inline-block}
+}
+@media(prefers-reduced-motion:reduce){
+  .pose-avatar .pose-img{display:none!important}
+  .pose-avatar .pose-img[data-pose="center"]{display:block!important}
+}
+  .avatar-tilt-btn{display:none!important}
+}
+
+.intro-text-wrap{display:flex;flex-direction:column;align-items:flex-start;max-width:65ch}
+.intro-text{font-size:clamp(1.1rem,1.8vw,1.3rem);line-height:1.75;color:var(--ink);font-weight:300;margin:0 0 1.5rem}
+.intro-link{font:400 12px/1 'Jost',system-ui,sans-serif;letter-spacing:.14em;text-transform:uppercase;color:var(--dim);display:inline-flex;align-items:center;gap:.4rem;text-decoration:none;transition:color .25s,transform .25s}
+.intro-link:hover,.intro-link:focus-visible{color:var(--acc-text);transform:translateX(4px)}
+
+@media(max-width:768px){
+  .intro-section{padding:4rem 0 3.5rem}
+  .intro-grid{grid-template-columns:1fr;gap:1.75rem}
+  .intro-photo-wrap{max-width:180px;margin:0 auto}
+  .intro-text{font-size:1.05rem;line-height:1.65}
 }
 
 /* ---- Capabilities: What I do (Asymmetric Open Rows) ----------------- */
@@ -286,13 +398,6 @@ transition:background .25s var(--ease-editorial),transform .2s var(--ease-editor
 @media(max-width:850px){
   .cap-row{grid-template-columns:1fr;gap:.6rem;padding:1.65rem 0}
 }
-
-/* ---- Personal Intro Section --------------------------------------------- */
-.intro-section{padding:5rem 0;border-top:1px solid var(--edge);position:relative;z-index:1}
-.intro-content{margin-top:2.25rem;max-width:58rem}
-.intro-text{font-size:clamp(1.15rem,2.2vw,1.4rem);line-height:1.65;color:var(--ink);font-weight:300;margin:0 0 1.5rem}
-.intro-link{font:400 12.5px/1 'Jost',system-ui,sans-serif;letter-spacing:.14em;text-transform:uppercase;color:var(--dim);display:inline-flex;align-items:center;gap:.4rem;text-decoration:none;transition:color .25s,transform .25s}
-.intro-link:hover{color:var(--acc-text);transform:translateX(3px)}
 
 /* ---- sections ---------------------------------------------------------- */
 section{padding:4.5rem 0;position:relative;z-index:1}
@@ -1489,6 +1594,288 @@ CHAT_JS = r"""
 })();
 """
 
+POSE_SWITCHER_JS = r"""
+(function(){
+  var switchers = document.querySelectorAll('[data-avatar="pose-switcher"]');
+  if(!switchers.length) return;
+
+  var mediaMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
+  var isReduced = mediaMotion.matches;
+  if(mediaMotion.addEventListener){
+    mediaMotion.addEventListener('change', function(e){
+      isReduced = e.matches;
+      if(isReduced){ setAllTarget('center'); }
+    });
+  }
+
+  // Preload all 10 images (endpoints + intermediate frames) to guarantee zero flashing
+  var poseNames = [
+    'center',
+    'trans-left', 'look-left',
+    'trans-right', 'look-right',
+    'trans-up', 'look-up',
+    'trans-down', 'look-down',
+    'blink'
+  ];
+  var preloads = {};
+  poseNames.forEach(function(p){
+    var img = new Image();
+    img.src = 'assets/images/avatar_poses/pose-' + p + '.png';
+    preloads[p] = img;
+  });
+
+  // State management per avatar instance
+  var instances = [];
+  switchers.forEach(function(sw){
+    var imgs = {};
+    sw.querySelectorAll('.pose-img').forEach(function(im){
+      imgs[im.getAttribute('data-pose')] = im;
+    });
+    instances.push({
+      el: sw,
+      imgs: imgs,
+      currentPose: 'center',
+      targetPose: 'center',
+      isTransitioning: false,
+      stepMs: 90,
+      timer: null
+    });
+  });
+
+  function applyPose(inst, poseName){
+    if(inst.currentPose === poseName) return;
+    if(inst.imgs[inst.currentPose]){
+      inst.imgs[inst.currentPose].classList.remove('active');
+    }
+    if(inst.imgs[poseName]){
+      inst.imgs[poseName].classList.add('active');
+    }
+    inst.currentPose = poseName;
+    if(inst.onPoseChange) inst.onPoseChange(poseName);
+  }
+
+  // Directed graph routing for coherent head/eye transitions
+  function getNextStep(current, target){
+    if(current === target) return null;
+    
+    // CENTER transitions outwards
+    if(current === 'center'){
+      if(target === 'look-left' || target === 'trans-left') return 'trans-left';
+      if(target === 'look-right' || target === 'trans-right') return 'trans-right';
+      if(target === 'look-up' || target === 'trans-up') return 'trans-up';
+      if(target === 'look-down' || target === 'trans-down') return 'trans-down';
+      return null;
+    }
+    
+    // LEFT branch
+    if(current === 'trans-left'){
+      if(target === 'look-left') return 'look-left';
+      return 'center';
+    }
+    if(current === 'look-left'){
+      return 'trans-left';
+    }
+
+    // RIGHT branch
+    if(current === 'trans-right'){
+      if(target === 'look-right') return 'look-right';
+      return 'center';
+    }
+    if(current === 'look-right'){
+      return 'trans-right';
+    }
+
+    // UP branch
+    if(current === 'trans-up'){
+      if(target === 'look-up') return 'look-up';
+      return 'center';
+    }
+    if(current === 'look-up'){
+      return 'trans-up';
+    }
+
+    // DOWN branch
+    if(current === 'trans-down'){
+      if(target === 'look-down') return 'look-down';
+      return 'center';
+    }
+    if(current === 'look-down'){
+      return 'trans-down';
+    }
+
+    return 'center';
+  }
+
+  function advanceInstance(inst){
+    if(isReduced){
+      applyPose(inst, 'center');
+      inst.isTransitioning = false;
+      return;
+    }
+    var next = getNextStep(inst.currentPose, inst.targetPose);
+    if(!next){
+      inst.isTransitioning = false;
+      return;
+    }
+    applyPose(inst, next);
+    inst.isTransitioning = true;
+    clearTimeout(inst.timer);
+    inst.timer = setTimeout(function(){
+      advanceInstance(inst);
+    }, inst.stepMs || 90);
+  }
+
+  function setTarget(inst, target){
+    if(inst.targetPose === target && inst.currentPose === target) return;
+    inst.targetPose = target;
+    if(!inst.isTransitioning){
+      advanceInstance(inst);
+    }
+  }
+
+  function setAllTarget(target){
+    instances.forEach(function(inst){
+      setTarget(inst, target);
+    });
+  }
+
+  // Cursor Tracking with Deadzone & Hysteresis
+  var mouseActive = false;
+  var lastX = 0, lastY = 0;
+  var currentAxis = 'horizontal'; // 'horizontal' | 'vertical'
+
+  function updateDirection(clientX, clientY){
+    if(isReduced) return;
+    instances.forEach(function(inst){
+      if(inst.el.getAttribute('data-manual') === 'true') return;
+      var rect = inst.el.getBoundingClientRect();
+      var cx = rect.left + rect.width / 2;
+      var cy = rect.top + rect.height / 2;
+
+      var dx = clientX - cx;
+      var dy = clientY - cy;
+      var dist = Math.sqrt(dx * dx + dy * dy);
+
+      // Deadzone around avatar center: within 70px stay centered
+      if(dist < 70){
+        setTarget(inst, 'center');
+        return;
+      }
+
+      var absX = Math.abs(dx);
+      var absY = Math.abs(dy);
+
+      // Axis hysteresis to prevent flickering on 45-degree diagonals
+      if(currentAxis === 'horizontal'){
+        if(absY > absX * 1.35){
+          currentAxis = 'vertical';
+        }
+      } else {
+        if(absX > absY * 1.35){
+          currentAxis = 'horizontal';
+        }
+      }
+
+      var targetPose = 'center';
+      if(currentAxis === 'horizontal'){
+        targetPose = (dx < 0) ? 'look-left' : 'look-right';
+      } else {
+        targetPose = (dy < 0) ? 'look-up' : 'look-down';
+      }
+
+      setTarget(inst, targetPose);
+    });
+  }
+
+  window.addEventListener('mousemove', function(e){
+    mouseActive = true;
+    lastX = e.clientX;
+    lastY = e.clientY;
+    updateDirection(e.clientX, e.clientY);
+  }, { passive: true });
+
+  window.addEventListener('scroll', function(){
+    if(mouseActive){
+      updateDirection(lastX, lastY);
+    }
+  }, { passive: true });
+
+  document.addEventListener('mouseleave', function(){
+    mouseActive = false;
+    setAllTarget('center');
+  }, { passive: true });
+
+  window.addEventListener('blur', function(){
+    mouseActive = false;
+    setAllTarget('center');
+  });
+
+  // Mobile Device Orientation / Phone Tilt
+  var tiltActive = false;
+  var baseBeta = null, baseGamma = null;
+
+  function onOrientation(e){
+    if(!tiltActive || isReduced || e.beta === null || e.gamma === null) return;
+    if(baseBeta === null){
+      baseBeta = e.beta;
+      baseGamma = e.gamma;
+    }
+    var dg = e.gamma - baseGamma;
+    var db = e.beta - baseBeta;
+
+    instances.forEach(function(inst){
+      if(inst.el.getAttribute('data-manual') === 'true') return;
+      if(Math.abs(dg) < 6 && Math.abs(db) < 6){
+        setTarget(inst, 'center');
+        return;
+      }
+      if(Math.abs(dg) >= Math.abs(db)){
+        setTarget(inst, (dg < 0) ? 'look-left' : 'look-right');
+      } else {
+        setTarget(inst, (db < 0) ? 'look-up' : 'look-down');
+      }
+    });
+  }
+
+  window.toggleAvatarTilt = function(btn){
+    if(tiltActive){
+      tiltActive = false;
+      baseBeta = null; baseGamma = null;
+      window.removeEventListener('deviceorientation', onOrientation);
+      setAllTarget('center');
+      if(btn){ btn.classList.remove('active'); btn.textContent = 'Enable tilt'; }
+      return;
+    }
+
+    function activate(){
+      tiltActive = true;
+      baseBeta = null; baseGamma = null;
+      window.addEventListener('deviceorientation', onOrientation, { passive: true });
+      if(btn){ btn.classList.add('active'); btn.textContent = 'Disable tilt'; }
+    }
+
+    if(typeof DeviceOrientationEvent !== 'undefined' && typeof DeviceOrientationEvent.requestPermission === 'function'){
+      DeviceOrientationEvent.requestPermission().then(function(s){
+        if(s === 'granted'){ activate(); }
+      }).catch(function(){});
+    } else if(window.DeviceOrientationEvent){
+      activate();
+    }
+  };
+
+  // Expose global controller for preview / telemetry test suite
+  window.__avatarController = {
+    instances: instances,
+    setTarget: setTarget,
+    setAllTarget: setAllTarget,
+    applyPose: applyPose,
+    setStepMs: function(ms){
+      instances.forEach(function(i){ i.stepMs = ms; });
+    }
+  };
+})();
+"""
+
 def shell(title, desc, body, active, up="", extra_js=""):
     p = PROFILE
     vj = VCARD_JS % dict(last=p['last'], first=p['first'], name=p['name'], title=p['vcard_title'],
@@ -1660,26 +2047,35 @@ def feat_card_html(pr, base="work/", up=""):
 # ------------------------------------------------------------------- builders
 def build_home():
     p = PROFILE
-    body = f'''<header id="top" class="hero-art">
-<div class="hero-art-media" aria-hidden="true">
-<img src="assets/images/hero-artwork.png" alt="" width="1920" height="1080" loading="eager" decoding="async">
-<div class="hero-art-grad"></div>
+    body = f'''<header id="top" class="hero-editorial">
+<div class="hero-bg-title-wrap" aria-hidden="true">
+<div class="hero-bg-title">PORTFOLIO</div>
 </div>
-<div class="wrap hero-art-wrap">
-<div class="hero-art-content">
-<p class="hero-identity hin" style="--d:50ms">PERSONAL PORTFOLIO</p>
-<h1 class="hin" style="--d:120ms">Hi, I’m Jamielyn.<br>I design visuals, websites, and systems.</h1>
-<p class="hero-lead hin" style="--d:190ms">Explore my work across brand content, e-commerce, and practical automation—from the finished designs to the thinking behind them.</p>
-<div class="hero-actions-compact hin" style="--d:260ms">
+<div class="wrap hero-editorial-wrap">
+<div class="hero-editorial-left">
+<h1 class="hin" style="--d:100ms">Hi, I’m Jamielyn.<br>I design visuals, websites, and systems.</h1>
+<p class="hero-lead hin" style="--d:180ms">Explore my work across brand content, e-commerce, and practical automation—from the finished designs to the thinking behind them.</p>
+<div class="hero-editorial-meta hin" style="--d:230ms">
+<span class="hero-meta-item"><span class="meta-dot"></span>{E(p['location'])}</span>
+<span class="meta-sep">·</span>
+<span class="hero-meta-item">Available for client work</span>
+</div>
+<div class="hero-actions-compact hin" style="--d:270ms">
 <a class="btn" href="#work">View my work</a>
 <a class="hero-link-sec" href="about.html">About me &rarr;</a>
+</div>
+</div>
+<div class="hero-editorial-right">
+<div class="hero-portrait-stage hin" style="--d:140ms">
+<div class="hero-backdrop-panel" aria-hidden="true"></div>
+<img class="hero-cutout-img" src="assets/images/portrait-cutout.png" alt="{E(p['name'])}" width="700" height="933" loading="eager" decoding="async">
 </div>
 </div>
 </div></header>
 
 <main>
+<section id="work" class="work-strip-section">
 <div class="wrap">
-<section id="work" style="padding:4.5rem 0 3.5rem">
 <div class="feat-head rv">
 <h2><span>SELECTED WORK</span></h2>
 </div>
@@ -1687,11 +2083,12 @@ def build_home():
 <div class="work-trio-grid">
 <a class="work-trio-item rv" href="work/margegold-jewelry.html">
 <div class="work-trio-visual">
-<img src="assets/images/margegold-cover.jpg" alt="Margegold Jewelry Shopify storefront and listing design" width="800" height="600" loading="lazy" decoding="async">
+<img src="assets/images/mg-croissant-1.jpg" alt="Margegold Jewelry Croissant Earrings listing photography" width="800" height="600" loading="lazy" decoding="async">
 </div>
 <div class="work-trio-body">
 <h3 class="work-trio-title">Margegold Jewelry</h3>
-<p class="work-trio-contrib"><strong style="color:var(--ink);font-weight:400">My role:</strong> Shopify storefront design, 8-slide listing image architecture, and paid ad creative sets.</p>
+<p class="work-trio-role"><strong>My role:</strong> Shopify storefront design, 8-slide listing architecture, and digital ad creative sets.</p>
+<p class="work-trio-insight">Standardized an 8-slide visual sequence across four platforms so a catalog of reflective gold pieces reads as one cohesive brand.</p>
 <span class="work-trio-link">View project &rarr;</span>
 </div>
 </a>
@@ -1702,18 +2099,20 @@ def build_home():
 </div>
 <div class="work-trio-body">
 <h3 class="work-trio-title">PhilMed Expo 2026</h3>
-<p class="work-trio-contrib"><strong style="color:var(--ink);font-weight:400">My role:</strong> Turnkey 3D booth spatial design in SketchUp, elevation drawings, and on-site lead tracking.</p>
+<p class="work-trio-role"><strong>My role:</strong> Turnkey 3D booth spatial design in SketchUp, elevation drawings, and on-site lead tracking.</p>
+<p class="work-trio-insight">Modeled sightlines and curved fascias in 3D prior to fabrication, giving two distinct brands clear visibility on a single shared island.</p>
 <span class="work-trio-link">View project &rarr;</span>
 </div>
 </a>
 
 <a class="work-trio-item rv" href="work/kpick-website.html">
-<div class="work-trio-visual">
-<img src="assets/images/kpick-web-desk-1.jpg" alt="kpicktradingcorp.com B2B website UI screenshot" width="800" height="600" loading="lazy" decoding="async">
+<div class="work-trio-visual web-preview">
+<img src="assets/images/kpick-web-desk-1.jpg" alt="K-PICK B2B website homepage screenshot" width="800" height="600" loading="lazy" decoding="async">
 </div>
 <div class="work-trio-body">
-<h3 class="work-trio-title">kpicktradingcorp.com</h3>
-<p class="work-trio-contrib"><strong style="color:var(--ink);font-weight:400">My role:</strong> Front-end B2B website design with interactive medical device simulator and quote builder.</p>
+<h3 class="work-trio-title">K-PICK Website</h3>
+<p class="work-trio-role"><strong>My role:</strong> Front-end B2B website design with interactive medical device simulator and quote builder.</p>
+<p class="work-trio-insight">Engineered an interactive syringe simulator within the procurement Learning Centre to reduce repetitive spec inquiries for sales reps.</p>
 <span class="work-trio-link">View project &rarr;</span>
 </div>
 </a>
@@ -1722,8 +2121,36 @@ def build_home():
 <div style="margin-top:3.5rem;text-align:center">
 <a class="btn ghost" href="work/index.html" style="display:inline-flex;width:auto;margin:0 auto">View all projects &rarr;</a>
 </div>
-</section>
 </div>
+</section>
+
+<section class="intro-section" id="about-intro">
+<div class="wrap">
+<h2 class="eyebrow grouphead"><span>ABOUT ME</span><span class="rule"></span></h2>
+<div class="intro-grid rv">
+<div class="intro-photo-wrap" id="about-avatar-wrap">
+<div class="intro-photo-card" id="about-avatar-card">
+<div class="pose-avatar" data-avatar="pose-switcher">
+  <img class="pose-img active" data-pose="center" src="assets/images/avatar_poses/pose-center.png" alt="{E(p['name'])} Illustrated Avatar" width="512" height="512">
+  <img class="pose-img" data-pose="trans-left" src="assets/images/avatar_poses/pose-trans-left.png" alt="" width="512" height="512" aria-hidden="true">
+  <img class="pose-img" data-pose="look-left" src="assets/images/avatar_poses/pose-look-left.png" alt="" width="512" height="512" aria-hidden="true">
+  <img class="pose-img" data-pose="trans-right" src="assets/images/avatar_poses/pose-trans-right.png" alt="" width="512" height="512" aria-hidden="true">
+  <img class="pose-img" data-pose="look-right" src="assets/images/avatar_poses/pose-look-right.png" alt="" width="512" height="512" aria-hidden="true">
+  <img class="pose-img" data-pose="trans-up" src="assets/images/avatar_poses/pose-trans-up.png" alt="" width="512" height="512" aria-hidden="true">
+  <img class="pose-img" data-pose="look-up" src="assets/images/avatar_poses/pose-look-up.png" alt="" width="512" height="512" aria-hidden="true">
+  <img class="pose-img" data-pose="trans-down" src="assets/images/avatar_poses/pose-trans-down.png" alt="" width="512" height="512" aria-hidden="true">
+  <img class="pose-img" data-pose="look-down" src="assets/images/avatar_poses/pose-look-down.png" alt="" width="512" height="512" aria-hidden="true">
+  <img class="pose-img" data-pose="blink" src="assets/images/avatar_poses/pose-blink.png" alt="" width="512" height="512" aria-hidden="true">
+</div>
+</div>
+</div>
+<div class="intro-text-wrap">
+<p class="intro-text">I’m a designer with an architectural background from the University of Northeastern Philippines, based in Manila. I bridge visual craft—like digital storefronts, marketing campaigns, and 3D spatial models—with practical automation systems that keep day-to-day operations consistent and easy to maintain.</p>
+<a class="intro-link" href="about.html">Read more about my background &rarr;</a>
+</div>
+</div>
+</div>
+</section>
 
 <section class="cap-section" id="what-i-do">
 <div class="wrap">
@@ -1761,18 +2188,8 @@ def build_home():
 </div>
 </section>
 
-<section class="intro-section" id="about-intro">
-<div class="wrap">
-<h2 class="eyebrow grouphead"><span>ABOUT ME</span><span class="rule"></span></h2>
-<div class="intro-content rv">
-<p class="intro-text">I’m a designer with an architectural background from the University of Northeastern Philippines, based in Manila. I work across digital storefronts, marketing content, and 3D spatial design—paired with practical automations that keep brand touchpoints consistent and easy to maintain.</p>
-<a class="intro-link" href="about.html">Read more about my background &rarr;</a>
-</div>
-</div>
-</section>
-
 </main>{footer()}'''
-    write("index.html", shell(f"{p['name']} — {p['subtitle_plain']}", p['intro'], body, "home"))
+    write("index.html", shell(f"{p['name']} — {p['subtitle_plain']}", p['intro'], body, "home", extra_js=POSE_SWITCHER_JS))
 
 
 def build_work_index():
@@ -4726,9 +5143,14 @@ body{{
  overflow:hidden;background:var(--glass);border:1px solid var(--edge);
  display:flex;align-items:center;justify-content:center;
 }}
-/* absolute, so it COVERS the initials instead of sharing the flex row */
-.av img{{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block}}
-.av span{{font-size:2rem;font-weight:600;letter-spacing:.04em;color:var(--dim)}}
+.pose-avatar{{position:relative;width:100%;height:100%;overflow:hidden;background:#580512;user-select:none;-webkit-user-select:none;z-index:2}}
+.pose-avatar .pose-img{{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:none;pointer-events:none}}
+.pose-avatar .pose-img.active{{display:block}}
+@media(prefers-reduced-motion:reduce){{
+  .pose-avatar .pose-img{{display:none!important}}
+  .pose-avatar .pose-img[data-pose="center"]{{display:block!important}}
+}}
+.av span{{display:none}}
 .eyebrow{{margin:0;font-size:10px;font-weight:400;letter-spacing:.26em;color:var(--dim)}}
 h1{{margin:clamp(.35rem,1.2vh,.6rem) 0 0;font-family:Georgia,'Times New Roman',serif;
 font-size:clamp(1.6rem,5vh,2.1rem);
@@ -4831,9 +5253,19 @@ transition:opacity .25s,transform .25s;z-index:300;box-shadow:0 12px 32px var(--
  <button class="toggle" type="button" id="t" aria-label="Switch between dark and light"></button>
 
  <div class="av">
-  <img src="{E(p['avatar'])}" alt="{E(p['name'])}"
-       onerror="this.remove()">
-  <span aria-hidden="true">{E(p['initials'])}</span>
+  <div class="pose-avatar" data-avatar="pose-switcher" style="border-radius:50%">
+   <img class="pose-img active" data-pose="center" src="assets/images/avatar_poses/pose-center.png" alt="{E(p['name'])}" width="512" height="512">
+   <img class="pose-img" data-pose="trans-left" src="assets/images/avatar_poses/pose-trans-left.png" alt="" width="512" height="512" aria-hidden="true">
+   <img class="pose-img" data-pose="look-left" src="assets/images/avatar_poses/pose-look-left.png" alt="" width="512" height="512" aria-hidden="true">
+   <img class="pose-img" data-pose="trans-right" src="assets/images/avatar_poses/pose-trans-right.png" alt="" width="512" height="512" aria-hidden="true">
+   <img class="pose-img" data-pose="look-right" src="assets/images/avatar_poses/pose-look-right.png" alt="" width="512" height="512" aria-hidden="true">
+   <img class="pose-img" data-pose="trans-up" src="assets/images/avatar_poses/pose-trans-up.png" alt="" width="512" height="512" aria-hidden="true">
+   <img class="pose-img" data-pose="look-up" src="assets/images/avatar_poses/pose-look-up.png" alt="" width="512" height="512" aria-hidden="true">
+   <img class="pose-img" data-pose="trans-down" src="assets/images/avatar_poses/pose-trans-down.png" alt="" width="512" height="512" aria-hidden="true">
+   <img class="pose-img" data-pose="look-down" src="assets/images/avatar_poses/pose-look-down.png" alt="" width="512" height="512" aria-hidden="true">
+   <img class="pose-img" data-pose="blink" src="assets/images/avatar_poses/pose-blink.png" alt="" width="512" height="512" aria-hidden="true">
+  </div>
+  <span aria-hidden="true" style="position:absolute;z-index:0">{E(p['initials'])}</span>
  </div>
 
  <p class="eyebrow">{E(p['card_eyebrow'])}</p>
@@ -4926,6 +5358,7 @@ function shareCard(){{
   showToast(window.location.href);
  }}
 }}
+{POSE_SWITCHER_JS}
 </script>
 </body></html>
 """)
@@ -4945,30 +5378,683 @@ def write(rel, text):
         f.write(text)
 
 
+def build_poses_preview():
+    p = PROFILE
+    body = f'''<header id="top"><div class="wrap">
+<p class="eyebrow acc">TRANSITION &amp; IN-BETWEEN FRAME VALIDATION</p>
+<h1 class="hin" style="margin-top:.75rem">Smooth Directional Avatar Transition Engine</h1>
+<p class="lead" style="max-width:48rem;margin-top:1rem">
+  Demonstrating coherent intermediate frames (in-betweens) and responsive state-machine playback between <strong>CENTER</strong> and all directional poses (<strong>LEFT</strong>, <strong>RIGHT</strong>, <strong>UP</strong>, <strong>DOWN</strong>). Entire portraits transition seamlessly without moving-pupil overlays, sliding sockets, or ghosting.
+</p>
+</div></header>
+
+<main><div class="wrap">
+
+<!-- 1. ALIGNED ENDPOINTS & IN-BETWEEN TRANSITION FRAMES -->
+<section style="border-bottom:1px solid var(--edge);padding-bottom:3.5rem">
+  <div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:1rem;margin-bottom:1.5rem">
+    <h2 class="eyebrow grouphead" style="margin-bottom:0"><span>1. TRANSITION FRAME ALIGNMENT &amp; IN-BETWEENS (512&times;512 1:1)</span><span class="rule"></span></h2>
+  </div>
+  <p class="muted" style="max-width:48rem;margin-bottom:2.5rem">
+    Each directional branch features a genuine intermediate transition frame where the head angle, eyelids, facial features, and hair move coherently at matched scale against the burgundy background.
+  </p>
+
+  <!-- Horizontal Transitions -->
+  <div style="display:flex;flex-direction:column;gap:2rem">
+    
+    <!-- Left Branch -->
+    <div style="background:var(--glass);border:1px solid var(--edge);border-radius:10px;padding:1.5rem">
+      <span class="eyebrow acc" style="display:block;margin-bottom:1rem">CENTER &harr; LEFT TRANSITION SEQUENCE</span>
+      <div style="display:grid;grid-template-columns:repeat(auto-fit, minmax(180px, 1fr));gap:1.5rem;text-align:center">
+        <div>
+          <div style="width:160px;height:160px;margin:0 auto .75rem;overflow:hidden;border:1px solid var(--edge);background:#580512;border-radius:4px">
+            <img src="assets/images/avatar_poses/pose-center.png" alt="Center" style="width:100%;height:100%;object-fit:cover;display:block">
+          </div>
+          <span style="font-size:12px;font-weight:500;display:block">1. CENTER (Start)</span>
+          <p style="font-size:11px;color:var(--dim);margin:0"><code>pose-center.png</code></p>
+        </div>
+        <div>
+          <div style="width:160px;height:160px;margin:0 auto .75rem;overflow:hidden;border:2px solid var(--acc);background:#580512;border-radius:4px">
+            <img src="assets/images/avatar_poses/pose-trans-left.png" alt="Trans Left" style="width:100%;height:100%;object-fit:cover;display:block">
+          </div>
+          <span style="font-size:12px;font-weight:600;color:var(--acc-text);display:block">2. MID-LEFT (In-Between)</span>
+          <p style="font-size:11px;color:var(--dim);margin:0"><code>pose-trans-left.png</code></p>
+        </div>
+        <div>
+          <div style="width:160px;height:160px;margin:0 auto .75rem;overflow:hidden;border:1px solid var(--edge);background:#580512;border-radius:4px">
+            <img src="assets/images/avatar_poses/pose-look-left.png" alt="Look Left" style="width:100%;height:100%;object-fit:cover;display:block">
+          </div>
+          <span style="font-size:12px;font-weight:500;display:block">3. LOOK LEFT (Target)</span>
+          <p style="font-size:11px;color:var(--dim);margin:0"><code>pose-look-left.png</code></p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Right Branch -->
+    <div style="background:var(--glass);border:1px solid var(--edge);border-radius:10px;padding:1.5rem">
+      <span class="eyebrow acc" style="display:block;margin-bottom:1rem">CENTER &harr; RIGHT TRANSITION SEQUENCE</span>
+      <div style="display:grid;grid-template-columns:repeat(auto-fit, minmax(180px, 1fr));gap:1.5rem;text-align:center">
+        <div>
+          <div style="width:160px;height:160px;margin:0 auto .75rem;overflow:hidden;border:1px solid var(--edge);background:#580512;border-radius:4px">
+            <img src="assets/images/avatar_poses/pose-center.png" alt="Center" style="width:100%;height:100%;object-fit:cover;display:block">
+          </div>
+          <span style="font-size:12px;font-weight:500;display:block">1. CENTER (Start)</span>
+          <p style="font-size:11px;color:var(--dim);margin:0"><code>pose-center.png</code></p>
+        </div>
+        <div>
+          <div style="width:160px;height:160px;margin:0 auto .75rem;overflow:hidden;border:2px solid var(--acc);background:#580512;border-radius:4px">
+            <img src="assets/images/avatar_poses/pose-trans-right.png" alt="Trans Right" style="width:100%;height:100%;object-fit:cover;display:block">
+          </div>
+          <span style="font-size:12px;font-weight:600;color:var(--acc-text);display:block">2. MID-RIGHT (In-Between)</span>
+          <p style="font-size:11px;color:var(--dim);margin:0"><code>pose-trans-right.png</code></p>
+        </div>
+        <div>
+          <div style="width:160px;height:160px;margin:0 auto .75rem;overflow:hidden;border:1px solid var(--edge);background:#580512;border-radius:4px">
+            <img src="assets/images/avatar_poses/pose-look-right.png" alt="Look Right" style="width:100%;height:100%;object-fit:cover;display:block">
+          </div>
+          <span style="font-size:12px;font-weight:500;display:block">3. LOOK RIGHT (Target)</span>
+          <p style="font-size:11px;color:var(--dim);margin:0"><code>pose-look-right.png</code></p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Up & Down Branches -->
+    <div style="display:grid;grid-template-columns:repeat(auto-fit, minmax(320px, 1fr));gap:2rem">
+      <!-- Up -->
+      <div style="background:var(--glass);border:1px solid var(--edge);border-radius:10px;padding:1.5rem">
+        <span class="eyebrow acc" style="display:block;margin-bottom:1rem">CENTER &harr; UP SEQUENCE</span>
+        <div style="display:grid;grid-template-columns:repeat(3, 1fr);gap:1rem;text-align:center">
+          <div>
+            <div style="width:100px;height:100px;margin:0 auto .5rem;overflow:hidden;border:1px solid var(--edge);background:#580512">
+              <img src="assets/images/avatar_poses/pose-center.png" alt="Center" style="width:100%;height:100%;object-fit:cover;display:block">
+            </div>
+            <span style="font-size:11px;display:block">Center</span>
+          </div>
+          <div>
+            <div style="width:100px;height:100px;margin:0 auto .5rem;overflow:hidden;border:2px solid var(--acc);background:#580512">
+              <img src="assets/images/avatar_poses/pose-trans-up.png" alt="Mid Up" style="width:100%;height:100%;object-fit:cover;display:block">
+            </div>
+            <span style="font-size:11px;color:var(--acc-text);font-weight:600;display:block">Mid-Up</span>
+          </div>
+          <div>
+            <div style="width:100px;height:100px;margin:0 auto .5rem;overflow:hidden;border:1px solid var(--edge);background:#580512">
+              <img src="assets/images/avatar_poses/pose-look-up.png" alt="Up" style="width:100%;height:100%;object-fit:cover;display:block">
+            </div>
+            <span style="font-size:11px;display:block">Look Up</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Down -->
+      <div style="background:var(--glass);border:1px solid var(--edge);border-radius:10px;padding:1.5rem">
+        <span class="eyebrow acc" style="display:block;margin-bottom:1rem">CENTER &harr; DOWN SEQUENCE</span>
+        <div style="display:grid;grid-template-columns:repeat(3, 1fr);gap:1rem;text-align:center">
+          <div>
+            <div style="width:100px;height:100px;margin:0 auto .5rem;overflow:hidden;border:1px solid var(--edge);background:#580512">
+              <img src="assets/images/avatar_poses/pose-center.png" alt="Center" style="width:100%;height:100%;object-fit:cover;display:block">
+            </div>
+            <span style="font-size:11px;display:block">Center</span>
+          </div>
+          <div>
+            <div style="width:100px;height:100px;margin:0 auto .5rem;overflow:hidden;border:2px solid var(--acc);background:#580512">
+              <img src="assets/images/avatar_poses/pose-trans-down.png" alt="Mid Down" style="width:100%;height:100%;object-fit:cover;display:block">
+            </div>
+            <span style="font-size:11px;color:var(--acc-text);font-weight:600;display:block">Mid-Down</span>
+          </div>
+          <div>
+            <div style="width:100px;height:100px;margin:0 auto .5rem;overflow:hidden;border:1px solid var(--edge);background:#580512">
+              <img src="assets/images/avatar_poses/pose-look-down.png" alt="Down" style="width:100%;height:100%;object-fit:cover;display:block">
+            </div>
+            <span style="font-size:11px;display:block">Look Down</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- 2. SMOOTH PLAYBACK DEMONSTRATION & INTERACTIVE SANDBOX -->
+<section>
+  <h2 class="eyebrow grouphead"><span>2. RESPONSIVE PLAYBACK &amp; INTERACTIVE SANDBOX</span><span class="rule"></span></h2>
+  <p class="muted" style="max-width:48rem;margin-bottom:1.5rem">
+    Test automated sequence playback at actual display size (240&times;240) or explore live cursor tracking with seamless frame routing.
+  </p>
+
+  <div style="background:var(--glass-2);border:1px solid var(--edge);border-radius:12px;padding:2.5rem 1.5rem;text-align:center">
+    
+    <!-- Primary Demo Sequence Action Bar -->
+    <div style="display:flex;justify-content:center;flex-wrap:wrap;gap:.75rem;margin-bottom:1.75rem">
+      <button class="btn" id="btn-demo-left" type="button" style="background:var(--acc);color:#fff" onclick="window.runDemoSequence('left')">
+        &blacktriangleright; Play CENTER &rarr; LEFT &rarr; CENTER Sequence
+      </button>
+      <button class="btn ghost" id="btn-demo-all" type="button" onclick="window.runDemoSequence('all')">
+        &blacktriangleright; Play 4-Direction Sweep
+      </button>
+      <button class="btn ghost" id="btn-speed-toggle" type="button" onclick="window.toggleSpeed()">
+        Speed: Normal (180ms total)
+      </button>
+    </div>
+
+    <!-- Manual State Buttons -->
+    <div style="display:flex;justify-content:center;flex-wrap:wrap;gap:.4rem;margin-bottom:2rem">
+      <button class="btn ghost" style="padding:.5rem .9rem;font-size:11px" type="button" onclick="window.setTargetPose('look-left')">Target: Left</button>
+      <button class="btn ghost" style="padding:.5rem .9rem;font-size:11px" type="button" onclick="window.setTargetPose('look-right')">Target: Right</button>
+      <button class="btn ghost" style="padding:.5rem .9rem;font-size:11px" type="button" onclick="window.setTargetPose('look-up')">Target: Up</button>
+      <button class="btn ghost" style="padding:.5rem .9rem;font-size:11px" type="button" onclick="window.setTargetPose('look-down')">Target: Down</button>
+      <button class="btn ghost" style="padding:.5rem .9rem;font-size:11px" type="button" onclick="window.setTargetPose('center')">Target: Center</button>
+      <button class="btn" id="btn-sandbox-toggle" type="button" style="background:var(--glass-2);border:1px solid var(--edge);color:var(--ink);padding:.5rem 1rem;font-size:11px" onclick="window.toggleSandboxFollow()">Mouse Follow: ON</button>
+    </div>
+
+    <!-- Live Display & Telemetry -->
+    <div style="display:flex;justify-content:center;align-items:center;gap:3.5rem;flex-wrap:wrap">
+      
+      <!-- Actual 240px Display -->
+      <div>
+        <span class="eyebrow" style="display:block;margin-bottom:.75rem">LIVE DISPLAY (240&times;240)</span>
+        <div style="width:240px;height:240px;margin:0 auto;position:relative;overflow:hidden;border:1px solid var(--edge);background:#580512;border-radius:6px;box-shadow:0 8px 32px rgba(0,0,0,0.35)">
+          <div class="pose-avatar" id="sandbox-avatar" data-avatar="pose-switcher">
+            <img class="pose-img active" data-pose="center" src="assets/images/avatar_poses/pose-center.png" alt="Center" width="512" height="512">
+            <img class="pose-img" data-pose="trans-left" src="assets/images/avatar_poses/pose-trans-left.png" alt="Trans Left" width="512" height="512">
+            <img class="pose-img" data-pose="look-left" src="assets/images/avatar_poses/pose-look-left.png" alt="Look Left" width="512" height="512">
+            <img class="pose-img" data-pose="trans-right" src="assets/images/avatar_poses/pose-trans-right.png" alt="Trans Right" width="512" height="512">
+            <img class="pose-img" data-pose="look-right" src="assets/images/avatar_poses/pose-look-right.png" alt="Look Right" width="512" height="512">
+            <img class="pose-img" data-pose="trans-up" src="assets/images/avatar_poses/pose-trans-up.png" alt="Trans Up" width="512" height="512">
+            <img class="pose-img" data-pose="look-up" src="assets/images/avatar_poses/pose-look-up.png" alt="Look Up" width="512" height="512">
+            <img class="pose-img" data-pose="trans-down" src="assets/images/avatar_poses/pose-trans-down.png" alt="Trans Down" width="512" height="512">
+            <img class="pose-img" data-pose="look-down" src="assets/images/avatar_poses/pose-look-down.png" alt="Look Down" width="512" height="512">
+            <img class="pose-img" data-pose="blink" src="assets/images/avatar_poses/pose-blink.png" alt="Blink" width="512" height="512">
+          </div>
+        </div>
+        <p id="pose-caption" style="font-size:12px;color:var(--acc-text);font-weight:600;margin-top:.75rem">Active Frame: CENTER</p>
+      </div>
+
+      <!-- Telemetry -->
+      <div style="background:var(--glass);border:1px solid var(--edge);border-radius:8px;padding:1.5rem;text-align:left;font-family:monospace;font-size:12px;min-width:300px;line-height:1.9">
+        <span class="eyebrow acc" style="display:block;margin-bottom:.75rem;font-family:'Jost',sans-serif">TRANSITION TELEMETRY</span>
+        <div>Mode: <span id="tel-mode" style="color:var(--ink)">Active Mouse Follow</span></div>
+        <div>Target Direction: <span id="tel-target" style="color:var(--acc-text);font-weight:600">CENTER</span></div>
+        <div>Active Frame: <span id="tel-frame" style="color:#6FCF97;font-weight:600">center</span></div>
+        <div>Step Duration: <span id="tel-step-dur" style="color:var(--ink)">90 ms / frame</span></div>
+        <div>Total Transition: <span id="tel-tot-dur" style="color:var(--dim)">180 ms</span></div>
+        <div>Hysteresis Status: <span style="color:var(--dim)">Deadzone 70px / Axis 1.35x</span></div>
+      </div>
+
+    </div>
+
+  </div>
+</section>
+
+</div></main>
+{footer()}'''
+
+    js = """
+(function(){
+  var sandboxAv = document.getElementById('sandbox-avatar');
+  var telMode = document.getElementById('tel-mode');
+  var telTarget = document.getElementById('tel-target');
+  var telFrame = document.getElementById('tel-frame');
+  var telStepDur = document.getElementById('tel-step-dur');
+  var telTotDur = document.getElementById('tel-tot-dur');
+  var poseCaption = document.getElementById('pose-caption');
+  var isSlowMo = false;
+  var isDemoRunning = false;
+
+  // Find sandbox instance in __avatarController
+  var inst = null;
+  if(window.__avatarController && window.__avatarController.instances){
+    for(var i=0; i<window.__avatarController.instances.length; i++){
+      if(window.__avatarController.instances[i].el === sandboxAv){
+        inst = window.__avatarController.instances[i];
+        break;
+      }
+    }
+  }
+
+  if(inst){
+    inst.onPoseChange = function(poseName){
+      if(telFrame) telFrame.textContent = poseName;
+      if(poseCaption) poseCaption.textContent = 'Active Frame: ' + poseName.toUpperCase();
+    };
+  }
+
+  window.setTargetPose = function(target){
+    if(isDemoRunning) return;
+    if(telMode) telMode.textContent = 'Target Preset (' + target.toUpperCase() + ')';
+    if(telTarget) telTarget.textContent = target.toUpperCase();
+    if(window.__avatarController){
+      window.__avatarController.setAllTarget(target);
+    }
+  };
+
+  window.toggleSpeed = function(){
+    isSlowMo = !isSlowMo;
+    var ms = isSlowMo ? 300 : 90;
+    var btn = document.getElementById('btn-speed-toggle');
+    if(btn){
+      btn.textContent = isSlowMo ? 'Speed: Slow-Mo (600ms total)' : 'Speed: Normal (180ms total)';
+    }
+    if(telStepDur) telStepDur.textContent = ms + ' ms / frame';
+    if(telTotDur) telTotDur.textContent = (ms * 2) + ' ms';
+    if(window.__avatarController){
+      window.__avatarController.setStepMs(ms);
+    }
+  };
+
+  window.toggleSandboxFollow = function(){
+    var isManual = sandboxAv.getAttribute('data-manual') === 'true';
+    sandboxAv.setAttribute('data-manual', isManual ? 'false' : 'true');
+    var btn = document.getElementById('btn-sandbox-toggle');
+    if(!isManual){
+      if(btn){ btn.textContent = 'Mouse Follow: OFF'; btn.style.background = 'transparent'; }
+      if(telMode) telMode.textContent = 'Manual Target Mode';
+    } else {
+      if(btn){ btn.textContent = 'Mouse Follow: ON'; btn.style.background = 'var(--glass-2)'; }
+      if(telMode) telMode.textContent = 'Active Mouse Follow';
+    }
+  };
+
+  window.runDemoSequence = function(type){
+    if(isDemoRunning) return;
+    isDemoRunning = true;
+    sandboxAv.setAttribute('data-manual', 'true');
+    var btnLeft = document.getElementById('btn-demo-left');
+    var btnAll = document.getElementById('btn-demo-all');
+    if(btnLeft) btnLeft.disabled = true;
+    if(btnAll) btnAll.disabled = true;
+
+    var stepTime = inst ? (inst.stepMs || 90) : 90;
+    var holdTime = 650;
+
+    if(type === 'left'){
+      if(telMode) telMode.textContent = 'Demo: CENTER \u2192 LEFT \u2192 CENTER';
+      if(telTarget) telTarget.textContent = 'LOOK-LEFT';
+      window.__avatarController.setTarget(inst, 'look-left');
+
+      setTimeout(function(){
+        if(telTarget) telTarget.textContent = 'CENTER';
+        window.__avatarController.setTarget(inst, 'center');
+        
+        setTimeout(function(){
+          isDemoRunning = false;
+          sandboxAv.setAttribute('data-manual', 'false');
+          if(btnLeft) btnLeft.disabled = false;
+          if(btnAll) btnAll.disabled = false;
+          if(telMode) telMode.textContent = 'Active Mouse Follow';
+        }, (stepTime * 2) + 200);
+      }, (stepTime * 2) + holdTime);
+
+    } else if(type === 'all'){
+      if(telMode) telMode.textContent = 'Demo: 4-Direction Sweep';
+      var sequence = ['look-left', 'look-right', 'look-up', 'look-down', 'center'];
+      var idx = 0;
+
+      function nextDemoStep(){
+        if(idx >= sequence.length){
+          isDemoRunning = false;
+          sandboxAv.setAttribute('data-manual', 'false');
+          if(btnLeft) btnLeft.disabled = false;
+          if(btnAll) btnAll.disabled = false;
+          if(telMode) telMode.textContent = 'Active Mouse Follow';
+          return;
+        }
+        var nextTarget = sequence[idx++];
+        if(telTarget) telTarget.textContent = nextTarget.toUpperCase();
+        window.__avatarController.setTarget(inst, nextTarget);
+        setTimeout(nextDemoStep, (stepTime * 2) + holdTime);
+      }
+      nextDemoStep();
+    }
+  };
+
+  window.addEventListener('mousemove', function(e){
+    if(!sandboxAv || sandboxAv.getAttribute('data-manual') === 'true' || isDemoRunning) return;
+    var rect = sandboxAv.getBoundingClientRect();
+    var cx = rect.left + rect.width / 2;
+    var cy = rect.top + rect.height / 2;
+    var dx = e.clientX - cx;
+    var dy = e.clientY - cy;
+    var dist = Math.sqrt(dx * dx + dy * dy);
+
+    var targetPose = 'center';
+    if(dist >= 70){
+      if(Math.abs(dx) >= Math.abs(dy)){
+        targetPose = (dx < 0) ? 'LOOK-LEFT' : 'LOOK-RIGHT';
+      } else {
+        targetPose = (dy < 0) ? 'LOOK-UP' : 'LOOK-DOWN';
+      }
+    }
+    if(telTarget) telTarget.textContent = targetPose;
+  });
+
+  // Handle URL query parameters for screenshot proofs
+  try {
+    var params = new URLSearchParams(window.location.search);
+    if(params.has('target')){
+      window.setTargetPose(params.get('target'));
+    }
+    if(params.has('cursorX') && params.has('cursorY')){
+      var marker = document.createElement('div');
+      marker.style.position = 'fixed';
+      marker.style.left = params.get('cursorX') + 'px';
+      marker.style.top = params.get('cursorY') + 'px';
+      marker.style.transform = 'translate(-50%, -50%)';
+      marker.style.zIndex = '9999';
+      marker.innerHTML = '<div style="width:20px;height:20px;border-radius:50%;border:2px solid #fff;background:rgba(232,144,156,0.6);box-shadow:0 0 12px rgba(232,144,156,0.9)"></div><svg width="24" height="24" viewBox="0 0 24 24" style="position:absolute;top:0;left:0;filter:drop-shadow(0 2px 4px rgba(0,0,0,0.8))"><path d="M4 2l16 8-8 3-3 8z" fill="#E8909C" stroke="#fff" stroke-width="1.5"/></svg>';
+      document.body.appendChild(marker);
+    }
+  } catch(e){}
+})();
+"""
+
+    write("poses-preview.html", shell("Directional Avatar Transitions — Jamielyn Ludovice",
+          "Whole-portrait smooth transition validation.", body, "about",
+          up="", extra_js=POSE_SWITCHER_JS + "\n" + js))
+
+
+def build_avatar_isolated_preview():
+    p = PROFILE
+    body = f'''<header id="top"><div class="wrap">
+<p class="eyebrow acc">MILESTONE 1: ISOLATED HORIZONTAL GAZE VALIDATION</p>
+<h1 class="hin" style="margin-top:.75rem">Interactive Avatar Diagnostic &amp; Isolated Preview</h1>
+<p class="lead" style="max-width:44rem;margin-top:1rem">
+  Validating clean neutral baseline and bounded horizontal left/right gaze before adding vertical tracking, blinking, head latency, or device tilt. Live website pages (About section and Digital Card) are locked to the approved static illustration.
+</p>
+</div></header>
+
+<main><div class="wrap">
+
+<!-- 1. DIAGNOSTIC LAYER AUDIT -->
+<section style="border-bottom:1px solid var(--edge);padding-bottom:3.5rem">
+  <h2 class="eyebrow grouphead"><span>1. EXACT ASSETS &amp; LAYER AUDIT</span><span class="rule"></span></h2>
+  <p class="muted" style="max-width:46rem;margin-bottom:2rem">
+    <strong>Transparency Disclosure:</strong> This implementation uses decomposed 2D raster layers extracted from the approved single-frame anime illustration (<code>about-avatar-approved.png</code>). It is <em>not</em> a 3D skeletal rig or Live2D multi-mesh model.
+  </p>
+  
+  <div style="display:grid;grid-template-columns:repeat(auto-fit, minmax(200px, 1fr));gap:1.5rem;align-items:start">
+    
+    <div style="background:var(--glass);border:1px solid var(--edge);border-radius:8px;padding:1rem;text-align:center">
+      <span class="eyebrow acc" style="display:block;margin-bottom:.5rem">MASTER APPROVED</span>
+      <div style="width:140px;height:140px;margin:0 auto .75rem;overflow:hidden;border:1px solid var(--edge);background:#5C0612">
+        <img src="assets/images/about-avatar-approved.png" alt="Master Approved" style="width:100%;height:100%;object-fit:cover">
+      </div>
+      <p style="font-size:11px;color:var(--dim);margin:0"><code>about-avatar-approved.png</code><br>1024&times;1024 RGB baseline</p>
+    </div>
+
+    <div style="background:var(--glass);border:1px solid var(--edge);border-radius:8px;padding:1rem;text-align:center">
+      <span class="eyebrow" style="display:block;margin-bottom:.5rem">LAYER 1: SCLERA BASE</span>
+      <div style="width:140px;height:140px;margin:0 auto .75rem;overflow:hidden;border:1px solid var(--edge);background:#5C0612">
+        <img src="assets/images/avatar-base.png" alt="Base Layer" style="width:100%;height:100%;object-fit:cover">
+      </div>
+      <p style="font-size:11px;color:var(--dim);margin:0"><code>avatar-base.png</code><br>Stationary face &amp; inpainted eye whites</p>
+    </div>
+
+    <div style="background:var(--glass);border:1px solid var(--edge);border-radius:8px;padding:1rem;text-align:center">
+      <span class="eyebrow" style="display:block;margin-bottom:.5rem">LAYER 2: LEFT IRIS</span>
+      <div style="width:140px;height:140px;margin:0 auto .75rem;display:flex;align-items:center;justify-content:center;border:1px solid var(--edge);background:#1a0f12">
+        <img src="assets/images/avatar-iris-left.png" alt="Left Iris" style="width:52px;height:auto;image-rendering:crisp-edges">
+      </div>
+      <p style="font-size:11px;color:var(--dim);margin:0"><code>avatar-iris-left.png</code><br>42&times;27px RGBA cutout</p>
+    </div>
+
+    <div style="background:var(--glass);border:1px solid var(--edge);border-radius:8px;padding:1rem;text-align:center">
+      <span class="eyebrow" style="display:block;margin-bottom:.5rem">LAYER 3: RIGHT IRIS</span>
+      <div style="width:140px;height:140px;margin:0 auto .75rem;display:flex;align-items:center;justify-content:center;border:1px solid var(--edge);background:#1a0f12">
+        <img src="assets/images/avatar-iris-right.png" alt="Right Iris" style="width:54px;height:auto;image-rendering:crisp-edges">
+      </div>
+      <p style="font-size:11px;color:var(--dim);margin:0"><code>avatar-iris-right.png</code><br>44&times;29px RGBA cutout</p>
+    </div>
+
+    <div style="background:var(--glass);border:1px solid var(--edge);border-radius:8px;padding:1rem;text-align:center">
+      <span class="eyebrow" style="display:block;margin-bottom:.5rem">LAYER 4: EYELASH OVERLAY</span>
+      <div style="width:140px;height:140px;margin:0 auto .75rem;overflow:hidden;border:1px solid var(--edge);background:#1a0f12">
+        <img src="assets/images/avatar-overlay.png" alt="Eyelash Overlay" style="width:100%;height:100%;object-fit:cover">
+      </div>
+      <p style="font-size:11px;color:var(--dim);margin:0"><code>avatar-overlay.png</code><br>1024&times;1024 RGBA lash contours</p>
+    </div>
+
+  </div>
+</section>
+
+<!-- 2. SIDE-BY-SIDE HORIZONTAL GAZE COMPARISON -->
+<section style="border-bottom:1px solid var(--edge);padding-bottom:3.5rem">
+  <h2 class="eyebrow grouphead"><span>2. HORIZONTAL GAZE BENCHMARKS (ACTUAL SIZE 240px)</span><span class="rule"></span></h2>
+  <p class="muted" style="max-width:44rem;margin-bottom:2rem">
+    Comparing the approved static master with the neutral baseline, look left (-8px translation), and look right (+8px translation).
+  </p>
+
+  <div style="display:grid;grid-template-columns:repeat(auto-fit, minmax(240px, 1fr));gap:2rem;align-items:start">
+    
+    <div style="background:var(--glass);border:1px solid var(--edge);border-radius:8px;padding:1.5rem;text-align:center">
+      <span class="eyebrow acc" style="display:block;margin-bottom:.75rem">STATIC MASTER (APPROVED)</span>
+      <div style="width:240px;height:240px;margin:0 auto 1rem;overflow:hidden;border:1px solid var(--edge);background:#5C0612">
+        <img src="assets/images/about-avatar-approved.png" alt="Static Master" style="width:100%;height:100%;object-fit:cover;display:block">
+      </div>
+      <p style="font-size:12px;color:var(--dim);margin:0">Exact reference artwork</p>
+    </div>
+
+    <div style="background:var(--glass);border:1px solid var(--edge);border-radius:8px;padding:1.5rem;text-align:center">
+      <span class="eyebrow" style="display:block;margin-bottom:.75rem">1. NEUTRAL RIG (0px OFFSET)</span>
+      <div style="width:240px;height:240px;margin:0 auto 1rem;overflow:hidden;border:1px solid var(--edge);background:#5C0612">
+        <img src="assets/images/poses/pose_neutral_240.png" alt="Neutral Pose" style="width:100%;height:100%;object-fit:cover;display:block">
+      </div>
+      <p style="font-size:12px;color:var(--dim);margin:0">Pristine centered alignment</p>
+    </div>
+
+    <div style="background:var(--glass);border:1px solid var(--edge);border-radius:8px;padding:1.5rem;text-align:center">
+      <span class="eyebrow" style="display:block;margin-bottom:.75rem">2. LOOK LEFT (-8px OFFSET)</span>
+      <div style="width:240px;height:240px;margin:0 auto 1rem;overflow:hidden;border:1px solid var(--edge);background:#5C0612">
+        <img src="assets/images/poses/pose_look_left_240.png" alt="Look Left Pose" style="width:100%;height:100%;object-fit:cover;display:block">
+      </div>
+      <p style="font-size:12px;color:var(--dim);margin:0">Natural gaze shift left</p>
+    </div>
+
+    <div style="background:var(--glass);border:1px solid var(--edge);border-radius:8px;padding:1.5rem;text-align:center">
+      <span class="eyebrow" style="display:block;margin-bottom:.75rem">3. LOOK RIGHT (+8px OFFSET)</span>
+      <div style="width:240px;height:240px;margin:0 auto 1rem;overflow:hidden;border:1px solid var(--edge);background:#5C0612">
+        <img src="assets/images/poses/pose_look_right_240.png" alt="Look Right Pose" style="width:100%;height:100%;object-fit:cover;display:block">
+      </div>
+      <p style="font-size:12px;color:var(--dim);margin:0">Natural gaze shift right</p>
+    </div>
+
+  </div>
+</section>
+
+<!-- 3. ISOLATED INTERACTIVE SANDBOX -->
+<section>
+  <h2 class="eyebrow grouphead"><span>3. LIVE ISOLATED INTERACTIVE SANDBOX</span><span class="rule"></span></h2>
+  <p class="muted" style="max-width:46rem;margin-bottom:1.5rem">
+    Move pointer across the window or use the test buttons below. Iris translation is strictly constrained to the horizontal X-axis inside socket boundaries with lerp easing.
+  </p>
+
+  <div style="background:var(--glass-2);border:1px solid var(--edge);border-radius:12px;padding:2.5rem 1.5rem;text-align:center">
+    
+    <!-- Controls -->
+    <div style="display:flex;justify-content:center;flex-wrap:wrap;gap:.5rem;margin-bottom:2rem">
+      <button class="btn ghost" type="button" onclick="setManualGaze(-1.0)">Look Far Left</button>
+      <button class="btn ghost" type="button" onclick="setManualGaze(-0.5)">Slight Left</button>
+      <button class="btn on" id="btn-neutral" type="button" onclick="setManualGaze(0)">Neutral Center</button>
+      <button class="btn ghost" type="button" onclick="setManualGaze(0.5)">Slight Right</button>
+      <button class="btn ghost" type="button" onclick="setManualGaze(1.0)">Look Far Right</button>
+      <button class="btn" id="btn-toggle-mouse" type="button" style="background:var(--acc);color:#fff" onclick="toggleMouseTracking()">Follow Mouse: ON</button>
+    </div>
+
+    <!-- Live Rig Display -->
+    <div style="display:flex;justify-content:center;align-items:center;gap:3rem;flex-wrap:wrap">
+      
+      <!-- Actual 240px Display -->
+      <div>
+        <span class="eyebrow" style="display:block;margin-bottom:.75rem">ACTUAL DISPLAY SIZE (240&times;240)</span>
+        <div style="width:240px;height:240px;margin:0 auto;position:relative;overflow:hidden;border:1px solid var(--edge);background:#5C0612">
+          <div class="interactive-avatar" id="avatar-live" data-avatar="interactive">
+            <img class="avatar-layer avatar-base" src="assets/images/avatar-base.png" alt="{E(p['name'])}" width="1024" height="1024">
+            <div class="avatar-eye-socket socket-l"><div class="avatar-iris" id="live-iris-l"><img src="assets/images/avatar-iris-left.png" alt="" width="44" height="28"></div></div>
+            <div class="avatar-eye-socket socket-r"><div class="avatar-iris" id="live-iris-r"><img src="assets/images/avatar-iris-right.png" alt="" width="46" height="30"></div></div>
+            <img class="avatar-layer avatar-overlay" src="assets/images/avatar-overlay.png" alt="" width="1024" height="1024" aria-hidden="true">
+          </div>
+        </div>
+      </div>
+
+      <!-- Diagnostic Telemetry -->
+      <div style="background:var(--glass);border:1px solid var(--edge);border-radius:8px;padding:1.5rem;text-align:left;font-family:monospace;font-size:12px;min-width:280px;line-height:1.8">
+        <span class="eyebrow acc" style="display:block;margin-bottom:.75rem;font-family:'Jost',sans-serif">REAL-TIME TELEMETRY</span>
+        <div>Mode: <span id="diag-mode" style="color:var(--ink)">Interactive Mouse Follow</span></div>
+        <div>Cursor Target X: <span id="diag-target-x" style="color:var(--acc-text)">0.00</span></div>
+        <div>Iris Current X: <span id="diag-current-x" style="color:var(--acc-text)">0.00</span></div>
+        <div>Left Iris Shift: <span id="diag-shift-l" style="color:var(--ink)">0.0 px</span></div>
+        <div>Right Iris Shift: <span id="diag-shift-r" style="color:var(--ink)">0.0 px</span></div>
+        <div>Socket Margin Left: <span id="diag-margin-l" style="color:#6FCF97">Safe (Inside socket)</span></div>
+        <div>Socket Margin Right: <span id="diag-margin-r" style="color:#6FCF97">Safe (Inside socket)</span></div>
+      </div>
+
+    </div>
+
+  </div>
+</section>
+
+</div></main>
+{footer()}'''
+
+    js = """
+(function(){
+  var mouseActive = true;
+  var targetX = 0;
+  var currentX = 0;
+  var lerpSpeed = 0.12;
+  var maxShift = 32.0; // max percentage shift within socket container
+
+  var liveAvatar = document.getElementById('avatar-live');
+  var irisL = document.getElementById('live-iris-l');
+  var irisR = document.getElementById('live-iris-r');
+  
+  var diagMode = document.getElementById('diag-mode');
+  var diagTargetX = document.getElementById('diag-target-x');
+  var diagCurrentX = document.getElementById('diag-current-x');
+  var diagShiftL = document.getElementById('diag-shift-l');
+  var diagShiftR = document.getElementById('diag-shift-r');
+
+  window.setManualGaze = function(val){
+    mouseActive = false;
+    document.getElementById('btn-toggle-mouse').textContent = 'Follow Mouse: OFF';
+    document.getElementById('btn-toggle-mouse').style.background = 'transparent';
+    targetX = Math.max(-1, Math.min(1, val));
+    if(diagMode) diagMode.textContent = 'Manual Preset (' + (val < 0 ? 'Left' : (val > 0 ? 'Right' : 'Neutral')) + ')';
+  };
+
+  window.toggleMouseTracking = function(){
+    mouseActive = !mouseActive;
+    var btn = document.getElementById('btn-toggle-mouse');
+    if(mouseActive){
+      btn.textContent = 'Follow Mouse: ON';
+      btn.style.background = 'var(--acc)';
+      if(diagMode) diagMode.textContent = 'Interactive Mouse Follow';
+    } else {
+      btn.textContent = 'Follow Mouse: OFF';
+      btn.style.background = 'transparent';
+      if(diagMode) diagMode.textContent = 'Locked Gaze';
+    }
+  };
+
+  window.addEventListener('mousemove', function(e){
+    if(!mouseActive || !liveAvatar) return;
+    var rect = liveAvatar.getBoundingClientRect();
+    var centerX = rect.left + rect.width / 2;
+    var deltaX = (e.clientX - centerX) / (window.innerWidth * 0.45);
+    targetX = Math.max(-1, Math.min(1, deltaX));
+    updatePointerMarker(e.clientX, e.clientY);
+  });
+
+  window.addEventListener('mouseleave', function(){
+    if(mouseActive){
+      targetX = 0;
+      hidePointerMarker();
+    }
+  });
+
+  function updatePointerMarker(x, y){
+    var marker = document.getElementById('cursor-marker');
+    if(!marker){
+      marker = document.createElement('div');
+      marker.id = 'cursor-marker';
+      marker.style.position = 'fixed';
+      marker.style.pointerEvents = 'none';
+      marker.style.zIndex = '9999';
+      marker.style.transform = 'translate(-50%, -50%)';
+      marker.innerHTML = '<div style="width:20px;height:20px;border-radius:50%;border:2px solid #fff;background:rgba(232,144,156,0.6);box-shadow:0 0 12px rgba(232,144,156,0.9)"></div><svg width="24" height="24" viewBox="0 0 24 24" style="position:absolute;top:0;left:0;filter:drop-shadow(0 2px 4px rgba(0,0,0,0.8))"><path d="M4 2l16 8-8 3-3 8z" fill="#E8909C" stroke="#fff" stroke-width="1.5"/></svg>';
+      document.body.appendChild(marker);
+    }
+    marker.style.display = 'block';
+    marker.style.left = x + 'px';
+    marker.style.top = y + 'px';
+  }
+
+  function hidePointerMarker(){
+    var marker = document.getElementById('cursor-marker');
+    if(marker) marker.style.display = 'none';
+  }
+
+  // Handle URL query parameters for screenshot proofs
+  try {
+    var params = new URLSearchParams(window.location.search);
+    if(params.has('gaze')){
+      var g = parseFloat(params.get('gaze'));
+      setManualGaze(g);
+      currentX = g;
+    }
+    if(params.has('cursorX') && params.has('cursorY')){
+      var cx = parseFloat(params.get('cursorX'));
+      var cy = parseFloat(params.get('cursorY'));
+      updatePointerMarker(cx, cy);
+    }
+  } catch(e){}
+
+  function render(){
+    currentX += (targetX - currentX) * lerpSpeed;
+    if(Math.abs(targetX - currentX) < 0.001) currentX = targetX;
+
+    var shiftPct = currentX * maxShift;
+    var shiftPxL = (shiftPct * 0.44 * 0.24).toFixed(1);
+    var shiftPxR = (shiftPct * 0.46 * 0.24).toFixed(1);
+
+    if(irisL) irisL.style.transform = 'translate3d(' + shiftPct.toFixed(2) + '%, 0, 0)';
+    if(irisR) irisR.style.transform = 'translate3d(' + shiftPct.toFixed(2) + '%, 0, 0)';
+
+    if(diagTargetX) diagTargetX.textContent = targetX.toFixed(2);
+    if(diagCurrentX) diagCurrentX.textContent = currentX.toFixed(2);
+    if(diagShiftL) diagShiftL.textContent = (currentX >= 0 ? '+' : '') + shiftPxL + ' px';
+    if(diagShiftR) diagShiftR.textContent = (currentX >= 0 ? '+' : '') + shiftPxR + ' px';
+
+    requestAnimationFrame(render);
+  }
+  requestAnimationFrame(render);
+})();
+"""
+
+    write("avatar-preview.html", shell("Avatar Diagnostic & Isolated Preview — Jamielyn Ludovice",
+          "Isolated validation of neutral face and horizontal gaze tracking.", body, "about",
+          up="", extra_js=js))
+
+
 def main():
     if os.path.isdir(OUT):
         shutil.rmtree(OUT)
     os.makedirs(OUT)
     write("assets/style.css", CSS.strip() + "\n")
-    # Real favicon.png / apple-touch-icon.png now come from Portfolio/images/
-    # (copied in below along with every other image) - the old text-based
-    # FAVICON_SVG is unused but left defined below in case it's needed again.
     qr_src = os.path.join(os.path.dirname(os.path.abspath(__file__)), "qrious.min.js")
     if os.path.isfile(qr_src):
         shutil.copy2(qr_src, os.path.join(OUT, "assets", "qr.min.js"))
-    # site/ is deleted and rebuilt every run, so images must live OUTSIDE it.
-    # Portfolio/images/ is the source folder - it is copied in on every build.
     dest = os.path.join(OUT, "assets", "images")
     os.makedirs(dest, exist_ok=True)
     src = os.path.join(os.path.dirname(os.path.abspath(__file__)), "images")
     os.makedirs(src, exist_ok=True)
-    copied = 0
-    for f in sorted(os.listdir(src)):
-        fp = os.path.join(src, f)
-        if os.path.isfile(fp) and not f.startswith("."):
-            shutil.copy2(fp, os.path.join(dest, f))
-            copied += 1
-    # Portfolio/videos/ -> site/assets/video/  (mp4 + poster jpg, same rule as images)
+    for root, dirs, files in os.walk(src):
+        rel = os.path.relpath(root, src)
+        target_dir = dest if rel == "." else os.path.join(dest, rel)
+        os.makedirs(target_dir, exist_ok=True)
+        for f in sorted(files):
+            fp = os.path.join(root, f)
+            if os.path.isfile(fp) and not f.startswith("."):
+                shutil.copy2(fp, os.path.join(target_dir, f))
     vsrc = os.path.join(os.path.dirname(os.path.abspath(__file__)), "videos")
     if os.path.isdir(vsrc):
         vdest = os.path.join(OUT, "assets", "video")
@@ -4997,7 +6083,7 @@ def main():
         sitemap_lines.append(f'  <url>\n    <loc>{loc}</loc>\n    <changefreq>{freq}</changefreq>\n    <priority>{prio}</priority>\n  </url>')
     sitemap_lines.append('</urlset>\n')
     write("sitemap.xml", "\n".join(sitemap_lines))
-    build_home(); build_work_index(); build_tools(); build_about(); build_card(); build_404()
+    build_home(); build_work_index(); build_tools(); build_about(); build_card(); build_404(); build_poses_preview(); build_avatar_isolated_preview()
     for i, pr in enumerate(PROJECTS):
         build_project(i, pr)
     n = sum(len(f) for _, _, f in os.walk(OUT))
@@ -5008,3 +6094,4 @@ def main():
 
 if __name__ == "__main__":
     main()
+
