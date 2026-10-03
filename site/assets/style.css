@@ -291,17 +291,17 @@ transition:background .25s var(--ease-editorial),transform .2s var(--ease-editor
   .work-trio-title{font-size:1.45rem}
 }
 
-/* ---- Personal Intro Section with Interactive Anime Avatar ----------------- */
-.intro-section{padding:5rem 0 4.5rem;border-top:1px solid var(--edge);position:relative;z-index:1}
-.intro-grid{display:grid;grid-template-columns:220px 1fr;gap:3.5rem;align-items:center;margin-top:2.25rem}
-@media(min-width:1200px){.intro-grid{grid-template-columns:240px 1fr;gap:4.5rem}}
+/* ---- Personal Intro Section with Interactive Illustrated Avatar ----------------- */
+.intro-section{padding:4.5rem 0 4rem;border-top:1px solid var(--edge);position:relative;z-index:1}
+.intro-grid{display:grid;grid-template-columns:200px 1fr;gap:3.5rem;align-items:center;margin-top:2rem}
+@media(min-width:1200px){.intro-grid{grid-template-columns:220px 1fr;gap:4.5rem}}
 
 .intro-photo-wrap{
-  position:relative;width:100%;max-width:240px;display:flex;flex-direction:column;align-items:center;
+  position:relative;width:100%;max-width:220px;display:flex;flex-direction:column;align-items:center;
 }
 .intro-photo-card{
-  width:100%;aspect-ratio:1/1;position:relative;overflow:hidden;border-radius:0;border:1px solid var(--edge);
-  background:#5C0612;
+  width:100%;aspect-ratio:1/1;position:relative;overflow:hidden;border-radius:4px;border:1px solid var(--edge);
+  background:#580512;
 }
 
 /* Whole-Portrait Pose Switching (Scoped to [data-avatar="pose-switcher"]) */
@@ -316,33 +316,34 @@ transition:background .25s var(--ease-editorial),transform .2s var(--ease-editor
   display:block;
 }
 
-.avatar-tilt-btn{
-  display:none;margin-top:.65rem;padding:.35rem .75rem;border-radius:4px;
+.avatar-motion-btn{
+  display:none;align-items:center;justify-content:center;gap:.45rem;
+  margin-top:.65rem;padding:.4rem .85rem;border-radius:999px;
   background:var(--glass);border:1px solid var(--edge);color:var(--dim);
-  font:400 11px/1 'Jost',system-ui,sans-serif;letter-spacing:.08em;text-transform:uppercase;
-  cursor:pointer;transition:all .2s;
+  font:400 11px/1 'Jost',system-ui,sans-serif;letter-spacing:.12em;text-transform:uppercase;
+  cursor:pointer;transition:background .2s,border-color .2s,color .2s,opacity .25s;
+  user-select:none;-webkit-user-select:none;touch-action:manipulation;
 }
-.avatar-tilt-btn:hover{color:var(--ink);border-color:var(--acc)}
-.avatar-tilt-btn.active{background:var(--acc);color:#F5F2ED;border-color:var(--acc)}
-@media(hover:none) and (pointer:coarse){
-  .avatar-tilt-btn{display:inline-block}
-}
+.avatar-motion-btn:hover{color:var(--ink);border-color:var(--acc);background:var(--glass-2)}
+.avatar-motion-btn.visible{display:inline-flex}
+.avatar-motion-btn .btn-dot{width:5px;height:5px;border-radius:50%;background:var(--acc)}
+
 @media(prefers-reduced-motion:reduce){
   .pose-avatar .pose-img{display:none!important}
   .pose-avatar .pose-img[data-pose="center"]{display:block!important}
-}
-  .avatar-tilt-btn{display:none!important}
+  .avatar-motion-btn{display:none!important}
 }
 
-.intro-text-wrap{display:flex;flex-direction:column;align-items:flex-start;max-width:65ch}
-.intro-text{font-size:clamp(1.1rem,1.8vw,1.3rem);line-height:1.75;color:var(--ink);font-weight:300;margin:0 0 1.5rem}
+.intro-text-wrap{display:flex;flex-direction:column;align-items:flex-start;max-width:62ch}
+.intro-text{font-size:clamp(1.05rem,1.5vw,1.18rem);line-height:1.7;color:var(--ink);font-weight:300;margin:0 0 1.25rem}
 .intro-link{font:400 12px/1 'Jost',system-ui,sans-serif;letter-spacing:.14em;text-transform:uppercase;color:var(--dim);display:inline-flex;align-items:center;gap:.4rem;text-decoration:none;transition:color .25s,transform .25s}
 .intro-link:hover,.intro-link:focus-visible{color:var(--acc-text);transform:translateX(4px)}
 
 @media(max-width:768px){
-  .intro-section{padding:4rem 0 3.5rem}
-  .intro-grid{grid-template-columns:1fr;gap:1.75rem}
+  .intro-section{padding:3.5rem 0 3rem}
+  .intro-grid{grid-template-columns:1fr;gap:1.75rem;text-align:center}
   .intro-photo-wrap{max-width:180px;margin:0 auto}
+  .intro-text-wrap{align-items:center;margin:0 auto}
   .intro-text{font-size:1.05rem;line-height:1.65}
 }
 

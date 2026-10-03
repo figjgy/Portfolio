@@ -331,17 +331,17 @@ transition:background .25s var(--ease-editorial),transform .2s var(--ease-editor
   .work-trio-title{font-size:1.45rem}
 }
 
-/* ---- Personal Intro Section with Interactive Anime Avatar ----------------- */
-.intro-section{padding:5rem 0 4.5rem;border-top:1px solid var(--edge);position:relative;z-index:1}
-.intro-grid{display:grid;grid-template-columns:220px 1fr;gap:3.5rem;align-items:center;margin-top:2.25rem}
-@media(min-width:1200px){.intro-grid{grid-template-columns:240px 1fr;gap:4.5rem}}
+/* ---- Personal Intro Section with Interactive Illustrated Avatar ----------------- */
+.intro-section{padding:4.5rem 0 4rem;border-top:1px solid var(--edge);position:relative;z-index:1}
+.intro-grid{display:grid;grid-template-columns:200px 1fr;gap:3.5rem;align-items:center;margin-top:2rem}
+@media(min-width:1200px){.intro-grid{grid-template-columns:220px 1fr;gap:4.5rem}}
 
 .intro-photo-wrap{
-  position:relative;width:100%;max-width:240px;display:flex;flex-direction:column;align-items:center;
+  position:relative;width:100%;max-width:220px;display:flex;flex-direction:column;align-items:center;
 }
 .intro-photo-card{
-  width:100%;aspect-ratio:1/1;position:relative;overflow:hidden;border-radius:0;border:1px solid var(--edge);
-  background:#5C0612;
+  width:100%;aspect-ratio:1/1;position:relative;overflow:hidden;border-radius:4px;border:1px solid var(--edge);
+  background:#580512;
 }
 
 /* Whole-Portrait Pose Switching (Scoped to [data-avatar="pose-switcher"]) */
@@ -356,33 +356,34 @@ transition:background .25s var(--ease-editorial),transform .2s var(--ease-editor
   display:block;
 }
 
-.avatar-tilt-btn{
-  display:none;margin-top:.65rem;padding:.35rem .75rem;border-radius:4px;
+.avatar-motion-btn{
+  display:none;align-items:center;justify-content:center;gap:.45rem;
+  margin-top:.65rem;padding:.4rem .85rem;border-radius:999px;
   background:var(--glass);border:1px solid var(--edge);color:var(--dim);
-  font:400 11px/1 'Jost',system-ui,sans-serif;letter-spacing:.08em;text-transform:uppercase;
-  cursor:pointer;transition:all .2s;
+  font:400 11px/1 'Jost',system-ui,sans-serif;letter-spacing:.12em;text-transform:uppercase;
+  cursor:pointer;transition:background .2s,border-color .2s,color .2s,opacity .25s;
+  user-select:none;-webkit-user-select:none;touch-action:manipulation;
 }
-.avatar-tilt-btn:hover{color:var(--ink);border-color:var(--acc)}
-.avatar-tilt-btn.active{background:var(--acc);color:#F5F2ED;border-color:var(--acc)}
-@media(hover:none) and (pointer:coarse){
-  .avatar-tilt-btn{display:inline-block}
-}
+.avatar-motion-btn:hover{color:var(--ink);border-color:var(--acc);background:var(--glass-2)}
+.avatar-motion-btn.visible{display:inline-flex}
+.avatar-motion-btn .btn-dot{width:5px;height:5px;border-radius:50%;background:var(--acc)}
+
 @media(prefers-reduced-motion:reduce){
   .pose-avatar .pose-img{display:none!important}
   .pose-avatar .pose-img[data-pose="center"]{display:block!important}
-}
-  .avatar-tilt-btn{display:none!important}
+  .avatar-motion-btn{display:none!important}
 }
 
-.intro-text-wrap{display:flex;flex-direction:column;align-items:flex-start;max-width:65ch}
-.intro-text{font-size:clamp(1.1rem,1.8vw,1.3rem);line-height:1.75;color:var(--ink);font-weight:300;margin:0 0 1.5rem}
+.intro-text-wrap{display:flex;flex-direction:column;align-items:flex-start;max-width:62ch}
+.intro-text{font-size:clamp(1.05rem,1.5vw,1.18rem);line-height:1.7;color:var(--ink);font-weight:300;margin:0 0 1.25rem}
 .intro-link{font:400 12px/1 'Jost',system-ui,sans-serif;letter-spacing:.14em;text-transform:uppercase;color:var(--dim);display:inline-flex;align-items:center;gap:.4rem;text-decoration:none;transition:color .25s,transform .25s}
 .intro-link:hover,.intro-link:focus-visible{color:var(--acc-text);transform:translateX(4px)}
 
 @media(max-width:768px){
-  .intro-section{padding:4rem 0 3.5rem}
-  .intro-grid{grid-template-columns:1fr;gap:1.75rem}
+  .intro-section{padding:3.5rem 0 3rem}
+  .intro-grid{grid-template-columns:1fr;gap:1.75rem;text-align:center}
   .intro-photo-wrap{max-width:180px;margin:0 auto}
+  .intro-text-wrap{align-items:center;margin:0 auto}
   .intro-text{font-size:1.05rem;line-height:1.65}
 }
 
@@ -1594,6 +1595,31 @@ CHAT_JS = r"""
 })();
 """
 
+def render_pose_avatar(alt_text="Jamielyn Ludovice Illustrated Avatar", extra_style=""):
+    style_attr = f' style="{extra_style}"' if extra_style else ''
+    images = [
+        ('center', 'pose-center.png', True),
+        ('left', 'pose-left.png', False),
+        ('right', 'pose-right.png', False),
+        ('up', 'pose-up.png', False),
+        ('down', 'pose-down.png', False),
+        ('up-left', 'pose-up-left.png', False),
+        ('up-right', 'pose-up-right.png', False),
+        ('down-left', 'pose-down-left.png', False),
+        ('down-right', 'pose-down-right.png', False),
+    ]
+    img_tags = []
+    for pose, src, is_active in images:
+        act = " active" if is_active else ""
+        alt = alt_text if is_active else ""
+        aria = ' aria-hidden="true"' if not is_active else ""
+        img_tags.append(f'  <img class="pose-img{act}" data-pose="{pose}" src="assets/images/avatar_poses/{src}" alt="{alt}" width="512" height="512"{aria}>')
+    
+    return f'''<div class="pose-avatar" data-avatar="pose-switcher"{style_attr}>
+{chr(10).join(img_tags)}
+</div>'''
+
+
 POSE_SWITCHER_JS = r"""
 (function(){
   var switchers = document.querySelectorAll('[data-avatar="pose-switcher"]');
@@ -1608,19 +1634,13 @@ POSE_SWITCHER_JS = r"""
     });
   }
 
-  // Preload all 10 images (endpoints + intermediate frames) to guarantee zero flashing
-  var poseNames = [
-    'center',
-    'trans-left', 'look-left',
-    'trans-right', 'look-right',
-    'trans-up', 'look-up',
-    'trans-down', 'look-down',
-    'blink'
-  ];
+  // Preload all 9 primary poses
+  var poseNames = ['center', 'left', 'right', 'up', 'down', 'up-left', 'up-right', 'down-left', 'down-right'];
   var preloads = {};
   poseNames.forEach(function(p){
     var img = new Image();
     img.src = 'assets/images/avatar_poses/pose-' + p + '.png';
+    if(img.decode){ img.decode().catch(function(){}); }
     preloads[p] = img;
   });
 
@@ -1635,10 +1655,7 @@ POSE_SWITCHER_JS = r"""
       el: sw,
       imgs: imgs,
       currentPose: 'center',
-      targetPose: 'center',
-      isTransitioning: false,
-      stepMs: 90,
-      timer: null
+      targetPose: 'center'
     });
   });
 
@@ -1654,83 +1671,10 @@ POSE_SWITCHER_JS = r"""
     if(inst.onPoseChange) inst.onPoseChange(poseName);
   }
 
-  // Directed graph routing for coherent head/eye transitions
-  function getNextStep(current, target){
-    if(current === target) return null;
-    
-    // CENTER transitions outwards
-    if(current === 'center'){
-      if(target === 'look-left' || target === 'trans-left') return 'trans-left';
-      if(target === 'look-right' || target === 'trans-right') return 'trans-right';
-      if(target === 'look-up' || target === 'trans-up') return 'trans-up';
-      if(target === 'look-down' || target === 'trans-down') return 'trans-down';
-      return null;
-    }
-    
-    // LEFT branch
-    if(current === 'trans-left'){
-      if(target === 'look-left') return 'look-left';
-      return 'center';
-    }
-    if(current === 'look-left'){
-      return 'trans-left';
-    }
-
-    // RIGHT branch
-    if(current === 'trans-right'){
-      if(target === 'look-right') return 'look-right';
-      return 'center';
-    }
-    if(current === 'look-right'){
-      return 'trans-right';
-    }
-
-    // UP branch
-    if(current === 'trans-up'){
-      if(target === 'look-up') return 'look-up';
-      return 'center';
-    }
-    if(current === 'look-up'){
-      return 'trans-up';
-    }
-
-    // DOWN branch
-    if(current === 'trans-down'){
-      if(target === 'look-down') return 'look-down';
-      return 'center';
-    }
-    if(current === 'look-down'){
-      return 'trans-down';
-    }
-
-    return 'center';
-  }
-
-  function advanceInstance(inst){
-    if(isReduced){
-      applyPose(inst, 'center');
-      inst.isTransitioning = false;
-      return;
-    }
-    var next = getNextStep(inst.currentPose, inst.targetPose);
-    if(!next){
-      inst.isTransitioning = false;
-      return;
-    }
-    applyPose(inst, next);
-    inst.isTransitioning = true;
-    clearTimeout(inst.timer);
-    inst.timer = setTimeout(function(){
-      advanceInstance(inst);
-    }, inst.stepMs || 90);
-  }
-
   function setTarget(inst, target){
-    if(inst.targetPose === target && inst.currentPose === target) return;
+    if(isReduced) target = 'center';
     inst.targetPose = target;
-    if(!inst.isTransitioning){
-      advanceInstance(inst);
-    }
+    applyPose(inst, target);
   }
 
   function setAllTarget(target){
@@ -1739,13 +1683,63 @@ POSE_SWITCHER_JS = r"""
     });
   }
 
-  // Cursor Tracking with Deadzone & Hysteresis
-  var mouseActive = false;
-  var lastX = 0, lastY = 0;
-  var currentAxis = 'horizontal'; // 'horizontal' | 'vertical'
+  // 8-Direction Sector Calculation with Hysteresis
+  var SECTOR_NAMES = ['right', 'down-right', 'down', 'down-left', 'left', 'up-left', 'up', 'up-right'];
+  var SECTOR_ANGLES = [0, 45, 90, 135, 180, -135, -90, -45];
+  var activeSector = 'center';
 
-  function updateDirection(clientX, clientY){
+  function calcDirectionSector(dx, dy, currentSector, deadzoneRadius){
+    var dist = Math.sqrt(dx * dx + dy * dy);
+    if(dist < (deadzoneRadius || 60)){
+      return 'center';
+    }
+    var deg = Math.atan2(dy, dx) * 180 / Math.PI;
+
+    // Hysteresis (+-6 deg sector boundary buffer)
+    if(currentSector && currentSector !== 'center'){
+      var idx = SECTOR_NAMES.indexOf(currentSector);
+      if(idx !== -1){
+        var cDeg = SECTOR_ANGLES[idx];
+        var diff = Math.abs(deg - cDeg);
+        if(diff > 180) diff = 360 - diff;
+        if(diff <= 28.5){
+          return currentSector;
+        }
+      }
+    }
+
+    var bestSector = 'center';
+    var minDiff = 999;
+    for(var i = 0; i < SECTOR_NAMES.length; i++){
+      var cDeg = SECTOR_ANGLES[i];
+      var d = Math.abs(deg - cDeg);
+      if(d > 180) d = 360 - d;
+      if(d < minDiff){
+        minDiff = d;
+        bestSector = SECTOR_NAMES[i];
+      }
+    }
+    return bestSector;
+  }
+
+  // Input Arbitration: Mouse vs Touch vs Tilt
+  var inputMode = 'none'; // 'mouse' | 'tilt'
+  var mouseActive = false;
+  var lastTouchTime = 0;
+  var lastX = 0, lastY = 0;
+
+  window.addEventListener('touchstart', function(){
+    lastTouchTime = Date.now();
+    mouseActive = false;
+  }, { passive: true });
+
+  window.addEventListener('touchend', function(){
+    lastTouchTime = Date.now();
+  }, { passive: true });
+
+  function updateMouseDirection(clientX, clientY){
     if(isReduced) return;
+    inputMode = 'mouse';
     instances.forEach(function(inst){
       if(inst.el.getAttribute('data-manual') === 'true') return;
       var rect = inst.el.getBoundingClientRect();
@@ -1754,128 +1748,269 @@ POSE_SWITCHER_JS = r"""
 
       var dx = clientX - cx;
       var dy = clientY - cy;
-      var dist = Math.sqrt(dx * dx + dy * dy);
 
-      // Deadzone around avatar center: within 70px stay centered
-      if(dist < 70){
-        setTarget(inst, 'center');
-        return;
-      }
-
-      var absX = Math.abs(dx);
-      var absY = Math.abs(dy);
-
-      // Axis hysteresis to prevent flickering on 45-degree diagonals
-      if(currentAxis === 'horizontal'){
-        if(absY > absX * 1.35){
-          currentAxis = 'vertical';
-        }
-      } else {
-        if(absX > absY * 1.35){
-          currentAxis = 'horizontal';
-        }
-      }
-
-      var targetPose = 'center';
-      if(currentAxis === 'horizontal'){
-        targetPose = (dx < 0) ? 'look-left' : 'look-right';
-      } else {
-        targetPose = (dy < 0) ? 'look-up' : 'look-down';
-      }
-
-      setTarget(inst, targetPose);
+      var sector = calcDirectionSector(dx, dy, activeSector, 65);
+      activeSector = sector;
+      setTarget(inst, sector);
     });
   }
 
-  window.addEventListener('mousemove', function(e){
-    mouseActive = true;
-    lastX = e.clientX;
-    lastY = e.clientY;
-    updateDirection(e.clientX, e.clientY);
-  }, { passive: true });
+  // Pointermove with strict touch isolation
+  if(window.PointerEvent){
+    window.addEventListener('pointermove', function(e){
+      if(e.pointerType === 'touch' || e.pointerType === 'pen') return;
+      if(Date.now() - lastTouchTime < 1200) return;
+      mouseActive = true;
+      lastX = e.clientX;
+      lastY = e.clientY;
+      updateMouseDirection(e.clientX, e.clientY);
+    }, { passive: true });
+  } else {
+    window.addEventListener('mousemove', function(e){
+      if(Date.now() - lastTouchTime < 1200) return;
+      if(e.sourceCapabilities && e.sourceCapabilities.firesTouchEvents) return;
+      mouseActive = true;
+      lastX = e.clientX;
+      lastY = e.clientY;
+      updateMouseDirection(e.clientX, e.clientY);
+    }, { passive: true });
+  }
 
   window.addEventListener('scroll', function(){
-    if(mouseActive){
-      updateDirection(lastX, lastY);
+    if(mouseActive && inputMode === 'mouse'){
+      updateMouseDirection(lastX, lastY);
     }
   }, { passive: true });
 
   document.addEventListener('mouseleave', function(){
-    mouseActive = false;
-    setAllTarget('center');
+    if(inputMode === 'mouse'){
+      mouseActive = false;
+      activeSector = 'center';
+      setAllTarget('center');
+    }
   }, { passive: true });
 
   window.addEventListener('blur', function(){
-    mouseActive = false;
-    setAllTarget('center');
+    if(inputMode === 'mouse'){
+      mouseActive = false;
+      activeSector = 'center';
+      setAllTarget('center');
+    }
   });
 
-  // Mobile Device Orientation / Phone Tilt
-  var tiltActive = false;
-  var baseBeta = null, baseGamma = null;
+  // Phone Tilt Manager
+  var tiltManager = {
+    active: false,
+    listening: false,
+    baseGamma: null,
+    baseBeta: null,
+    calibFrames: 0,
+    smoothX: 0,
+    smoothY: 0,
+    buttons: [],
+    sensorDataReceived: false,
 
-  function onOrientation(e){
-    if(!tiltActive || isReduced || e.beta === null || e.gamma === null) return;
-    if(baseBeta === null){
-      baseBeta = e.beta;
-      baseGamma = e.gamma;
-    }
-    var dg = e.gamma - baseGamma;
-    var db = e.beta - baseBeta;
+    registerButton: function(btn){
+      if(btn && this.buttons.indexOf(btn) === -1){
+        this.buttons.push(btn);
+      }
+    },
 
-    instances.forEach(function(inst){
-      if(inst.el.getAttribute('data-manual') === 'true') return;
-      if(Math.abs(dg) < 6 && Math.abs(db) < 6){
-        setTarget(inst, 'center');
+    showButtons: function(){
+      this.buttons.forEach(function(b){
+        if(b){
+          b.classList.add('visible');
+          b.innerHTML = '<span class="btn-dot"></span>Enable motion';
+        }
+      });
+    },
+
+    hideButtons: function(){
+      this.buttons.forEach(function(b){
+        if(b) b.classList.remove('visible');
+      });
+    },
+
+    recalibrate: function(){
+      this.baseGamma = null;
+      this.baseBeta = null;
+      this.calibFrames = 0;
+      this.smoothX = 0;
+      this.smoothY = 0;
+      setAllTarget('center');
+    },
+
+    init: function(){
+      var self = this;
+      if(isReduced) return;
+
+      document.querySelectorAll('.avatar-motion-btn').forEach(function(b){
+        self.registerButton(b);
+      });
+
+      // Check device orientation availability
+      var hasOrient = typeof window.DeviceOrientationEvent !== 'undefined';
+      if(!hasOrient){
+        self.hideButtons();
         return;
       }
-      if(Math.abs(dg) >= Math.abs(db)){
-        setTarget(inst, (dg < 0) ? 'look-left' : 'look-right');
+
+      var hasReqPerm = typeof DeviceOrientationEvent.requestPermission === 'function';
+      if(hasReqPerm){
+        // iOS 13+ requires user gesture
+        self.showButtons();
       } else {
-        setTarget(inst, (db < 0) ? 'look-up' : 'look-down');
+        // Android / Chromium / non-permission browsers: auto-start
+        self.startListening(true);
       }
-    });
-  }
+    },
 
-  window.toggleAvatarTilt = function(btn){
-    if(tiltActive){
-      tiltActive = false;
-      baseBeta = null; baseGamma = null;
-      window.removeEventListener('deviceorientation', onOrientation);
-      setAllTarget('center');
-      if(btn){ btn.classList.remove('active'); btn.textContent = 'Enable tilt'; }
-      return;
-    }
+    requestAndStart: function(){
+      var self = this;
+      if(typeof DeviceOrientationEvent !== 'undefined' && typeof DeviceOrientationEvent.requestPermission === 'function'){
+        DeviceOrientationEvent.requestPermission().then(function(res){
+          if(res === 'granted'){
+            self.startListening(false);
+          } else {
+            self.hideButtons();
+          }
+        }).catch(function(){
+          self.hideButtons();
+        });
+      } else {
+        self.startListening(false);
+      }
+    },
 
-    function activate(){
-      tiltActive = true;
-      baseBeta = null; baseGamma = null;
+    startListening: function(isAuto){
+      var self = this;
+      if(self.listening) return;
+      self.listening = true;
+      self.active = true;
+      self.recalibrate();
+
+      function onOrientation(e){
+        if(isReduced || !self.active) return;
+        if(e.gamma === null || e.beta === null) return;
+
+        if(!self.sensorDataReceived){
+          self.sensorDataReceived = true;
+          self.hideButtons();
+        }
+
+        // If desktop mouse was active recently, don't let tilt fight it unless touch was used
+        if(mouseActive && (Date.now() - lastTouchTime > 3000) && inputMode === 'mouse') return;
+        inputMode = 'tilt';
+
+        // Establish rolling initial neutral baseline
+        if(self.baseGamma === null || self.baseBeta === null){
+          self.baseGamma = e.gamma;
+          self.baseBeta = e.beta;
+          self.calibFrames = 1;
+          self.smoothX = 0;
+          self.smoothY = 0;
+          return;
+        }
+
+        if(self.calibFrames < 5){
+          self.baseGamma = (self.baseGamma * self.calibFrames + e.gamma) / (self.calibFrames + 1);
+          self.baseBeta = (self.baseBeta * self.calibFrames + e.beta) / (self.calibFrames + 1);
+          self.calibFrames++;
+        }
+
+        var dGamma = e.gamma - self.baseGamma;
+        var dBeta = e.beta - self.baseBeta;
+
+        // Screen orientation compensation
+        var angle = 0;
+        if(typeof window.orientation !== 'undefined') angle = window.orientation;
+        else if(window.screen && window.screen.orientation && window.screen.orientation.angle !== undefined) angle = window.screen.orientation.angle;
+
+        var rawX = dGamma;
+        var rawY = dBeta;
+
+        if(angle === 90){
+          rawX = dBeta;
+          rawY = -dGamma;
+        } else if(angle === -90 || angle === 270){
+          rawX = -dBeta;
+          rawY = dGamma;
+        } else if(angle === 180){
+          rawX = -dGamma;
+          rawY = -dBeta;
+        }
+
+        // Exponential smoothing (responsive and jitter-free)
+        self.smoothX = (self.smoothX * 0.72) + (rawX * 0.28);
+        self.smoothY = (self.smoothY * 0.72) + (rawY * 0.28);
+
+        var tiltDist = Math.sqrt(self.smoothX * self.smoothX + self.smoothY * self.smoothY);
+
+        // Deadzone threshold (4.5 degrees)
+        var targetPose = 'center';
+        if(tiltDist >= 4.5){
+          var deg = Math.atan2(self.smoothY, self.smoothX) * 180 / Math.PI;
+          var bestSector = 'center';
+          var minDiff = 999;
+          for(var i = 0; i < SECTOR_NAMES.length; i++){
+            var cDeg = SECTOR_ANGLES[i];
+            var d = Math.abs(deg - cDeg);
+            if(d > 180) d = 360 - d;
+            if(d < minDiff){
+              minDiff = d;
+              bestSector = SECTOR_NAMES[i];
+            }
+          }
+          targetPose = bestSector;
+        }
+
+        setAllTarget(targetPose);
+      }
+
       window.addEventListener('deviceorientation', onOrientation, { passive: true });
-      if(btn){ btn.classList.add('active'); btn.textContent = 'Disable tilt'; }
-    }
+      if('ondeviceorientationabsolute' in window){
+        window.addEventListener('deviceorientationabsolute', onOrientation, { passive: true });
+      }
 
-    if(typeof DeviceOrientationEvent !== 'undefined' && typeof DeviceOrientationEvent.requestPermission === 'function'){
-      DeviceOrientationEvent.requestPermission().then(function(s){
-        if(s === 'granted'){ activate(); }
-      }).catch(function(){});
-    } else if(window.DeviceOrientationEvent){
-      activate();
+      // Pause/resume on visibility change (switching tabs/apps)
+      document.addEventListener('visibilitychange', function(){
+        if(document.hidden){
+          self.active = false;
+          setAllTarget('center');
+        } else {
+          self.active = true;
+          self.recalibrate();
+        }
+      });
+
+      // Recalibrate on orientation change (portrait <-> landscape)
+      window.addEventListener('orientationchange', function(){
+        self.recalibrate();
+      });
     }
   };
 
-  // Expose global controller for preview / telemetry test suite
+  // Global toggle handler called by button tap
+  window.toggleAvatarMotion = function(btn){
+    tiltManager.requestAndStart();
+  };
+
+  // Init on DOM ready
+  if(document.readyState === 'loading'){
+    document.addEventListener('DOMContentLoaded', function(){ tiltManager.init(); });
+  } else {
+    tiltManager.init();
+  }
+
   window.__avatarController = {
     instances: instances,
     setTarget: setTarget,
     setAllTarget: setAllTarget,
     applyPose: applyPose,
-    setStepMs: function(ms){
-      instances.forEach(function(i){ i.stepMs = ms; });
-    }
+    tiltManager: tiltManager
   };
 })();
 """
-
 def shell(title, desc, body, active, up="", extra_js=""):
     p = PROFILE
     vj = VCARD_JS % dict(last=p['last'], first=p['first'], name=p['name'], title=p['vcard_title'],
@@ -2130,23 +2265,13 @@ def build_home():
 <div class="intro-grid rv">
 <div class="intro-photo-wrap" id="about-avatar-wrap">
 <div class="intro-photo-card" id="about-avatar-card">
-<div class="pose-avatar" data-avatar="pose-switcher">
-  <img class="pose-img active" data-pose="center" src="assets/images/avatar_poses/pose-center.png" alt="{E(p['name'])} Illustrated Avatar" width="512" height="512">
-  <img class="pose-img" data-pose="trans-left" src="assets/images/avatar_poses/pose-trans-left.png" alt="" width="512" height="512" aria-hidden="true">
-  <img class="pose-img" data-pose="look-left" src="assets/images/avatar_poses/pose-look-left.png" alt="" width="512" height="512" aria-hidden="true">
-  <img class="pose-img" data-pose="trans-right" src="assets/images/avatar_poses/pose-trans-right.png" alt="" width="512" height="512" aria-hidden="true">
-  <img class="pose-img" data-pose="look-right" src="assets/images/avatar_poses/pose-look-right.png" alt="" width="512" height="512" aria-hidden="true">
-  <img class="pose-img" data-pose="trans-up" src="assets/images/avatar_poses/pose-trans-up.png" alt="" width="512" height="512" aria-hidden="true">
-  <img class="pose-img" data-pose="look-up" src="assets/images/avatar_poses/pose-look-up.png" alt="" width="512" height="512" aria-hidden="true">
-  <img class="pose-img" data-pose="trans-down" src="assets/images/avatar_poses/pose-trans-down.png" alt="" width="512" height="512" aria-hidden="true">
-  <img class="pose-img" data-pose="look-down" src="assets/images/avatar_poses/pose-look-down.png" alt="" width="512" height="512" aria-hidden="true">
-  <img class="pose-img" data-pose="blink" src="assets/images/avatar_poses/pose-blink.png" alt="" width="512" height="512" aria-hidden="true">
+{render_pose_avatar(f"{E(p['name'])} Illustrated Avatar")}
 </div>
-</div>
+<button class="avatar-motion-btn" type="button" onclick="window.toggleAvatarMotion(this)" aria-label="Enable motion tracking"><span class="btn-dot"></span>Enable motion</button>
 </div>
 <div class="intro-text-wrap">
-<p class="intro-text">I’m a designer with an architectural background from the University of Northeastern Philippines, based in Manila. I bridge visual craft—like digital storefronts, marketing campaigns, and 3D spatial models—with practical automation systems that keep day-to-day operations consistent and easy to maintain.</p>
-<a class="intro-link" href="about.html">Read more about my background &rarr;</a>
+<p class="intro-text">I’m a Manila-based designer working across brand visuals, e-commerce websites, and 3D spaces. I combine design with practical automation to make everyday work simpler and keep content consistent.</p>
+<a class="intro-link" href="about.html">More about me &rarr;</a>
 </div>
 </div>
 </div>
@@ -5068,243 +5193,617 @@ def build_card():
     vj = VCARD_JS % dict(last=p['last'], first=p['first'], name=p['name'], title=p['vcard_title'],
                          tel=p['tel'], email=p['email'], li=p['linkedin'], file=p['vcard_file'],
                          social="".join(f',"URL:{u}"' for _, _, u in socials()))
-    company = (f'<p class="org">{E(p["company"])} &middot; {E(p["location"])}</p>'
-               if p.get("company") else f'<p class="org">{E(p["location"])}</p>')
+    
     write("card.html", f"""<!DOCTYPE html>
-<html lang="en" data-theme="dark"><head>
+<html lang="en" data-theme="light"><head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<title>{E(p['name'])}</title>
-<meta name="description" content="{E(p['subtitle_plain'])}">
-<meta name="theme-color" content="#0B0B0B">
+<title>{E(p['name'])} — Designer &amp; Creative Specialist</title>
+<meta name="description" content="Manila-based designer working across brand visuals, e-commerce websites, and 3D spaces.">
+<meta name="theme-color" content="#EAE6DF">
 <meta name="robots" content="noindex">
 <link rel="icon" type="image/png" href="assets/images/favicon.png">
 <link rel="apple-touch-icon" href="assets/images/apple-touch-icon.png">
-<script>(function(){{try{{var v=localStorage.getItem('jl-theme');if(v){{document.documentElement.setAttribute('data-theme',v);var m=document.querySelector('meta[name="theme-color"]');if(m)m.setAttribute('content',v==='light'?'#EFEBE4':'#0B0B0B');}}}}catch(e){{}}}})();</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
+<script>
+(function(){{
+  try{{
+    var q = new URLSearchParams(window.location.search).get('theme');
+    var v = q || localStorage.getItem('jl-theme') || 'light';
+    document.documentElement.setAttribute('data-theme', v);
+    var m = document.querySelector('meta[name="theme-color"]');
+    if(m) m.setAttribute('content', v === 'dark' ? '#0D0C0B' : '#EAE6DF');
+  }}catch(e){{}}
+}})();
+</script>
 <style>
+/* Refined Editorial Business Card Styling */
 *{{box-sizing:border-box;-webkit-tap-highlight-color:transparent}}
+
 :root{{
- --bg:#0B0B0B;--ink:#F5F2ED;--dim:rgba(245,242,237,.60);--acc:#8B0D1A;--acc-lift:#A81324;
- --glass:rgba(245,242,237,.055);--edge:rgba(245,242,237,.14);--edge-top:rgba(245,242,237,.30);
- --shade:rgba(0,0,0,.55);--blob1:rgba(139,13,26,.18);--blob2:rgba(139,13,26,.09);
+  --page-bg:#EAE6DF;
+  --card-bg:#FAF8F5;
+  --ink:#141211;
+  --dim:rgba(20,18,17,.68);
+  --dim-soft:rgba(20,18,17,.48);
+  --acc:#8B0D1A;
+  --acc-lift:#700A15;
+  --acc-btn-text:#FAF8F5;
+  --edge:rgba(20,18,17,.12);
+  --edge-subtle:rgba(20,18,17,.08);
+  --card-shadow:0 14px 40px rgba(0,0,0,.06),0 2px 8px rgba(0,0,0,.03);
+  --glass:rgba(20,18,17,.035);
+  --glass-2:rgba(20,18,17,.07);
 }}
-[data-theme="light"]{{
- --bg:#EFEBE4;--ink:#12100F;--dim:rgba(18,16,15,.62);--acc:#8B0D1A;--acc-lift:#700A15;
- --glass:rgba(255,255,255,.42);--edge:rgba(18,16,15,.10);--edge-top:rgba(255,255,255,.85);
- --shade:rgba(90,70,70,.16);--blob1:rgba(139,13,26,.11);--blob2:rgba(139,13,26,.06);
+
+[data-theme="dark"]{{
+  --page-bg:#0D0C0B;
+  --card-bg:#161413;
+  --ink:#F5F2ED;
+  --dim:rgba(245,242,237,.68);
+  --dim-soft:rgba(245,242,237,.45);
+  --acc:#8B0D1A;
+  --acc-lift:#A81324;
+  --acc-btn-text:#F5F2ED;
+  --edge:rgba(245,242,237,.12);
+  --edge-subtle:rgba(245,242,237,.08);
+  --card-shadow:0 20px 50px rgba(0,0,0,.5);
+  --glass:rgba(245,242,237,.04);
+  --glass-2:rgba(245,242,237,.08);
 }}
-/* 2026-09-14 — FIT THE PHONE, one screen, no scroll.
-   Two separate faults were making this card overflow:
-   1. height:100% / 100vh on a phone does NOT mean the visible area. Mobile
-      browsers size 100vh to the viewport with the URL bar HIDDEN, so the card
-      was always taller than the screen by roughly the height of that bar —
-      exactly the overflow in her screenshot. 100dvh is the dynamic height and
-      tracks the chrome; 100vh stays first as the fallback for older browsers.
-   2. Everything inside was fixed px/rem, so a short phone had no way to give.
-      Every large vertical measurement below is now clamp(min, vh, max): full
-      size on a desktop or a tall phone, compressing on a small one, never
-      below the min that keeps a tap target legal. */
-html,body{{height:100%}}
+
+html,body{{min-height:100%;width:100%;overflow-x:hidden}}
 body{{
- margin:0;background:var(--bg);color:var(--ink);
- font-family:system-ui,-apple-system,'Segoe UI',Roboto,sans-serif;line-height:1.55;
- display:flex;align-items:center;justify-content:center;
- min-height:100vh;min-height:100dvh;
- padding:max(clamp(.5rem,1.6vh,1.25rem),env(safe-area-inset-top)) 1.25rem
-         max(clamp(.5rem,1.6vh,1.25rem),env(safe-area-inset-bottom));
- overflow-x:hidden;transition:background .35s,color .35s;
+  margin:0;
+  background:var(--page-bg);
+  color:var(--ink);
+  font-family:'Jost',system-ui,-apple-system,sans-serif;
+  line-height:1.5;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+  min-height:100vh;
+  min-height:100dvh;
+  padding:max(1.25rem,env(safe-area-inset-top)) 16px max(1.25rem,env(safe-area-inset-bottom));
+  transition:background .3s ease,color .3s ease;
 }}
-.blobs{{position:fixed;inset:0;z-index:0;overflow:hidden;pointer-events:none}}
-.blobs i{{position:absolute;display:block;border-radius:50%;filter:blur(70px)}}
-.b1{{width:70vw;height:70vw;max-width:420px;max-height:420px;background:var(--blob1);
- top:-14%;left:-22%}}
-.b2{{width:60vw;height:60vw;max-width:360px;max-height:360px;background:var(--blob2);
- bottom:-16%;right:-20%}}
+
+/* Card Container */
 .card{{
- position:relative;z-index:1;width:100%;max-width:24rem;
- background:var(--glass);border:1px solid var(--edge);border-radius:12px;
- -webkit-backdrop-filter:blur(22px) saturate(150%);backdrop-filter:blur(22px) saturate(150%);
- box-shadow:0 18px 50px var(--shade);
- padding:clamp(1.1rem,3.4vh,2rem) 1.5rem clamp(1rem,3vh,1.75rem);
- text-align:center;transition:background .35s,border-color .35s;
+  position:relative;
+  width:100%;
+  max-width:445px;
+  margin:auto;
+  background:var(--card-bg);
+  border:1px solid var(--edge);
+  border-radius:10px;
+  box-shadow:var(--card-shadow);
+  padding:2.25rem 2.15rem 2rem;
+  transition:background .3s ease,border-color .3s ease,box-shadow .3s ease;
 }}
-.toggle{{
- position:absolute;top:1rem;right:1rem;width:48px;height:28px;border-radius:14px;cursor:pointer;
- background:var(--glass);border:1px solid var(--edge);padding:0;
- -webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px);
+
+/* Discreet Theme Toggle */
+.theme-toggle{{
+  position:absolute;
+  top:1.25rem;
+  right:1.25rem;
+  width:32px;
+  height:32px;
+  border-radius:50%;
+  border:1px solid var(--edge-subtle);
+  background:transparent;
+  color:var(--dim);
+  cursor:pointer;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  padding:0;
+  z-index:2;
+  transition:color .2s,border-color .2s,background .2s;
 }}
-.toggle::after{{content:'';position:absolute;top:3px;left:3px;width:20px;height:20px;
- border-radius:50%;background:var(--ink);opacity:.85;transition:transform .3s}}
-[data-theme="light"] .toggle::after{{transform:translateX(20px)}}
-.toggle:focus-visible{{outline:2px solid var(--acc);outline-offset:2px}}
-.av{{
- position:relative;width:clamp(68px,12.5vh,100px);height:clamp(68px,12.5vh,100px);
- margin:.25rem auto clamp(.6rem,2.2vh,1.25rem);border-radius:50%;
- overflow:hidden;background:var(--glass);border:1px solid var(--edge);
- display:flex;align-items:center;justify-content:center;
+.theme-toggle:hover{{
+  color:var(--ink);
+  border-color:var(--edge);
+  background:var(--glass);
 }}
-.pose-avatar{{position:relative;width:100%;height:100%;overflow:hidden;background:#580512;user-select:none;-webkit-user-select:none;z-index:2}}
-.pose-avatar .pose-img{{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:none;pointer-events:none}}
-.pose-avatar .pose-img.active{{display:block}}
+.theme-toggle svg{{
+  width:16px;
+  height:16px;
+  stroke:currentColor;
+  fill:none;
+  stroke-width:1.7;
+}}
+
+/* Top Identity Area (Left Avatar + Right Info) */
+.identity-area{{
+  display:flex;
+  align-items:flex-start;
+  gap:1.15rem;
+  min-width:0;
+  position:relative;
+}}
+
+.avatar-frame{{
+  position:relative;
+  width:96px;
+  height:96px;
+  flex:0 0 96px;
+  aspect-ratio:1/1;
+  border-radius:6px;
+  overflow:hidden;
+  background:#580512;
+  border:1px solid var(--edge);
+}}
+
+.pose-avatar{{
+  position:relative;
+  width:100%;
+  height:100%;
+  overflow:hidden;
+  background:#580512;
+  user-select:none;
+  -webkit-user-select:none;
+}}
+.pose-avatar .pose-img{{
+  position:absolute;
+  inset:0;
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  display:none;
+  pointer-events:none;
+}}
+.pose-avatar .pose-img.active{{
+  display:block;
+}}
+
+.avatar-motion-btn{{
+  display:none;
+  align-items:center;
+  justify-content:center;
+  gap:.4rem;
+  margin-top:.45rem;
+  padding:.32rem .65rem;
+  border-radius:999px;
+  background:var(--glass);
+  border:1px solid var(--edge);
+  color:var(--dim);
+  font:400 10.5px/1 'Jost',system-ui,sans-serif;
+  letter-spacing:.12em;
+  text-transform:uppercase;
+  cursor:pointer;
+  transition:background .2s,border-color .2s,color .2s;
+  user-select:none;
+  -webkit-user-select:none;
+  touch-action:manipulation;
+}}
+.avatar-motion-btn:hover{{color:var(--ink);border-color:var(--acc);background:var(--glass-2)}}
+.avatar-motion-btn.visible{{display:inline-flex}}
+.avatar-motion-btn .btn-dot{{width:4px;height:4px;border-radius:50%;background:var(--acc)}}
+
 @media(prefers-reduced-motion:reduce){{
   .pose-avatar .pose-img{{display:none!important}}
   .pose-avatar .pose-img[data-pose="center"]{{display:block!important}}
+  .avatar-motion-btn{{display:none!important}}
 }}
-.av span{{display:none}}
-.eyebrow{{margin:0;font-size:10px;font-weight:400;letter-spacing:.26em;color:var(--dim)}}
-h1{{margin:clamp(.35rem,1.2vh,.6rem) 0 0;font-family:Georgia,'Times New Roman',serif;
-font-size:clamp(1.6rem,5vh,2.1rem);
-font-weight:400;line-height:1.15;letter-spacing:.005em}}
-.role{{margin:clamp(.4rem,1.4vh,.7rem) 0 0;font-size:clamp(.875rem,1.9vh,.9375rem);
-font-weight:400;letter-spacing:.02em;color:var(--ink)}}
-.org{{margin:clamp(.25rem,.9vh,.4rem) 0 0;font-size:clamp(.8125rem,1.7vh,.875rem);color:var(--dim)}}
-hr{{border:0;height:1px;background:var(--edge);margin:clamp(.75rem,2.6vh,1.5rem) 0}}
-.save{{
- display:flex;align-items:center;justify-content:center;width:100%;
- min-height:clamp(46px,6.6vh,52px);
- border:0;border-radius:6px;cursor:pointer;background:var(--acc);color:#F5F2ED;
- font:500 12.5px/1 system-ui,sans-serif;letter-spacing:.14em;text-transform:uppercase;
- transition:background .25s,transform .12s;
-}}
-.save:active{{transform:scale(.98)}}
-.save:hover{{background:var(--acc-lift)}}
-.row{{display:grid;grid-template-columns:1fr 1fr;gap:clamp(.5rem,1.6vh,.75rem);
- margin-top:clamp(.5rem,1.6vh,.75rem)}}
-.row a{{
- display:flex;align-items:center;justify-content:center;
- min-height:clamp(44px,6.2vh,50px);border-radius:6px;
- background:var(--glass);border:1px solid var(--edge);color:var(--ink);text-decoration:none;
- font:400 14px/1 system-ui,sans-serif;
- transition:border-color .2s}}
-.row a:active{{border-color:var(--acc)}}
-.tool-btn{{
- display:flex;align-items:center;justify-content:center;gap:.5rem;
- min-height:clamp(44px,6.2vh,50px);border-radius:6px;
- background:var(--glass);border:1px solid var(--edge);color:var(--ink);
- font:400 13.5px/1 system-ui,sans-serif;cursor:pointer;
- transition:border-color .2s,background .2s;
-}}
-.tool-btn:hover{{border-color:var(--acc);background:var(--glass-2)}}
-.tool-btn:active{{transform:scale(.98)}}
-.tool-btn svg{{width:17px;height:17px;stroke:currentColor;fill:none;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}}
-.full{{
- display:inline-flex;align-items:center;justify-content:center;min-height:40px;
- margin-top:clamp(.7rem,2.4vh,1.5rem);
- color:var(--ink);text-decoration:underline;text-underline-offset:5px;
- font:400 13.5px/1 system-ui,sans-serif;letter-spacing:.04em}}
-.socials{{display:flex;justify-content:center;gap:.75rem;margin-top:clamp(.7rem,2.2vh,1.25rem)}}
-.socials a{{width:clamp(42px,6vh,48px);height:clamp(42px,6vh,48px);
-border-radius:50%;display:flex;align-items:center;
-justify-content:center;background:var(--glass);border:1px solid var(--edge);
-transition:border-color .2s}}
-.socials a:active{{border-color:var(--acc)}}
-.socials svg{{width:19px;height:19px;stroke:var(--ink);fill:none;stroke-width:1.7;
-stroke-linecap:round;stroke-linejoin:round}}
-.note{{margin:clamp(.7rem,2.2vh,1.25rem) 0 0;font-size:12px;color:var(--dim);line-height:1.45}}
-/* Very short screens */
-@media(max-height:620px){{
-  .note{{display:none}}
-  .org{{display:none}}
-}}
-button:focus-visible,a:focus-visible{{outline:2px solid var(--acc);outline-offset:3px}}
 
+.identity-info{{
+  display:flex;
+  flex-direction:column;
+  min-width:0;
+  flex:1 1 0;
+  padding-right:34px;
+}}
+
+.name{{
+  font-family:'Cormorant Garamond',Georgia,serif;
+  font-size:clamp(1.55rem,5vw,2.1rem);
+  font-weight:400;
+  line-height:1.12;
+  letter-spacing:-0.01em;
+  color:var(--ink);
+  margin:0 0 .25rem;
+  overflow-wrap:break-word;
+  word-break:normal;
+}}
+
+.title{{
+  font-size:0.9375rem;
+  font-weight:400;
+  color:var(--dim);
+  margin:0 0 .15rem;
+  line-height:1.3;
+}}
+
+.location{{
+  font-size:0.8125rem;
+  font-weight:400;
+  letter-spacing:0.04em;
+  color:var(--dim-soft);
+  margin:0;
+}}
+
+/* Supporting Capabilities Line */
+.focus-line{{
+  font-size:11px;
+  font-weight:400;
+  letter-spacing:0.06em;
+  text-transform:uppercase;
+  color:var(--dim);
+  margin:1.15rem 0 0;
+  line-height:1.4;
+  overflow-wrap:break-word;
+}}
+
+/* Subtle Divider */
+.card-divider{{
+  border:0;
+  height:1px;
+  background:var(--edge-subtle);
+  margin:1.15rem 0 1.25rem;
+}}
+
+/* Actions Area */
+.actions{{
+  display:flex;
+  flex-direction:column;
+  gap:.65rem;
+  min-width:0;
+}}
+
+/* Primary Burgundy Save Contact Button */
+.btn-save{{
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  width:100%;
+  min-height:48px;
+  border:0;
+  border-radius:6px;
+  cursor:pointer;
+  background:var(--acc);
+  color:var(--acc-btn-text);
+  font:500 12.5px/1 'Jost',system-ui,sans-serif;
+  letter-spacing:.14em;
+  text-transform:uppercase;
+  transition:background .2s ease,transform .1s ease;
+}}
+.btn-save:hover{{background:var(--acc-lift)}}
+.btn-save:active{{transform:scale(.99)}}
+
+/* Direct Contact Row (Email / Call) */
+.contact-row{{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:.65rem;
+  min-width:0;
+}}
+.btn-quiet{{
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  gap:.45rem;
+  min-height:46px;
+  min-width:0;
+  border-radius:6px;
+  background:transparent;
+  border:1px solid var(--edge);
+  color:var(--ink);
+  text-decoration:none;
+  font:400 13px/1 'Jost',system-ui,sans-serif;
+  letter-spacing:.02em;
+  white-space:nowrap;
+  transition:border-color .2s,background .2s,color .2s;
+}}
+.btn-quiet:hover{{
+  border-color:var(--acc);
+  background:var(--glass);
+}}
+.btn-quiet svg{{
+  width:15px;
+  height:15px;
+  stroke:currentColor;
+  fill:none;
+  stroke-width:1.8;
+}}
+
+/* Compact Utility Row (QR Code & Share) */
+.utility-row{{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:.65rem;
+  margin-top:.1rem;
+  min-width:0;
+}}
+.btn-util{{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  gap:.45rem;
+  min-height:42px;
+  min-width:0;
+  background:transparent;
+  border:1px solid var(--edge);
+  padding:.4rem .5rem;
+  border-radius:6px;
+  color:var(--dim);
+  font:400 12px/1 'Jost',system-ui,sans-serif;
+  letter-spacing:.03em;
+  white-space:nowrap;
+  cursor:pointer;
+  transition:color .2s,border-color .2s,background .2s;
+}}
+.btn-util:hover{{
+  color:var(--ink);
+  border-color:var(--acc);
+  background:var(--glass);
+}}
+.btn-util svg{{
+  width:15px;
+  height:15px;
+  stroke:currentColor;
+  fill:none;
+  stroke-width:1.8;
+}}
+
+/* Secondary Socials Row */
+.social-row{{
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  gap:.75rem;
+  margin-top:1rem;
+  padding-top:.85rem;
+  border-top:1px solid var(--edge-subtle);
+}}
+.social-link{{
+  width:38px;
+  height:38px;
+  border-radius:50%;
+  border:1px solid var(--edge-subtle);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  color:var(--dim);
+  text-decoration:none;
+  transition:color .2s,border-color .2s,background .2s;
+}}
+.social-link:hover{{
+  color:var(--ink);
+  border-color:var(--edge);
+  background:var(--glass);
+}}
+.social-link svg{{
+  width:17px;
+  height:17px;
+  stroke:currentColor;
+  fill:none;
+  stroke-width:1.7;
+}}
+
+/* View Portfolio Link */
+.portfolio-link-wrap{{
+  text-align:center;
+  margin-top:.95rem;
+}}
+.portfolio-link{{
+  display:inline-flex;
+  align-items:center;
+  gap:.4rem;
+  font:500 11.5px/1 'Jost',system-ui,sans-serif;
+  letter-spacing:.16em;
+  text-transform:uppercase;
+  color:var(--ink);
+  text-decoration:none;
+  transition:color .2s,transform .2s;
+}}
+.portfolio-link:hover{{
+  color:var(--acc);
+  transform:translateX(3px);
+}}
+
+/* Quiet Footer Note */
+.card-footer-note{{
+  text-align:center;
+  font-size:11px;
+  color:var(--dim-soft);
+  margin:.65rem 0 0;
+  line-height:1.4;
+  letter-spacing:.02em;
+}}
+
+/* Responsive adjustments */
+@media(max-width:480px){{
+  body{{
+    padding:max(1rem,env(safe-area-inset-top)) 16px max(1rem,env(safe-area-inset-bottom));
+  }}
+  .card{{
+    padding:22px 20px 20px;
+    max-width:100%;
+  }}
+  .theme-toggle{{
+    top:1.15rem;
+    right:1.15rem;
+  }}
+  .identity-area{{
+    gap:.95rem;
+  }}
+  .avatar-frame{{
+    width:76px;
+    height:76px;
+    flex:0 0 76px;
+  }}
+  .name{{
+    font-size:1.55rem;
+  }}
+  .title{{
+    font-size:0.875rem;
+  }}
+  .location{{
+    font-size:0.75rem;
+  }}
+  .focus-line{{
+    font-size:10px;
+    letter-spacing:0.04em;
+    margin-top:1rem;
+  }}
+  .card-divider{{
+    margin:1rem 0 1.15rem;
+  }}
+}}
+@media(max-width:360px){{
+  body{{
+    padding:max(0.85rem,env(safe-area-inset-top)) 12px max(0.85rem,env(safe-area-inset-bottom));
+  }}
+  .card{{
+    padding:18px 14px 16px;
+  }}
+  .identity-area{{
+    flex-direction:column;
+    align-items:center;
+    text-align:center;
+    gap:.75rem;
+  }}
+  .identity-info{{
+    padding-right:0;
+    align-items:center;
+    text-align:center;
+  }}
+  .avatar-motion-btn{{
+    margin:.5rem auto 0;
+  }}
+  .name{{
+    font-size:1.45rem;
+    text-align:center;
+  }}
+  .focus-line{{
+    text-align:center;
+    font-size:9.5px;
+  }}
+  .btn-quiet, .btn-util{{
+    font-size:11.5px;
+    padding:.35rem .3rem;
+  }}
+}}
+
+/* Modal (QR Code) */
 .modal{{position:fixed;inset:0;z-index:200;display:flex;align-items:center;justify-content:center;
-background:rgba(11,11,11,.88);-webkit-backdrop-filter:blur(20px);backdrop-filter:blur(20px);
+background:rgba(11,11,11,.82);-webkit-backdrop-filter:blur(16px);backdrop-filter:blur(16px);
 opacity:0;pointer-events:none;transition:opacity .25s ease;padding:1.25rem}}
 .modal.open{{opacity:1;pointer-events:auto}}
-.modal-card{{position:relative;width:100%;max-width:20rem;background:var(--bg);
+.modal-card{{position:relative;width:100%;max-width:20rem;background:var(--card-bg);
 border:1px solid var(--edge);border-radius:10px;padding:2rem 1.5rem 1.75rem;text-align:center;
-box-shadow:0 24px 60px var(--shade);
+box-shadow:0 24px 60px rgba(0,0,0,.45);
 transform:scale(.95);transition:transform .25s cubic-bezier(.4,0,.2,1)}}
 .modal.open .modal-card{{transform:scale(1)}}
-.modal-close{{position:absolute;top:.85rem;right:.85rem;width:34px;height:34px;border-radius:6px;
-background:var(--glass);border:1px solid var(--edge);color:var(--ink);font-size:18px;line-height:1;
+.modal-close{{position:absolute;top:.85rem;right:.85rem;width:32px;height:32px;border-radius:6px;
+background:transparent;border:1px solid var(--edge-subtle);color:var(--ink);font-size:18px;line-height:1;
 display:flex;align-items:center;justify-content:center;cursor:pointer;transition:border-color .2s}}
 .modal-close:hover{{border-color:var(--acc)}}
 .qr-wrap{{background:#fff;padding:12px;border-radius:8px;display:inline-block;margin:1rem auto .75rem;
-box-shadow:0 8px 24px rgba(0,0,0,.25)}}
+box-shadow:0 6px 20px rgba(0,0,0,.15)}}
 .qr-wrap canvas{{display:block;max-width:100%;height:auto}}
 .qr-note{{font-size:12px;color:var(--dim);margin:0 0 1.25rem;line-height:1.4}}
-.modal-btn{{width:100%;min-height:44px;border-radius:6px;border:1px solid var(--edge);
-background:var(--glass-2);color:var(--ink);font:400 12px/1 system-ui,sans-serif;
-letter-spacing:.14em;text-transform:uppercase;cursor:pointer;transition:border-color .2s}}
-.modal-btn:hover{{border-color:var(--acc)}}
+.modal-btn{{width:100%;min-height:42px;border-radius:6px;border:1px solid var(--edge);
+background:var(--glass);color:var(--ink);font:500 11.5px/1 'Jost',system-ui,sans-serif;
+letter-spacing:.14em;text-transform:uppercase;cursor:pointer;transition:border-color .2s,background .2s}}
+.modal-btn:hover{{border-color:var(--acc);background:var(--glass-2)}}
 
 .toast{{position:fixed;bottom:2rem;left:50%;transform:translateX(-50%) translateY(20px);
-background:var(--ink);color:var(--bg);padding:.65rem 1.25rem;border-radius:6px;
+background:var(--ink);color:var(--card-bg);padding:.65rem 1.25rem;border-radius:6px;
 font-size:12px;font-weight:500;letter-spacing:.04em;opacity:0;pointer-events:none;
-transition:opacity .25s,transform .25s;z-index:300;box-shadow:0 12px 32px var(--shade)}}
+transition:opacity .25s,transform .25s;z-index:300;box-shadow:0 12px 32px rgba(0,0,0,.35)}}
 .toast.show{{opacity:1;transform:translateX(-50%) translateY(0)}}
-@media(prefers-reduced-motion:reduce){{*{{transition:none!important}}}}
-@supports not ((backdrop-filter:blur(1px)) or (-webkit-backdrop-filter:blur(1px))){{
- .card{{background:rgba(20,20,20,.94)}}
- [data-theme="light"] .card{{background:rgba(255,255,255,.94)}}
-}}
 </style></head>
 <body>
+
 <svg width="0" height="0" style="position:absolute" aria-hidden="true"><defs>
+<g id="i-mail"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></g>
+<g id="i-tel"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></g>
+<g id="i-qr"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/><rect x="14" y="14" width="3" height="3"/><rect x="18" y="18" width="3" height="3"/><path d="M7 7h.01M17 7h.01M7 17h.01"/></g>
+<g id="i-share"><path d="M4 12v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-8"/><polyline points="16 6 12 2 8 6"/><line x1="12" y1="2" x2="12" y2="15"/></g>
 <g id="i-wa"><path d="M21 11.5a8.4 8.4 0 0 1-12.6 7.3L3 20.5l1.8-5.3A8.4 8.4 0 1 1 21 11.5z"/><path d="M8.6 9.1c.2-.5.4-.5.6-.5h.5c.2 0 .4 0 .6.5l.7 1.7c.1.2 0 .4-.1.5l-.4.5c-.1.1-.2.3-.1.5a5.4 5.4 0 0 0 2.6 2.3c.2.1.4 0 .5-.1l.5-.6c.1-.2.3-.2.5-.1l1.6.8c.2.1.4.2.4.4a1.9 1.9 0 0 1-1.3 1.6c-.6.2-1.4.1-3.2-.8a9 9 0 0 1-3.5-3.7c-.6-1.2-.5-2.1-.2-2.6z"/></g>
 <g id="i-ig"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.2" cy="6.8" r="1.1" fill="currentColor" stroke="none"/></g>
 <g id="i-tt"><path d="M16 3c.4 2.2 1.9 3.8 4 4.1v3a7 7 0 0 1-4-1.3v5.9a5.7 5.7 0 1 1-5-5.7v3.1a2.7 2.7 0 1 0 2 2.6V3h3z"/></g>
+<g id="i-sun"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></g>
 </defs></svg>
-<div class="blobs" aria-hidden="true"><i class="b1"></i><i class="b2"></i></div>
 
 <main class="card">
- <button class="toggle" type="button" id="t" aria-label="Switch between dark and light"></button>
+  <!-- Discreet Theme Toggle -->
+  <button class="theme-toggle" type="button" id="theme-btn" aria-label="Toggle dark/light theme">
+    <svg class="ico" viewBox="0 0 24 24"><use href="#i-sun"/></svg>
+  </button>
 
- <div class="av">
-  <div class="pose-avatar" data-avatar="pose-switcher" style="border-radius:50%">
-   <img class="pose-img active" data-pose="center" src="assets/images/avatar_poses/pose-center.png" alt="{E(p['name'])}" width="512" height="512">
-   <img class="pose-img" data-pose="trans-left" src="assets/images/avatar_poses/pose-trans-left.png" alt="" width="512" height="512" aria-hidden="true">
-   <img class="pose-img" data-pose="look-left" src="assets/images/avatar_poses/pose-look-left.png" alt="" width="512" height="512" aria-hidden="true">
-   <img class="pose-img" data-pose="trans-right" src="assets/images/avatar_poses/pose-trans-right.png" alt="" width="512" height="512" aria-hidden="true">
-   <img class="pose-img" data-pose="look-right" src="assets/images/avatar_poses/pose-look-right.png" alt="" width="512" height="512" aria-hidden="true">
-   <img class="pose-img" data-pose="trans-up" src="assets/images/avatar_poses/pose-trans-up.png" alt="" width="512" height="512" aria-hidden="true">
-   <img class="pose-img" data-pose="look-up" src="assets/images/avatar_poses/pose-look-up.png" alt="" width="512" height="512" aria-hidden="true">
-   <img class="pose-img" data-pose="trans-down" src="assets/images/avatar_poses/pose-trans-down.png" alt="" width="512" height="512" aria-hidden="true">
-   <img class="pose-img" data-pose="look-down" src="assets/images/avatar_poses/pose-look-down.png" alt="" width="512" height="512" aria-hidden="true">
-   <img class="pose-img" data-pose="blink" src="assets/images/avatar_poses/pose-blink.png" alt="" width="512" height="512" aria-hidden="true">
+  <!-- Top Identity Area -->
+  <div class="identity-area">
+    <div class="avatar-frame">
+      {render_pose_avatar(E(p['name']), extra_style="width:100%;height:100%")}
+    </div>
+    <div class="identity-info">
+      <h1 class="name">{E(p['name'])}</h1>
+      <p class="title">Designer &amp; Creative Specialist</p>
+      <p class="location">Manila, Philippines</p>
+      <button class="avatar-motion-btn" type="button" onclick="window.toggleAvatarMotion(this)" aria-label="Enable motion tracking">
+        <span class="btn-dot"></span>Enable motion
+      </button>
+    </div>
   </div>
-  <span aria-hidden="true" style="position:absolute;z-index:0">{E(p['initials'])}</span>
- </div>
 
- <p class="eyebrow">{E(p['card_eyebrow'])}</p>
- <h1>{E(p['name'])}</h1>
- <p class="role">{E(p['role'])}</p>
- {company}
+  <!-- Supporting Capabilities Line -->
+  <p class="focus-line">Brand visuals &middot; E-commerce &middot; Systems</p>
 
- <hr>
+  <!-- Subtle Divider -->
+  <hr class="card-divider">
 
- <button class="save" type="button" onclick="downloadVCard()">Save Contact</button>
- <div class="row">
-  <a href="mailto:{E(p['email'])}">Email</a>
-  <a href="tel:{E(p['tel'])}">Call</a>
- </div>
- <div class="row">
-  <button class="tool-btn" type="button" onclick="openQR()">
-   <svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/><rect x="14" y="14" width="3" height="3"/><rect x="18" y="18" width="3" height="3"/><path d="M7 7h.01M17 7h.01M7 17h.01"/></svg>
-   <span>QR Code</span>
-  </button>
-  <button class="tool-btn" type="button" onclick="shareCard()">
-   <svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-8"/><polyline points="16 6 12 2 8 6"/><line x1="12" y1="2" x2="12" y2="15"/></svg>
-   <span>Share</span>
-  </button>
- </div>
+  <!-- Actions Hierarchy -->
+  <div class="actions">
+    <button class="btn-save" type="button" onclick="downloadVCard()">Save Contact</button>
+    
+    <div class="contact-row">
+      <a class="btn-quiet" href="mailto:{E(p['email'])}">
+        <svg viewBox="0 0 24 24"><use href="#i-mail"/></svg>Email
+      </a>
+      <a class="btn-quiet" href="tel:{E(p['tel'])}">
+        <svg viewBox="0 0 24 24"><use href="#i-tel"/></svg>Call
+      </a>
+    </div>
 
- <div class="socials">{"".join(f'<a href="{E(u)}" target="_blank" rel="noopener" aria-label="{E(l)}"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="#{i}"/></svg></a>' for i, l, u in socials())}</div>
+    <div class="utility-row">
+      <button class="btn-util" type="button" onclick="openQR()">
+        <svg viewBox="0 0 24 24"><use href="#i-qr"/></svg><span>QR Code</span>
+      </button>
+      <button class="btn-util" type="button" onclick="shareCard()">
+        <svg viewBox="0 0 24 24"><use href="#i-share"/></svg><span>Share Card</span>
+      </button>
+    </div>
+  </div>
 
- <a class="full" href="index.html">View Full Portfolio</a>
- <p class="note">The contact file contains only the public details shown on this page.</p>
+  <!-- Secondary Socials -->
+  <div class="social-row">
+    {"".join(f'<a class="social-link" href="{E(u)}" target="_blank" rel="noopener" aria-label="{E(l)}"><svg viewBox="0 0 24 24"><use href="#{i}"/></svg></a>' for i, l, u in socials())}
+  </div>
+
+  <!-- Portfolio Link -->
+  <div class="portfolio-link-wrap">
+    <a class="portfolio-link" href="index.html">View Portfolio &rarr;</a>
+  </div>
+
+  <!-- Quiet Footer Note -->
+  <p class="card-footer-note">Saves the public contact details shown here.</p>
 </main>
 
+<!-- QR Code Modal -->
 <div id="qrmodal" class="modal" aria-hidden="true" role="dialog" aria-modal="true" aria-label="QR Code">
- <div class="modal-card">
-  <button class="modal-close" type="button" onclick="closeQR()" aria-label="Close">&times;</button>
-  <p class="eyebrow" style="margin-bottom:.75rem">SCAN WITH PHONE CAMERA</p>
-  <div class="qr-wrap"><canvas id="qrcanvas"></canvas></div>
-  <p class="qr-note">Opens this digital business card on any phone</p>
-  <button class="modal-btn" type="button" onclick="closeQR()">Done</button>
- </div>
+  <div class="modal-card">
+    <button class="modal-close" type="button" onclick="closeQR()" aria-label="Close">&times;</button>
+    <p style="font-size:10.5px;letter-spacing:.18em;text-transform:uppercase;color:var(--dim);margin:0 0 .75rem">SCAN WITH PHONE CAMERA</p>
+    <div class="qr-wrap"><canvas id="qrcanvas"></canvas></div>
+    <p class="qr-note">Opens this digital business card on any phone</p>
+    <button class="modal-btn" type="button" onclick="closeQR()">Done</button>
+  </div>
 </div>
 <div id="toast" class="toast" aria-live="polite"></div>
 
@@ -5312,57 +5811,83 @@ transition:opacity .25s,transform .25s;z-index:300;box-shadow:0 12px 32px var(--
 <script>
 {vj}
 (function(){{
- var r=document.documentElement,t=document.getElementById('t'),K='jl-theme';
- try{{var v=localStorage.getItem(K);if(v)r.setAttribute('data-theme',v);}}catch(e){{}}
- t.addEventListener('click',function(){{
-  var n=r.getAttribute('data-theme')==='light'?'dark':'light';
-  r.setAttribute('data-theme',n);
-  var m=document.querySelector('meta[name="theme-color"]');if(m)m.setAttribute('content',n==='light'?'#EFEBE4':'#0B0B0B');
-  try{{localStorage.setItem(K,n);}}catch(e){{}}
- }});
+  var r = document.documentElement;
+  var btn = document.getElementById('theme-btn');
+  var K = 'jl-theme';
+  
+  if(btn){{
+    btn.addEventListener('click', function(){{
+      var current = r.getAttribute('data-theme') || 'light';
+      var next = current === 'dark' ? 'light' : 'dark';
+      r.setAttribute('data-theme', next);
+      var m = document.querySelector('meta[name="theme-color"]');
+      if(m) m.setAttribute('content', next === 'dark' ? '#0D0C0B' : '#EAE6DF');
+      try{{ localStorage.setItem(K, next); }}catch(e){{}}
+    }});
+  }}
 }})();
 
 function showToast(msg){{
- var t=document.getElementById('toast');if(!t)return;
- t.textContent=msg;t.classList.add('show');
- setTimeout(function(){{t.classList.remove('show');}},2400);
+  var t = document.getElementById('toast');
+  if(!t) return;
+  t.textContent = msg;
+  t.classList.add('show');
+  setTimeout(function(){{ t.classList.remove('show'); }}, 2400);
 }}
-var qrInst=null;
+
+var qrInst = null;
 function openQR(){{
- var m=document.getElementById('qrmodal');if(!m)return;
- m.classList.add('open');m.setAttribute('aria-hidden','false');
- document.body.style.overflow='hidden';
- if(!qrInst && typeof QRious!=='undefined'){{
-  qrInst=new QRious({{element:document.getElementById('qrcanvas'),value:window.location.href,size:200,level:'M'}});
- }}
+  var m = document.getElementById('qrmodal');
+  if(!m) return;
+  m.classList.add('open');
+  m.setAttribute('aria-hidden', 'false');
+  document.body.style.overflow = 'hidden';
+  if(!qrInst && typeof QRious !== 'undefined'){{
+    qrInst = new QRious({{
+      element: document.getElementById('qrcanvas'),
+      value: window.location.href,
+      size: 200,
+      level: 'M'
+    }});
+  }}
 }}
+
 function closeQR(){{
- var m=document.getElementById('qrmodal');if(!m)return;
- m.classList.remove('open');m.setAttribute('aria-hidden','true');
- document.body.style.overflow='';
+  var m = document.getElementById('qrmodal');
+  if(!m) return;
+  m.classList.remove('open');
+  m.setAttribute('aria-hidden', 'true');
+  document.body.style.overflow = '';
 }}
-document.getElementById('qrmodal').addEventListener('click',function(e){{
- if(e.target===this||e.target.closest('.modal-close'))closeQR();
+
+document.getElementById('qrmodal').addEventListener('click', function(e){{
+  if(e.target === this || e.target.closest('.modal-close')) closeQR();
 }});
-document.addEventListener('keydown',function(e){{
- if(e.key==='Escape'&&document.getElementById('qrmodal').classList.contains('open'))closeQR();
+
+document.addEventListener('keydown', function(e){{
+  if(e.key === 'Escape' && document.getElementById('qrmodal').classList.contains('open')) closeQR();
 }});
+
 function shareCard(){{
- if(navigator.share){{
-  navigator.share({{title:document.title,text:"Jamielyn Ludovice — Multimedia Marketing Specialist",url:window.location.href}}).catch(function(){{}});
- }}else if(navigator.clipboard){{
-  navigator.clipboard.writeText(window.location.href).then(function(){{
-   showToast("Card link copied to clipboard!");
-  }});
- }}else{{
-  showToast(window.location.href);
- }}
+  if(navigator.share){{
+    navigator.share({{
+      title: document.title,
+      text: "Jamielyn Ludovice — Designer & Creative Specialist",
+      url: window.location.href
+    }}).catch(function(){{}});
+  }} else if(navigator.clipboard){{
+    navigator.clipboard.writeText(window.location.href).then(function(){{
+      showToast("Card link copied to clipboard!");
+    }});
+  }} else {{
+    showToast(window.location.href);
+  }}
 }}
+
 {POSE_SWITCHER_JS}
 </script>
 </body></html>
 """)
-
 
 FAVICON_SVG = """<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
 <rect width="64" height="64" rx="16" fill="#8B0D1A"/>
@@ -5370,180 +5895,134 @@ FAVICON_SVG = """<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
 </svg>
 """
 
-
 def write(rel, text):
     path = os.path.join(OUT, rel)
     os.makedirs(os.path.dirname(path), exist_ok=True)
     with open(path, "w", encoding="utf-8", newline="\n") as f:
         f.write(text)
 
-
 def build_poses_preview():
     p = PROFILE
     body = f'''<header id="top"><div class="wrap">
-<p class="eyebrow acc">TRANSITION &amp; IN-BETWEEN FRAME VALIDATION</p>
-<h1 class="hin" style="margin-top:.75rem">Smooth Directional Avatar Transition Engine</h1>
+<p class="eyebrow acc">NINE-POSE &amp; EIGHT-DIRECTION AVATAR VALIDATION</p>
+<h1 class="hin" style="margin-top:.75rem">Eight-Directional Illustrated Avatar Engine</h1>
 <p class="lead" style="max-width:48rem;margin-top:1rem">
-  Demonstrating coherent intermediate frames (in-betweens) and responsive state-machine playback between <strong>CENTER</strong> and all directional poses (<strong>LEFT</strong>, <strong>RIGHT</strong>, <strong>UP</strong>, <strong>DOWN</strong>). Entire portraits transition seamlessly without moving-pupil overlays, sliding sockets, or ghosting.
+  Validating complete 8-direction + Center whole-portrait switching (<strong>UP-LEFT</strong>, <strong>UP</strong>, <strong>UP-RIGHT</strong>, <strong>LEFT</strong>, <strong>CENTER</strong>, <strong>RIGHT</strong>, <strong>DOWN-LEFT</strong>, <strong>DOWN</strong>, <strong>DOWN-RIGHT</strong>) with continuous radial and orbital intermediate frames, mid-transition reversal, and calibrated phone tilt motion tracking.
 </p>
 </div></header>
 
 <main><div class="wrap">
 
-<!-- 1. ALIGNED ENDPOINTS & IN-BETWEEN TRANSITION FRAMES -->
+<!-- 1. 3x3 PRIMARY ENDPOINTS & IN-BETWEEN TRANSITION GALLERY -->
 <section style="border-bottom:1px solid var(--edge);padding-bottom:3.5rem">
   <div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:1rem;margin-bottom:1.5rem">
-    <h2 class="eyebrow grouphead" style="margin-bottom:0"><span>1. TRANSITION FRAME ALIGNMENT &amp; IN-BETWEENS (512&times;512 1:1)</span><span class="rule"></span></h2>
+    <h2 class="eyebrow grouphead" style="margin-bottom:0"><span>1. NINE EXTRACTED &amp; ALIGNED PRIMARY ENDPOINTS (3&times;3 GRID)</span><span class="rule"></span></h2>
   </div>
-  <p class="muted" style="max-width:48rem;margin-bottom:2.5rem">
-    Each directional branch features a genuine intermediate transition frame where the head angle, eyelids, facial features, and hair move coherently at matched scale against the burgundy background.
+  <p class="muted" style="max-width:48rem;margin-bottom:2rem">
+    All 9 portraits extracted cleanly from the reference sheet with zero borders or text gutters, normalized to 512&times;512 1:1 against the #580512 burgundy background.
   </p>
 
-  <!-- Horizontal Transitions -->
-  <div style="display:flex;flex-direction:column;gap:2rem">
+  <div style="display:grid;grid-template-columns:repeat(3, 1fr);gap:1.25rem;max-width:680px;margin:0 auto 3rem;text-align:center">
     
-    <!-- Left Branch -->
-    <div style="background:var(--glass);border:1px solid var(--edge);border-radius:10px;padding:1.5rem">
-      <span class="eyebrow acc" style="display:block;margin-bottom:1rem">CENTER &harr; LEFT TRANSITION SEQUENCE</span>
-      <div style="display:grid;grid-template-columns:repeat(auto-fit, minmax(180px, 1fr));gap:1.5rem;text-align:center">
-        <div>
-          <div style="width:160px;height:160px;margin:0 auto .75rem;overflow:hidden;border:1px solid var(--edge);background:#580512;border-radius:4px">
-            <img src="assets/images/avatar_poses/pose-center.png" alt="Center" style="width:100%;height:100%;object-fit:cover;display:block">
-          </div>
-          <span style="font-size:12px;font-weight:500;display:block">1. CENTER (Start)</span>
-          <p style="font-size:11px;color:var(--dim);margin:0"><code>pose-center.png</code></p>
-        </div>
-        <div>
-          <div style="width:160px;height:160px;margin:0 auto .75rem;overflow:hidden;border:2px solid var(--acc);background:#580512;border-radius:4px">
-            <img src="assets/images/avatar_poses/pose-trans-left.png" alt="Trans Left" style="width:100%;height:100%;object-fit:cover;display:block">
-          </div>
-          <span style="font-size:12px;font-weight:600;color:var(--acc-text);display:block">2. MID-LEFT (In-Between)</span>
-          <p style="font-size:11px;color:var(--dim);margin:0"><code>pose-trans-left.png</code></p>
-        </div>
-        <div>
-          <div style="width:160px;height:160px;margin:0 auto .75rem;overflow:hidden;border:1px solid var(--edge);background:#580512;border-radius:4px">
-            <img src="assets/images/avatar_poses/pose-look-left.png" alt="Look Left" style="width:100%;height:100%;object-fit:cover;display:block">
-          </div>
-          <span style="font-size:12px;font-weight:500;display:block">3. LOOK LEFT (Target)</span>
-          <p style="font-size:11px;color:var(--dim);margin:0"><code>pose-look-left.png</code></p>
-        </div>
+    <!-- Row 1 -->
+    <div style="background:var(--glass);border:1px solid var(--edge);border-radius:8px;padding:1rem">
+      <div style="aspect-ratio:1/1;overflow:hidden;border:1px solid var(--edge);background:#580512;border-radius:4px;margin-bottom:.5rem">
+        <img src="assets/images/avatar_poses/pose-up-left.png" alt="Up Left" style="width:100%;height:100%;object-fit:cover;display:block">
       </div>
+      <span style="font-size:11px;font-weight:600;display:block">UP LEFT</span>
+    </div>
+    <div style="background:var(--glass);border:1px solid var(--edge);border-radius:8px;padding:1rem">
+      <div style="aspect-ratio:1/1;overflow:hidden;border:1px solid var(--edge);background:#580512;border-radius:4px;margin-bottom:.5rem">
+        <img src="assets/images/avatar_poses/pose-up.png" alt="Up" style="width:100%;height:100%;object-fit:cover;display:block">
+      </div>
+      <span style="font-size:11px;font-weight:600;display:block">UP</span>
+    </div>
+    <div style="background:var(--glass);border:1px solid var(--edge);border-radius:8px;padding:1rem">
+      <div style="aspect-ratio:1/1;overflow:hidden;border:1px solid var(--edge);background:#580512;border-radius:4px;margin-bottom:.5rem">
+        <img src="assets/images/avatar_poses/pose-up-right.png" alt="Up Right" style="width:100%;height:100%;object-fit:cover;display:block">
+      </div>
+      <span style="font-size:11px;font-weight:600;display:block">UP RIGHT</span>
     </div>
 
-    <!-- Right Branch -->
-    <div style="background:var(--glass);border:1px solid var(--edge);border-radius:10px;padding:1.5rem">
-      <span class="eyebrow acc" style="display:block;margin-bottom:1rem">CENTER &harr; RIGHT TRANSITION SEQUENCE</span>
-      <div style="display:grid;grid-template-columns:repeat(auto-fit, minmax(180px, 1fr));gap:1.5rem;text-align:center">
-        <div>
-          <div style="width:160px;height:160px;margin:0 auto .75rem;overflow:hidden;border:1px solid var(--edge);background:#580512;border-radius:4px">
-            <img src="assets/images/avatar_poses/pose-center.png" alt="Center" style="width:100%;height:100%;object-fit:cover;display:block">
-          </div>
-          <span style="font-size:12px;font-weight:500;display:block">1. CENTER (Start)</span>
-          <p style="font-size:11px;color:var(--dim);margin:0"><code>pose-center.png</code></p>
-        </div>
-        <div>
-          <div style="width:160px;height:160px;margin:0 auto .75rem;overflow:hidden;border:2px solid var(--acc);background:#580512;border-radius:4px">
-            <img src="assets/images/avatar_poses/pose-trans-right.png" alt="Trans Right" style="width:100%;height:100%;object-fit:cover;display:block">
-          </div>
-          <span style="font-size:12px;font-weight:600;color:var(--acc-text);display:block">2. MID-RIGHT (In-Between)</span>
-          <p style="font-size:11px;color:var(--dim);margin:0"><code>pose-trans-right.png</code></p>
-        </div>
-        <div>
-          <div style="width:160px;height:160px;margin:0 auto .75rem;overflow:hidden;border:1px solid var(--edge);background:#580512;border-radius:4px">
-            <img src="assets/images/avatar_poses/pose-look-right.png" alt="Look Right" style="width:100%;height:100%;object-fit:cover;display:block">
-          </div>
-          <span style="font-size:12px;font-weight:500;display:block">3. LOOK RIGHT (Target)</span>
-          <p style="font-size:11px;color:var(--dim);margin:0"><code>pose-look-right.png</code></p>
-        </div>
+    <!-- Row 2 -->
+    <div style="background:var(--glass);border:1px solid var(--edge);border-radius:8px;padding:1rem">
+      <div style="aspect-ratio:1/1;overflow:hidden;border:1px solid var(--edge);background:#580512;border-radius:4px;margin-bottom:.5rem">
+        <img src="assets/images/avatar_poses/pose-left.png" alt="Left" style="width:100%;height:100%;object-fit:cover;display:block">
       </div>
+      <span style="font-size:11px;font-weight:600;display:block">LEFT</span>
+    </div>
+    <div style="background:var(--glass);border:2px solid var(--acc);border-radius:8px;padding:1rem">
+      <div style="aspect-ratio:1/1;overflow:hidden;border:1px solid var(--edge);background:#580512;border-radius:4px;margin-bottom:.5rem">
+        <img src="assets/images/avatar_poses/pose-center.png" alt="Center" style="width:100%;height:100%;object-fit:cover;display:block">
+      </div>
+      <span style="font-size:11px;font-weight:700;color:var(--acc-text);display:block">CENTER (Neutral)</span>
+    </div>
+    <div style="background:var(--glass);border:1px solid var(--edge);border-radius:8px;padding:1rem">
+      <div style="aspect-ratio:1/1;overflow:hidden;border:1px solid var(--edge);background:#580512;border-radius:4px;margin-bottom:.5rem">
+        <img src="assets/images/avatar_poses/pose-right.png" alt="Right" style="width:100%;height:100%;object-fit:cover;display:block">
+      </div>
+      <span style="font-size:11px;font-weight:600;display:block">RIGHT</span>
     </div>
 
-    <!-- Up & Down Branches -->
-    <div style="display:grid;grid-template-columns:repeat(auto-fit, minmax(320px, 1fr));gap:2rem">
-      <!-- Up -->
-      <div style="background:var(--glass);border:1px solid var(--edge);border-radius:10px;padding:1.5rem">
-        <span class="eyebrow acc" style="display:block;margin-bottom:1rem">CENTER &harr; UP SEQUENCE</span>
-        <div style="display:grid;grid-template-columns:repeat(3, 1fr);gap:1rem;text-align:center">
-          <div>
-            <div style="width:100px;height:100px;margin:0 auto .5rem;overflow:hidden;border:1px solid var(--edge);background:#580512">
-              <img src="assets/images/avatar_poses/pose-center.png" alt="Center" style="width:100%;height:100%;object-fit:cover;display:block">
-            </div>
-            <span style="font-size:11px;display:block">Center</span>
-          </div>
-          <div>
-            <div style="width:100px;height:100px;margin:0 auto .5rem;overflow:hidden;border:2px solid var(--acc);background:#580512">
-              <img src="assets/images/avatar_poses/pose-trans-up.png" alt="Mid Up" style="width:100%;height:100%;object-fit:cover;display:block">
-            </div>
-            <span style="font-size:11px;color:var(--acc-text);font-weight:600;display:block">Mid-Up</span>
-          </div>
-          <div>
-            <div style="width:100px;height:100px;margin:0 auto .5rem;overflow:hidden;border:1px solid var(--edge);background:#580512">
-              <img src="assets/images/avatar_poses/pose-look-up.png" alt="Up" style="width:100%;height:100%;object-fit:cover;display:block">
-            </div>
-            <span style="font-size:11px;display:block">Look Up</span>
-          </div>
-        </div>
+    <!-- Row 3 -->
+    <div style="background:var(--glass);border:1px solid var(--edge);border-radius:8px;padding:1rem">
+      <div style="aspect-ratio:1/1;overflow:hidden;border:1px solid var(--edge);background:#580512;border-radius:4px;margin-bottom:.5rem">
+        <img src="assets/images/avatar_poses/pose-down-left.png" alt="Down Left" style="width:100%;height:100%;object-fit:cover;display:block">
       </div>
-
-      <!-- Down -->
-      <div style="background:var(--glass);border:1px solid var(--edge);border-radius:10px;padding:1.5rem">
-        <span class="eyebrow acc" style="display:block;margin-bottom:1rem">CENTER &harr; DOWN SEQUENCE</span>
-        <div style="display:grid;grid-template-columns:repeat(3, 1fr);gap:1rem;text-align:center">
-          <div>
-            <div style="width:100px;height:100px;margin:0 auto .5rem;overflow:hidden;border:1px solid var(--edge);background:#580512">
-              <img src="assets/images/avatar_poses/pose-center.png" alt="Center" style="width:100%;height:100%;object-fit:cover;display:block">
-            </div>
-            <span style="font-size:11px;display:block">Center</span>
-          </div>
-          <div>
-            <div style="width:100px;height:100px;margin:0 auto .5rem;overflow:hidden;border:2px solid var(--acc);background:#580512">
-              <img src="assets/images/avatar_poses/pose-trans-down.png" alt="Mid Down" style="width:100%;height:100%;object-fit:cover;display:block">
-            </div>
-            <span style="font-size:11px;color:var(--acc-text);font-weight:600;display:block">Mid-Down</span>
-          </div>
-          <div>
-            <div style="width:100px;height:100px;margin:0 auto .5rem;overflow:hidden;border:1px solid var(--edge);background:#580512">
-              <img src="assets/images/avatar_poses/pose-look-down.png" alt="Down" style="width:100%;height:100%;object-fit:cover;display:block">
-            </div>
-            <span style="font-size:11px;display:block">Look Down</span>
-          </div>
-        </div>
+      <span style="font-size:11px;font-weight:600;display:block">DOWN LEFT</span>
+    </div>
+    <div style="background:var(--glass);border:1px solid var(--edge);border-radius:8px;padding:1rem">
+      <div style="aspect-ratio:1/1;overflow:hidden;border:1px solid var(--edge);background:#580512;border-radius:4px;margin-bottom:.5rem">
+        <img src="assets/images/avatar_poses/pose-down.png" alt="Down" style="width:100%;height:100%;object-fit:cover;display:block">
       </div>
+      <span style="font-size:11px;font-weight:600;display:block">DOWN</span>
+    </div>
+    <div style="background:var(--glass);border:1px solid var(--edge);border-radius:8px;padding:1rem">
+      <div style="aspect-ratio:1/1;overflow:hidden;border:1px solid var(--edge);background:#580512;border-radius:4px;margin-bottom:.5rem">
+        <img src="assets/images/avatar_poses/pose-down-right.png" alt="Down Right" style="width:100%;height:100%;object-fit:cover;display:block">
+      </div>
+      <span style="font-size:11px;font-weight:600;display:block">DOWN RIGHT</span>
     </div>
 
   </div>
 </section>
 
-<!-- 2. SMOOTH PLAYBACK DEMONSTRATION & INTERACTIVE SANDBOX -->
+<!-- 2. RESPONSIVE PLAYBACK & INTERACTIVE SANDBOX -->
 <section>
   <h2 class="eyebrow grouphead"><span>2. RESPONSIVE PLAYBACK &amp; INTERACTIVE SANDBOX</span><span class="rule"></span></h2>
   <p class="muted" style="max-width:48rem;margin-bottom:1.5rem">
-    Test automated sequence playback at actual display size (240&times;240) or explore live cursor tracking with seamless frame routing.
+    Run the requested sequence (<strong>CENTER &rarr; LEFT &rarr; UP-LEFT &rarr; UP &rarr; CENTER</strong>), test mid-transition reversal, or explore full 8-direction pointer follow and phone tilt calibration.
   </p>
 
   <div style="background:var(--glass-2);border:1px solid var(--edge);border-radius:12px;padding:2.5rem 1.5rem;text-align:center">
     
-    <!-- Primary Demo Sequence Action Bar -->
-    <div style="display:flex;justify-content:center;flex-wrap:wrap;gap:.75rem;margin-bottom:1.75rem">
-      <button class="btn" id="btn-demo-left" type="button" style="background:var(--acc);color:#fff" onclick="window.runDemoSequence('left')">
-        &blacktriangleright; Play CENTER &rarr; LEFT &rarr; CENTER Sequence
+    <!-- Primary Demo Sequence Buttons -->
+    <div style="display:flex;justify-content:center;flex-wrap:wrap;gap:.75rem;margin-bottom:1.5rem">
+      <button class="btn" id="btn-demo-seq" type="button" style="background:var(--acc);color:#fff" onclick="window.runDemoSequence('requested')">
+        &blacktriangleright; Play Verification: CENTER &rarr; LEFT &rarr; UP-LEFT &rarr; UP &rarr; UP-RIGHT &rarr; RIGHT &rarr; CENTER
       </button>
-      <button class="btn ghost" id="btn-demo-all" type="button" onclick="window.runDemoSequence('all')">
-        &blacktriangleright; Play 4-Direction Sweep
+      <button class="btn ghost" id="btn-demo-orbit" type="button" onclick="window.runDemoSequence('orbit')">
+        &blacktriangleright; Play 8-Direction Orbital Sweep
+      </button>
+      <button class="btn ghost" id="btn-demo-reverse" type="button" onclick="window.runDemoSequence('reversal')">
+        &blacktriangleright; Test Mid-Transition Reversal
       </button>
       <button class="btn ghost" id="btn-speed-toggle" type="button" onclick="window.toggleSpeed()">
-        Speed: Normal (180ms total)
+        Speed: Normal (80ms/step)
       </button>
     </div>
 
-    <!-- Manual State Buttons -->
-    <div style="display:flex;justify-content:center;flex-wrap:wrap;gap:.4rem;margin-bottom:2rem">
-      <button class="btn ghost" style="padding:.5rem .9rem;font-size:11px" type="button" onclick="window.setTargetPose('look-left')">Target: Left</button>
-      <button class="btn ghost" style="padding:.5rem .9rem;font-size:11px" type="button" onclick="window.setTargetPose('look-right')">Target: Right</button>
-      <button class="btn ghost" style="padding:.5rem .9rem;font-size:11px" type="button" onclick="window.setTargetPose('look-up')">Target: Up</button>
-      <button class="btn ghost" style="padding:.5rem .9rem;font-size:11px" type="button" onclick="window.setTargetPose('look-down')">Target: Down</button>
-      <button class="btn ghost" style="padding:.5rem .9rem;font-size:11px" type="button" onclick="window.setTargetPose('center')">Target: Center</button>
-      <button class="btn" id="btn-sandbox-toggle" type="button" style="background:var(--glass-2);border:1px solid var(--edge);color:var(--ink);padding:.5rem 1rem;font-size:11px" onclick="window.toggleSandboxFollow()">Mouse Follow: ON</button>
+    <!-- Direction Preset Buttons (3x3 Compass) -->
+    <div style="display:inline-grid;grid-template-columns:repeat(3, auto);gap:.35rem;margin:0 auto 2rem">
+      <button class="btn ghost" style="padding:.45rem .8rem;font-size:11px" type="button" onclick="window.setTargetPose('up-left')">&nwarr; Up-Left</button>
+      <button class="btn ghost" style="padding:.45rem .8rem;font-size:11px" type="button" onclick="window.setTargetPose('up')">&uarr; Up</button>
+      <button class="btn ghost" style="padding:.45rem .8rem;font-size:11px" type="button" onclick="window.setTargetPose('up-right')">&nearr; Up-Right</button>
+      <button class="btn ghost" style="padding:.45rem .8rem;font-size:11px" type="button" onclick="window.setTargetPose('left')">&larr; Left</button>
+      <button class="btn on" style="padding:.45rem .8rem;font-size:11px;background:var(--acc);color:#fff" type="button" onclick="window.setTargetPose('center')">&bull; Center</button>
+      <button class="btn ghost" style="padding:.45rem .8rem;font-size:11px" type="button" onclick="window.setTargetPose('right')">&rarr; Right</button>
+      <button class="btn ghost" style="padding:.45rem .8rem;font-size:11px" type="button" onclick="window.setTargetPose('down-left')">&swarr; Down-Left</button>
+      <button class="btn ghost" style="padding:.45rem .8rem;font-size:11px" type="button" onclick="window.setTargetPose('down')">&darr; Down</button>
+      <button class="btn ghost" style="padding:.45rem .8rem;font-size:11px" type="button" onclick="window.setTargetPose('down-right')">&searr; Down-Right</button>
     </div>
 
     <!-- Live Display & Telemetry -->
@@ -5553,31 +6032,22 @@ def build_poses_preview():
       <div>
         <span class="eyebrow" style="display:block;margin-bottom:.75rem">LIVE DISPLAY (240&times;240)</span>
         <div style="width:240px;height:240px;margin:0 auto;position:relative;overflow:hidden;border:1px solid var(--edge);background:#580512;border-radius:6px;box-shadow:0 8px 32px rgba(0,0,0,0.35)">
-          <div class="pose-avatar" id="sandbox-avatar" data-avatar="pose-switcher">
-            <img class="pose-img active" data-pose="center" src="assets/images/avatar_poses/pose-center.png" alt="Center" width="512" height="512">
-            <img class="pose-img" data-pose="trans-left" src="assets/images/avatar_poses/pose-trans-left.png" alt="Trans Left" width="512" height="512">
-            <img class="pose-img" data-pose="look-left" src="assets/images/avatar_poses/pose-look-left.png" alt="Look Left" width="512" height="512">
-            <img class="pose-img" data-pose="trans-right" src="assets/images/avatar_poses/pose-trans-right.png" alt="Trans Right" width="512" height="512">
-            <img class="pose-img" data-pose="look-right" src="assets/images/avatar_poses/pose-look-right.png" alt="Look Right" width="512" height="512">
-            <img class="pose-img" data-pose="trans-up" src="assets/images/avatar_poses/pose-trans-up.png" alt="Trans Up" width="512" height="512">
-            <img class="pose-img" data-pose="look-up" src="assets/images/avatar_poses/pose-look-up.png" alt="Look Up" width="512" height="512">
-            <img class="pose-img" data-pose="trans-down" src="assets/images/avatar_poses/pose-trans-down.png" alt="Trans Down" width="512" height="512">
-            <img class="pose-img" data-pose="look-down" src="assets/images/avatar_poses/pose-look-down.png" alt="Look Down" width="512" height="512">
-            <img class="pose-img" data-pose="blink" src="assets/images/avatar_poses/pose-blink.png" alt="Blink" width="512" height="512">
-          </div>
+          {render_pose_avatar("Live Test Avatar", extra_style="width:100%;height:100%")}
         </div>
         <p id="pose-caption" style="font-size:12px;color:var(--acc-text);font-weight:600;margin-top:.75rem">Active Frame: CENTER</p>
+        <button class="avatar-tilt-btn" id="sandbox-tilt-btn" type="button" onclick="window.toggleAvatarTilt(this)" style="margin-top:.25rem">📱 Enable Tilt</button>
       </div>
 
       <!-- Telemetry -->
-      <div style="background:var(--glass);border:1px solid var(--edge);border-radius:8px;padding:1.5rem;text-align:left;font-family:monospace;font-size:12px;min-width:300px;line-height:1.9">
-        <span class="eyebrow acc" style="display:block;margin-bottom:.75rem;font-family:'Jost',sans-serif">TRANSITION TELEMETRY</span>
-        <div>Mode: <span id="tel-mode" style="color:var(--ink)">Active Mouse Follow</span></div>
-        <div>Target Direction: <span id="tel-target" style="color:var(--acc-text);font-weight:600">CENTER</span></div>
+      <div style="background:var(--glass);border:1px solid var(--edge);border-radius:8px;padding:1.5rem;text-align:left;font-family:monospace;font-size:12px;min-width:320px;line-height:1.9">
+        <span class="eyebrow acc" style="display:block;margin-bottom:.75rem;font-family:'Jost',sans-serif">8-DIRECTION &amp; TILT TELEMETRY</span>
+        <div>Tracking Mode: <span id="tel-mode" style="color:var(--ink)">Active Mouse Follow</span></div>
+        <div>Target Sector: <span id="tel-target" style="color:var(--acc-text);font-weight:600">CENTER</span></div>
         <div>Active Frame: <span id="tel-frame" style="color:#6FCF97;font-weight:600">center</span></div>
-        <div>Step Duration: <span id="tel-step-dur" style="color:var(--ink)">90 ms / frame</span></div>
-        <div>Total Transition: <span id="tel-tot-dur" style="color:var(--dim)">180 ms</span></div>
-        <div>Hysteresis Status: <span style="color:var(--dim)">Deadzone 70px / Axis 1.35x</span></div>
+        <div>Step Duration: <span id="tel-step-dur" style="color:var(--ink)">80 ms / frame</span></div>
+        <div>Pointer Angle: <span id="tel-angle" style="color:var(--dim)">0.0&deg;</span></div>
+        <div>Tilt Calibration: <span id="tel-tilt-calib" style="color:var(--dim)">Not Calibrated</span></div>
+        <div>Hysteresis Status: <span style="color:var(--dim)">Deadzone 65px / &plusmn;6&deg; Sector Buffer</span></div>
       </div>
 
     </div>
@@ -5590,32 +6060,29 @@ def build_poses_preview():
 
     js = """
 (function(){
-  var sandboxAv = document.getElementById('sandbox-avatar');
   var telMode = document.getElementById('tel-mode');
   var telTarget = document.getElementById('tel-target');
   var telFrame = document.getElementById('tel-frame');
   var telStepDur = document.getElementById('tel-step-dur');
-  var telTotDur = document.getElementById('tel-tot-dur');
+  var telAngle = document.getElementById('tel-angle');
+  var telTiltCalib = document.getElementById('tel-tilt-calib');
   var poseCaption = document.getElementById('pose-caption');
   var isSlowMo = false;
   var isDemoRunning = false;
 
-  // Find sandbox instance in __avatarController
-  var inst = null;
-  if(window.__avatarController && window.__avatarController.instances){
-    for(var i=0; i<window.__avatarController.instances.length; i++){
-      if(window.__avatarController.instances[i].el === sandboxAv){
-        inst = window.__avatarController.instances[i];
-        break;
-      }
-    }
-  }
+  var inst = (window.__avatarController && window.__avatarController.instances) ? window.__avatarController.instances[0] : null;
 
   if(inst){
     inst.onPoseChange = function(poseName){
       if(telFrame) telFrame.textContent = poseName;
       if(poseCaption) poseCaption.textContent = 'Active Frame: ' + poseName.toUpperCase();
     };
+  }
+
+  // Register sandbox tilt button if present
+  var sBtn = document.getElementById('sandbox-tilt-btn');
+  if(sBtn && window.__avatarController && window.__avatarController.tiltManager){
+    window.__avatarController.tiltManager.registerButton(sBtn);
   }
 
   window.setTargetPose = function(target){
@@ -5629,102 +6096,106 @@ def build_poses_preview():
 
   window.toggleSpeed = function(){
     isSlowMo = !isSlowMo;
-    var ms = isSlowMo ? 300 : 90;
+    var ms = isSlowMo ? 250 : 80;
     var btn = document.getElementById('btn-speed-toggle');
     if(btn){
-      btn.textContent = isSlowMo ? 'Speed: Slow-Mo (600ms total)' : 'Speed: Normal (180ms total)';
+      btn.textContent = isSlowMo ? 'Speed: Slow-Mo (250ms/step)' : 'Speed: Normal (80ms/step)';
     }
     if(telStepDur) telStepDur.textContent = ms + ' ms / frame';
-    if(telTotDur) telTotDur.textContent = (ms * 2) + ' ms';
     if(window.__avatarController){
       window.__avatarController.setStepMs(ms);
-    }
-  };
-
-  window.toggleSandboxFollow = function(){
-    var isManual = sandboxAv.getAttribute('data-manual') === 'true';
-    sandboxAv.setAttribute('data-manual', isManual ? 'false' : 'true');
-    var btn = document.getElementById('btn-sandbox-toggle');
-    if(!isManual){
-      if(btn){ btn.textContent = 'Mouse Follow: OFF'; btn.style.background = 'transparent'; }
-      if(telMode) telMode.textContent = 'Manual Target Mode';
-    } else {
-      if(btn){ btn.textContent = 'Mouse Follow: ON'; btn.style.background = 'var(--glass-2)'; }
-      if(telMode) telMode.textContent = 'Active Mouse Follow';
     }
   };
 
   window.runDemoSequence = function(type){
     if(isDemoRunning) return;
     isDemoRunning = true;
-    sandboxAv.setAttribute('data-manual', 'true');
-    var btnLeft = document.getElementById('btn-demo-left');
-    var btnAll = document.getElementById('btn-demo-all');
-    if(btnLeft) btnLeft.disabled = true;
-    if(btnAll) btnAll.disabled = true;
+    
+    // Disable buttons during automated demo
+    var btns = document.querySelectorAll('#btn-demo-seq, #btn-demo-orbit, #btn-demo-reverse');
+    btns.forEach(function(b){ b.disabled = true; });
 
-    var stepTime = inst ? (inst.stepMs || 90) : 90;
-    var holdTime = 650;
+    var stepTime = inst ? (inst.stepMs || 80) : 80;
+    var holdTime = 600;
 
-    if(type === 'left'){
-      if(telMode) telMode.textContent = 'Demo: CENTER \u2192 LEFT \u2192 CENTER';
-      if(telTarget) telTarget.textContent = 'LOOK-LEFT';
-      window.__avatarController.setTarget(inst, 'look-left');
-
-      setTimeout(function(){
-        if(telTarget) telTarget.textContent = 'CENTER';
-        window.__avatarController.setTarget(inst, 'center');
-        
-        setTimeout(function(){
-          isDemoRunning = false;
-          sandboxAv.setAttribute('data-manual', 'false');
-          if(btnLeft) btnLeft.disabled = false;
-          if(btnAll) btnAll.disabled = false;
-          if(telMode) telMode.textContent = 'Active Mouse Follow';
-        }, (stepTime * 2) + 200);
-      }, (stepTime * 2) + holdTime);
-
-    } else if(type === 'all'){
-      if(telMode) telMode.textContent = 'Demo: 4-Direction Sweep';
-      var sequence = ['look-left', 'look-right', 'look-up', 'look-down', 'center'];
+    if(type === 'requested'){
+      // CENTER -> LEFT -> UP-LEFT -> UP -> UP-RIGHT -> RIGHT -> CENTER
+      var seq = ['left', 'up-left', 'up', 'up-right', 'right', 'center'];
+      if(telMode) telMode.textContent = 'Demo: CENTER \u2192 LEFT \u2192 UP-LEFT \u2192 UP \u2192 UP-RIGHT \u2192 RIGHT \u2192 CENTER';
       var idx = 0;
 
-      function nextDemoStep(){
-        if(idx >= sequence.length){
+      function nextStep(){
+        if(idx >= seq.length){
           isDemoRunning = false;
-          sandboxAv.setAttribute('data-manual', 'false');
-          if(btnLeft) btnLeft.disabled = false;
-          if(btnAll) btnAll.disabled = false;
+          btns.forEach(function(b){ b.disabled = false; });
           if(telMode) telMode.textContent = 'Active Mouse Follow';
           return;
         }
-        var nextTarget = sequence[idx++];
+        var nextTarget = seq[idx++];
         if(telTarget) telTarget.textContent = nextTarget.toUpperCase();
-        window.__avatarController.setTarget(inst, nextTarget);
-        setTimeout(nextDemoStep, (stepTime * 2) + holdTime);
+        window.__avatarController.setAllTarget(nextTarget);
+        setTimeout(nextStep, (stepTime * 2) + holdTime);
       }
-      nextDemoStep();
+      nextStep();
+
+    } else if(type === 'orbit'){
+      // 8-Direction Orbital Sweep
+      var ring = ['right', 'up-right', 'up', 'up-left', 'left', 'down-left', 'down', 'down-right', 'center'];
+      if(telMode) telMode.textContent = 'Demo: 8-Direction Orbital Sweep';
+      var idx = 0;
+
+      function nextOrbit(){
+        if(idx >= ring.length){
+          isDemoRunning = false;
+          btns.forEach(function(b){ b.disabled = false; });
+          if(telMode) telMode.textContent = 'Active Mouse Follow';
+          return;
+        }
+        var nextTarget = ring[idx++];
+        if(telTarget) telTarget.textContent = nextTarget.toUpperCase();
+        window.__avatarController.setAllTarget(nextTarget);
+        setTimeout(nextOrbit, (stepTime * 2) + 400);
+      }
+      nextOrbit();
+
+    } else if(type === 'reversal'){
+      // Test Mid-Transition Reversal: Center -> Left (reverse midway to Right)
+      if(telMode) telMode.textContent = 'Demo: Mid-Transition Reversal Test';
+      if(telTarget) telTarget.textContent = 'LEFT (Initiating...)';
+      window.__avatarController.setAllTarget('left');
+
+      // Reverse after 1 step (during intermediate trans-c-left frame!)
+      setTimeout(function(){
+        if(telTarget) telTarget.textContent = 'REVERSING \u2192 RIGHT';
+        window.__avatarController.setAllTarget('right');
+
+        setTimeout(function(){
+          if(telTarget) telTarget.textContent = 'RETURNING \u2192 CENTER';
+          window.__avatarController.setAllTarget('center');
+          
+          setTimeout(function(){
+            isDemoRunning = false;
+            btns.forEach(function(b){ b.disabled = false; });
+            if(telMode) telMode.textContent = 'Active Mouse Follow';
+          }, (stepTime * 2) + 200);
+        }, (stepTime * 2) + 800);
+      }, stepTime + 20);
     }
   };
 
   window.addEventListener('mousemove', function(e){
-    if(!sandboxAv || sandboxAv.getAttribute('data-manual') === 'true' || isDemoRunning) return;
-    var rect = sandboxAv.getBoundingClientRect();
+    if(isDemoRunning) return;
+    if(!inst || !inst.el) return;
+    var rect = inst.el.getBoundingClientRect();
     var cx = rect.left + rect.width / 2;
     var cy = rect.top + rect.height / 2;
     var dx = e.clientX - cx;
     var dy = e.clientY - cy;
     var dist = Math.sqrt(dx * dx + dy * dy);
+    var deg = Math.atan2(dy, dx) * 180 / Math.PI;
 
-    var targetPose = 'center';
-    if(dist >= 70){
-      if(Math.abs(dx) >= Math.abs(dy)){
-        targetPose = (dx < 0) ? 'LOOK-LEFT' : 'LOOK-RIGHT';
-      } else {
-        targetPose = (dy < 0) ? 'LOOK-UP' : 'LOOK-DOWN';
-      }
-    }
-    if(telTarget) telTarget.textContent = targetPose;
+    if(telAngle) telAngle.textContent = (dist < 65 ? 'Neutral Zone' : deg.toFixed(1) + '\u00B0');
+    if(telTarget && !inst.isTransitioning) telTarget.textContent = inst.targetPose.toUpperCase();
   });
 
   // Handle URL query parameters for screenshot proofs
@@ -5747,8 +6218,8 @@ def build_poses_preview():
 })();
 """
 
-    write("poses-preview.html", shell("Directional Avatar Transitions — Jamielyn Ludovice",
-          "Whole-portrait smooth transition validation.", body, "about",
+    write("poses-preview.html", shell("Nine-Pose Avatar Transitions — Jamielyn Ludovice",
+          "Eight-direction whole-portrait smooth transition validation.", body, "about",
           up="", extra_js=POSE_SWITCHER_JS + "\n" + js))
 
 

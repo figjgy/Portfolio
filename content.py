@@ -22,12 +22,12 @@ PROFILE = {
     "last":            "Ludovice",
     "subtitle":        "MULTIDISCIPLINARY CREATIVE SPECIALIST · E-COMMERCE DESIGNER · 3D VISUALISER",
     "subtitle_plain":  "Multidisciplinary Creative Specialist & E-Commerce Designer",
-    "vcard_title":     "Multidisciplinary Creative Specialist",
+    "vcard_title":     "Designer & Creative Specialist",
     "vcard_file":      "Jamielyn_Ludovice",
     "location":        "Manila, Philippines",
     # --- shown on card.html (the NFC page) -------------------------------
     "card_eyebrow":    "DIGITAL BUSINESS CARD",
-    "role":            "Multidisciplinary Creative Specialist & E-Commerce Designer",
+    "role":            "Designer & Creative Specialist",
     "company":         "",   # removed current employer; card displays location only
     "initials":        "JL",
     "avatar":          "assets/images/profile.jpg",   # square, for the NFC card
