@@ -20,8 +20,8 @@ PROFILE = {
     "name":            "Jamielyn Ludovice",
     "first":           "Jamielyn",
     "last":            "Ludovice",
-    "subtitle":        "MULTIDISCIPLINARY CREATIVE SPECIALIST · E-COMMERCE DESIGNER · 3D VISUALISER",
-    "subtitle_plain":  "Multidisciplinary Creative Specialist & E-Commerce Designer",
+    "subtitle":        "MULTIDISCIPLINARY CREATIVE SPECIALIST · E-COMMERCE & EMAIL MARKETING · SEO & 3D VISUALISER",
+    "subtitle_plain":  "Multidisciplinary Creative Specialist, E-Commerce, Email Marketing & SEO",
     "vcard_title":     "Designer & Creative Specialist",
     "vcard_file":      "Jamielyn_Ludovice",
     "location":        "Manila, Philippines",
@@ -157,11 +157,28 @@ SERVICES = [
         "cta_text": "Inquire about E-commerce Listings",
         "wa_text": "Hi Jamie! I'd like to inquire about E-Commerce Storefront and Listing Overhaul services.",
     },
+    {
+        "id": "email-seo",
+        "title": "Email Marketing & SEO",
+        "tagline": "Omnisend Flows, Custom HTML Templates & On-Page Search Optimisation",
+        "desc": "Automated store emails in Omnisend and custom HTML templates, paired with practical on-page SEO, structured data, and site audits.",
+        "deliverables": [
+            "Omnisend flows: welcome, abandoned cart, cancelled order follow-up, referral & wholesale sequences",
+            "Custom table-based HTML email templates tested across mobile, desktop, and dark mode",
+            "On-page SEO: page titles, meta descriptions, canonicals, JSON-LD schema, and XML sitemaps",
+            "Keyword tracking, site audits (SE Ranking & Search Console), and comparison guides",
+        ],
+        "tools": "Omnisend, WooCommerce, GoAffPro API, SE Ranking, Google Search Console, HTML/CSS",
+        "cta_text": "Inquire about Email Marketing & SEO",
+        "wa_text": "Hi Jamie! I'd like to inquire about Email Marketing and SEO services.",
+    },
 ]
 
 # The scrolling strip on the home page. Add or remove freely.
 MARQUEE = [
     "Product Design", "Blender 3D", "SketchUp", "Photorealistic Renders", "Trade Show Booths",
+    "Email Marketing", "Omnisend Flows", "HTML Email Templates", "Cart & Order Recovery",
+    "Technical SEO", "JSON-LD Schema", "SE Ranking & GSC", "Organic Search Growth",
     "Social Media Content", "Content Calendars", "Pubmats", "Carousels", "Brand Templates",
     "Video Editing", "Short-Form Video", "TikTok & Reels", "CapCut", "Ad Creatives",
     "Branding", "Visual Systems", "Large-Format Banners", "B2B Web Design", "Brand Sourcing",
@@ -171,6 +188,7 @@ MARQUEE = [
 
 DISCIPLINES = {
     "product-design": "Product Design",
+    "email-seo":      "Email Marketing & SEO",
     "social-media":   "Social Media Content",
     "video-editing":  "Video Editing",
     "branding":       "Branding",
@@ -884,6 +902,111 @@ PROJECTS = [
                              "A day's report, assembled and sent without a line typed by hand",
                              "The ERP feed classified into one action per product"],
     },
+    # ------------------------------------------------- EMAIL MARKETING & SEO
+    {
+        "slug": "email-lifecycle-automations",
+        "title": "Email design & Omnisend flows — US Research Peptide Brands",
+        "discipline": "email-seo",
+        "year": "2026",
+        "featured": True,
+        "client": "US Direct-to-Lab Research Peptide Store & White-Label Supplier (Confidential — NDA)",
+        "project_type": "Email Graphic Design, Custom HTML Templates, Omnisend Flows & GoAffPro API Sync",
+        "role": "Email Designer & Marketing Automation Specialist",
+        "tools": "Omnisend, Canva, Custom HTML/CSS, WooCommerce, GoAffPro API, SPF/DKIM/DMARC, WPCode",
+        "result_purpose": "Designed custom light and dark email templates and launched 5 automated Omnisend flows for two US research peptide brands (under NDA), averaging a 50% open rate and $882.73 in recovered orders in week one.",
+        "tags": ["Email design", "Omnisend", "HTML email", "Cart recovery", "Research peptides"],
+        "cover": "email-cover.jpg",
+        "cover_note": "Email designs for US research peptide and white-label fulfillment brands (brand names redacted under NDA)",
+        "summary": ("Email graphic design, custom HTML templates and automated Omnisend flows "
+                    "for two US research peptide brands — a direct-to-lab peptide store and a "
+                    "B2B white-label peptide supplier (brand names redacted under NDA)."),
+        "challenge": ("Both peptide brands needed automated follow-ups, but served completely "
+                      "different buyers. The direct store sells laboratory research peptides "
+                      "(BPC-157, TB-500, KPV) to researchers and needed visual cart recovery, "
+                      "order follow-up and 20% store-credit referral emails. The sister brand is "
+                      "a B2B white-label peptide supplier and needed a clean dark-mode sequence "
+                      "for wholesale partner leads.\n\n"
+                      "Nothing was following up on abandoned carts or failed checkout payments, "
+                      "and referral codes sat inside GoAffPro without ever being emailed to buyers. "
+                      "Off-the-shelf templates also inverted badly in mobile dark mode and got "
+                      "clipped behind Gmail's three dots on repeat sends."),
+        "approach": ("Designed two distinct email systems from scratch: an ice-blue, royal navy "
+                     "and gold laboratory look with 3D peptide vial graphics for the direct "
+                     "research store (abandoned cart, welcome, failed/cancelled order recovery, "
+                     "and 20% referral credit emails), and a pure dark-navy and sky-cyan layout "
+                     "for the B2B white-label peptide partner sequence.\n\n"
+                     "Wired five automated workflows in Omnisend to WooCommerce order statuses "
+                     "and a custom WPCode/GoAffPro API bridge so each paying customer's referral "
+                     "link is generated and dropped straight into their email, with SPF, DKIM, "
+                     "DMARC and strict opt-in rules in place."),
+        "result": ("Five automated flows running across both peptide stores, averaging a 50% "
+                   "open rate (up to 83.3% on post-purchase referral emails) and $882.73 in "
+                   "recovered orders from Omnisend in the first week."),
+        "gallery": [
+            {"ratio": "r34",
+             "grid": ["email-design-llr-1.jpg", "email-design-llr-2.jpg",
+                      "email-design-llr-3.jpg", "email-design-llr-4.jpg"],
+             "alt": "Research peptide email design (NDA redacted)",
+             "title": "Direct-to-lab peptide store — cart recovery & referral email designs",
+             "sub": "Abandoned cart sequence and 20% store credit referral emails with custom peptide vial visuals (client logo blurred under NDA)"},
+            {"ratio": "r34",
+             "grid": ["email-design-seq-1.jpg", "email-design-seq-2.jpg",
+                      "email-design-seq-3.jpg", "email-design-seq-4.jpg"],
+             "alt": "White-label peptide B2B and lab HTML email templates (NDA redacted)",
+             "title": "White-label peptide B2B & laboratory — HTML email templates",
+             "sub": "Dark-mode B2B partner sequence and welcome / payment-retry HTML templates (client identifiers blurred under NDA)"},
+            "email-flows.jpg",
+            "email-templates.jpg",
+        ],
+        "gallery_captions": [
+            "Four visual emails designed for the direct-to-lab peptide store: abandoned cart reminder, 20% off final cart recovery, post-purchase referral link invite, and referral sale reward notification (brand name blurred under NDA)",
+            "Table-based HTML templates built for mobile and dark mode: B2B white-label peptide onboarding and 99%+ purity COA emails alongside laboratory welcome and failed-order retry templates",
+            "Live Omnisend automations dashboard showing the active cart recovery ($853.02 recovered) and referral workflows (store name blurred under NDA)",
+            "Omnisend store performance report showing $882.73 in attributed revenue from the automated recovery flows in week one",
+        ],
+    },
+    {
+        "slug": "technical-seo-organic-growth",
+        "title": "On-page SEO & search audits — White-Label Peptide Supplier",
+        "discipline": "email-seo",
+        "year": "2026",
+        "featured": True,
+        "client": "US B2B White-Label Research Peptide Fulfillment Platform (Confidential — NDA)",
+        "project_type": "On-Page SEO, JSON-LD Structured Data, SE Ranking Audits & B2B Comparison Guides",
+        "role": "SEO & Content Specialist",
+        "tools": "SE Ranking, Google Search Console, JSON-LD Schema, WordPress / WPCode, Landingi, XML Sitemaps",
+        "result_purpose": "Raised SE Ranking website audit score to 95/100 with 0 errors for a US B2B research peptide supplier (under NDA), published compliant B2B peptide sourcing guides, and moved priority supplier keywords up by 33 positions.",
+        "tags": ["On-page SEO", "Technical SEO", "JSON-LD schema", "SE Ranking", "Research peptides"],
+        "cover": "seo-cover.jpg",
+        "cover_note": "SE Ranking website audit — 95/100 health score with zero errors (domain blurred under NDA)",
+        "summary": ("On-page SEO, structured data, B2B comparison guides and SE Ranking site "
+                    "audits for a US white-label research peptide fulfillment platform (under NDA)."),
+        "challenge": ("The B2B peptide fulfillment site and its lead-capture funnel were already "
+                      "live and the page layout was signed off, so I could not bolt extra keyword "
+                      "blocks onto the existing pages. Under the hood, pages were missing meta "
+                      "descriptions, titles were generic, thin utility URLs were being indexed, "
+                      "and search engines had no structured schema describing the white-label "
+                      "research peptide fulfillment service.\n\n"
+                      "Because the client supplies strictly Research Use Only (RUO) laboratory "
+                      "reagents, every title, schema block and blog guide also had to follow "
+                      "strict laboratory compliance rules."),
+        "approach": ("Handled the technical SEO inside the page head and site config so the "
+                     "approved visual layout stayed untouched: rewrote title tags and meta "
+                     "descriptions around B2B peptide supplier and white-label dropshipping "
+                     "keywords, set canonical tags, cleaned up the XML sitemap and robots.txt, "
+                     "and added JSON-LD schema (Organization, Service, Product and FAQ) via WPCode.\n\n"
+                     "To rank for commercial buyer searches without cluttering the main pages, "
+                     "I wrote and published B2B peptide comparison and COA verification guides "
+                     "with clean SVG icons, RUO disclaimers, internal links, and ten dofollow "
+                     "industry citations tracked in SE Ranking."),
+        "result": ("Raised the SE Ranking website audit score to 95/100 with zero errors, "
+                   "indexed all ten supporting B2B peptide citations, and moved "
+                   "'peptide dropshipping supplier' up 33 positions in US search results."),
+        "gallery": ["seo-architecture.jpg", "seo-audit.jpg"],
+        "gallery_captions": [
+            "SE Ranking US keyword tracker — 'peptide dropshipping supplier' up 33 positions after updating on-page titles, schema and internal links (client project name blurred under NDA)",
+            "SE Ranking backlink monitor — ten B2B peptide sourcing and COA verification guides indexed with dofollow links to the core pages (target domain blurred under NDA)"],
+    },
 ]
 
 # The three-panel story at the top of the About page.
@@ -977,13 +1100,20 @@ TESTIMONIALS = [
 TESTIMONIALS_PENDING = 0
 
 EXPERTISE = [
+    {"group": "Email Marketing & SEO", "items": [
+        "Omnisend flows and campaigns",
+        "Custom HTML email templates",
+        "Cart and order recovery sequences",
+        "On-page SEO and metadata",
+        "JSON-LD structured data and sitemaps",
+        "Site audits and keyword tracking"]},
     {"group": "Marketing & Content", "items": [
         "Content calendar strategy", "Social media management",
         "Short-form scripting for TikTok, Reels and Facebook",
         "Video production and editing", "Event and exhibit coverage",
         "Copywriting in English, Filipino and Taglish"]},
     {"group": "E-Commerce", "items": [
-        "Shopee, Lazada and TikTok Shop", "Storefront and campaign design",
+        "Shopee, Lazada, TikTok Shop, Shopify and WooCommerce", "Storefront and campaign design",
         "Listing graphics and A+ content", "Title, keyword and image optimisation",
         "Marketplace compliance and violation resolution"]},
     {"group": "Graphic & Layout", "items": [
@@ -1005,9 +1135,10 @@ EXPERTISE = [
 ]
 
 # Grouped by what you use it for, not one long line.
-# NOTE: only tools you actually use are listed. Add Photoshop / Illustrator
-# here if you use them — I left them out because I could not confirm it.
 STACK = [
+    {"group": "Email & SEO", "items": [
+        "Omnisend", "SE Ranking", "Serpstat", "Google Search Console",
+        "GoAffPro API", "JSON-LD Schema", "WordPress / WPCode"]},
     {"group": "Design & Layout", "items": [
         "Photoshop", "Illustrator", "Lightroom Classic", "Canva", "Photoroom",
         "Figma", "Superdesign"]},
@@ -1019,13 +1150,13 @@ STACK = [
         "Claude", "Cowork", "n8n", "GoHighLevel", "Python", "Notion",
         "Telegram Bot API"]},
     {"group": "Web & Systems", "items": [
-        "HTML / CSS / JS", "Flask", "Wix", "Vercel", "IMAP / REST APIs"]},
+        "HTML / CSS / JS", "Flask", "WooCommerce", "Shopify", "Wix", "Vercel", "IMAP / REST APIs"]},
 ]
 
 ABOUT = ("I am a Multidisciplinary Creative Specialist with a foundation in Architecture from "
-         "the University of Northeastern Philippines. I bridge the gap between high-end visual design "
-         "— e-commerce storefronts, 3D product renders, video editing, and branding — and the automated "
-         "systems that keep operations running smoothly.")
+         "the University of Northeastern Philippines. I bridge the gap between visual design "
+         "— e-commerce storefronts, email marketing, on-page SEO, 3D product renders, and branding — "
+         "and the automated systems that keep everyday operations running smoothly.")
 
 # ---------------------------------------------------------------------------
 # BIO — the long-form version on the About page. Structured on purpose:
@@ -1037,18 +1168,18 @@ BIO = [
     ("I'm a **Multidisciplinary Creative Specialist** with a strong foundation in **Architecture from the "
      "University of Northeastern Philippines**. That training gave me an enduring discipline for structural "
      "balance, exact scale, and building repeatable systems rather than temporary one-off files. Whether I'm "
-     "modeling a 3D medical device in Blender, laying out an exhibition booth, or directing an 8-slide listing for "
+     "modeling a 3D medical device in Blender, coding a custom HTML email template, or directing an 8-slide listing for "
      "Shopify, I approach every creative surface with architectural rigor."),
 
-    ("In daily practice, my core work revolves around **E-Commerce Listings & Digital Storefronts** across **Shopee, "
-     "Lazada, and TikTok Shop**, as well as Shopify. I design mobile-first storefronts, conversion-engineered listing "
-     "graphics, and A+ content, and I resolve the regulatory claim flags that stall sales. Alongside this, I direct "
-     "**Social Media Content** (managing multi-brand content calendars with ~30 posts per brand monthly) and produce "
-     "**Video Editing** and short-form scripts for high-retention vertical reels and direct-response ads."),
+    ("In daily practice, my core work spans **E-Commerce Storefronts, Email Marketing & SEO**. "
+     "Across **Shopify, WooCommerce, Shopee, Lazada, and TikTok Shop**, I design mobile-first storefronts and "
+     "A+ listings while resolving regulatory compliance flags. On the email and search side, I set up "
+     "**Omnisend email flows** (welcome, abandoned cart, order follow-up, and referral sequences), build custom "
+     "**HTML email templates**, and handle **on-page SEO** — fixing page titles, meta descriptions, "
+     "structured data, and comparison guides tracked in **SE Ranking and Google Search Console**."),
 
-    ("What sets my work apart is that I don't just stop at visual assets — I build **Internal Automation Systems** "
-     "to make sure the work scales. I develop automated Telegram accomplishment bots, role-based Flask operations hubs, "
-     "and Notion databases that eliminate repetitive admin. I also source and screen Korean medical manufacturers for "
-     "domestic distribution. My focus is always on creating work that converts, elevates the brand, and stays consistent "
-     "long after launch."),
+    ("Alongside commerce and search, I direct **Social Media Content** (~30 scheduled posts per brand monthly), "
+     "produce **Short-Form Video & Ad Creatives**, and build **Internal Automation Systems** — from Telegram reporting "
+     "bots and Flask operations dashboards to Notion pipelines and Korean manufacturer sourcing. My focus is always on "
+     "creating work that converts, elevates the brand, and stays consistent long after launch."),
 ]

@@ -78,6 +78,7 @@ transition:background .65s var(--ease-editorial),color .65s var(--ease-editorial
 h1,h2,h3,h4,.serif{font-family:'Cormorant Garamond',Georgia,serif;margin:0;
 line-height:1.15;font-weight:400;letter-spacing:.005em}
 p{margin:0}a{color:inherit;text-decoration:none}img{max-width:100%;display:block}
+.hero-face canvas, .hero-face img { width:100%; height:auto; display:block; }
 .wrap{max-width:var(--max);margin:0 auto;padding:0 var(--pad);width:100%;position:relative;z-index:1}
 .eyebrow{font-size:10.5px;text-transform:uppercase;letter-spacing:.24em;font-weight:400;
 font-family:'Jost',system-ui,sans-serif}
@@ -921,7 +922,7 @@ display:flex;flex-direction:column;gap:1.5rem}
 
 /* ---- services grid (about page) --------------------------------------- */
 .services-grid{display:grid;gap:2.5rem;margin-top:2.5rem}
-@media(min-width:840px){.services-grid{grid-template-columns:repeat(3,1fr)}}
+@media(min-width:840px){.services-grid{grid-template-columns:repeat(2,1fr)}}
 .service-card{position:relative;overflow:hidden;display:flex;flex-direction:column;
 background:var(--glass);border:1px solid var(--edge);border-radius:6px;padding:2.25rem 2rem 2rem;
 transition:border-color .35s var(--ease-editorial),transform .35s var(--ease-editorial)}
@@ -2044,6 +2045,7 @@ def shell(title, desc, body, active, up="", extra_js=""):
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="{up}assets/style.css">
+<script src="{up}assets/js/face.js" defer></script>
 </head>
 <body>
 <script>document.documentElement.classList.add('js')</script>
@@ -2265,9 +2267,8 @@ def build_home():
 <div class="intro-grid rv">
 <div class="intro-photo-wrap" id="about-avatar-wrap">
 <div class="intro-photo-card" id="about-avatar-card">
-{render_pose_avatar(f"{E(p['name'])} Illustrated Avatar")}
+<div class="hero-face"><img src="assets/img/face/smile.webp" alt="Portrait of {E(p['name'])}"></div>
 </div>
-<button class="avatar-motion-btn" type="button" onclick="window.toggleAvatarMotion(this)" aria-label="Enable motion tracking"><span class="btn-dot"></span>Enable motion</button>
 </div>
 <div class="intro-text-wrap">
 <p class="intro-text">I’m a Manila-based designer working across brand visuals, e-commerce websites, and 3D spaces. I combine design with practical automation to make everyday work simpler and keep content consistent.</p>
@@ -2297,6 +2298,15 @@ def build_home():
 </div>
 <div class="cap-content">
 <p>Marketplace storefront design, standardized 8-slide listing image architectures, and clean responsive website front-ends.</p>
+</div>
+</div>
+
+<div class="cap-row rv">
+<div class="cap-header">
+<h3>Email marketing &amp; SEO</h3>
+</div>
+<div class="cap-content">
+<p>Order recovery and follow-up flows in Omnisend, custom HTML email templates, on-page SEO, and site audits in SE Ranking and Search Console.</p>
 </div>
 </div>
 
@@ -2680,6 +2690,21 @@ def build_about():
         <li>3D Blender product modeling (5 studio angles, lifestyle)</li>
       </ul>
       <a class="btn" href="https://wa.me/639394886685?text=Hi%20Jamie%21%20I%27d%20like%20to%20inquire%20about%20your%203D%20Booth%20%26%20Product%20Visualization%20package." target="_blank" rel="noopener" style="margin-top:1.25rem">
+        <svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><use href="#i-wa"/></svg>Inquire on WhatsApp
+      </a>
+    </div>
+
+    <div class="service-card">
+      <span class="pro-badge">EMAIL &amp; SEARCH</span>
+      <h3 class="serif">Email Marketing &amp; On-Page SEO</h3>
+      <p>Automated customer email flows, custom HTML templates, and technical site clean-up so stores recover lost carts and rank for the terms buyers search.</p>
+      <ul>
+        <li>Omnisend flows (Welcome, Abandoned Cart, Order Follow-Up, Referral)</li>
+        <li>Custom dark and light HTML email templates tested in Gmail</li>
+        <li>Page titles, meta descriptions, JSON-LD schema &amp; sitemap clean-up</li>
+        <li>Site audits, keyword tracking &amp; search guides (SE Ranking / GSC)</li>
+      </ul>
+      <a class="btn" href="https://wa.me/639394886685?text=Hi%20Jamie%21%20I%27d%20like%20to%20inquire%20about%20your%20Email%20Marketing%20%26%20SEO%20package." target="_blank" rel="noopener" style="margin-top:1.25rem">
         <svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><use href="#i-wa"/></svg>Inquire on WhatsApp
       </a>
     </div>
@@ -5337,6 +5362,7 @@ body{{
   background:#580512;
   border:1px solid var(--edge);
 }}
+.hero-face canvas, .hero-face img{{width:100%;height:auto;display:block}}
 
 .pose-avatar{{
   position:relative;
@@ -5740,20 +5766,17 @@ transition:opacity .25s,transform .25s;z-index:300;box-shadow:0 12px 32px rgba(0
   <!-- Top Identity Area -->
   <div class="identity-area">
     <div class="avatar-frame">
-      {render_pose_avatar(E(p['name']), extra_style="width:100%;height:100%")}
+      <div class="hero-face"><img src="assets/img/face/smile.webp" alt="Portrait of {E(p['name'])}"></div>
     </div>
     <div class="identity-info">
       <h1 class="name">{E(p['name'])}</h1>
       <p class="title">Designer &amp; Creative Specialist</p>
       <p class="location">Manila, Philippines</p>
-      <button class="avatar-motion-btn" type="button" onclick="window.toggleAvatarMotion(this)" aria-label="Enable motion tracking">
-        <span class="btn-dot"></span>Enable motion
-      </button>
     </div>
   </div>
 
   <!-- Supporting Capabilities Line -->
-  <p class="focus-line">Brand visuals &middot; E-commerce &middot; Systems</p>
+  <p class="focus-line">Brand visuals &middot; E-commerce &middot; Email &amp; SEO &middot; Systems</p>
 
   <!-- Subtle Divider -->
   <hr class="card-divider">
@@ -5808,6 +5831,7 @@ transition:opacity .25s,transform .25s;z-index:300;box-shadow:0 12px 32px rgba(0
 <div id="toast" class="toast" aria-live="polite"></div>
 
 <script src="assets/qr.min.js"></script>
+<script src="assets/js/face.js" defer></script>
 <script>
 {vj}
 (function(){{
@@ -6534,6 +6558,15 @@ def main():
             fp = os.path.join(vsrc, f)
             if os.path.isfile(fp) and not f.startswith("."):
                 shutil.copy2(fp, os.path.join(vdest, f))
+    # Copy assets/img (face frames) and assets/js (face.js)
+    root_dir = os.path.dirname(os.path.abspath(__file__))
+    assets_src = os.path.join(root_dir, "assets")
+    if os.path.isdir(assets_src):
+        for sub in ["img", "js"]:
+            s_sub = os.path.join(assets_src, sub)
+            if os.path.isdir(s_sub):
+                d_sub = os.path.join(OUT, "assets", sub)
+                shutil.copytree(s_sub, d_sub, dirs_exist_ok=True)
     with open(os.path.join(src, "README.txt"), "w", encoding="utf-8") as f:
         f.write("PUT YOUR IMAGES HERE - screenshots, renders, portraits.\n"
                 "Then name the file in content.py.\n\n"

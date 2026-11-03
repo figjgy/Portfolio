@@ -141,6 +141,7 @@ body{
   background:#580512;
   border:1px solid var(--edge);
 }
+.hero-face canvas, .hero-face img{width:100%;height:auto;display:block}
 
 .pose-avatar{
   position:relative;
@@ -544,30 +545,17 @@ transition:opacity .25s,transform .25s;z-index:300;box-shadow:0 12px 32px rgba(0
   <!-- Top Identity Area -->
   <div class="identity-area">
     <div class="avatar-frame">
-      <div class="pose-avatar" data-avatar="pose-switcher" style="width:100%;height:100%">
-  <img class="pose-img active" data-pose="center" src="assets/images/avatar_poses/pose-center.png" alt="Jamielyn Ludovice" width="512" height="512">
-  <img class="pose-img" data-pose="left" src="assets/images/avatar_poses/pose-left.png" alt="" width="512" height="512" aria-hidden="true">
-  <img class="pose-img" data-pose="right" src="assets/images/avatar_poses/pose-right.png" alt="" width="512" height="512" aria-hidden="true">
-  <img class="pose-img" data-pose="up" src="assets/images/avatar_poses/pose-up.png" alt="" width="512" height="512" aria-hidden="true">
-  <img class="pose-img" data-pose="down" src="assets/images/avatar_poses/pose-down.png" alt="" width="512" height="512" aria-hidden="true">
-  <img class="pose-img" data-pose="up-left" src="assets/images/avatar_poses/pose-up-left.png" alt="" width="512" height="512" aria-hidden="true">
-  <img class="pose-img" data-pose="up-right" src="assets/images/avatar_poses/pose-up-right.png" alt="" width="512" height="512" aria-hidden="true">
-  <img class="pose-img" data-pose="down-left" src="assets/images/avatar_poses/pose-down-left.png" alt="" width="512" height="512" aria-hidden="true">
-  <img class="pose-img" data-pose="down-right" src="assets/images/avatar_poses/pose-down-right.png" alt="" width="512" height="512" aria-hidden="true">
-</div>
+      <div class="hero-face"><img src="assets/img/face/smile.webp" alt="Portrait of Jamielyn Ludovice"></div>
     </div>
     <div class="identity-info">
       <h1 class="name">Jamielyn Ludovice</h1>
       <p class="title">Designer &amp; Creative Specialist</p>
       <p class="location">Manila, Philippines</p>
-      <button class="avatar-motion-btn" type="button" onclick="window.toggleAvatarMotion(this)" aria-label="Enable motion tracking">
-        <span class="btn-dot"></span>Enable motion
-      </button>
     </div>
   </div>
 
   <!-- Supporting Capabilities Line -->
-  <p class="focus-line">Brand visuals &middot; E-commerce &middot; Systems</p>
+  <p class="focus-line">Brand visuals &middot; E-commerce &middot; Email &amp; SEO &middot; Systems</p>
 
   <!-- Subtle Divider -->
   <hr class="card-divider">
@@ -622,6 +610,7 @@ transition:opacity .25s,transform .25s;z-index:300;box-shadow:0 12px 32px rgba(0
 <div id="toast" class="toast" aria-live="polite"></div>
 
 <script src="assets/qr.min.js"></script>
+<script src="assets/js/face.js" defer></script>
 <script>
 
 function downloadVCard(){
