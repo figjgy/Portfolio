@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Jamielyn Ludovice — E-Commerce Email Marketing & CRM Walkthrough</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@600;700&family=Jost:wght@400;500;600&display=swap" rel="stylesheet" />
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      min-height: 100vh;
+      background: #0B0B0B;
+      color: #F4EFEA;
+      font-family: 'Jost', sans-serif;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 28px 24px 48px;
+    }
+    .header {
+      width: 100%;
+      max-width: 1280px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 16px;
+      padding-bottom: 20px;
+      margin-bottom: 24px;
+      border-bottom: 1px solid rgba(244,239,234,0.1);
+    }
+    .title-wrap h1 {
+      font-family: 'Cormorant Garamond', Georgia, serif;
+      font-size: 32px;
+      font-weight: 600;
+      color: #F4EFEA;
+    }
+    .title-wrap p {
+      font-size: 14px;
+      color: #B9B2AB;
+      margin-top: 4px;
+    }
+    .btn {
+      display: inline-block;
+      padding: 11px 22px;
+      border-radius: 999px;
+      background: #8B0D1A;
+      color: #FFFFFF;
+      text-decoration: none;
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      border: 1px solid #C93B4B;
+    }
+    .player-card {
+      width: 100%;
+      max-width: 1280px;
+      background: #141211;
+      border: 1px solid rgba(244,239,234,0.12);
+      border-radius: 16px;
+      padding: 14px;
+      box-shadow: 0 24px 64px rgba(0,0,0,0.75);
+    }
+    video {
+      width: 100%;
+      height: auto;
+      border-radius: 10px;
+      display: block;
+      background: #000;
+    }
+    .chapters {
+      width: 100%;
+      max-width: 1280px;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 16px;
+      margin-top: 22px;
+    }
+    .chap {
+      background: #141211;
+      border: 1px solid rgba(244,239,234,0.09);
+      border-radius: 12px;
+      padding: 16px 18px;
+      cursor: pointer;
+      transition: border-color 0.2s;
+    }
+    .chap:hover { border-color: #C93B4B; }
+    .chap-t { font-size: 11px; color: #C93B4B; font-weight: 600; letter-spacing: 0.14em; text-transform: uppercase; }
+    .chap-h { font-size: 15px; font-weight: 600; color: #F4EFEA; margin-top: 4px; }
+  </style>
+</head>
+<body>
+  <div class="header">
+    <div class="title-wrap">
+      <h1>Jamielyn Ludovice &mdash; CRM &amp; Email Marketing Walkthrough</h1>
+      <p>Prepared for Faizan Tahir &middot; Klaviyo &amp; Omnisend Lifecycle Flows, 40/40/20 Campaign Calendar &amp; EN &rarr; DE Workflow</p>
+    </div>
+    <a class="btn" href="/card">Digital Business Card &rarr;</a>
+  </div>
+  <div class="player-card">
+    <video id="vid" src="/assets/videos/crm-email-walkthrough.mp4" controls playsinline preload="metadata"></video>
+  </div>
+  <div class="chapters">
+    <div class="chap" onclick="const v=document.getElementById('vid');v.currentTime=0;v.play();">
+      <div class="chap-t">00:00 &middot; Part 01</div>
+      <div class="chap-h">Intro &amp; End-to-End CRM / Email Workflow</div>
+    </div>
+    <div class="chap" onclick="const v=document.getElementById('vid');v.currentTime=34.3;v.play();">
+      <div class="chap-t">00:34 &middot; Part 02</div>
+      <div class="chap-h">Automated Recovery Flow &amp; Dark/Light HTML</div>
+    </div>
+    <div class="chap" onclick="const v=document.getElementById('vid');v.currentTime=91.3;v.play();">
+      <div class="chap-t">01:31 &middot; Part 03</div>
+      <div class="chap-h">Klaviyo 40/40/20 Calendar &amp; Launch Sequence</div>
+    </div>
+    <div class="chap" onclick="const v=document.getElementById('vid');v.currentTime=143.7;v.play();">
+      <div class="chap-t">02:23 &middot; Part 04</div>
+      <div class="chap-h">4-Step English &rarr; German (DE) Localization</div>
+    </div>
+  </div>
+</body>
+</html>
