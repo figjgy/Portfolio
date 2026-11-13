@@ -2043,7 +2043,7 @@ def shell(title, desc, body, active, up="", extra_js=""):
 <meta name="twitter:image" content="https://jamielyn-ludovice.vercel.app/assets/images/og-image.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500&family=Jost:wght@300;400;500&family=Silkscreen&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="{up}assets/style.css">
 <script src="{up}assets/js/face.js" defer></script>
 </head>
@@ -2182,6 +2182,176 @@ def feat_card_html(pr, base="work/", up=""):
 
 
 # ------------------------------------------------------------------- builders
+# ============================================================================
+# 3D / interactive layer (2026-11 redesign). Additive: appended to CSS below,
+# JS is passed to the home page only. Disabled for reduced-motion + touch.
+# ============================================================================
+FX_CSS = """
+/* ---- FX: intro loader --------------------------------------------------- */
+#fx-loader{position:fixed;inset:0;z-index:9999;background:#050505;display:flex;align-items:center;
+justify-content:center;flex-direction:column;gap:1.4rem;transition:opacity .7s var(--ease-cinematic),visibility .7s}
+#fx-loader.out{opacity:0;visibility:hidden}
+#fx-loader .fx-shape{width:26px;height:26px;background:var(--acc-lift);transform:rotate(45deg);
+animation:fxspin 1.1s var(--ease-cinematic) infinite alternate;box-shadow:0 0 40px rgba(168,19,36,.55)}
+@keyframes fxspin{from{transform:rotate(45deg) scale(.7);border-radius:2px}to{transform:rotate(225deg) scale(1.15);border-radius:50%}}
+#fx-loader .fx-word{font:400 clamp(2rem,9vw,5.5rem)/1 'Silkscreen','Courier New',monospace;color:var(--ink);
+letter-spacing:.06em;opacity:0;transform:translateY(12px);transition:opacity .5s,transform .5s}
+#fx-loader.word .fx-word{opacity:1;transform:none}
+#fx-loader.word .fx-shape{animation:none;transform:rotate(45deg) scale(.5)}
+html.fx-wait .hin{animation-play-state:paused}
+html.fx-lock,html.fx-lock body{overflow:hidden}
+
+/* ---- FX: 3D hero -------------------------------------------------------- */
+.hero-editorial{--mx:0;--my:0;perspective:1400px}
+.hero-bg-title-wrap{top:auto;bottom:-.48em;align-items:flex-end;z-index:0}
+.hero-bg-title{font-size:clamp(4.5rem,17.5vw,17rem);font-weight:500;opacity:1;letter-spacing:.04em;line-height:.74;
+color:transparent;-webkit-text-stroke:1.2px rgba(245,242,237,.16);
+background:linear-gradient(180deg,rgba(245,242,237,.10),rgba(245,242,237,0) 78%);-webkit-background-clip:text;background-clip:text;
+transform:translate3d(calc(var(--mx)*-18px),calc(var(--my)*-8px),0);transition:transform .25s ease-out}
+[data-theme="light"] .hero-bg-title{opacity:1;-webkit-text-stroke-color:rgba(18,16,15,.18);
+background:linear-gradient(180deg,rgba(18,16,15,.10),rgba(18,16,15,0) 78%);-webkit-background-clip:text;background-clip:text}
+.hero-portrait-stage{transform-style:preserve-3d;
+transform:rotateY(calc(var(--mx)*7deg)) rotateX(calc(var(--my)*-4deg));transition:transform .25s ease-out}
+.hero-backdrop-panel{transform:translateZ(-50px) translate3d(calc(var(--mx)*-10px),calc(var(--my)*-6px),0)}
+.hero-cutout-img{transform:translateZ(60px) translate3d(calc(var(--mx)*8px),calc(var(--my)*4px),0);will-change:transform}
+.fx-chip{position:absolute;z-index:3;padding:.55rem .95rem;border-radius:999px;font:400 11px/1 'Jost',system-ui,sans-serif;
+letter-spacing:.16em;text-transform:uppercase;color:var(--ink);background:rgba(20,10,12,.55);
+border:1px solid var(--edge-top);-webkit-backdrop-filter:blur(14px);backdrop-filter:blur(14px);
+box-shadow:0 14px 34px rgba(0,0,0,.45);white-space:nowrap;
+transform:translateZ(var(--z,110px)) translate3d(calc(var(--mx)*var(--k,16)*1px),calc(var(--my)*var(--k,16)*.6px),0);
+transition:transform .25s ease-out;animation:fxfloat 6s ease-in-out infinite;animation-delay:var(--fd,0s)}
+@keyframes fxfloat{0%,100%{margin-top:0}50%{margin-top:-10px}}
+.fx-chip i{display:inline-block;width:6px;height:6px;border-radius:50%;background:var(--acc-lift);margin-right:.5rem;box-shadow:0 0 10px var(--acc-lift)}
+.fx-chip.c1{top:14%;left:-6%;--z:120px;--k:22;--fd:0s}
+.fx-chip.c2{top:44%;right:-8%;--z:90px;--k:-16;--fd:-2s}
+.fx-chip.c3{bottom:16%;left:-10%;--z:140px;--k:26;--fd:-4s}
+@media(max-width:960px){.fx-chip.c1{left:0}.fx-chip.c2{right:0}.fx-chip.c3{left:0}.hero-bg-title-wrap{bottom:auto;top:40%}}
+@media(max-width:640px){.fx-chip{font-size:9.5px;padding:.45rem .7rem}}
+
+/* ---- FX: tilt cards ----------------------------------------------------- */
+.work-trio-grid{perspective:1200px}
+.work-trio-visual{transform-style:preserve-3d;will-change:transform}
+.work-trio-visual.fx-live{transition:transform .12s ease-out,border-color .35s,box-shadow .35s}
+.work-trio-item:hover .work-trio-visual{box-shadow:0 30px 60px rgba(0,0,0,.55),0 0 0 1px rgba(168,19,36,.35)}
+.work-trio-visual::after{content:"";position:absolute;inset:0;pointer-events:none;opacity:0;transition:opacity .3s;
+background:radial-gradient(circle at var(--gx,50%) var(--gy,50%),rgba(255,255,255,.22),transparent 55%)}
+.work-trio-item:hover .work-trio-visual::after{opacity:1}
+
+/* ---- FX: pixel band ----------------------------------------------------- */
+.pixel-band{padding:4.5rem 0;border-top:1px solid var(--edge);border-bottom:1px solid var(--edge);position:relative;z-index:1;overflow:hidden;
+background:radial-gradient(60% 120% at 50% 50%,rgba(139,13,26,.18),transparent 70%)}
+.pixel-text{font:400 clamp(2.4rem,9.5vw,8rem)/1.1 'Silkscreen','Courier New',monospace;text-align:center;color:var(--ink);
+letter-spacing:.08em;text-shadow:0 0 36px rgba(168,19,36,.45);user-select:none}
+.pixel-sub{display:block;text-align:center;margin-top:1rem;font:400 11px/1 'Jost',sans-serif;letter-spacing:.3em;text-transform:uppercase;color:var(--dim)}
+
+/* ---- FX: services accordion -------------------------------------------- */
+.cap-acc{margin-top:2.5rem;border-top:1px solid var(--edge)}
+.acc-item{border-bottom:1px solid var(--edge);transition:background .35s}
+.acc-item.open{background:linear-gradient(90deg,rgba(139,13,26,.10),transparent 70%)}
+.acc-btn{width:100%;display:grid;grid-template-columns:4rem 1fr auto;align-items:center;gap:1rem;padding:1.9rem .25rem;
+background:none;border:0;color:var(--ink);cursor:pointer;text-align:left;font:inherit}
+.acc-num{font:400 12px/1 'Silkscreen','Courier New',monospace;letter-spacing:.1em;color:var(--acc-text)}
+.acc-title{font-family:'Cormorant Garamond',Georgia,serif;font-size:clamp(1.5rem,3vw,2.3rem);font-weight:400;line-height:1.2;transition:transform .45s var(--ease-editorial),color .3s}
+.acc-btn:hover .acc-title,.acc-btn:focus-visible .acc-title{transform:translateX(10px);color:var(--acc-text)}
+.acc-ico{width:34px;height:34px;border:1px solid var(--edge-top);border-radius:50%;display:grid;place-items:center;font-size:18px;color:var(--dim);
+transition:transform .45s var(--ease-editorial),background .3s,color .3s}
+.acc-item.open .acc-ico{transform:rotate(45deg);background:var(--acc);color:#F5F2ED;border-color:var(--acc)}
+.acc-panel{display:grid;grid-template-rows:0fr;transition:grid-template-rows .55s var(--ease-editorial)}
+.acc-item.open .acc-panel{grid-template-rows:1fr}
+.acc-panel>div{overflow:hidden}
+.acc-panel p{padding:0 .25rem 2rem 5rem;font-size:1.05rem;color:var(--dim);line-height:1.75;max-width:70ch}
+@media(max-width:640px){.acc-btn{grid-template-columns:2.6rem 1fr auto;padding:1.4rem 0}.acc-panel p{padding:0 0 1.6rem 3.6rem}}
+
+/* ---- FX: contact glass + swirl ----------------------------------------- */
+footer{overflow:hidden;background:#070607}
+footer::before{content:"";position:absolute;inset:-30%;z-index:0;pointer-events:none;opacity:.9;
+background:conic-gradient(from 0deg at 50% 50%,rgba(139,13,26,.0),rgba(139,13,26,.35),rgba(60,8,40,.25),rgba(139,13,26,0) 70%);
+filter:blur(70px);animation:fxswirl 28s linear infinite}
+footer::after{content:"";position:absolute;inset:0;z-index:0;pointer-events:none;
+background:radial-gradient(40% 50% at 78% 30%,rgba(255,255,255,.04),transparent 70%)}
+@keyframes fxswirl{to{transform:rotate(360deg)}}
+.footrow{position:relative;z-index:1}
+footer .lead-col{padding:2rem;border-radius:14px;background:rgba(245,242,237,.045);border:1px solid var(--edge-top);
+-webkit-backdrop-filter:blur(22px);backdrop-filter:blur(22px);box-shadow:0 30px 70px rgba(0,0,0,.5)}
+[data-theme="light"] footer{background:var(--bg)}
+[data-theme="light"] footer .lead-col{background:rgba(255,255,255,.5)}
+
+@media(prefers-reduced-motion:reduce){
+ .fx-chip,footer::before,#fx-loader .fx-shape{animation:none}
+ .hero-bg-title,.hero-portrait-stage,.hero-backdrop-panel,.hero-cutout-img,.fx-chip{transform:none!important;transition:none}
+}
+"""
+
+FX_JS = r"""
+(function(){
+  var root=document.documentElement;
+  var still=window.matchMedia&&matchMedia('(prefers-reduced-motion:reduce)').matches;
+  var fine=window.matchMedia&&matchMedia('(hover:hover) and (pointer:fine)').matches;
+
+  /* intro loader: once per session, never blocks the page for more than ~2.6s */
+  (function(){
+    var seen=false;try{seen=sessionStorage.getItem('jl-intro')==='1'}catch(e){}
+    if(still||seen||location.hash)return;
+    var L=document.createElement('div');L.id='fx-loader';L.setAttribute('aria-hidden','true');
+    L.innerHTML='<div class="fx-shape"></div><div class="fx-word">PORTFOLIO</div>';
+    document.body.appendChild(L);root.classList.add('fx-wait','fx-lock');
+    function done(){L.classList.add('out');root.classList.remove('fx-wait','fx-lock');
+      try{sessionStorage.setItem('jl-intro','1')}catch(e){}setTimeout(function(){L.remove()},800)}
+    setTimeout(function(){L.classList.add('word')},650);
+    setTimeout(done,1750);setTimeout(function(){if(L.parentNode)done()},2600);
+  })();
+
+  /* hero parallax */
+  var hero=document.querySelector('.hero-editorial');
+  if(hero&&fine&&!still){
+    var raf=0,tx=0,ty=0;
+    hero.addEventListener('pointermove',function(e){
+      var r=hero.getBoundingClientRect();tx=((e.clientX-r.left)/r.width-.5)*2;ty=((e.clientY-r.top)/r.height-.5)*2;
+      if(!raf)raf=requestAnimationFrame(function(){hero.style.setProperty('--mx',tx.toFixed(3));hero.style.setProperty('--my',ty.toFixed(3));raf=0});
+    });
+    hero.addEventListener('pointerleave',function(){hero.style.setProperty('--mx',0);hero.style.setProperty('--my',0)});
+  }
+
+  /* tilt cards */
+  if(fine&&!still){
+    [].forEach.call(document.querySelectorAll('.work-trio-visual'),function(v){
+      var item=v.closest('.work-trio-item')||v;
+      item.addEventListener('pointermove',function(e){
+        var r=v.getBoundingClientRect(),x=(e.clientX-r.left)/r.width,y=(e.clientY-r.top)/r.height;
+        v.classList.add('fx-live');
+        v.style.transform='perspective(900px) rotateY('+((x-.5)*14).toFixed(2)+'deg) rotateX('+((.5-y)*10).toFixed(2)+'deg) translateY(-4px)';
+        v.style.setProperty('--gx',(x*100)+'%');v.style.setProperty('--gy',(y*100)+'%');
+      });
+      item.addEventListener('pointerleave',function(){v.style.transform='';v.classList.remove('fx-live')});
+    });
+  }
+
+  /* accordion (one open at a time) */
+  [].forEach.call(document.querySelectorAll('.acc-item'),function(it){
+    var b=it.querySelector('.acc-btn');
+    b.addEventListener('click',function(){
+      var open=it.classList.contains('open');
+      [].forEach.call(document.querySelectorAll('.acc-item.open'),function(o){o.classList.remove('open');o.querySelector('.acc-btn').setAttribute('aria-expanded','false')});
+      if(!open){it.classList.add('open');b.setAttribute('aria-expanded','true')}
+    });
+  });
+
+  /* pixel text scramble on reveal */
+  var px=document.querySelector('.pixel-text');
+  if(px&&!still&&'IntersectionObserver' in window){
+    var final=px.getAttribute('data-text'),set='#@%&*+=?01<>/',played=false;
+    new IntersectionObserver(function(en,o){en.forEach(function(x){
+      if(!x.isIntersecting||played)return;played=true;o.disconnect();var f=0,n=22;
+      var t=setInterval(function(){f++;var out='';
+        for(var i=0;i<final.length;i++){var c=final[i];out+=(c===' '||i<final.length*f/n)?c:set[Math.floor(Math.random()*set.length)]}
+        px.textContent=out;if(f>=n){clearInterval(t);px.textContent=final}},45);
+    })},{threshold:.5}).observe(px);
+  }
+})();
+"""
+CSS += FX_CSS
+
+
 def build_home():
     p = PROFILE
     body = f'''<header id="top" class="hero-editorial">
@@ -2205,6 +2375,9 @@ def build_home():
 <div class="hero-editorial-right">
 <div class="hero-portrait-stage hin" style="--d:140ms">
 <div class="hero-backdrop-panel" aria-hidden="true"></div>
+<span class="fx-chip c1" aria-hidden="true"><i></i>Brand &amp; Content</span>
+<span class="fx-chip c2" aria-hidden="true"><i></i>E-commerce</span>
+<span class="fx-chip c3" aria-hidden="true"><i></i>Email &amp; SEO</span>
 <img class="hero-cutout-img" src="assets/images/portrait-cutout.png" alt="{E(p['name'])}" width="700" height="933" loading="eager" decoding="async">
 </div>
 </div>
@@ -2261,6 +2434,8 @@ def build_home():
 </div>
 </section>
 
+<section class="pixel-band" aria-hidden="true"><div class="pixel-text" data-text="HELLO WORLD">HELLO WORLD</div><span class="pixel-sub">Let’s make something good</span></section>
+
 <section class="intro-section" id="about-intro">
 <div class="wrap">
 <h2 class="eyebrow grouphead"><span>ABOUT ME</span><span class="rule"></span></h2>
@@ -2281,50 +2456,29 @@ def build_home():
 <section class="cap-section" id="what-i-do">
 <div class="wrap">
 <h2 class="eyebrow grouphead"><span>WHAT I DO</span><span class="rule"></span></h2>
-<div class="cap-list">
-
-<div class="cap-row rv">
-<div class="cap-header">
-<h3>Brand &amp; content design</h3>
+<div class="cap-acc">
+<div class="acc-item open">
+<button class="acc-btn" type="button" aria-expanded="true" aria-controls="acc-p0"><span class="acc-num">01</span><span class="acc-title">Brand &amp; content design</span><span class="acc-ico" aria-hidden="true">+</span></button>
+<div class="acc-panel" id="acc-p0" role="region"><div><p>Social media pubmats, educational carousels, and short-form video scripts built for consistent multi-brand publishing.</p></div></div>
 </div>
-<div class="cap-content">
-<p>Social media pubmats, educational carousels, and short-form video scripts built for consistent multi-brand publishing.</p>
+<div class="acc-item">
+<button class="acc-btn" type="button" aria-expanded="false" aria-controls="acc-p1"><span class="acc-num">02</span><span class="acc-title">E-commerce &amp; web</span><span class="acc-ico" aria-hidden="true">+</span></button>
+<div class="acc-panel" id="acc-p1" role="region"><div><p>Marketplace storefront design, standardized 8-slide listing image architectures, and clean responsive website front-ends.</p></div></div>
 </div>
+<div class="acc-item">
+<button class="acc-btn" type="button" aria-expanded="false" aria-controls="acc-p2"><span class="acc-num">03</span><span class="acc-title">Email marketing &amp; SEO</span><span class="acc-ico" aria-hidden="true">+</span></button>
+<div class="acc-panel" id="acc-p2" role="region"><div><p>Order recovery and follow-up flows in Omnisend, custom HTML email templates, on-page SEO, and site audits in SE Ranking and Search Console.</p></div></div>
 </div>
-
-<div class="cap-row rv">
-<div class="cap-header">
-<h3>E-commerce &amp; web</h3>
+<div class="acc-item">
+<button class="acc-btn" type="button" aria-expanded="false" aria-controls="acc-p3"><span class="acc-num">04</span><span class="acc-title">3D visual &amp; automation</span><span class="acc-ico" aria-hidden="true">+</span></button>
+<div class="acc-panel" id="acc-p3" role="region"><div><p>3D trade show booth modeling in SketchUp, parametric product renders, and automated workflow bots that reduce repetitive manual tasks.</p></div></div>
 </div>
-<div class="cap-content">
-<p>Marketplace storefront design, standardized 8-slide listing image architectures, and clean responsive website front-ends.</p>
-</div>
-</div>
-
-<div class="cap-row rv">
-<div class="cap-header">
-<h3>Email marketing &amp; SEO</h3>
-</div>
-<div class="cap-content">
-<p>Order recovery and follow-up flows in Omnisend, custom HTML email templates, on-page SEO, and site audits in SE Ranking and Search Console.</p>
-</div>
-</div>
-
-<div class="cap-row rv">
-<div class="cap-header">
-<h3>3D visual &amp; automation</h3>
-</div>
-<div class="cap-content">
-<p>3D trade show booth modeling in SketchUp, parametric product renders, and automated workflow bots that reduce repetitive manual tasks.</p>
-</div>
-</div>
-
 </div>
 </div>
 </section>
 
 </main>{footer()}'''
-    write("index.html", shell(f"{p['name']} — {p['subtitle_plain']}", p['intro'], body, "home", extra_js=POSE_SWITCHER_JS))
+    write("index.html", shell(f"{p['name']} — {p['subtitle_plain']}", p['intro'], body, "home", extra_js=POSE_SWITCHER_JS + FX_JS))
 
 
 def build_work_index():

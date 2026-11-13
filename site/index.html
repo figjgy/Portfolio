@@ -24,7 +24,7 @@
 <meta name="twitter:image" content="https://jamielyn-ludovice.vercel.app/assets/images/og-image.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500&family=Jost:wght@300;400;500&family=Silkscreen&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="assets/style.css">
 <script src="assets/js/face.js" defer></script>
 </head>
@@ -54,6 +54,9 @@
 <div class="hero-editorial-right">
 <div class="hero-portrait-stage hin" style="--d:140ms">
 <div class="hero-backdrop-panel" aria-hidden="true"></div>
+<span class="fx-chip c1" aria-hidden="true"><i></i>Brand &amp; Content</span>
+<span class="fx-chip c2" aria-hidden="true"><i></i>E-commerce</span>
+<span class="fx-chip c3" aria-hidden="true"><i></i>Email &amp; SEO</span>
 <img class="hero-cutout-img" src="assets/images/portrait-cutout.png" alt="Jamielyn Ludovice" width="700" height="933" loading="eager" decoding="async">
 </div>
 </div>
@@ -110,6 +113,8 @@
 </div>
 </section>
 
+<section class="pixel-band" aria-hidden="true"><div class="pixel-text" data-text="HELLO WORLD">HELLO WORLD</div><span class="pixel-sub">Let’s make something good</span></section>
+
 <section class="intro-section" id="about-intro">
 <div class="wrap">
 <h2 class="eyebrow grouphead"><span>ABOUT ME</span><span class="rule"></span></h2>
@@ -130,44 +135,23 @@
 <section class="cap-section" id="what-i-do">
 <div class="wrap">
 <h2 class="eyebrow grouphead"><span>WHAT I DO</span><span class="rule"></span></h2>
-<div class="cap-list">
-
-<div class="cap-row rv">
-<div class="cap-header">
-<h3>Brand &amp; content design</h3>
+<div class="cap-acc">
+<div class="acc-item open">
+<button class="acc-btn" type="button" aria-expanded="true" aria-controls="acc-p0"><span class="acc-num">01</span><span class="acc-title">Brand &amp; content design</span><span class="acc-ico" aria-hidden="true">+</span></button>
+<div class="acc-panel" id="acc-p0" role="region"><div><p>Social media pubmats, educational carousels, and short-form video scripts built for consistent multi-brand publishing.</p></div></div>
 </div>
-<div class="cap-content">
-<p>Social media pubmats, educational carousels, and short-form video scripts built for consistent multi-brand publishing.</p>
+<div class="acc-item">
+<button class="acc-btn" type="button" aria-expanded="false" aria-controls="acc-p1"><span class="acc-num">02</span><span class="acc-title">E-commerce &amp; web</span><span class="acc-ico" aria-hidden="true">+</span></button>
+<div class="acc-panel" id="acc-p1" role="region"><div><p>Marketplace storefront design, standardized 8-slide listing image architectures, and clean responsive website front-ends.</p></div></div>
 </div>
+<div class="acc-item">
+<button class="acc-btn" type="button" aria-expanded="false" aria-controls="acc-p2"><span class="acc-num">03</span><span class="acc-title">Email marketing &amp; SEO</span><span class="acc-ico" aria-hidden="true">+</span></button>
+<div class="acc-panel" id="acc-p2" role="region"><div><p>Order recovery and follow-up flows in Omnisend, custom HTML email templates, on-page SEO, and site audits in SE Ranking and Search Console.</p></div></div>
 </div>
-
-<div class="cap-row rv">
-<div class="cap-header">
-<h3>E-commerce &amp; web</h3>
+<div class="acc-item">
+<button class="acc-btn" type="button" aria-expanded="false" aria-controls="acc-p3"><span class="acc-num">04</span><span class="acc-title">3D visual &amp; automation</span><span class="acc-ico" aria-hidden="true">+</span></button>
+<div class="acc-panel" id="acc-p3" role="region"><div><p>3D trade show booth modeling in SketchUp, parametric product renders, and automated workflow bots that reduce repetitive manual tasks.</p></div></div>
 </div>
-<div class="cap-content">
-<p>Marketplace storefront design, standardized 8-slide listing image architectures, and clean responsive website front-ends.</p>
-</div>
-</div>
-
-<div class="cap-row rv">
-<div class="cap-header">
-<h3>Email marketing &amp; SEO</h3>
-</div>
-<div class="cap-content">
-<p>Order recovery and follow-up flows in Omnisend, custom HTML email templates, on-page SEO, and site audits in SE Ranking and Search Console.</p>
-</div>
-</div>
-
-<div class="cap-row rv">
-<div class="cap-header">
-<h3>3D visual &amp; automation</h3>
-</div>
-<div class="cap-content">
-<p>3D trade show booth modeling in SketchUp, parametric product renders, and automated workflow bots that reduce repetitive manual tasks.</p>
-</div>
-</div>
-
 </div>
 </div>
 </section>
@@ -905,6 +889,72 @@ if(e.key==='Escape' && m.classList.contains('open')) closeNav();
     applyPose: applyPose,
     tiltManager: tiltManager
   };
+})();
+
+(function(){
+  var root=document.documentElement;
+  var still=window.matchMedia&&matchMedia('(prefers-reduced-motion:reduce)').matches;
+  var fine=window.matchMedia&&matchMedia('(hover:hover) and (pointer:fine)').matches;
+
+  /* intro loader: once per session, never blocks the page for more than ~2.6s */
+  (function(){
+    var seen=false;try{seen=sessionStorage.getItem('jl-intro')==='1'}catch(e){}
+    if(still||seen||location.hash)return;
+    var L=document.createElement('div');L.id='fx-loader';L.setAttribute('aria-hidden','true');
+    L.innerHTML='<div class="fx-shape"></div><div class="fx-word">PORTFOLIO</div>';
+    document.body.appendChild(L);root.classList.add('fx-wait','fx-lock');
+    function done(){L.classList.add('out');root.classList.remove('fx-wait','fx-lock');
+      try{sessionStorage.setItem('jl-intro','1')}catch(e){}setTimeout(function(){L.remove()},800)}
+    setTimeout(function(){L.classList.add('word')},650);
+    setTimeout(done,1750);setTimeout(function(){if(L.parentNode)done()},2600);
+  })();
+
+  /* hero parallax */
+  var hero=document.querySelector('.hero-editorial');
+  if(hero&&fine&&!still){
+    var raf=0,tx=0,ty=0;
+    hero.addEventListener('pointermove',function(e){
+      var r=hero.getBoundingClientRect();tx=((e.clientX-r.left)/r.width-.5)*2;ty=((e.clientY-r.top)/r.height-.5)*2;
+      if(!raf)raf=requestAnimationFrame(function(){hero.style.setProperty('--mx',tx.toFixed(3));hero.style.setProperty('--my',ty.toFixed(3));raf=0});
+    });
+    hero.addEventListener('pointerleave',function(){hero.style.setProperty('--mx',0);hero.style.setProperty('--my',0)});
+  }
+
+  /* tilt cards */
+  if(fine&&!still){
+    [].forEach.call(document.querySelectorAll('.work-trio-visual'),function(v){
+      var item=v.closest('.work-trio-item')||v;
+      item.addEventListener('pointermove',function(e){
+        var r=v.getBoundingClientRect(),x=(e.clientX-r.left)/r.width,y=(e.clientY-r.top)/r.height;
+        v.classList.add('fx-live');
+        v.style.transform='perspective(900px) rotateY('+((x-.5)*14).toFixed(2)+'deg) rotateX('+((.5-y)*10).toFixed(2)+'deg) translateY(-4px)';
+        v.style.setProperty('--gx',(x*100)+'%');v.style.setProperty('--gy',(y*100)+'%');
+      });
+      item.addEventListener('pointerleave',function(){v.style.transform='';v.classList.remove('fx-live')});
+    });
+  }
+
+  /* accordion (one open at a time) */
+  [].forEach.call(document.querySelectorAll('.acc-item'),function(it){
+    var b=it.querySelector('.acc-btn');
+    b.addEventListener('click',function(){
+      var open=it.classList.contains('open');
+      [].forEach.call(document.querySelectorAll('.acc-item.open'),function(o){o.classList.remove('open');o.querySelector('.acc-btn').setAttribute('aria-expanded','false')});
+      if(!open){it.classList.add('open');b.setAttribute('aria-expanded','true')}
+    });
+  });
+
+  /* pixel text scramble on reveal */
+  var px=document.querySelector('.pixel-text');
+  if(px&&!still&&'IntersectionObserver' in window){
+    var final=px.getAttribute('data-text'),set='#@%&*+=?01<>/',played=false;
+    new IntersectionObserver(function(en,o){en.forEach(function(x){
+      if(!x.isIntersecting||played)return;played=true;o.disconnect();var f=0,n=22;
+      var t=setInterval(function(){f++;var out='';
+        for(var i=0;i<final.length;i++){var c=final[i];out+=(c===' '||i<final.length*f/n)?c:set[Math.floor(Math.random()*set.length)]}
+        px.textContent=out;if(f>=n){clearInterval(t);px.textContent=final}},45);
+    })},{threshold:.5}).observe(px);
+  }
 })();
 </script>
 </body>
